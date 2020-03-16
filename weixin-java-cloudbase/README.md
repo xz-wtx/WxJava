@@ -1,10 +1,9 @@
-
-
-## 如何使用`WxJava`进行小程序云开发
+## 如何使用 `WxJava` 进行小程序云开发
 
 [云开发-一站式后端云服务](https://tencentcloudbase.github.io/)
 
-### 一、  引入maven依赖
+### 一、  引入`maven`依赖
+
 
 ```
 <dependency>
@@ -37,20 +36,20 @@
 
 ### 四、  根据小程序前端需要调用相应的方法：
 
-目前WxJava 已支持当前所有接口（当然如果官方后续加入新接口，则还未在最新版本中实现，会考虑在之后版本中加入），所有以支持接口可以参考JavaDoc在线版本：http://binary.ac.cn/weixin-java-miniapp-javadoc/cn/binarywang/wx/miniapp/api/WxMaCloudService.html
+目前 `WxJava` 已支持当前所有接口（当然如果官方后续加入新接口，则还未在最新版本中实现，会考虑在之后版本中加入），所有已支持的接口列表可以参考在线`JavaDoc`：http://binary.ac.cn/weixin-java-miniapp-javadoc/cn/binarywang/wx/miniapp/api/WxMaCloudService.html
 
 
-以触发云函数接口为例，可以采用如下方式调用invokeCloudFunction方法：
+以触发云函数接口为例，可以采用如下方式调用 `invokeCloudFunction` 方法：
 
 
 ```
-String result = wxMaService.getCloudService().invokeCloudFunction("rcn", "login", "{}"); // 拿到resule之后，可以在后续加入自己的处理逻辑代码
+String result = wxMaService.getCloudService().invokeCloudFunction("rcn", "login", "{}"); // 拿到result之后，可以在后续加入自己的处理逻辑代码
 ```
 
 
-更多方法调用实例可以参考WxJava源码中的单元测试类：`cn.binarywang.wx.miniapp.api.impl.WxMaCloudServiceImplTest`
+更多方法调用实例可以参考 `WxJava` 源码中的单元测试类：`cn.binarywang.wx.miniapp.api.impl.WxMaCloudServiceImplTest`
 
-### 五、  Spring框架整合：
+### 五、  `Spring` 框架整合：
 
-可以参考https://github.com/binarywang/weixin-java-miniapp-demo 此项目整合Spring开发。
-此项目基于spring boot，如果需要支持Spring MVC项目，适当改造即可。
+可以参考https://github.com/binarywang/weixin-java-miniapp-demo 此项目整合 `Spring` 开发。
+此项目基于 `Spring Boot` ，如果需要支持`Spring MVC`项目，适当改造即可。
