@@ -50,6 +50,30 @@ String result = wxMaService.getCloudService().invokeCloudFunction("rcn", "login"
 
 更多方法调用实例可以参考 `WxJava` 源码中的单元测试类：`cn.binarywang.wx.miniapp.api.impl.WxMaCloudServiceImplTest`
 
+
+另外，顺便在此列出当前已支持云开发的方法如下：
+
+|  接口描述    | 方法名     |
+| ---- | ---- |
+| 删除文件 | batchDeleteFile(String env, String[] fileIds)|
+| 获取文件下载链接 | batchDownloadFile(String env, String[] fileIds, long[] maxAges)|
+| 数据库插入记录 | databaseAdd(String env, String query)|
+| 数据库聚合记录 | databaseAggregate(String env, String query)|
+| 新增集合 | databaseCollectionAdd(String env, String collectionName)|
+| 删除集合 | databaseCollectionDelete(String env, String collectionName)|
+| 获取特定云环境下集合信息 | databaseCollectionGet(String env, Long limit, Long offset)|
+| 统计集合记录数或统计查询语句对应的结果记录数 | databaseCount(String env, String query)|
+| 数据库删除记录 | databaseDelete(String env, String query)|
+| 数据库导出 | databaseMigrateExport(String env, String filePath, int fileType, String query)|
+| 数据库导入 | databaseMigrateImport(String env, String collectionName, String filePath, int fileType, boolean stopOnError, int conflictMode)|
+| 数据库迁移状态查询 | databaseMigrateQueryInfo(String env, Long jobId)|
+| 数据库查询记录 | databaseQuery(String env, String query)|
+| 数据库更新记录 | databaseUpdate(String env, String query)|
+| 获取腾讯云API调用凭证 | getQcloudToken(long lifeSpan)|
+| 触发云函数 | invokeCloudFunction(String env, String name, String body)|
+| 变更数据库索引 | updateIndex(String env, String collectionName, List<WxCloudDatabaseCreateIndexRequest> createIndexes, List<String> dropIndexNames)|
+| 获取文件上传链接 | uploadFile(String env, String path)|
+
 ### 五、  `Spring` 框架整合：
 
 可以参考https://github.com/binarywang/weixin-java-miniapp-demo 此项目整合 `Spring` 开发。
