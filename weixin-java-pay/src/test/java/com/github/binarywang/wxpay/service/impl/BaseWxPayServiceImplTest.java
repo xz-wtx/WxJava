@@ -144,6 +144,24 @@ public class BaseWxPayServiceImplTest {
     log.warn(this.payService.getWxApiData().toString());
   }
 
+  @Test
+  public void testCreateOrderSpecific() throws Exception {
+    // Won't compile
+    // WxPayMpOrderResult result = payService.createOrder(TradeType.Specific.APP, new WxPayUnifiedOrderRequest());
+    payService.createOrder(
+      TradeType.Specific.JSAPI,
+      WxPayUnifiedOrderRequest.newBuilder()
+        .body("我去")
+        .totalFee(1)
+        .productId("aaa")
+        .spbillCreateIp("11.1.11.1")
+        .notifyUrl("111111")
+        .outTradeNo("111111290")
+        .build()
+    )
+      .getAppId();
+  }
+
   /**
    * Test get pay info.
    *

@@ -352,6 +352,15 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
   }
 
   @Override
+  public <T> T createOrder(TradeType.Specific<T> specificTradeType, WxPayUnifiedOrderRequest request) throws WxPayException {
+    if (specificTradeType == null) {
+      throw new IllegalArgumentException("specificTradeType 不能为 null");
+    }
+    request.setTradeType(specificTradeType.getType());
+    return createOrder(request);
+  }
+
+  @Override
   public WxPayUnifiedOrderResult unifiedOrder(WxPayUnifiedOrderRequest request) throws WxPayException {
     request.checkAndSign(this.getConfig());
 
