@@ -274,6 +274,7 @@ public class WxPayMicropayRequest extends BaseWxPayRequest {
     map.put("time_expire", timeExpire);
     map.put("auth_code", authCode);
     map.put("scene_info", sceneInfo);
+    map.put("profit_sharing",profitSharing);
   }
 
 }
