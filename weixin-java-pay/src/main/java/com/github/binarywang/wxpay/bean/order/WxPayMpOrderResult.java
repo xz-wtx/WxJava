@@ -1,6 +1,7 @@
 package com.github.binarywang.wxpay.bean.order;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ import java.io.Serializable;
 @Data
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class WxPayMpOrderResult implements Serializable {
   private static final long serialVersionUID = -7966682379048446567L;
 
