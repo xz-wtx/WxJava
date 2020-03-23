@@ -20,8 +20,6 @@ import com.github.binarywang.wxpay.testbase.XmlWxPayConfig;
 import com.github.binarywang.wxpay.util.XmlConfig;
 import com.google.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Guice;
 import org.testng.annotations.Test;
@@ -619,10 +617,60 @@ public class BaseWxPayServiceImplTest {
   }
 
   @Test
-  public void testGetWxPayFaceAuthInfo() {
+  public void testGetWxPayFaceAuthInfo() throws WxPayException {
+    XmlConfig.fastMode = true;
+    final WxPayFaceAuthInfoRequest request = new WxPayFaceAuthInfoRequest()
+      .setStoreId("1").setRawdata("111").setNow("111").setVersion("111").setStoreName("2222").setDeviceId("111");
+    request.setSignType("MD5");
+    this.payService.getWxPayFaceAuthInfo(request);
   }
 
   @Test
   public void testFacepay() {
+  }
+
+  @Test
+  public void testGetEntPayService() {
+    // no need to test
+  }
+
+  @Test
+  public void testGetProfitSharingService() {
+    // no need to test
+  }
+
+  @Test
+  public void testGetRedpackService() {
+    // no need to test
+  }
+
+  @Test
+  public void testSetEntPayService() {
+    // no need to test
+  }
+
+  @Test
+  public void testGetPayBaseUrl() {
+    // no need to test
+  }
+
+  @Test
+  public void testParseScanPayNotifyResult() {
+  }
+
+  @Test
+  public void testSendMiniProgramRedpack() {
+  }
+
+  @Test
+  public void testSendRedpack() {
+  }
+
+  @Test
+  public void testQueryRedpack() {
+  }
+
+  @Test
+  public void testTestQueryRedpack() {
   }
 }
