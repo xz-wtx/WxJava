@@ -36,7 +36,7 @@ public class ProfitSharingQueryResult extends BaseWxPayResult {
   /**
    * 微信分账单号
    */
-  @XStreamAlias("orderId")
+  @XStreamAlias("order_id")
   private String orderId;
   /**
    * 分账单状态
@@ -82,7 +82,7 @@ public class ProfitSharingQueryResult extends BaseWxPayResult {
   protected void loadXML(Document d) {
     transactionId = readXMLString(d, "transaction_id");
     outOrderNo = readXMLString(d, "out_order_no");
-    orderId = readXMLString(d, "orderId");
+    orderId = readXMLString(d, "order_id");
     status = readXMLString(d, "status");
     closeReason = readXMLString(d, "close_reason");
     receiversJson = readXMLString(d, "receivers");
