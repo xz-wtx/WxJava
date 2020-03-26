@@ -14,6 +14,10 @@ public class WxMaRedisConfigImpl extends AbstractWxMaRedisConfig {
 
   private JedisPool jedisPool;
 
+  private static final String ACCESS_TOKEN_KEY = "wa:access_token:";
+
+  private String accessTokenKey;
+
   /**
    * JedisPool 在此配置类是必须项，使用 WxMaRedisConfigImpl(JedisPool) 构造方法来构造实例
    */
@@ -36,5 +40,42 @@ public class WxMaRedisConfigImpl extends AbstractWxMaRedisConfig {
   @Override
   protected Jedis getJedis() {
     return jedisPool.getResource();
+  }
+
+  /**
+   * 每个公众号生成独有的存储key.
+   */
+  @Override
+  public void setAppid(String appId) {
+    super.setAppid(appId);
+    this.accessTokenKey = ACCESS_TOKEN_KEY.concat(appId);
+  }
+
+  @Override
+  public String getAccessToken() {
+    try (Jedis jedis = this.jedisPool.getResource()) {
+      return jedis.get(this.accessTokenKey);
+    }
+  }
+
+  @Override
+  public boolean isAccessTokenExpired() {
+    try (Jedis jedis = this.jedisPool.getResource()) {
+      return jedis.ttl(accessTokenKey) < 2;
+    }
+  }
+
+  @Override
+  public synchronized void updateAccessToken(String accessToken, int expiresInSeconds) {
+    try (Jedis jedis = this.jedisPool.getResource()) {
+      jedis.setex(this.accessTokenKey, expiresInSeconds - 200, accessToken);
+    }
+  }
+
+  @Override
+  public void expireAccessToken() {
+    try (Jedis jedis = this.jedisPool.getResource()) {
+      jedis.expire(this.accessTokenKey, 0);
+    }
   }
 }
