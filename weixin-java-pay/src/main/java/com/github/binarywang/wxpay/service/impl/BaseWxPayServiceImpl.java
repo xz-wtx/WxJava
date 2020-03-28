@@ -13,6 +13,7 @@ import com.github.binarywang.wxpay.bean.order.WxPayNativeOrderResult;
 import com.github.binarywang.wxpay.bean.request.*;
 import com.github.binarywang.wxpay.bean.result.*;
 import com.github.binarywang.wxpay.config.WxPayConfig;
+import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.constant.WxPayConstants.SignType;
 import com.github.binarywang.wxpay.constant.WxPayConstants.TradeType;
 import com.github.binarywang.wxpay.exception.WxPayException;
@@ -804,6 +805,10 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
 
   @Override
   public WxPayFaceAuthInfoResult getWxPayFaceAuthInfo(WxPayFaceAuthInfoRequest request) throws WxPayException {
+    if (StringUtils.isEmpty(request.getSignType())) {
+      request.setSignType(WxPayConstants.SignType.MD5);
+    }
+
     request.checkAndSign(this.getConfig());
     String url = "https://payapp.weixin.qq.com/face/get_wxpayface_authinfo";
     String responseContent = this.post(url, request.toXML(), false);
