@@ -9,6 +9,8 @@ import redis.clients.jedis.JedisPool;
  * <pre>
  * 需要引入依赖<a href="https://github.com/abelaska/jedis-lock">jedis-lock</a>，才能使用该类。
  * </pre>
+ *
+ * @author <a href="https://github.com/winter4666">winter</a>
  */
 public class WxMaRedisConfigImpl extends AbstractWxMaRedisConfig {
 
