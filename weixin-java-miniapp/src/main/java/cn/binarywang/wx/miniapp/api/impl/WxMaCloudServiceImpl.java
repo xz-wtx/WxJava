@@ -49,7 +49,6 @@ public class WxMaCloudServiceImpl implements WxMaCloudService {
 
   @Override
   public List<String> add(String collection, List list) throws WxErrorException {
-
     String jsonData = WxMaGsonBuilder.create().toJson(list);
     String query = JoinerUtils.blankJoiner.join(
       "db.collection('", collection, "')",
@@ -67,9 +66,7 @@ public class WxMaCloudServiceImpl implements WxMaCloudService {
     }
     JsonArray idArray = jsonObject.getAsJsonArray("id_list");
     List<String> idList = new ArrayList<>();
-    Iterator<JsonElement> idIterator = idArray.iterator();
-    while (idIterator.hasNext()) {
-      JsonElement id = idIterator.next();
+    for (JsonElement id : idArray) {
       idList.add(id.getAsString());
     }
     return idList;
@@ -124,8 +121,7 @@ public class WxMaCloudServiceImpl implements WxMaCloudService {
     if (jsonObject.get(WxMaConstants.ERRCODE).getAsInt() != 0) {
       throw new WxErrorException(WxError.fromJson(responseContent));
     }
-    Integer deletedNum = jsonObject.get("deleted").getAsInt();
-    return deletedNum;
+    return jsonObject.get("deleted").getAsInt();
   }
 
   @Override
@@ -174,10 +170,11 @@ public class WxMaCloudServiceImpl implements WxMaCloudService {
     }
     StringBuilder orderBySb = new StringBuilder();
     if (null != orderBy && !orderBy.isEmpty()) {
-      orderBy.entrySet().forEach(
-        e -> orderBySb.append(".orderBy('").append(e.getKey()).append("', '").append(e.getValue()).append("')")
-      );
+      for (Map.Entry<String, String> entry : orderBy.entrySet()) {
+        orderBySb.append(".orderBy('").append(entry.getKey()).append("', '").append(entry.getValue()).append("')");
+      }
     }
+
     if (null == limit) {
       limit = 100;
     }
