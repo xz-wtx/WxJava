@@ -4,7 +4,9 @@ import cn.binarywang.wx.miniapp.api.*;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.config.WxMaConfig;
 import com.google.common.base.Joiner;
+import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.WxType;
@@ -181,6 +183,17 @@ public class WxMaServiceImpl implements WxMaService, RequestHttp<CloseableHttpCl
 
     String result = get(JSCODE_TO_SESSION_URL, Joiner.on("&").withKeyValueSeparator("=").join(params));
     return WxMaJscode2SessionResult.fromJson(result);
+  }
+
+  @Override
+  public void setDynamicData(int lifespan, String type, int scene, String data) throws WxErrorException {
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.addProperty("lifespan", lifespan);
+    jsonObject.addProperty("query", WxGsonBuilder.create().toJson(ImmutableMap.of("type", type)));
+    jsonObject.addProperty("data", data);
+    jsonObject.addProperty("scene", scene);
+
+    this.post(SET_DYNAMIC_DATA_URL, jsonObject.toString());
   }
 
   @Override
