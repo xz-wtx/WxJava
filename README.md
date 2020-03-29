@@ -159,14 +159,14 @@
 
 1. [chanjarster (Daniel Qian)](http://github.com/chanjarster)
 1. [binarywang (Binary Wang)](http://github.com/binarywang)
-1. [mgcnrx11](http://github.com/mgcnrx11)
 1. [007gzs](http://github.com/007gzs)
-1. [aimilin6688 (Jonk)](http://github.com/aimilin6688)
+1. [Silloy](https://github.com/silloy)
+1. [mgcnrx11](http://github.com/mgcnrx11)
 1. [kakotor](http://github.com/kakotor)
+1. [aimilin6688 (Jonk)](http://github.com/aimilin6688)
 1. [kareanyi (MillerLin)](http://github.com/kareanyi)
+1. [forfuns](https://github.com/forfuns)
 1. [tianmu](http://github.com/tianmu)
-1. [rememberber (周波)](http://github.com/rememberber)
-1. [charmingoh (Charming)](http://github.com/charmingoh)
 
 </details>
 
