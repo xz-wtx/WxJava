@@ -239,7 +239,10 @@ public class WxMaServiceImpl implements WxMaService, RequestHttp<CloseableHttpCl
         if (retryTimes + 1 > this.maxRetryTimes) {
           log.warn("重试达到最大次数【{}】", maxRetryTimes);
           //最后一次重试失败后，直接抛出异常，不再等待
-          throw new RuntimeException("微信服务端异常，超出重试次数");
+          throw new WxErrorException(WxError.builder()
+            .errorCode(e.getError().getErrorCode())
+            .errorMsg("微信服务端异常，超出重试次数！")
+            .build());
         }
 
         WxError error = e.getError();
