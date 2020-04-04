@@ -291,12 +291,12 @@ public class WxMaServiceImpl implements WxMaService, RequestHttp<CloseableHttpCl
         Lock lock = this.getWxMaConfig().getAccessTokenLock();
         lock.lock();
         try {
-          if(StringUtils.equals(this.getWxMaConfig().getAccessToken(), accessToken)){
+          if (StringUtils.equals(this.getWxMaConfig().getAccessToken(), accessToken)) {
             this.getWxMaConfig().expireAccessToken();
           }
-        } catch (Exception ex){
+        } catch (Exception ex) {
           this.getWxMaConfig().expireAccessToken();
-        }finally {
+        } finally {
           lock.unlock();
         }
         if (this.getWxMaConfig().autoRefreshToken()) {
