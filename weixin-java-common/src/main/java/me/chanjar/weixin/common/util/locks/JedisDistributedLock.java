@@ -3,6 +3,8 @@ package me.chanjar.weixin.common.util.locks;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
+
+import com.github.jedis.lock.JedisLock;
 import redis.clients.jedis.Jedis;
 import redis.clients.util.Pool;
 

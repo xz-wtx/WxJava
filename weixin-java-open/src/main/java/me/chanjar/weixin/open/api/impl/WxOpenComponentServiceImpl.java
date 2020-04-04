@@ -23,8 +23,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Lock;
 
 /**
  * @author <a href="https://github.com/007gzs">007</a>
@@ -158,12 +158,12 @@ public class WxOpenComponentServiceImpl implements WxOpenComponentService {
         Lock lock = this.getWxOpenConfigStorage().getComponentAccessTokenLock();
         lock.lock();
         try {
-          if (StringUtils.equals(componentAccessToken, this.getWxOpenConfigStorage().getComponentAccessToken()){
+          if (StringUtils.equals(componentAccessToken, this.getWxOpenConfigStorage().getComponentAccessToken())) {
             this.getWxOpenConfigStorage().expireComponentAccessToken();
           }
         } catch (Exception ex) {
           this.getWxOpenConfigStorage().expireComponentAccessToken();
-        }finally {
+        } finally {
           lock.unlock();
         }
 
@@ -202,12 +202,12 @@ public class WxOpenComponentServiceImpl implements WxOpenComponentService {
         Lock lock = this.getWxOpenConfigStorage().getComponentAccessTokenLock();
         lock.lock();
         try {
-          if (StringUtils.equals(componentAccessToken, this.getWxOpenConfigStorage().getComponentAccessToken()){
+          if (StringUtils.equals(componentAccessToken, this.getWxOpenConfigStorage().getComponentAccessToken())) {
             this.getWxOpenConfigStorage().expireComponentAccessToken();
           }
         } catch (Exception ex) {
           this.getWxOpenConfigStorage().expireComponentAccessToken();
-        }finally {
+        } finally {
           lock.unlock();
         }
         if (this.getWxOpenConfigStorage().autoRefreshToken()) {
@@ -379,13 +379,13 @@ public class WxOpenComponentServiceImpl implements WxOpenComponentService {
   @Override
   public String getAuthorizerAccessToken(String appId, boolean forceRefresh) throws WxErrorException {
     WxOpenConfigStorage config = getWxOpenConfigStorage();
-    if (!config.isAuthorizerAccessTokenExpired(appId) && !forceRefresh){
+    if (!config.isAuthorizerAccessTokenExpired(appId) && !forceRefresh) {
       return config.getAuthorizerAccessToken(appId);
     }
     Lock lock = config.getWxMpConfigStorage(appId).getAccessTokenLock();
     lock.lock();
-    try{
-      if (!config.isAuthorizerAccessTokenExpired(appId) && !forceRefresh){
+    try {
+      if (!config.isAuthorizerAccessTokenExpired(appId) && !forceRefresh) {
         return config.getAuthorizerAccessToken(appId);
       }
       JsonObject jsonObject = new JsonObject();
@@ -397,7 +397,7 @@ public class WxOpenComponentServiceImpl implements WxOpenComponentService {
       WxOpenAuthorizerAccessToken wxOpenAuthorizerAccessToken = WxOpenAuthorizerAccessToken.fromJson(responseContent);
       config.updateAuthorizerAccessToken(appId, wxOpenAuthorizerAccessToken);
       return config.getAuthorizerAccessToken(appId);
-    }finally {
+    } finally {
       lock.unlock();
     }
   }
