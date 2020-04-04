@@ -155,7 +155,7 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
       log.debug("微信支付异步通知请求参数：{}", xmlData);
       WxPayOrderNotifyResult result = WxPayOrderNotifyResult.fromXML(xmlData);
       log.debug("微信支付异步通知请求解析后的对象：{}", result);
-      result.checkResult(this, this.getConfig().getSignType(), false);
+      result.checkResult(this, result.getSignType(), false);
       return result;
     } catch (WxPayException e) {
       throw e;
