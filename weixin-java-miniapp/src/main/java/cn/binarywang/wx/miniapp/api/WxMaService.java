@@ -287,4 +287,11 @@ public interface WxMaService {
    * @return .
    */
   WxMaCloudService getCloudService();
+
+  /**
+   * 获取直播接口服务对象
+   *
+   * @return .
+   */
+  WxMaLiveService getLiveService();
 }
