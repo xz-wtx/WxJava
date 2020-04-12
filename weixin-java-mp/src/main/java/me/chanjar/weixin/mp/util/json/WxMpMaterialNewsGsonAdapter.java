@@ -3,6 +3,7 @@ package me.chanjar.weixin.mp.util.json;
 import com.google.gson.*;
 import me.chanjar.weixin.common.util.json.GsonHelper;
 import me.chanjar.weixin.mp.bean.material.WxMpMaterialNews;
+import me.chanjar.weixin.mp.bean.material.WxMpNewsArticle;
 
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
@@ -15,8 +16,8 @@ public class WxMpMaterialNewsGsonAdapter implements JsonSerializer<WxMpMaterialN
     JsonObject newsJson = new JsonObject();
 
     JsonArray articleJsonArray = new JsonArray();
-    for (WxMpMaterialNews.WxMpMaterialNewsArticle article : wxMpMaterialNews.getArticles()) {
-      JsonObject articleJson = WxMpGsonBuilder.create().toJsonTree(article, WxMpMaterialNews.WxMpMaterialNewsArticle.class).getAsJsonObject();
+    for (WxMpNewsArticle article : wxMpMaterialNews.getArticles()) {
+      JsonObject articleJson = WxMpGsonBuilder.create().toJsonTree(article, WxMpNewsArticle.class).getAsJsonObject();
       articleJsonArray.add(articleJson);
     }
     newsJson.add("articles", articleJsonArray);
@@ -42,7 +43,7 @@ public class WxMpMaterialNewsGsonAdapter implements JsonSerializer<WxMpMaterialN
       JsonArray articles = json.getAsJsonArray("news_item");
       for (JsonElement article1 : articles) {
         JsonObject articleInfo = article1.getAsJsonObject();
-        WxMpMaterialNews.WxMpMaterialNewsArticle article = WxMpGsonBuilder.create().fromJson(articleInfo, WxMpMaterialNews.WxMpMaterialNewsArticle.class);
+        WxMpNewsArticle article = WxMpGsonBuilder.create().fromJson(articleInfo, WxMpNewsArticle.class);
         wxMpMaterialNews.addArticle(article);
       }
     }
