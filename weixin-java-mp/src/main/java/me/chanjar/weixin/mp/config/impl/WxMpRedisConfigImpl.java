@@ -1,12 +1,12 @@
 package me.chanjar.weixin.mp.config.impl;
 
-import me.chanjar.weixin.common.util.locks.JedisDistributedLock;
+import com.sun.istack.internal.NotNull;
+import me.chanjar.weixin.mp.config.redis.JedisWxMpRedisOps;
+import me.chanjar.weixin.mp.config.redis.WxMpRedisOps;
 import me.chanjar.weixin.mp.enums.TicketType;
-import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 基于Redis的微信配置provider.
@@ -20,19 +20,23 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 @SuppressWarnings("hiding")
 public class WxMpRedisConfigImpl extends WxMpDefaultConfigImpl {
-  private static final String ACCESS_TOKEN_KEY = "wx:access_token:";
-  private static final String LOCK_KEY = "wx:lock:";
+  private static final String ACCESS_TOKEN_KEY_TPL = "%s:access_token:%s";
+  private static final String TICKET_KEY_TPL = "%s:ticket:key:%s:%s";
+  private static final String LOCK_KEY_TPL = "%s:lock:%s:";
 
-  /**
-   * 使用连接池保证线程安全.
-   */
-  private final JedisPool jedisPool;
+  private final WxMpRedisOps redisOps;
+  private final String keyPrefix;
 
   private String accessTokenKey;
   private String lockKey;
 
-  public WxMpRedisConfigImpl(JedisPool jedisPool) {
-    this.jedisPool = jedisPool;
+  public WxMpRedisConfigImpl(@NotNull JedisPool jedisPool) {
+    this(new JedisWxMpRedisOps(jedisPool), "wx");
+  }
+
+  public WxMpRedisConfigImpl(@NotNull WxMpRedisOps redisOps, @NotNull String keyPrefix) {
+    this.redisOps = redisOps;
+    this.keyPrefix = keyPrefix;
   }
 
   /**
@@ -41,72 +45,57 @@ public class WxMpRedisConfigImpl extends WxMpDefaultConfigImpl {
   @Override
   public void setAppId(String appId) {
     super.setAppId(appId);
-    this.accessTokenKey = ACCESS_TOKEN_KEY.concat(appId);
-    this.lockKey = ACCESS_TOKEN_KEY.concat(appId).concat(":");
-    accessTokenLock = new JedisDistributedLock(jedisPool, lockKey.concat("accessTokenLock"));
-    jsapiTicketLock = new JedisDistributedLock(jedisPool, lockKey.concat("jsapiTicketLock"));
-    sdkTicketLock = new JedisDistributedLock(jedisPool, lockKey.concat("sdkTicketLock"));
-    cardApiTicketLock = new JedisDistributedLock(jedisPool, lockKey.concat("cardApiTicketLock"));
+    this.accessTokenKey = String.format(ACCESS_TOKEN_KEY_TPL, this.keyPrefix, appId);
+    this.lockKey = String.format(LOCK_KEY_TPL, this.keyPrefix, appId);
+    accessTokenLock = this.redisOps.getLock(lockKey.concat("accessTokenLock"));
+    jsapiTicketLock = this.redisOps.getLock(lockKey.concat("jsapiTicketLock"));
+    sdkTicketLock = this.redisOps.getLock(lockKey.concat("sdkTicketLock"));
+    cardApiTicketLock = this.redisOps.getLock(lockKey.concat("cardApiTicketLock"));
   }
 
   private String getTicketRedisKey(TicketType type) {
-    return String.format("wx:ticket:key:%s:%s", this.appId, type.getCode());
+    return String.format(TICKET_KEY_TPL, this.keyPrefix, appId, type.getCode());
   }
 
   @Override
   public String getAccessToken() {
-    try (Jedis jedis = this.jedisPool.getResource()) {
-      return jedis.get(this.accessTokenKey);
-    }
+    return redisOps.getValue(this.accessTokenKey);
   }
 
   @Override
   public boolean isAccessTokenExpired() {
-    try (Jedis jedis = this.jedisPool.getResource()) {
-      return jedis.ttl(accessTokenKey) < 2;
-    }
+    Long expire = redisOps.getExpire(this.accessTokenKey);
+    return expire == null || expire < 2;
   }
 
   @Override
   public synchronized void updateAccessToken(String accessToken, int expiresInSeconds) {
-    try (Jedis jedis = this.jedisPool.getResource()) {
-      jedis.setex(this.accessTokenKey, expiresInSeconds - 200, accessToken);
-    }
+    redisOps.setValue(this.accessTokenKey, accessToken, expiresInSeconds - 200, TimeUnit.SECONDS);
   }
 
   @Override
   public void expireAccessToken() {
-    try (Jedis jedis = this.jedisPool.getResource()) {
-      jedis.expire(this.accessTokenKey, 0);
-    }
+    redisOps.expire(this.accessTokenKey, 0, TimeUnit.SECONDS);
   }
 
   @Override
   public String getTicket(TicketType type) {
-    try (Jedis jedis = this.jedisPool.getResource()) {
-      return jedis.get(this.getTicketRedisKey(type));
-    }
+    return redisOps.getValue(this.getTicketRedisKey(type));
   }
 
   @Override
   public boolean isTicketExpired(TicketType type) {
-    try (Jedis jedis = this.jedisPool.getResource()) {
-      return jedis.ttl(this.getTicketRedisKey(type)) < 2;
-    }
+    return redisOps.getExpire(this.getTicketRedisKey(type)) < 2;
   }
 
   @Override
   public synchronized void updateTicket(TicketType type, String jsapiTicket, int expiresInSeconds) {
-    try (Jedis jedis = this.jedisPool.getResource()) {
-      jedis.setex(this.getTicketRedisKey(type), expiresInSeconds - 200, jsapiTicket);
-    }
+    redisOps.setValue(this.getTicketRedisKey(type), jsapiTicket, expiresInSeconds - 200, TimeUnit.SECONDS);
   }
 
   @Override
   public void expireTicket(TicketType type) {
-    try (Jedis jedis = this.jedisPool.getResource()) {
-      jedis.expire(this.getTicketRedisKey(type), 0);
-    }
+    redisOps.expire(this.getTicketRedisKey(type), 0, TimeUnit.SECONDS);
   }
 
 }
