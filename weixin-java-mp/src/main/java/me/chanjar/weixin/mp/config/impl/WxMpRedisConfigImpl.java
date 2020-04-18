@@ -1,5 +1,6 @@
 package me.chanjar.weixin.mp.config.impl;
 
+import lombok.Data;
 import me.chanjar.weixin.mp.config.redis.JedisWxMpRedisOps;
 import me.chanjar.weixin.mp.config.redis.WxMpRedisOps;
 import me.chanjar.weixin.mp.enums.TicketType;
@@ -17,8 +18,11 @@ import java.util.concurrent.TimeUnit;
  *
  * @author nickwong
  */
+@Data
 @SuppressWarnings("hiding")
 public class WxMpRedisConfigImpl extends WxMpDefaultConfigImpl {
+  private static final long serialVersionUID = -988502871997239733L;
+  
   private static final String ACCESS_TOKEN_KEY_TPL = "%s:access_token:%s";
   private static final String TICKET_KEY_TPL = "%s:ticket:key:%s:%s";
   private static final String LOCK_KEY_TPL = "%s:lock:%s:";
