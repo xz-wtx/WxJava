@@ -234,6 +234,13 @@ public class WxCpXmlMessage implements Serializable {
   private String position;
 
   /**
+   * 群ID.
+   */
+  @XStreamAlias("ChatId")
+  @XStreamConverter(value = XStreamCDataConverter.class)
+  private String chatId;
+
+  /**
    * 性别，1表示男性，2表示女性.
    */
   @XStreamAlias("Gender")
