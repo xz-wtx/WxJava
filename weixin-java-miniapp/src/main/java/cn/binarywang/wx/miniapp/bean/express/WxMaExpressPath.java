@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * 运单轨迹对象
+ *
  * @author <a href="https://github.com/mr-xiaoyu">xiaoyu</a>
  * @since 2019-11-26
  */
@@ -18,7 +19,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WxMaExpressPath implements Serializable {
-
   private static final long serialVersionUID = 5643624677715536605L;
 
   /**
@@ -55,7 +55,7 @@ public class WxMaExpressPath implements Serializable {
   }
 
   @Data
-  private static class PathItem{
+  public static class PathItem {
 
     /**
      * 轨迹节点 Unix 时间戳
