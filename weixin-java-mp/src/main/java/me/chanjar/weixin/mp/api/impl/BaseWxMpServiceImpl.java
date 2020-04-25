@@ -18,6 +18,7 @@ import me.chanjar.weixin.common.util.DataUtils;
 import me.chanjar.weixin.common.util.RandomUtils;
 import me.chanjar.weixin.common.util.crypto.SHA1;
 import me.chanjar.weixin.common.util.http.*;
+import me.chanjar.weixin.common.util.json.WxGsonBuilder;
 import me.chanjar.weixin.mp.api.*;
 import me.chanjar.weixin.mp.bean.WxMpSemanticQuery;
 import me.chanjar.weixin.mp.bean.result.WxMpCurrentAutoReplyInfo;
@@ -57,13 +58,13 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
   private WxMpDataCubeService dataCubeService = new WxMpDataCubeServiceImpl(this);
   private WxMpUserBlacklistService blackListService = new WxMpUserBlacklistServiceImpl(this);
   private WxMpTemplateMsgService templateMsgService = new WxMpTemplateMsgServiceImpl(this);
-  private WxMpSubscribeMsgService subscribeMsgService = new WxMpSubscribeMsgServiceImpl(this);
+  private final WxMpSubscribeMsgService subscribeMsgService = new WxMpSubscribeMsgServiceImpl(this);
   private WxMpDeviceService deviceService = new WxMpDeviceServiceImpl(this);
   private WxMpShakeService shakeService = new WxMpShakeServiceImpl(this);
   private WxMpMemberCardService memberCardService = new WxMpMemberCardServiceImpl(this);
   private WxMpMassMessageService massMessageService = new WxMpMassMessageServiceImpl(this);
   private WxMpAiOpenService aiOpenService = new WxMpAiOpenServiceImpl(this);
-  private WxMpWifiService wifiService = new WxMpWifiServiceImpl(this);
+  private final WxMpWifiService wifiService = new WxMpWifiServiceImpl(this);
   private WxMpMarketingService marketingService = new WxMpMarketingServiceImpl(this);
   private WxMpCommentService commentService = new WxMpCommentServiceImpl(this);
   private WxMpOcrService ocrService = new WxMpOcrServiceImpl(this);
@@ -284,6 +285,11 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
   @Override
   public String post(WxMpApiUrl url, String postData) throws WxErrorException {
     return this.post(url.getUrl(this.getWxMpConfigStorage()), postData);
+  }
+
+  @Override
+  public String post(String url, Object obj) throws WxErrorException {
+    return this.execute(SimplePostRequestExecutor.create(this), url, WxGsonBuilder.create().toJson(obj));
   }
 
   @Override

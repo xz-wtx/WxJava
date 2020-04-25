@@ -3,6 +3,7 @@ package cn.binarywang.wx.miniapp.api;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.config.WxMaConfig;
 import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.common.service.WxService;
 import me.chanjar.weixin.common.util.http.MediaUploadRequestExecutor;
 import me.chanjar.weixin.common.util.http.RequestExecutor;
 import me.chanjar.weixin.common.util.http.RequestHttp;
@@ -10,7 +11,7 @@ import me.chanjar.weixin.common.util.http.RequestHttp;
 /**
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
  */
-public interface WxMaService {
+public interface WxMaService extends WxService {
   /**
    * 获取access_token.
    */
@@ -98,21 +99,6 @@ public interface WxMaService {
    * @throws WxErrorException .
    */
   String getPaidUnionId(String openid, String transactionId, String mchId, String outTradeNo) throws WxErrorException;
-
-  /**
-   * 当本Service没有实现某个API的时候，可以用这个，针对所有微信API中的GET请求.
-   */
-  String get(String url, String queryParam) throws WxErrorException;
-
-  /**
-   * 当本Service没有实现某个API的时候，可以用这个，针对所有微信API中的POST请求.
-   */
-  String post(String url, String postData) throws WxErrorException;
-
-  /**
-   * 当本Service没有实现某个API的时候，可以用这个，针对所有微信API中的POST请求.
-   */
-  String post(String url, Object obj) throws WxErrorException;
 
   /**
    * <pre>

@@ -3,6 +3,7 @@ package me.chanjar.weixin.mp.api;
 import me.chanjar.weixin.common.bean.WxJsapiSignature;
 import me.chanjar.weixin.common.bean.WxNetCheckResult;
 import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.common.service.WxService;
 import me.chanjar.weixin.common.util.http.MediaUploadRequestExecutor;
 import me.chanjar.weixin.common.util.http.RequestExecutor;
 import me.chanjar.weixin.common.util.http.RequestHttp;
@@ -22,7 +23,7 @@ import java.util.Map;
  *
  * @author chanjarster
  */
-public interface WxMpService {
+public interface WxMpService extends WxService {
   /**
    * <pre>
    * 验证消息的确来自微信服务器.
@@ -275,26 +276,6 @@ public interface WxMpService {
    * @param appid 公众号的APPID
    */
   void clearQuota(String appid) throws WxErrorException;
-
-  /**
-   * 当本Service没有实现某个API的时候，可以用这个，针对所有微信API中的GET请求.
-   *
-   * @param queryParam 参数
-   * @param url        请求接口地址
-   * @return 接口响应字符串
-   * @throws WxErrorException 异常
-   */
-  String get(String url, String queryParam) throws WxErrorException;
-
-  /**
-   * 当本Service没有实现某个API的时候，可以用这个，针对所有微信API中的POST请求.
-   *
-   * @param postData 请求参数json值
-   * @param url      请求接口地址
-   * @return 接口响应字符串
-   * @throws WxErrorException 异常
-   */
-  String post(String url, String postData) throws WxErrorException;
 
   /**
    * <pre>
