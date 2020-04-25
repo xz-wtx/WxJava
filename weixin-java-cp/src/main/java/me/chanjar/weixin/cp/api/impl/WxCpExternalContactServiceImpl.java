@@ -2,23 +2,26 @@ package me.chanjar.weixin.cp.api.impl;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import lombok.RequiredArgsConstructor;
+import me.chanjar.weixin.common.error.WxCpErrorMsgEnum;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.api.WxCpExternalContactService;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.*;
 import org.apache.commons.lang3.ArrayUtils;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.ExternalContact.*;
 
+/**
+ * @author 曹祖鹏 & yuanqixun
+ */
+@RequiredArgsConstructor
 public class WxCpExternalContactServiceImpl implements WxCpExternalContactService {
-  private WxCpService mainService;
-
-  public WxCpExternalContactServiceImpl(WxCpService mainService) {
-    this.mainService = mainService;
-  }
+  private final WxCpService mainService;
 
   @Override
   public WxCpUserExternalContactInfo getExternalContact(String userId) throws WxErrorException {
@@ -37,22 +40,30 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
   @Override
   public List<String> listExternalContacts(String userId) throws WxErrorException {
     final String url = this.mainService.getWxCpConfigStorage().getApiUrl(LIST_EXTERNAL_CONTACT + userId);
-    String responseContent = this.mainService.get(url, null);
-    return WxCpUserExternalContactList.fromJson(responseContent).getExternalUserId();
+    try {
+      String responseContent = this.mainService.get(url, null);
+      return WxCpUserExternalContactList.fromJson(responseContent).getExternalUserId();
+    } catch (WxErrorException e) {
+      // not external contact,无客户则返回空列表
+      if (e.getError().getErrorCode() == WxCpErrorMsgEnum.CODE_84061.getCode()) {
+        return Collections.emptyList();
+      }
+      throw e;
+    }
   }
 
   @Override
-  public List<String> listFollowUser() throws WxErrorException {
+  public List<String> listFollowers() throws WxErrorException {
     final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GET_FOLLOW_USER_LIST);
     String responseContent = this.mainService.get(url, null);
-    return WxCpUserWithExternalPermission.fromJson(responseContent).getFollowUser();
+    return WxCpUserWithExternalPermission.fromJson(responseContent).getFollowers();
   }
 
   @Override
   public WxCpUserExternalUnassignList listUnassignedList(Integer pageIndex, Integer pageSize) throws WxErrorException {
     JsonObject json = new JsonObject();
-    json.addProperty("page_id",pageIndex == null ? 0 : pageIndex);
-    json.addProperty("page_size",pageSize == null ? 100 : pageSize);
+    json.addProperty("page_id", pageIndex == null ? 0 : pageIndex);
+    json.addProperty("page_size", pageSize == null ? 100 : pageSize);
     final String url = this.mainService.getWxCpConfigStorage().getApiUrl(LIST_UNASSIGNED_CONTACT);
     final String result = this.mainService.post(url, json.toString());
     return WxCpUserExternalUnassignList.fromJson(result);
@@ -72,18 +83,18 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
   @Override
   public WxCpUserExternalGroupChatList listGroupChat(Integer pageIndex, Integer pageSize, int status, String[] userIds, String[] partyIds) throws WxErrorException {
     JsonObject json = new JsonObject();
-    json.addProperty("offset",pageIndex == null ? 0 : pageIndex);
-    json.addProperty("limit",pageSize == null ? 100 : pageSize);
-    json.addProperty("status_filter",status);
-    if(ArrayUtils.isNotEmpty(userIds) || ArrayUtils.isNotEmpty(partyIds)){
+    json.addProperty("offset", pageIndex == null ? 0 : pageIndex);
+    json.addProperty("limit", pageSize == null ? 100 : pageSize);
+    json.addProperty("status_filter", status);
+    if (ArrayUtils.isNotEmpty(userIds) || ArrayUtils.isNotEmpty(partyIds)) {
       JsonObject ownerFilter = new JsonObject();
-      if(ArrayUtils.isNotEmpty(userIds)){
+      if (ArrayUtils.isNotEmpty(userIds)) {
         json.add("userid", new Gson().toJsonTree(userIds).getAsJsonArray());
       }
-      if(ArrayUtils.isNotEmpty(partyIds)){
+      if (ArrayUtils.isNotEmpty(partyIds)) {
         json.add("partyid", new Gson().toJsonTree(partyIds).getAsJsonArray());
       }
-      json.add("owner_filter",ownerFilter);
+      json.add("owner_filter", ownerFilter);
     }
     final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GROUP_CHAT_LIST);
     final String result = this.mainService.post(url, json.toString());
@@ -102,13 +113,13 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
   @Override
   public WxCpUserExternalUserBehaviorStatistic getUserBehaviorStatistic(Date startTime, Date endTime, String[] userIds, String[] partyIds) throws WxErrorException {
     JsonObject json = new JsonObject();
-    json.addProperty("start_time", startTime.getTime()/1000);
-    json.addProperty("end_time", endTime.getTime()/1000);
-    if(ArrayUtils.isNotEmpty(userIds) || ArrayUtils.isNotEmpty(partyIds)){
-      if(ArrayUtils.isNotEmpty(userIds)){
+    json.addProperty("start_time", startTime.getTime() / 1000);
+    json.addProperty("end_time", endTime.getTime() / 1000);
+    if (ArrayUtils.isNotEmpty(userIds) || ArrayUtils.isNotEmpty(partyIds)) {
+      if (ArrayUtils.isNotEmpty(userIds)) {
         json.add("userid", new Gson().toJsonTree(userIds).getAsJsonArray());
       }
-      if(ArrayUtils.isNotEmpty(partyIds)){
+      if (ArrayUtils.isNotEmpty(partyIds)) {
         json.add("partyid", new Gson().toJsonTree(partyIds).getAsJsonArray());
       }
     }
@@ -120,20 +131,20 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
   @Override
   public WxCpUserExternalGroupChatStatistic getGroupChatStatistic(Date startTime, Integer orderBy, Integer orderAsc, Integer pageIndex, Integer pageSize, String[] userIds, String[] partyIds) throws WxErrorException {
     JsonObject json = new JsonObject();
-    json.addProperty("day_begin_time", startTime.getTime()/1000);
+    json.addProperty("day_begin_time", startTime.getTime() / 1000);
     json.addProperty("order_by", orderBy == null ? 1 : orderBy);
-    json.addProperty("order_asc",orderAsc == null ? 0 : orderAsc);
-    json.addProperty("offset",pageIndex == null ? 0 : pageIndex);
-    json.addProperty("limit",pageSize == null ? 500 : pageSize);
-    if(ArrayUtils.isNotEmpty(userIds) || ArrayUtils.isNotEmpty(partyIds)){
+    json.addProperty("order_asc", orderAsc == null ? 0 : orderAsc);
+    json.addProperty("offset", pageIndex == null ? 0 : pageIndex);
+    json.addProperty("limit", pageSize == null ? 500 : pageSize);
+    if (ArrayUtils.isNotEmpty(userIds) || ArrayUtils.isNotEmpty(partyIds)) {
       JsonObject ownerFilter = new JsonObject();
-      if(ArrayUtils.isNotEmpty(userIds)){
+      if (ArrayUtils.isNotEmpty(userIds)) {
         json.add("userid_list", new Gson().toJsonTree(userIds).getAsJsonArray());
       }
-      if(ArrayUtils.isNotEmpty(partyIds)){
+      if (ArrayUtils.isNotEmpty(partyIds)) {
         json.add("userid_list", new Gson().toJsonTree(partyIds).getAsJsonArray());
       }
-      json.add("owner_filter",ownerFilter);
+      json.add("owner_filter", ownerFilter);
     }
     final String url = this.mainService.getWxCpConfigStorage().getApiUrl(LIST_GROUP_CHAT_DATA);
     final String result = this.mainService.post(url, json.toString());

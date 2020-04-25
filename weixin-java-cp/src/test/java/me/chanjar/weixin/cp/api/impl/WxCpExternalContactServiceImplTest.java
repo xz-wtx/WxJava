@@ -38,7 +38,7 @@ public class WxCpExternalContactServiceImplTest {
 
   @Test
   public void testListExternalWithPermission() throws WxErrorException {
-    List<String> ret = this.wxCpService.getExternalContactService().listFollowUser();
+    List<String> ret = this.wxCpService.getExternalContactService().listFollowers();
     System.out.println(ret);
     assertNotNull(ret);
   }

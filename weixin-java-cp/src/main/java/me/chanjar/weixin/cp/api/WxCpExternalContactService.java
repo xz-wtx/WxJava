@@ -85,7 +85,7 @@ public interface WxCpExternalContactService {
    * @return List of CpUser id
    * @throws WxErrorException .
    */
-  List<String> listFollowUser() throws WxErrorException;
+  List<String> listFollowers() throws WxErrorException;
 
   /**
    * 企业和第三方可通过此接口，获取所有离职成员的客户列表，并可进一步调用离职成员的外部联系人再分配接口将这些客户重新分配给其他企业成员。
