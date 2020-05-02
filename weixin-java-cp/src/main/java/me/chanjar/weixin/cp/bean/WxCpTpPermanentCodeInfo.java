@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 服务商模式获取永久授权码信息
  *
- * @author Daniel Qian
+ * @author yunaqixun
  */
 @Getter
 @Setter
@@ -22,7 +22,7 @@ public class WxCpTpPermanentCodeInfo extends WxCpBaseResp {
   private String accessToken;
 
   @SerializedName("expires_in")
-  private Long ExpiresIn;
+  private Long expiresIn;
 
   @SerializedName("permanent_code")
   private String permanentCode;
@@ -92,7 +92,7 @@ public class WxCpTpPermanentCodeInfo extends WxCpBaseResp {
      * 授权企业在微工作台（原企业号）的二维码，可用于关注微工作台
      */
     @SerializedName("corp_wxqrcode")
-    private String corpWxqrcode;
+    private String corpWxQrcode;
 
     @SerializedName("corp_scale")
     private String corpScale;
@@ -119,7 +119,7 @@ public class WxCpTpPermanentCodeInfo extends WxCpBaseResp {
      * 授权的应用信息，注意是一个数组，但仅旧的多应用套件授权时会返回多个agent，对新的单应用授权，永远只返回一个agent
      */
     @SerializedName("agent")
-    private List<Agent> agent;
+    private List<Agent> agents;
 
   }
 
@@ -127,7 +127,7 @@ public class WxCpTpPermanentCodeInfo extends WxCpBaseResp {
   @Setter
   public static class Agent {
     @SerializedName("agentid")
-    private Integer agentid;
+    private Integer agentId;
 
     @SerializedName("name")
     private String name;
@@ -160,7 +160,7 @@ public class WxCpTpPermanentCodeInfo extends WxCpBaseResp {
   @Setter
   public static class AuthUserInfo {
     @SerializedName("userid")
-    private String userid;
+    private String userId;
 
     @SerializedName("name")
     private String name;
@@ -188,26 +188,25 @@ public class WxCpTpPermanentCodeInfo extends WxCpBaseResp {
     private Integer level;
 
     @SerializedName("allow_party")
-    private List<Integer> allowParty;
+    private List<Integer> allowParties;
 
     @SerializedName("allow_user")
-    private List<String> allowUser;
+    private List<String> allowUsers;
 
     @SerializedName("allow_tag")
-    private List<Integer> allowTag;
+    private List<Integer> allowTags;
 
     @SerializedName("extra_party")
-    private List<Integer> extraParty;
+    private List<Integer> extraParties;
 
     @SerializedName("extra_user")
-    private List<String> extraUser;
+    private List<String> extraUsers;
 
     @SerializedName("extra_tag")
-    private List<Integer> extraTag;
+    private List<Integer> extraTags;
 
 
   }
-
 
   public static WxCpTpPermanentCodeInfo fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpTpPermanentCodeInfo.class);
