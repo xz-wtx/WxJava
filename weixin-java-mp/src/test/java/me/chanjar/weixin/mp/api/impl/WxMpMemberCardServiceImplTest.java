@@ -95,7 +95,6 @@ public class WxMpMemberCardServiceImplTest {
   @Test
   public void testUpdateUserMemberCard() throws Exception {
     WxMpMemberCardUpdateMessage updateMessage = new WxMpMemberCardUpdateMessage();
-    updateMessage.setAddBounus(100);
     updateMessage.setBonus(1000);
     updateMessage.setCardId(cardId);
     updateMessage.setCode(code);

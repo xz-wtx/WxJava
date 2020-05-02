@@ -46,7 +46,7 @@ public class WxMpServiceJoddHttpImpl extends BaseWxMpServiceImpl<HttpConnectionP
       httpProxy = new ProxyInfo(ProxyInfo.ProxyType.HTTP, configStorage.getHttpProxyHost(), configStorage.getHttpProxyPort(), configStorage.getHttpProxyUsername(), configStorage.getHttpProxyPassword());
     }
 
-    httpClient = JoddHttp.httpConnectionProvider;
+    httpClient = new SocketHttpConnectionProvider();
   }
 
   @Override
