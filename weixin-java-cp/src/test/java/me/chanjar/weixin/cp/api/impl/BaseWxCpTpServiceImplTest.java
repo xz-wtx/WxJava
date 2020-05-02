@@ -133,7 +133,7 @@ public class BaseWxCpTpServiceImplTest {
     assertThat(tpCorp.getPermanentCode()).isEqualTo("xxxx");
 
     final WxCpTpPermanentCodeInfo tpPermanentCodeInfo = tpService.getPermanentCodeInfo(authCode);
-    assertThat(tpPermanentCodeInfo.getAuthInfo().getAgent().get(0).getAgentid()).isEqualTo(1);
+    assertThat(tpPermanentCodeInfo.getAuthInfo().getAgents().get(0).getAgentId()).isEqualTo(1);
 
   }
 
@@ -193,8 +193,8 @@ public class BaseWxCpTpServiceImplTest {
     jsonObject.addProperty("auth_code", authCode);
     doReturn(returnJson).when(tpService).post(configStorage.getApiUrl(GET_PERMANENT_CODE), jsonObject.toString());
     final WxCpTpPermanentCodeInfo tpPermanentCodeInfo = tpService.getPermanentCodeInfo(authCode);
-    assertThat(tpPermanentCodeInfo.getAuthInfo().getAgent().get(0).getAgentid()).isEqualTo(1000012);
-    assertNotNull(tpPermanentCodeInfo.getAuthInfo().getAgent().get(0).getSquareLogoUrl());
+    assertThat(tpPermanentCodeInfo.getAuthInfo().getAgents().get(0).getAgentId()).isEqualTo(1000012);
+    assertNotNull(tpPermanentCodeInfo.getAuthInfo().getAgents().get(0).getSquareLogoUrl());
     assertNotNull(tpPermanentCodeInfo.getAuthCorpInfo().getCorpSquareLogoUrl());
   }
 

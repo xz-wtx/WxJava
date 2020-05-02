@@ -3,7 +3,7 @@ package me.chanjar.weixin.mp.config.impl;
 import lombok.Data;
 import me.chanjar.weixin.common.redis.JedisWxRedisOps;
 import me.chanjar.weixin.common.redis.WxRedisOps;
-import me.chanjar.weixin.mp.enums.TicketType;
+import me.chanjar.weixin.common.enums.TicketType;
 import redis.clients.jedis.JedisPool;
 
 import java.util.concurrent.TimeUnit;

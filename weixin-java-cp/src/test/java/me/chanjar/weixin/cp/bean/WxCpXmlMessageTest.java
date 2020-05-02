@@ -70,9 +70,9 @@ public class WxCpXmlMessageTest {
     assertEquals(wxMessage.getMediaId(), "media_id");
     assertEquals(wxMessage.getFormat(), "Format");
     assertEquals(wxMessage.getThumbMediaId(), "thumb_media_id");
-    assertEquals(wxMessage.getLocationX(), 23.134521d);
-    assertEquals(wxMessage.getLocationY(), 113.358803d);
-    assertEquals(wxMessage.getScale(), 20d);
+    assertEquals(wxMessage.getLocationX().doubleValue(), 23.134521d);
+    assertEquals(wxMessage.getLocationY().doubleValue(), 113.358803d);
+    assertEquals(wxMessage.getScale().doubleValue(), 20d);
     assertEquals(wxMessage.getLabel(), "位置信息");
     assertEquals(wxMessage.getDescription(), "公众平台官网链接");
     assertEquals(wxMessage.getUrl(), "url");
@@ -80,9 +80,9 @@ public class WxCpXmlMessageTest {
     assertEquals(wxMessage.getEvent(), "subscribe");
     assertEquals(wxMessage.getEventKey(), "qrscene_123123");
     assertEquals(wxMessage.getTicket(), "TICKET");
-    assertEquals(wxMessage.getLatitude(), 23.137466);
-    assertEquals(wxMessage.getLongitude(), 113.352425);
-    assertEquals(wxMessage.getPrecision(), 119.385040);
+    assertEquals(wxMessage.getLatitude().doubleValue(), 23.137466);
+    assertEquals(wxMessage.getLongitude().doubleValue(), 113.352425);
+    assertEquals(wxMessage.getPrecision().doubleValue(), 119.385040);
     assertEquals(wxMessage.getScanCodeInfo().getScanType(), "qrcode");
     assertEquals(wxMessage.getScanCodeInfo().getScanResult(), "1");
     assertEquals(wxMessage.getSendPicsInfo().getCount(), new Long(1));

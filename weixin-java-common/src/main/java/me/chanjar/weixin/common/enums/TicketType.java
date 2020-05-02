@@ -1,6 +1,7 @@
-package me.chanjar.weixin.mp.enums;
+package me.chanjar.weixin.common.enums;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 /**
  * <pre>
@@ -11,6 +12,7 @@ import lombok.Getter;
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
  */
 @Getter
+@RequiredArgsConstructor
 public enum TicketType {
   /**
    * jsapi
@@ -24,12 +26,10 @@ public enum TicketType {
    * 微信卡券
    */
   WX_CARD("wx_card");
+
   /**
    * type代码
    */
-  private String code;
+  private final String code;
 
-  TicketType(String code) {
-    this.code = code;
-  }
 }
