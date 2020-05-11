@@ -21,7 +21,7 @@ public enum TicketType {
   /**
    * sdk
    */
-  SDK("2"),
+  SDK("sdk"),
   /**
    * 微信卡券
    */
