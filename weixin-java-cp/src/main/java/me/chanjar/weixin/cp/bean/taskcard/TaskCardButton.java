@@ -1,7 +1,9 @@
 package me.chanjar.weixin.cp.bean.taskcard;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * <pre>
@@ -14,6 +16,8 @@ import lombok.Data;
  */
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class TaskCardButton {
   private String key;
   private String name;
