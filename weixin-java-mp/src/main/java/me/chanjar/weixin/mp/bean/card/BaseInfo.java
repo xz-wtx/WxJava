@@ -192,13 +192,8 @@ public class BaseInfo implements Serializable {
   @SerializedName("need_push_on_view")
   private boolean needPushOnView;
 
-
   /**
    * 微信小程序开放功能 小程序&卡券打通部分新增8个字段 https://mp.weixin.qq.com/cgi-bin/announce?action=getannouncement&key=1490190158&version=1&lang=zh_CN&platform=2
-   * @return
-   */
-
-  /**
    * 自定义使用入口跳转小程序的user_name，格式为原始id+@app
    */
   @SerializedName("custom_app_brand_user_name")
@@ -229,6 +224,16 @@ public class BaseInfo implements Serializable {
   @SerializedName("promotion_app_brand_pass")
   private String promotionAppBrandPass;
 
+  /**
+   * 小程序的user_name,
+   */
+  @SerializedName("activate_app_brand_user_name")
+  private String activateAppBrandUserName;
+  /**
+   * 激活小程序页面地址
+   */
+  @SerializedName("activate_app_brand_pass")
+  private String activateAppBrandPass;
 
   /**
    *
