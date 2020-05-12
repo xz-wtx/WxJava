@@ -145,7 +145,7 @@ public class WxPayConfig {
         if (!path.startsWith("/")) {
           path = "/" + path;
         }
-        inputStream = WxPayConfig.class.getResourceAsStream(path);
+        inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
         if (inputStream == null) {
           throw new WxPayException(fileNotFoundMsg);
         }
