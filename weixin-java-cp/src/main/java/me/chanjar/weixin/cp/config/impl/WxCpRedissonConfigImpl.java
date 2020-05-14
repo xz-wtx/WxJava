@@ -1,4 +1,4 @@
-package cn.binarywang.wx.miniapp.config.impl;
+package me.chanjar.weixin.cp.config.impl;
 
 import lombok.NonNull;
 import me.chanjar.weixin.common.bean.WxAccessToken;
@@ -14,14 +14,13 @@ import java.util.concurrent.locks.Lock;
  * 基于Redisson的实现
  *
  * @author yuanqixun
- * @date 2020/5/3
+ * @date 2020/5/13
  */
-public class WxMaRedissonConfigImpl extends WxMaDefaultConfigImpl {
-
-  protected final static String LOCK_KEY = "wechat_ma_lock:";
-  protected final static String MA_ACCESS_TOKEN_KEY = "wechat_ma_access_token_key:";
-  protected final static String MA_JSAPI_TICKET_KEY = "wechat_ma_jsapi_ticket_key:";
-  protected final static String MA_CARD_API_TICKET_KEY = "wechat_ma_card_api_ticket_key:";
+public class WxCpRedissonConfigImpl extends WxCpDefaultConfigImpl {
+  protected final static String LOCK_KEY = "wechat_cp_lock:";
+  protected final static String CP_ACCESS_TOKEN_KEY = "wechat_cp_access_token_key:";
+  protected final static String CP_JSAPI_TICKET_KEY = "wechat_cp_jsapi_ticket_key:";
+  protected final static String CP_AGENT_JSAPI_TICKET_KEY = "wechat_cp_agent_jsapi_ticket_key:";
 
   /**
    * redis 存储的 key 的前缀，可为空
@@ -29,33 +28,39 @@ public class WxMaRedissonConfigImpl extends WxMaDefaultConfigImpl {
   protected String keyPrefix;
   protected String accessTokenKey;
   protected String jsapiTicketKey;
-  protected String cardApiTicketKey;
+  protected String agentJsapiTicketKey;
   protected String lockKey;
 
   private final WxRedisOps redisOps;
 
-  public WxMaRedissonConfigImpl(@NonNull RedissonClient redissonClient, String keyPrefix) {
+  public WxCpRedissonConfigImpl(@NonNull RedissonClient redissonClient, String keyPrefix) {
     this(new RedissonWxRedisOps(redissonClient), keyPrefix);
   }
 
-  public WxMaRedissonConfigImpl(@NonNull RedissonClient redissonClient) {
+  public WxCpRedissonConfigImpl(@NonNull RedissonClient redissonClient) {
     this(redissonClient, null);
   }
 
-  private WxMaRedissonConfigImpl(@NonNull WxRedisOps redisOps, String keyPrefix) {
+  private WxCpRedissonConfigImpl(@NonNull WxRedisOps redisOps, String keyPrefix) {
     this.redisOps = redisOps;
     this.keyPrefix = keyPrefix;
   }
 
+  /**
+   * 设置企业微信自研应用ID（整数）,同时初始化相关的redis key，注意要先调用setCorpId，再调用setAgentId
+   *
+   * @param agentId
+   */
   @Override
-  public void setAppid(String appid) {
-    super.setAppid(appid);
+  public void setAgentId(Integer agentId) {
+    super.setAgentId(agentId);
+    String ukey = getCorpId().concat(":").concat(String.valueOf(agentId));
     String prefix = StringUtils.isBlank(keyPrefix) ? "" :
       (StringUtils.endsWith(keyPrefix, ":") ? keyPrefix : (keyPrefix + ":"));
-    lockKey = prefix + LOCK_KEY.concat(appid);
-    accessTokenKey = prefix + MA_ACCESS_TOKEN_KEY.concat(appid);
-    jsapiTicketKey = prefix + MA_JSAPI_TICKET_KEY.concat(appid);
-    cardApiTicketKey = prefix + MA_CARD_API_TICKET_KEY.concat(appid);
+    lockKey = prefix + LOCK_KEY.concat(ukey);
+    accessTokenKey = prefix + CP_ACCESS_TOKEN_KEY.concat(ukey);
+    jsapiTicketKey = prefix + CP_JSAPI_TICKET_KEY.concat(ukey);
+    agentJsapiTicketKey = prefix + CP_AGENT_JSAPI_TICKET_KEY.concat(ukey);
   }
 
   protected Lock getLockByKey(String key) {
@@ -68,8 +73,8 @@ public class WxMaRedissonConfigImpl extends WxMaDefaultConfigImpl {
   }
 
   @Override
-  public Lock getCardApiTicketLock() {
-    return getLockByKey(this.lockKey.concat(":").concat("cardApiTicket"));
+  public Lock getAgentJsapiTicketLock() {
+    return getLockByKey(this.lockKey.concat(":").concat("agentJsapiTicket"));
 
   }
 
@@ -100,6 +105,11 @@ public class WxMaRedissonConfigImpl extends WxMaDefaultConfigImpl {
   }
 
   @Override
+  public void expireAccessToken() {
+    redisOps.expire(this.accessTokenKey, 0, TimeUnit.SECONDS);
+  }
+
+  @Override
   public String getJsapiTicket() {
     return redisOps.getValue(this.jsapiTicketKey);
   }
@@ -118,33 +128,27 @@ public class WxMaRedissonConfigImpl extends WxMaDefaultConfigImpl {
   @Override
   public void updateJsapiTicket(String jsapiTicket, int expiresInSeconds) {
     redisOps.setValue(this.jsapiTicketKey, jsapiTicket, expiresInSeconds, TimeUnit.SECONDS);
-
   }
 
   @Override
-  public String getCardApiTicket() {
-    return redisOps.getValue(cardApiTicketKey);
+  public void expireAgentJsapiTicket() {
+    redisOps.expire(this.agentJsapiTicketKey, 0, TimeUnit.SECONDS);
   }
 
   @Override
-  public boolean isCardApiTicketExpired() {
-    Long expire = redisOps.getExpire(this.cardApiTicketKey);
+  public void updateAgentJsapiTicket(String agentJsapiTicket, int expiresInSeconds) {
+    redisOps.setValue(this.agentJsapiTicketKey, agentJsapiTicket, expiresInSeconds, TimeUnit.SECONDS);
+  }
+
+  @Override
+  public String getAgentJsapiTicket() {
+    return redisOps.getValue(this.agentJsapiTicketKey);
+  }
+
+  @Override
+  public boolean isAgentJsapiTicketExpired() {
+    Long expire = redisOps.getExpire(this.agentJsapiTicketKey);
     return expire == null || expire < 2;
-  }
-
-  @Override
-  public void expireCardApiTicket() {
-    redisOps.expire(this.cardApiTicketKey, 0, TimeUnit.SECONDS);
-  }
-
-  @Override
-  public void updateCardApiTicket(String cardApiTicket, int expiresInSeconds) {
-    redisOps.setValue(this.cardApiTicketKey, cardApiTicket, expiresInSeconds, TimeUnit.SECONDS);
-  }
-
-  @Override
-  public void expireAccessToken() {
-    redisOps.expire(this.accessTokenKey, 0, TimeUnit.SECONDS);
   }
 
 }
