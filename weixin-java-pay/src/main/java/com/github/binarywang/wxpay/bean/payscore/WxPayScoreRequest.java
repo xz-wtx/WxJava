@@ -1,8 +1,11 @@
 package com.github.binarywang.wxpay.bean.payscore;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,8 +14,11 @@ import java.util.List;
  * @author doger.wang
  * @date 2020/5/12 16:36
  */
-@NoArgsConstructor
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Accessors(chain = true)
 public class WxPayScoreRequest implements Serializable {
   private static final long serialVersionUID = 364764508076146082L;
 

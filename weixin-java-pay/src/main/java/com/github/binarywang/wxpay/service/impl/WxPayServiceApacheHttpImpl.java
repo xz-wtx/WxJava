@@ -144,11 +144,11 @@ public class WxPayServiceApacheHttpImpl extends BaseWxPayServiceImpl {
   }
 
   private CloseableHttpClient createApiV3HttpClient() throws WxPayException {
-    CloseableHttpClient apiv3HttpClient = this.getConfig().getApiV3HttpClient();
-    if (null == apiv3HttpClient) {
+    CloseableHttpClient apiV3HttpClient = this.getConfig().getApiV3HttpClient();
+    if (null == apiV3HttpClient) {
       return this.getConfig().initApiV3HttpClient();
     }
-    return apiv3HttpClient;
+    return apiV3HttpClient;
   }
 
   private StringEntity createEntry(String requestStr) {
