@@ -1,26 +1,33 @@
 package com.github.binarywang.wxpay.service.impl;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import javax.net.ssl.SSLContext;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.binarywang.wxpay.bean.WxPayApiData;
 import com.github.binarywang.wxpay.bean.request.WxPayQueryCommentRequest;
 import com.github.binarywang.wxpay.bean.request.WxPayRedpackQueryRequest;
 import com.github.binarywang.wxpay.bean.result.WxPayCommonResult;
 import com.github.binarywang.wxpay.bean.result.WxPayRedpackQueryResult;
+import com.github.binarywang.wxpay.config.WxPayConfig;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import jodd.util.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHost;
+import org.apache.http.HttpStatus;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ssl.DefaultHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -90,14 +97,81 @@ public class WxPayServiceApacheHttpImpl extends BaseWxPayServiceImpl {
     }
   }
 
-  private StringEntity createEntry(String requestStr) {
-    try {
-      return new StringEntity(new String(requestStr.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1));
-    } catch (UnsupportedEncodingException e) {
-      //cannot happen
-      this.log.error(e.getMessage(), e);
-      return null;
+  @Override
+  public String postV3(String url, String requestStr) throws WxPayException {
+    CloseableHttpClient httpClient = this.createApiV3HttpClient();
+    HttpPost httpPost = this.createHttpPost(url, requestStr);
+    httpPost.addHeader("Accept", "application/json");
+    httpPost.addHeader("Content-Type", "application/json");
+    try (CloseableHttpResponse response = httpClient.execute(httpPost)){
+      //v3已经改为通过状态码判断200 204 成功
+      int statusCode = response.getStatusLine().getStatusCode();
+      String responseString = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
+      if (HttpStatus.SC_OK==statusCode || HttpStatus.SC_NO_CONTENT==statusCode){
+        this.log.info("\n【请求地址】：{}\n【请求数据】：{}\n【响应数据】：{}", url, requestStr, responseString);
+        return responseString;
+      }else {
+        //有错误提示信息返回
+        JSONObject jsonObject = JSONObject.parseObject(responseString);
+        String message = jsonObject.getString("message");
+        throw new WxPayException(message);
+      }
+    } catch (Exception e) {
+      this.log.error("\n【请求地址】：{}\n【请求数据】：{}\n【异常信息】：{}", url, requestStr, e.getMessage());
+      throw new WxPayException(e.getMessage(), e);
+    } finally {
+      httpPost.releaseConnection();
     }
+
+
+
+
+  }
+
+  @Override
+  public String getV3(URI url) throws WxPayException {
+    CloseableHttpClient httpClient = this.createApiV3HttpClient();
+    HttpGet httpGet = new HttpGet(url);
+    httpGet.addHeader("Accept", "application/json");
+    httpGet.addHeader("Content-Type", "application/json");
+    try (CloseableHttpResponse response = httpClient.execute(httpGet)){
+      //v3已经改为通过状态码判断200 204 成功
+      int statusCode = response.getStatusLine().getStatusCode();
+      String responseString = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
+      if (HttpStatus.SC_OK==statusCode || HttpStatus.SC_NO_CONTENT==statusCode){
+        this.log.info("\n【请求地址】：{}\n【响应数据】：{}", url , responseString);
+        return responseString;
+      }else {
+        //有错误提示信息返回
+        JSONObject jsonObject = JSONObject.parseObject(responseString);
+        String message = jsonObject.getString("message");
+        throw new WxPayException(message);
+      }
+    } catch (Exception e) {
+      this.log.error("\n【请求地址】：{}\n【异常信息】：{}", url, e.getMessage());
+      throw new WxPayException(e.getMessage(), e);
+    } finally {
+      httpGet.releaseConnection();
+    }
+
+
+  }
+
+  private CloseableHttpClient createApiV3HttpClient() throws WxPayException {
+    CloseableHttpClient apiv3HttpClient = this.getConfig().getApiv3HttpClient();
+    if (null==apiv3HttpClient){
+      return this.getConfig().initApiV3HttpClient();
+    }
+    return apiv3HttpClient;
+  }
+
+
+  private StringEntity createEntry(String requestStr) {
+
+      return new StringEntity(requestStr, ContentType.create("application/json", "utf-8"));
+      //return new StringEntity(new String(requestStr.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1));
+
+
   }
 
   private HttpClientBuilder createHttpClientBuilder(boolean useKey) throws WxPayException {
