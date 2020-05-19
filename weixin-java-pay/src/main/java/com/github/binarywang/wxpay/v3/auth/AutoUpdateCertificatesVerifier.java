@@ -1,8 +1,22 @@
 package com.github.binarywang.wxpay.v3.auth;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.binarywang.wxpay.v3.Credentials;
+import com.github.binarywang.wxpay.v3.WechatPayHttpClientBuilder;
+import com.github.binarywang.wxpay.v3.util.AesUtils;
+import com.github.binarywang.wxpay.v3.util.PemUtils;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.util.EntityUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.security.cert.CertificateExpiredException;
 import java.security.cert.CertificateNotYetValidException;
@@ -13,57 +27,56 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.binarywang.wxpay.v3.Credentials;
-import com.github.binarywang.wxpay.v3.WechatPayHttpClientBuilder;
-import com.github.binarywang.wxpay.v3.util.AesUtils;
-import com.github.binarywang.wxpay.v3.util.PemUtils;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.util.EntityUtils;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * 在原有CertificatesVerifier基础上，增加自动更新证书功能
+ *
+ * @author doger.wang
  */
+@Slf4j
 public class AutoUpdateCertificatesVerifier implements Verifier {
+  /**
+   * 证书下载地址
+   */
+  private static final String CERT_DOWNLOAD_PATH = "https://api.mch.weixin.qq.com/v3/certificates";
 
-  private static final Logger log = LoggerFactory.getLogger(AutoUpdateCertificatesVerifier.class);
-
-  //证书下载地址
-  private static final String CertDownloadPath = "https://api.mch.weixin.qq.com/v3/certificates";
-
-  //上次更新时间
+  /**
+   * 上次更新时间
+   */
   private volatile Instant instant;
 
-  //证书更新间隔时间，单位为分钟
-  private int minutesInterval;
+  /**
+   * 证书更新间隔时间，单位为分钟
+   */
+  private final int minutesInterval;
 
   private CertificatesVerifier verifier;
 
-  private Credentials credentials;
+  private final Credentials credentials;
 
-  private byte[] apiV3Key;
+  private final byte[] apiV3Key;
 
-  private ReentrantLock lock = new ReentrantLock();
+  private final ReentrantLock lock = new ReentrantLock();
 
-  //时间间隔枚举，支持一小时、六小时以及十二小时
+  /**
+   * 时间间隔枚举，支持一小时、六小时以及十二小时
+   */
+  @Getter
+  @RequiredArgsConstructor
   public enum TimeInterval {
-    OneHour(60), SixHours(60 * 6), TwelveHours(60 * 12);
+    /**
+     * 一小时
+     */
+    OneHour(60),
+    /**
+     * 六小时
+     */
+    SixHours(60 * 6),
+    /**
+     * 十二小时
+     */
+    TwelveHours(60 * 12);
 
-    private int minutes;
-
-    TimeInterval(int minutes) {
-      this.minutes = minutes;
-    }
-
-    public int getMinutes() {
-      return minutes;
-    }
+    private final int minutes;
   }
 
   public AutoUpdateCertificatesVerifier(Credentials credentials, byte[] apiV3Key) {
@@ -103,11 +116,11 @@ public class AutoUpdateCertificatesVerifier implements Verifier {
 
   private void autoUpdateCert() throws IOException, GeneralSecurityException {
     CloseableHttpClient httpClient = WechatPayHttpClientBuilder.create()
-        .withCredentials(credentials)
-        .withValidator(verifier == null ? (response) -> true : new WechatPay2Validator(verifier))
-        .build();
+      .withCredentials(credentials)
+      .withValidator(verifier == null ? (response) -> true : new WechatPay2Validator(verifier))
+      .build();
 
-    HttpGet httpGet = new HttpGet(CertDownloadPath);
+    HttpGet httpGet = new HttpGet(CERT_DOWNLOAD_PATH);
     httpGet.addHeader("Accept", "application/json");
 
     CloseableHttpResponse response = httpClient.execute(httpGet);
@@ -125,12 +138,10 @@ public class AutoUpdateCertificatesVerifier implements Verifier {
     }
   }
 
-
   /**
    * 反序列化证书并解密
    */
-  private List<X509Certificate> deserializeToCerts(byte[] apiV3Key, String body)
-      throws GeneralSecurityException, IOException {
+  private List<X509Certificate> deserializeToCerts(byte[] apiV3Key, String body) throws GeneralSecurityException, IOException {
     AesUtils decryptor = new AesUtils(apiV3Key);
     ObjectMapper mapper = new ObjectMapper();
     JsonNode dataNode = mapper.readTree(body).get("data");
@@ -140,14 +151,14 @@ public class AutoUpdateCertificatesVerifier implements Verifier {
         JsonNode encryptCertificateNode = dataNode.get(i).get("encrypt_certificate");
         //解密
         String cert = decryptor.decryptToString(
-            encryptCertificateNode.get("associated_data").toString().replaceAll("\"", "")
-                .getBytes("utf-8"),
-            encryptCertificateNode.get("nonce").toString().replaceAll("\"", "")
-                .getBytes("utf-8"),
-            encryptCertificateNode.get("ciphertext").toString().replaceAll("\"", ""));
+          encryptCertificateNode.get("associated_data").toString().replaceAll("\"", "")
+            .getBytes(StandardCharsets.UTF_8),
+          encryptCertificateNode.get("nonce").toString().replaceAll("\"", "")
+            .getBytes(StandardCharsets.UTF_8),
+          encryptCertificateNode.get("ciphertext").toString().replaceAll("\"", ""));
 
         X509Certificate x509Cert = PemUtils
-            .loadCertificate(new ByteArrayInputStream(cert.getBytes("utf-8")));
+          .loadCertificate(new ByteArrayInputStream(cert.getBytes(StandardCharsets.UTF_8)));
         try {
           x509Cert.checkValidity();
         } catch (CertificateExpiredException | CertificateNotYetValidException e) {
@@ -156,6 +167,7 @@ public class AutoUpdateCertificatesVerifier implements Verifier {
         newCertList.add(x509Cert);
       }
     }
+
     return newCertList;
   }
 }
