@@ -1,18 +1,11 @@
 package com.github.binarywang.wxpay.service.impl;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import javax.net.ssl.SSLContext;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.binarywang.wxpay.bean.WxPayApiData;
-import com.github.binarywang.wxpay.bean.request.WxPayQueryCommentRequest;
-import com.github.binarywang.wxpay.bean.request.WxPayRedpackQueryRequest;
-import com.github.binarywang.wxpay.bean.result.WxPayCommonResult;
-import com.github.binarywang.wxpay.bean.result.WxPayRedpackQueryResult;
-import com.github.binarywang.wxpay.config.WxPayConfig;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import jodd.util.Base64;
 import org.apache.commons.lang3.StringUtils;
@@ -34,10 +27,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-
-import com.github.binarywang.wxpay.bean.WxPayApiData;
-import com.github.binarywang.wxpay.exception.WxPayException;
-import jodd.util.Base64;
 
 /**
  * <pre>
@@ -158,7 +147,7 @@ public class WxPayServiceApacheHttpImpl extends BaseWxPayServiceImpl {
   }
 
   private CloseableHttpClient createApiV3HttpClient() throws WxPayException {
-    CloseableHttpClient apiv3HttpClient = this.getConfig().getApiv3HttpClient();
+    CloseableHttpClient apiv3HttpClient = this.getConfig().getApiV3HttpClient();
     if (null==apiv3HttpClient){
       return this.getConfig().initApiV3HttpClient();
     }

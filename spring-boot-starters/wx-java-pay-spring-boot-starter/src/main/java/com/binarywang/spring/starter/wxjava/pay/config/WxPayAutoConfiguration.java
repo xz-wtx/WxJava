@@ -55,7 +55,7 @@ public class WxPayAutoConfiguration {
     payConfig.setPrivateKeyPath(StringUtils.trimToNull(this.properties.getPrivateKeyPath()));
     payConfig.setPrivateCertPath(StringUtils.trimToNull(this.properties.getPrivateCertPath()));
     payConfig.setCertSerialNo(StringUtils.trimToNull(this.properties.getCertSerialNo()));
-    payConfig.setApiv3Key(StringUtils.trimToNull(this.properties.getApiv3Key()));
+    payConfig.setApiV3Key(StringUtils.trimToNull(this.properties.getApiv3Key()));
 
     wxPayService.setConfig(payConfig);
     return wxPayService;
