@@ -1,6 +1,7 @@
 package cn.binarywang.wx.graal;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.RoundEnvironment;
@@ -25,7 +26,6 @@ import java.util.TreeSet;
  *
  * @author outersky
  */
-
 @SupportedAnnotationTypes("lombok.Data")
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
 public class GraalProcessor extends AbstractProcessor {
@@ -38,7 +38,6 @@ public class GraalProcessor extends AbstractProcessor {
   @Override
   public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
     for (TypeElement annotatedClass : ElementFilter.typesIn(roundEnv.getElementsAnnotatedWith(Data.class))) {
-
       registerClass(annotatedClass.getQualifiedName().toString());
       handleSuperClass(annotatedClass);
     }
@@ -108,29 +107,29 @@ public class GraalProcessor extends AbstractProcessor {
     String propsFile = path + NATIVE_IMAGE_PROPERTIES;
     try {
       FileObject fileObject = processingEnv.getFiler().createResource(StandardLocation.CLASS_OUTPUT, "", propsFile);
-      Writer writer = fileObject.openWriter();
-      writer.append("Args = -H:ReflectionConfigurationResources=${.}/" + REFLECTION_CONFIG_JSON);
-      writer.close();
+      try (Writer writer = fileObject.openWriter();) {
+        writer.append("Args = -H:ReflectionConfigurationResources=${.}/" + REFLECTION_CONFIG_JSON);
+      }
     } catch (IOException e) {
       e.printStackTrace();
     }
 
     try {
       FileObject fileObject = processingEnv.getFiler().createResource(StandardLocation.CLASS_OUTPUT, "", reflectFile);
-      Writer writer = fileObject.openWriter();
-      writer.write("[\n");
-      boolean first = true;
-      for (String name : classSet) {
-        if (first) {
-          first = false;
-        } else {
-          writer.write(",");
+      try (Writer writer = fileObject.openWriter();) {
+        writer.write("[\n");
+        boolean first = true;
+        for (String name : classSet) {
+          if (first) {
+            first = false;
+          } else {
+            writer.write(",");
+          }
+          writer.write(assetGraalJsonElement(name));
+          writer.append('\n');
         }
-        writer.write(assetGraalJsonElement(name));
-        writer.append('\n');
+        writer.write("]");
       }
-      writer.write("]");
-      writer.close();
     } catch (IOException e) {
       e.printStackTrace();
     }
