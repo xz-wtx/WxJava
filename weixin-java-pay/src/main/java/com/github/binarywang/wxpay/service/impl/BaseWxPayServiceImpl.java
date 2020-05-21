@@ -281,7 +281,7 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
     }
 
     String timestamp = String.valueOf(System.currentTimeMillis() / 1000);
-    String nonceStr = String.valueOf(System.currentTimeMillis());
+    String nonceStr = unifiedOrderResult.getNonceStr();
     switch (request.getTradeType()) {
       case TradeType.MWEB: {
         return (T) new WxPayMwebOrderResult(unifiedOrderResult.getMwebUrl());
@@ -387,7 +387,7 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
 
     Map<String, String> payInfo = new HashMap<>();
     String timestamp = String.valueOf(System.currentTimeMillis() / 1000);
-    String nonceStr = String.valueOf(System.currentTimeMillis());
+    String nonceStr = unifiedOrderResult.getNonceStr();
     if (TradeType.NATIVE.equals(request.getTradeType())) {
       payInfo.put("codeUrl", unifiedOrderResult.getCodeURL());
     } else if (TradeType.APP.equals(request.getTradeType())) {
