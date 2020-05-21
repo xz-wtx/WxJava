@@ -8,6 +8,8 @@ import com.google.inject.Inject;
 import org.testng.annotations.Guice;
 import org.testng.annotations.Test;
 
+import java.net.URISyntaxException;
+
 /**
  * 测试代码，待补充完善.
  *
@@ -62,14 +64,14 @@ public class PayScoreServiceImplTest {
   }
 
   @Test
-  public void testQueryServiceOrder() {
+  public void testQueryServiceOrder() throws URISyntaxException, WxPayException {
     //两个参数选填一个
-    this.payService.getPayScoreService().queryServiceOrder("11","");
+    this.payService.getPayScoreService().queryServiceOrder("11", "");
   }
 
   @Test
-  public void testCancelServiceOrder() {
-    this.payService.getPayScoreService().cancelServiceOrder("11","测试取消");
+  public void testCancelServiceOrder() throws WxPayException {
+    this.payService.getPayScoreService().cancelServiceOrder("11", "测试取消");
   }
 
   @Test
@@ -77,7 +79,7 @@ public class PayScoreServiceImplTest {
   }
 
   @Test
-  public void testCompleteServiceOrder()  throws WxPayException{
+  public void testCompleteServiceOrder() throws WxPayException {
 /*    {
       "appid":"",
       "service_id":"",
@@ -96,9 +98,10 @@ public class PayScoreServiceImplTest {
     ],
       "total_amount":100
     }
-  }*/
+*/
     this.payService.getPayScoreService().completeServiceOrder(WxPayScoreRequest.builder().build());
-
+  }
+  
   @Test
   public void testPayServiceOrder() {
   }

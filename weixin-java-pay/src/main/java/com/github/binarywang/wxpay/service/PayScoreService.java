@@ -44,9 +44,8 @@ public interface PayScoreService {
    * @param queryId    the query id
    * @return the wx pay score result
    * @throws WxPayException     the wx pay exception
-   * @throws URISyntaxException the uri syntax exception
    */
-  WxPayScoreResult queryServiceOrder(String outOrderNo, String queryId) throws WxPayException, URISyntaxException;
+  WxPayScoreResult queryServiceOrder(String outOrderNo, String queryId) throws WxPayException;
 
   /**
    * <pre>

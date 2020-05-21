@@ -60,10 +60,17 @@ public class PayScoreServiceImpl implements PayScoreService {
   }
 
   @Override
-  public WxPayScoreResult queryServiceOrder(String outOrderNo, String queryId) throws WxPayException, URISyntaxException {
+  public WxPayScoreResult queryServiceOrder(String outOrderNo, String queryId) throws WxPayException {
     WxPayConfig config = this.payService.getConfig();
     String url = this.payService.getPayBaseUrl() + "/v3/payscore/serviceorder";
-    URIBuilder uriBuilder = new URIBuilder(url);
+
+    URIBuilder uriBuilder;
+    try {
+      uriBuilder = new URIBuilder(url);
+    } catch (URISyntaxException e) {
+      throw new WxPayException("未知异常！", e);
+    }
+
     if (StringUtils.isAllEmpty(outOrderNo, queryId) || !StringUtils.isAnyEmpty(outOrderNo, queryId)) {
       throw new WxPayException("out_order_no,query_id不允许都填写或都不填写");
     }
@@ -75,8 +82,13 @@ public class PayScoreServiceImpl implements PayScoreService {
     }
     uriBuilder.setParameter("service_id", config.getServiceId());
     uriBuilder.setParameter("appid", config.getAppId());
-    String result = payService.getV3(uriBuilder.build());
-    return GSON.fromJson(result, WxPayScoreResult.class);
+    try {
+      String result = payService.getV3(uriBuilder.build());
+      return GSON.fromJson(result, WxPayScoreResult.class);
+    } catch (URISyntaxException e) {
+      throw new WxPayException("未知异常！", e);
+    }
+
   }
 
   @Override
@@ -139,7 +151,7 @@ public class PayScoreServiceImpl implements PayScoreService {
   }
 
   @Override
-  public PayScoreNotifyData parseNotifyData(String data){
+  public PayScoreNotifyData parseNotifyData(String data) {
     return GSON.fromJson(data, PayScoreNotifyData.class);
 
   }
