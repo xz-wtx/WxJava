@@ -831,4 +831,18 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
     return result;
   }
 
+  @Override
+  public WxPayQueryExchangeRateResult queryExchangeRate(String feeType, String date) throws WxPayException {
+    WxPayQueryExchangeRateRequest request = new WxPayQueryExchangeRateRequest();
+    request.setFeeType(feeType);
+    request.setDate(date);
+
+    request.checkAndSign(this.getConfig());
+
+    String url = this.getPayBaseUrl() + "/pay/queryexchagerate";
+    String responseContent = this.post(url, request.toXML(), false);
+    WxPayQueryExchangeRateResult result = BaseWxPayResult.fromXML(responseContent, WxPayQueryExchangeRateResult.class);
+    result.checkResult(this, request.getSignType(), true);
+    return result;
+  }
 }

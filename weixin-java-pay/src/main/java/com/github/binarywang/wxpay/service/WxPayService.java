@@ -65,12 +65,10 @@ public interface WxPayService {
    */
   String postV3(String url, String requestStr) throws WxPayException;
 
-
   /**
    * 发送get V3请求，得到响应字符串.
    *
-   * @param url        请求地址
-   * @param param 请求信息
+   * @param url 请求地址
    * @return 返回请求结果字符串 string
    * @throws WxPayException the wx pay exception
    */
@@ -200,11 +198,11 @@ public interface WxPayService {
   /**
    * 调用统一下单接口，并组装生成支付所需参数对象.
    *
-   * @see WxPayService#createOrder(WxPayUnifiedOrderRequest)
    * @param specificTradeType 将使用的交易方式，不能为 null
-   * @param request 统一下单请求参数，设定的 tradeType 及配置里的 tradeType 将被忽略，转而使用 specificTradeType
+   * @param request           统一下单请求参数，设定的 tradeType 及配置里的 tradeType 将被忽略，转而使用 specificTradeType
    * @return 返回 {@link WxPayConstants.TradeType.Specific} 指定的类
    * @throws WxPayException the wx pay exception
+   * @see WxPayService#createOrder(WxPayUnifiedOrderRequest)
    */
   <T> T createOrder(WxPayConstants.TradeType.Specific<T> specificTradeType, WxPayUnifiedOrderRequest request) throws WxPayException;
 
@@ -759,5 +757,18 @@ public interface WxPayService {
    */
   WxPayFacepayResult facepay(WxPayFacepayRequest request) throws WxPayException;
 
-
+  /**
+   * 查询汇率
+   * <pre>
+   * 应用场景：商户网站的商品以外币标价时，通过该接口可以实时查询到微信使用的转换汇率。汇率更新时间为北京时间上午10:00，一天更新一次。
+   * 文档地址：https://pay.weixin.qq.com/wiki/doc/api/app/app_jw.php?chapter=9_15&index=12
+   * 接口链接：https://api.mch.weixin.qq.com/pay/queryexchagerate
+   * </pre>
+   *
+   * @param feeType 外币币种
+   * @param date    日期，格式为yyyyMMdd，如2009年12月25日表示为20091225。时区为GMT+8 beijing
+   * @return .
+   * @throws WxPayException .
+   */
+  WxPayQueryExchangeRateResult queryExchangeRate(String feeType, String date) throws WxPayException;
 }

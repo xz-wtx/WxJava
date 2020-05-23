@@ -626,7 +626,8 @@ public class BaseWxPayServiceImplTest {
   }
 
   @Test
-  public void testFacepay() {
+  public void testFacepay() throws WxPayException {
+    final WxPayFacepayResult result = this.payService.facepay(WxPayFacepayRequest.newBuilder().build());
   }
 
   @Test
@@ -672,5 +673,17 @@ public class BaseWxPayServiceImplTest {
 
   @Test
   public void testTestQueryRedpack() {
+  }
+
+  @Test
+  public void testGetPayScoreService() {
+    // no need to test
+  }
+
+  @Test
+  public void testQueryExchangeRate() throws WxPayException {
+    final WxPayQueryExchangeRateResult result = this.payService.queryExchangeRate("USD", "20200425");
+    assertThat(result).isNotNull();
+    System.out.println(result);
   }
 }

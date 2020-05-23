@@ -171,6 +171,13 @@ public abstract class BaseWxPayRequest implements Serializable {
   protected abstract void checkConstraints() throws WxPayException;
 
   /**
+   * 是否需要nonce_str
+   */
+  protected boolean needNonceStr() {
+    return true;
+  }
+
+  /**
    * 如果配置中已经设置，可以不设置值.
    *
    * @param appid 微信公众号appid
@@ -363,7 +370,7 @@ public abstract class BaseWxPayRequest implements Serializable {
       }
     }
 
-    if (StringUtils.isBlank(getNonceStr())) {
+    if (needNonceStr() && StringUtils.isBlank(getNonceStr())) {
       this.setNonceStr(String.valueOf(System.currentTimeMillis()));
     }
 
