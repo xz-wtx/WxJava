@@ -122,10 +122,8 @@ public interface PayScoreService {
    *
    * @param data the data
    * @return the wx pay score result
-   * @throws WxPayException the wx pay exception
    */
   PayScoreNotifyData parseNotifyData(String data);
-
 
   /**
    * <pre>

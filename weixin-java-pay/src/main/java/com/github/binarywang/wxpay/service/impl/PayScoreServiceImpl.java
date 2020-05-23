@@ -153,7 +153,6 @@ public class PayScoreServiceImpl implements PayScoreService {
   @Override
   public PayScoreNotifyData parseNotifyData(String data) {
     return GSON.fromJson(data, PayScoreNotifyData.class);
-
   }
 
   @Override

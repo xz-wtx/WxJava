@@ -101,7 +101,7 @@ public class PayScoreServiceImplTest {
 */
     this.payService.getPayScoreService().completeServiceOrder(WxPayScoreRequest.builder().build());
   }
-  
+
   @Test
   public void testPayServiceOrder() {
   }
