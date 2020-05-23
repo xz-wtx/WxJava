@@ -53,8 +53,8 @@ public class WxMpTemplateMsgServiceImplTest {
 
   @Test
   public void testSetIndustry() throws Exception {
-    WxMpTemplateIndustry industry = new WxMpTemplateIndustry(WxMpTemplateIndustryEnum.findByCode(1),
-      WxMpTemplateIndustryEnum.findByCode(4));
+    WxMpTemplateIndustry industry = new WxMpTemplateIndustry(WxMpTemplateIndustryEnum.findByCode(29),
+      WxMpTemplateIndustryEnum.findByCode(8));
     boolean result = this.wxService.getTemplateMsgService().setIndustry(industry);
     Assert.assertTrue(result);
   }
