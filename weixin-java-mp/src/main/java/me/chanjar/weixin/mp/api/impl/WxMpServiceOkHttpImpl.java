@@ -10,6 +10,7 @@ import me.chanjar.weixin.mp.config.WxMpConfigStorage;
 import okhttp3.*;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.concurrent.locks.Lock;
 
 import static me.chanjar.weixin.mp.enums.WxMpApiUrl.Other.GET_ACCESS_TOKEN_URL;
@@ -55,15 +56,7 @@ public class WxMpServiceOkHttpImpl extends BaseWxMpServiceImpl<OkHttpClient, OkH
 
       Request request = new Request.Builder().url(url).get().build();
       Response response = getRequestHttpClient().newCall(request).execute();
-      String resultContent = response.body().string();
-      WxError error = WxError.fromJson(resultContent, WxType.MP);
-      if (error.getErrorCode() != 0) {
-        throw new WxErrorException(error);
-      }
-      WxAccessToken accessToken = WxAccessToken.fromJson(resultContent);
-      config.updateAccessToken(accessToken.getAccessToken(), accessToken.getExpiresIn());
-
-      return config.getAccessToken();
+      return this.extractAccessToken(Objects.requireNonNull(response.body()).string());
     } catch (IOException e) {
       throw new RuntimeException(e);
     } finally {

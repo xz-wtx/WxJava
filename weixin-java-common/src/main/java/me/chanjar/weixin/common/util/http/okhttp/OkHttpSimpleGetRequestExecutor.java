@@ -35,12 +35,7 @@ public class OkHttpSimpleGetRequestExecutor extends SimpleGetRequestExecutor<OkH
     OkHttpClient client = requestHttp.getRequestHttpClient();
     Request request = new Request.Builder().url(uri).build();
     Response response = client.newCall(request).execute();
-    String responseContent = response.body().string();
-    WxError error = WxError.fromJson(responseContent, wxType);
-    if (error.getErrorCode() != 0) {
-      throw new WxErrorException(error);
-    }
-    return responseContent;
+    return this.handleResponse(wxType, response.body().string());
   }
 
 }

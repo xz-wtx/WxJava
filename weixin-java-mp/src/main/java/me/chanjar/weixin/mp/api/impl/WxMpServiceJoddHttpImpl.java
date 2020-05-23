@@ -65,23 +65,14 @@ public class WxMpServiceJoddHttpImpl extends BaseWxMpServiceImpl<HttpConnectionP
       String url = String.format(GET_ACCESS_TOKEN_URL.getUrl(config), config.getAppId(), config.getSecret());
 
       HttpRequest request = HttpRequest.get(url);
-
       if (this.getRequestHttpProxy() != null) {
         SocketHttpConnectionProvider provider = new SocketHttpConnectionProvider();
         provider.useProxy(getRequestHttpProxy());
 
         request.withConnectionProvider(provider);
       }
-      HttpResponse response = request.send();
-      String resultContent = response.bodyText();
-      WxError error = WxError.fromJson(resultContent, WxType.MP);
-      if (error.getErrorCode() != 0) {
-        throw new WxErrorException(error);
-      }
-      WxAccessToken accessToken = WxAccessToken.fromJson(resultContent);
-      config.updateAccessToken(accessToken.getAccessToken(), accessToken.getExpiresIn());
 
-      return config.getAccessToken();
+      return this.extractAccessToken(request.send().bodyText());
     } finally {
       lock.unlock();
     }

@@ -85,14 +85,7 @@ public class WxMpServiceHttpClientImpl extends BaseWxMpServiceImpl<CloseableHttp
           httpGet.setConfig(requestConfig);
         }
         try (CloseableHttpResponse response = getRequestHttpClient().execute(httpGet)) {
-          String resultContent = new BasicResponseHandler().handleResponse(response);
-          WxError error = WxError.fromJson(resultContent, WxType.MP);
-          if (error.getErrorCode() != 0) {
-            throw new WxErrorException(error);
-          }
-          WxAccessToken accessToken = WxAccessToken.fromJson(resultContent);
-          config.updateAccessToken(accessToken.getAccessToken(), accessToken.getExpiresIn());
-          return config.getAccessToken();
+          return this.extractAccessToken(new BasicResponseHandler().handleResponse(response));
         } finally {
           httpGet.releaseConnection();
         }
@@ -103,4 +96,5 @@ public class WxMpServiceHttpClientImpl extends BaseWxMpServiceImpl<CloseableHttp
       lock.unlock();
     }
   }
+
 }

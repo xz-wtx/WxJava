@@ -12,6 +12,7 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
@@ -42,22 +43,10 @@ public class ApacheSimplePostRequestExecutor extends SimplePostRequestExecutor<C
 
     try (CloseableHttpResponse response = requestHttp.getRequestHttpClient().execute(httpPost)) {
       String responseContent = Utf8ResponseHandler.INSTANCE.handleResponse(response);
-      if (responseContent.isEmpty()) {
-        throw new WxErrorException(WxError.builder().errorCode(9999).errorMsg("无响应内容").build());
-      }
-
-      if (responseContent.startsWith("<xml>")) {
-        //xml格式输出直接返回
-        return responseContent;
-      }
-
-      WxError error = WxError.fromJson(responseContent, wxType);
-      if (error.getErrorCode() != 0) {
-        throw new WxErrorException(error);
-      }
-      return responseContent;
+      return this.handleResponse(wxType, responseContent);
     } finally {
       httpPost.releaseConnection();
     }
   }
+
 }

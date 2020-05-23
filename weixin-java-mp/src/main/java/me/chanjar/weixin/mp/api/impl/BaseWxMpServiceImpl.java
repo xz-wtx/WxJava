@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.WxType;
+import me.chanjar.weixin.common.bean.WxAccessToken;
 import me.chanjar.weixin.common.bean.WxJsapiSignature;
 import me.chanjar.weixin.common.bean.WxNetCheckResult;
 import me.chanjar.weixin.common.enums.TicketType;
@@ -398,6 +399,17 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
     }
 
     return this.configStorageMap.get(WxMpConfigStorageHolder.get());
+  }
+
+  protected String extractAccessToken(String resultContent) throws WxErrorException {
+    WxMpConfigStorage config = this.getWxMpConfigStorage();
+    WxError error = WxError.fromJson(resultContent, WxType.MP);
+    if (error.getErrorCode() != 0) {
+      throw new WxErrorException(error);
+    }
+    WxAccessToken accessToken = WxAccessToken.fromJson(resultContent);
+    config.updateAccessToken(accessToken.getAccessToken(), accessToken.getExpiresIn());
+    return config.getAccessToken();
   }
 
   @Override

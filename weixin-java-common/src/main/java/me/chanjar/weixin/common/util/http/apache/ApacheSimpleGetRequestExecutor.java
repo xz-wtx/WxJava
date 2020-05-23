@@ -19,8 +19,8 @@ import java.io.IOException;
  * @author ecoolper
  * @date 2017/5/4
  */
-public class ApacheHttpClientSimpleGetRequestExecutor extends SimpleGetRequestExecutor<CloseableHttpClient, HttpHost> {
-  public ApacheHttpClientSimpleGetRequestExecutor(RequestHttp requestHttp) {
+public class ApacheSimpleGetRequestExecutor extends SimpleGetRequestExecutor<CloseableHttpClient, HttpHost> {
+  public ApacheSimpleGetRequestExecutor(RequestHttp requestHttp) {
     super(requestHttp);
   }
 
@@ -40,11 +40,7 @@ public class ApacheHttpClientSimpleGetRequestExecutor extends SimpleGetRequestEx
 
     try (CloseableHttpResponse response = requestHttp.getRequestHttpClient().execute(httpGet)) {
       String responseContent = Utf8ResponseHandler.INSTANCE.handleResponse(response);
-      WxError error = WxError.fromJson(responseContent, wxType);
-      if (error.getErrorCode() != 0) {
-        throw new WxErrorException(error);
-      }
-      return responseContent;
+      return handleResponse(wxType, responseContent);
     } finally {
       httpGet.releaseConnection();
     }
