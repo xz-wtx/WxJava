@@ -6,22 +6,22 @@ import java.net.URI;
 import java.security.SecureRandom;
 
 import com.github.binarywang.wxpay.v3.Credentials;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class WechatPay2Credentials implements Credentials {
-  private static final Logger log = LoggerFactory.getLogger(WechatPay2Credentials.class);
-
+@Slf4j
+public class WxPayCredentials implements Credentials {
   private static final String SYMBOLS =
       "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
   private static final SecureRandom RANDOM = new SecureRandom();
   protected String merchantId;
   protected Signer signer;
 
-  public WechatPay2Credentials(String merchantId, Signer signer) {
+  public WxPayCredentials(String merchantId, Signer signer) {
     this.merchantId = merchantId;
     this.signer = signer;
   }

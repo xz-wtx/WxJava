@@ -7,8 +7,8 @@ import java.util.List;
 
 import com.github.binarywang.wxpay.v3.auth.CertificatesVerifier;
 import com.github.binarywang.wxpay.v3.auth.PrivateKeySigner;
-import com.github.binarywang.wxpay.v3.auth.WechatPay2Credentials;
-import com.github.binarywang.wxpay.v3.auth.WechatPay2Validator;
+import com.github.binarywang.wxpay.v3.auth.WxPayCredentials;
+import com.github.binarywang.wxpay.v3.auth.WxPayValidator;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.execchain.ClientExecChain;
@@ -37,7 +37,7 @@ public class WxPayV3HttpClientBuilder extends HttpClientBuilder {
 
   public WxPayV3HttpClientBuilder withMerchant(String merchantId, String serialNo, PrivateKey privateKey) {
     this.credentials =
-        new WechatPay2Credentials(merchantId, new PrivateKeySigner(serialNo, privateKey));
+        new WxPayCredentials(merchantId, new PrivateKeySigner(serialNo, privateKey));
     return this;
   }
 
@@ -47,7 +47,7 @@ public class WxPayV3HttpClientBuilder extends HttpClientBuilder {
   }
 
   public WxPayV3HttpClientBuilder withWechatpay(List<X509Certificate> certificates) {
-    this.validator = new WechatPay2Validator(new CertificatesVerifier(certificates));
+    this.validator = new WxPayValidator(new CertificatesVerifier(certificates));
     return this;
   }
 

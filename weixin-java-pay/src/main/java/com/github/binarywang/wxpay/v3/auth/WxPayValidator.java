@@ -4,20 +4,18 @@ package com.github.binarywang.wxpay.v3.auth;
 import java.io.IOException;
 
 import com.github.binarywang.wxpay.v3.Validator;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-public class WechatPay2Validator implements Validator {
-
-  private static final Logger log = LoggerFactory.getLogger(WechatPay2Validator.class);
-
+@Slf4j
+public class WxPayValidator implements Validator {
   private Verifier verifier;
 
-  public WechatPay2Validator(Verifier verifier) {
+  public WxPayValidator(Verifier verifier) {
     this.verifier = verifier;
   }
 

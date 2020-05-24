@@ -4,8 +4,8 @@ import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.v3.WxPayV3HttpClientBuilder;
 import com.github.binarywang.wxpay.v3.auth.AutoUpdateCertificatesVerifier;
 import com.github.binarywang.wxpay.v3.auth.PrivateKeySigner;
-import com.github.binarywang.wxpay.v3.auth.WechatPay2Credentials;
-import com.github.binarywang.wxpay.v3.auth.WechatPay2Validator;
+import com.github.binarywang.wxpay.v3.auth.WxPayCredentials;
+import com.github.binarywang.wxpay.v3.auth.WxPayValidator;
 import com.github.binarywang.wxpay.v3.util.PemUtils;
 import jodd.util.ResourcesUtil;
 import lombok.Data;
@@ -300,8 +300,8 @@ public class WxPayConfig {
       CloseableHttpClient httpClient = WxPayV3HttpClientBuilder.create()
         .withMerchant(mchId, certSerialNo, merchantPrivateKey)
         .withWechatpay(Collections.singletonList(PemUtils.loadCertificate(certInputStream)))
-        .withValidator(new WechatPay2Validator(new AutoUpdateCertificatesVerifier(
-          new WechatPay2Credentials(mchId, new PrivateKeySigner(certSerialNo, merchantPrivateKey)),
+        .withValidator(new WxPayValidator(new AutoUpdateCertificatesVerifier(
+          new WxPayCredentials(mchId, new PrivateKeySigner(certSerialNo, merchantPrivateKey)),
           apiV3Key.getBytes(StandardCharsets.UTF_8))))
         .build();
       this.apiV3HttpClient = httpClient;

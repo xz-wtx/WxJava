@@ -3,6 +3,7 @@ package com.github.binarywang.wxpay.v3.auth;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.binarywang.wxpay.v3.Credentials;
+import com.github.binarywang.wxpay.v3.Validator;
 import com.github.binarywang.wxpay.v3.WxPayV3HttpClientBuilder;
 import com.github.binarywang.wxpay.v3.util.AesUtils;
 import com.github.binarywang.wxpay.v3.util.PemUtils;
@@ -13,6 +14,8 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.joda.time.Instant;
+import org.joda.time.Minutes;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -21,8 +24,6 @@ import java.security.GeneralSecurityException;
 import java.security.cert.CertificateExpiredException;
 import java.security.cert.CertificateNotYetValidException;
 import java.security.cert.X509Certificate;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
@@ -98,7 +99,7 @@ public class AutoUpdateCertificatesVerifier implements Verifier {
 
   @Override
   public boolean verify(String serialNumber, byte[] message, String signature) {
-    if (instant == null || Duration.between(instant, Instant.now()).toMinutes() >= minutesInterval) {
+    if (instant == null || Minutes.minutesBetween(instant, Instant.now()).getMinutes() >= minutesInterval) {
       if (lock.tryLock()) {
         try {
           autoUpdateCert();
@@ -117,7 +118,12 @@ public class AutoUpdateCertificatesVerifier implements Verifier {
   private void autoUpdateCert() throws IOException, GeneralSecurityException {
     CloseableHttpClient httpClient = WxPayV3HttpClientBuilder.create()
       .withCredentials(credentials)
-      .withValidator(verifier == null ? (response) -> true : new WechatPay2Validator(verifier))
+      .withValidator(verifier == null ? new Validator() {
+        @Override
+        public boolean validate(CloseableHttpResponse response) throws IOException {
+          return true;
+        }
+      } : new WxPayValidator(verifier))
       .build();
 
     HttpGet httpGet = new HttpGet(CERT_DOWNLOAD_PATH);
