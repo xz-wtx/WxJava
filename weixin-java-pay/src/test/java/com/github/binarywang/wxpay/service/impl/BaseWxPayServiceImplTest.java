@@ -20,8 +20,6 @@ import com.github.binarywang.wxpay.testbase.XmlWxPayConfig;
 import com.github.binarywang.wxpay.util.XmlConfig;
 import com.google.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Guice;
 import org.testng.annotations.Test;
@@ -63,12 +61,13 @@ public class BaseWxPayServiceImplTest {
       .notifyUrl("111111")
       .tradeType(TradeType.JSAPI)
       .openid(((XmlWxPayConfig) this.payService.getConfig()).getOpenid())
-      .outTradeNo("1111112")
+      .outTradeNo("111111826")
+      .attach("#*#{\"pn\":\"粤B87965\",\"aid\":\"wx123\"}#*#")
       .build();
     request.setSignType(SignType.HMAC_SHA256);
     WxPayUnifiedOrderResult result = this.payService.unifiedOrder(request);
     log.info(result.toString());
-    log.warn(this.payService.getWxApiData().toString());
+//    log.warn(this.payService.getWxApiData().toString());
   }
 
   /**
@@ -141,6 +140,24 @@ public class BaseWxPayServiceImplTest {
         .build());
     log.info(result.toString());
     log.warn(this.payService.getWxApiData().toString());
+  }
+
+  @Test
+  public void testCreateOrderSpecific() throws Exception {
+    // Won't compile
+    // WxPayMpOrderResult result = payService.createOrder(TradeType.Specific.APP, new WxPayUnifiedOrderRequest());
+    payService.createOrder(
+      TradeType.Specific.JSAPI,
+      WxPayUnifiedOrderRequest.newBuilder()
+        .body("我去")
+        .totalFee(1)
+        .productId("aaa")
+        .spbillCreateIp("11.1.11.1")
+        .notifyUrl("111111")
+        .outTradeNo("111111290")
+        .build()
+    )
+      .getAppId();
   }
 
   /**
@@ -600,10 +617,73 @@ public class BaseWxPayServiceImplTest {
   }
 
   @Test
-  public void testGetWxPayFaceAuthInfo() {
+  public void testGetWxPayFaceAuthInfo() throws WxPayException {
+    XmlConfig.fastMode = true;
+    final WxPayFaceAuthInfoRequest request = new WxPayFaceAuthInfoRequest()
+      .setStoreId("1").setRawdata("111").setNow("111").setVersion("111").setStoreName("2222").setDeviceId("111");
+    request.setSignType("MD5");
+    this.payService.getWxPayFaceAuthInfo(request);
   }
 
   @Test
-  public void testFacepay() {
+  public void testFacepay() throws WxPayException {
+    final WxPayFacepayResult result = this.payService.facepay(WxPayFacepayRequest.newBuilder().build());
+  }
+
+  @Test
+  public void testGetEntPayService() {
+    // no need to test
+  }
+
+  @Test
+  public void testGetProfitSharingService() {
+    // no need to test
+  }
+
+  @Test
+  public void testGetRedpackService() {
+    // no need to test
+  }
+
+  @Test
+  public void testSetEntPayService() {
+    // no need to test
+  }
+
+  @Test
+  public void testGetPayBaseUrl() {
+    // no need to test
+  }
+
+  @Test
+  public void testParseScanPayNotifyResult() {
+  }
+
+  @Test
+  public void testSendMiniProgramRedpack() {
+  }
+
+  @Test
+  public void testSendRedpack() {
+  }
+
+  @Test
+  public void testQueryRedpack() {
+  }
+
+  @Test
+  public void testTestQueryRedpack() {
+  }
+
+  @Test
+  public void testGetPayScoreService() {
+    // no need to test
+  }
+
+  @Test
+  public void testQueryExchangeRate() throws WxPayException {
+    final WxPayQueryExchangeRateResult result = this.payService.queryExchangeRate("USD", "20200425");
+    assertThat(result).isNotNull();
+    System.out.println(result);
   }
 }

@@ -6,10 +6,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.WxType;
+import me.chanjar.weixin.common.bean.WxAccessToken;
 import me.chanjar.weixin.common.bean.WxJsapiSignature;
 import me.chanjar.weixin.common.bean.WxNetCheckResult;
+import me.chanjar.weixin.common.enums.TicketType;
 import me.chanjar.weixin.common.error.WxError;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.session.StandardSessionManager;
@@ -18,6 +22,7 @@ import me.chanjar.weixin.common.util.DataUtils;
 import me.chanjar.weixin.common.util.RandomUtils;
 import me.chanjar.weixin.common.util.crypto.SHA1;
 import me.chanjar.weixin.common.util.http.*;
+import me.chanjar.weixin.common.util.json.WxGsonBuilder;
 import me.chanjar.weixin.mp.api.*;
 import me.chanjar.weixin.mp.bean.WxMpSemanticQuery;
 import me.chanjar.weixin.mp.bean.result.WxMpCurrentAutoReplyInfo;
@@ -25,7 +30,6 @@ import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
 import me.chanjar.weixin.mp.bean.result.WxMpSemanticQueryResult;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import me.chanjar.weixin.mp.config.WxMpConfigStorage;
-import me.chanjar.weixin.mp.enums.TicketType;
 import me.chanjar.weixin.mp.enums.WxMpApiUrl;
 import me.chanjar.weixin.mp.util.WxMpConfigStorageHolder;
 import org.apache.commons.lang3.StringUtils;
@@ -57,17 +61,21 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
   private WxMpDataCubeService dataCubeService = new WxMpDataCubeServiceImpl(this);
   private WxMpUserBlacklistService blackListService = new WxMpUserBlacklistServiceImpl(this);
   private WxMpTemplateMsgService templateMsgService = new WxMpTemplateMsgServiceImpl(this);
-  private WxMpSubscribeMsgService subscribeMsgService = new WxMpSubscribeMsgServiceImpl(this);
+  private final WxMpSubscribeMsgService subscribeMsgService = new WxMpSubscribeMsgServiceImpl(this);
   private WxMpDeviceService deviceService = new WxMpDeviceServiceImpl(this);
   private WxMpShakeService shakeService = new WxMpShakeServiceImpl(this);
   private WxMpMemberCardService memberCardService = new WxMpMemberCardServiceImpl(this);
   private WxMpMassMessageService massMessageService = new WxMpMassMessageServiceImpl(this);
   private WxMpAiOpenService aiOpenService = new WxMpAiOpenServiceImpl(this);
-  private WxMpWifiService wifiService = new WxMpWifiServiceImpl(this);
+  private final WxMpWifiService wifiService = new WxMpWifiServiceImpl(this);
   private WxMpMarketingService marketingService = new WxMpMarketingServiceImpl(this);
   private WxMpCommentService commentService = new WxMpCommentServiceImpl(this);
   private WxMpOcrService ocrService = new WxMpOcrServiceImpl(this);
   private WxMpImgProcService imgProcService = new WxMpImgProcServiceImpl(this);
+
+  @Getter
+  @Setter
+  private WxMpMerchantInvoiceService merchantInvoiceService = new WxMpMerchantInvoiceServiceImpl(this, this.cardService);
 
   private Map<String, WxMpConfigStorage> configStorageMap;
 
@@ -287,6 +295,11 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
   }
 
   @Override
+  public String post(String url, Object obj) throws WxErrorException {
+    return this.execute(SimplePostRequestExecutor.create(this), url, WxGsonBuilder.create().toJson(obj));
+  }
+
+  @Override
   public <T, E> T execute(RequestExecutor<T, E> executor, WxMpApiUrl url, E data) throws WxErrorException {
     return this.execute(executor, url.getUrl(this.getWxMpConfigStorage()), data);
   }
@@ -345,13 +358,23 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
       WxError error = e.getError();
       /*
        * 发生以下情况时尝试刷新access_token
-       * 40001 获取access_token时AppSecret错误，或者access_token无效
-       * 42001 access_token超时
-       * 40014 不合法的access_token，请开发者认真比对access_token的有效性（如是否过期），或查看是否正在为恰当的公众号调用接口
+       * 40001 获取 access_token 时 AppSecret 错误，或者 access_token 无效。请开发者认真比对 AppSecret 的正确性，或查看是否正在为恰当的公众号调用接口
+       * 42001 access_token 超时，请检查 access_token 的有效期，请参考基础支持 - 获取 access_token 中，对 access_token 的详细机制说明
+       * 40014 不合法的 access_token ，请开发者认真比对 access_token 的有效性（如是否过期），或查看是否正在为恰当的公众号调用接口
        */
       if (error.getErrorCode() == 42001 || error.getErrorCode() == 40001 || error.getErrorCode() == 40014) {
         // 强制设置wxMpConfigStorage它的access token过期了，这样在下一次请求里就会刷新access token
-        this.getWxMpConfigStorage().expireAccessToken();
+        Lock lock = this.getWxMpConfigStorage().getAccessTokenLock();
+        lock.lock();
+        try {
+          if (StringUtils.equals(this.getWxMpConfigStorage().getAccessToken(), accessToken)) {
+            this.getWxMpConfigStorage().expireAccessToken();
+          }
+        } catch (Exception ex) {
+          this.getWxMpConfigStorage().expireAccessToken();
+        } finally {
+          lock.unlock();
+        }
         if (this.getWxMpConfigStorage().autoRefreshToken()) {
           return this.execute(executor, uri, data);
         }
@@ -378,6 +401,17 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
     return this.configStorageMap.get(WxMpConfigStorageHolder.get());
   }
 
+  protected String extractAccessToken(String resultContent) throws WxErrorException {
+    WxMpConfigStorage config = this.getWxMpConfigStorage();
+    WxError error = WxError.fromJson(resultContent, WxType.MP);
+    if (error.getErrorCode() != 0) {
+      throw new WxErrorException(error);
+    }
+    WxAccessToken accessToken = WxAccessToken.fromJson(resultContent);
+    config.updateAccessToken(accessToken.getAccessToken(), accessToken.getExpiresIn());
+    return config.getAccessToken();
+  }
+
   @Override
   public void setWxMpConfigStorage(WxMpConfigStorage wxConfigProvider) {
     final String defaultMpId = WxMpConfigStorageHolder.get();
@@ -399,9 +433,6 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
   @Override
   public void addConfigStorage(String mpId, WxMpConfigStorage configStorages) {
     synchronized (this) {
-      if (this.configStorageMap.containsKey(mpId)) {
-        throw new RuntimeException("该公众号标识已存在，请更换其他标识！");
-      }
       this.configStorageMap.put(mpId, configStorages);
     }
   }

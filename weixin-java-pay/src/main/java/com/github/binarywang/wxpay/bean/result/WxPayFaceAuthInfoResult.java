@@ -21,7 +21,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @XStreamAlias("xml")
 public class WxPayFaceAuthInfoResult extends BaseWxPayResult implements Serializable {
-
   private static final long serialVersionUID = -65138145275211272L;
 
   /**

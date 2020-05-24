@@ -5,6 +5,7 @@ import lombok.Data;
 import me.chanjar.weixin.mp.util.json.WxMpGsonBuilder;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 微信会员卡基本信息更新
@@ -54,7 +55,7 @@ public class BaseInfoUpdate implements Serializable {
    * 门店位置ID,调用 POI门店管理接口 获取门店位置ID.
    */
   @SerializedName("location_id_list")
-  private String locationIdList;
+  private List<String> locationIdList;
 
   /**
    * 会员卡是否支持全部门店,填写后商户门店更新时会自动同步至卡券.
@@ -158,6 +159,49 @@ public class BaseInfoUpdate implements Serializable {
    */
   @SerializedName("date_info")
   private DateInfo dateInfo;
+
+  /**
+   * 微信小程序开放功能 小程序&卡券打通部分新增8个字段 https://mp.weixin.qq.com/cgi-bin/announce?action=getannouncement&key=1490190158&version=1&lang=zh_CN&platform=2
+   * 自定义使用入口跳转小程序的user_name，格式为原始id+@app
+   */
+  @SerializedName("custom_app_brand_user_name")
+  private String customAppBrandUserName;
+  /**
+   * 自定义使用入口小程序页面地址
+   */
+  @SerializedName("custom_app_brand_pass")
+  private String customAppBrandPass;
+  /**
+   * 小程序的user_name
+   */
+  @SerializedName("center_app_brand_user_name")
+  private String centerAppBrandUserName;
+  /**
+   * 自定义居中使用入口小程序页面地址
+   */
+  @SerializedName("center_app_brand_pass")
+  private String centerAppBrandPass;
+  /**
+   * 小程序的user_name
+   */
+  @SerializedName("promotion_app_brand_user_name")
+  private String promotionAppBrandUserName;
+  /**
+   * 自定义营销入口小程序页面地址
+   */
+  @SerializedName("promotion_app_brand_pass")
+  private String promotionAppBrandPass;
+
+  /**
+   * 小程序的user_name,
+   */
+  @SerializedName("activate_app_brand_user_name")
+  private String activateAppBrandUserName;
+  /**
+   * 激活小程序页面地址
+   */
+  @SerializedName("activate_app_brand_pass")
+  private String activateAppBrandPass;
 
   @Override
   public String toString() {

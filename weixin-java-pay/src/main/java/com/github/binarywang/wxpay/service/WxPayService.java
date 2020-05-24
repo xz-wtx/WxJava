@@ -8,9 +8,11 @@ import com.github.binarywang.wxpay.bean.notify.WxScanPayNotifyResult;
 import com.github.binarywang.wxpay.bean.request.*;
 import com.github.binarywang.wxpay.bean.result.*;
 import com.github.binarywang.wxpay.config.WxPayConfig;
+import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 
 import java.io.File;
+import java.net.URI;
 import java.util.Date;
 import java.util.Map;
 
@@ -54,6 +56,25 @@ public interface WxPayService {
   String post(String url, String requestStr, boolean useKey) throws WxPayException;
 
   /**
+   * 发送post请求，得到响应字符串.
+   *
+   * @param url        请求地址
+   * @param requestStr 请求信息
+   * @return 返回请求结果字符串 string
+   * @throws WxPayException the wx pay exception
+   */
+  String postV3(String url, String requestStr) throws WxPayException;
+
+  /**
+   * 发送get V3请求，得到响应字符串.
+   *
+   * @param url 请求地址
+   * @return 返回请求结果字符串 string
+   * @throws WxPayException the wx pay exception
+   */
+  String getV3(URI url) throws WxPayException;
+
+  /**
    * 获取企业付款服务类.
    *
    * @return the ent pay service
@@ -73,6 +94,14 @@ public interface WxPayService {
    * @return the ent pay service
    */
   ProfitSharingService getProfitSharingService();
+
+
+  /**
+   * 获取支付分服务类.
+   *
+   * @return the ent pay service
+   */
+  PayScoreService getPayScoreService();
 
   /**
    * 设置企业付款服务类，允许开发者自定义实现类.
@@ -165,6 +194,17 @@ public interface WxPayService {
    * @throws WxPayException the wx pay exception
    */
   <T> T createOrder(WxPayUnifiedOrderRequest request) throws WxPayException;
+
+  /**
+   * 调用统一下单接口，并组装生成支付所需参数对象.
+   *
+   * @param specificTradeType 将使用的交易方式，不能为 null
+   * @param request           统一下单请求参数，设定的 tradeType 及配置里的 tradeType 将被忽略，转而使用 specificTradeType
+   * @return 返回 {@link WxPayConstants.TradeType.Specific} 指定的类
+   * @throws WxPayException the wx pay exception
+   * @see WxPayService#createOrder(WxPayUnifiedOrderRequest)
+   */
+  <T> T createOrder(WxPayConstants.TradeType.Specific<T> specificTradeType, WxPayUnifiedOrderRequest request) throws WxPayException;
 
   /**
    * 统一下单(详见https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_1)
@@ -717,4 +757,18 @@ public interface WxPayService {
    */
   WxPayFacepayResult facepay(WxPayFacepayRequest request) throws WxPayException;
 
+  /**
+   * 查询汇率
+   * <pre>
+   * 应用场景：商户网站的商品以外币标价时，通过该接口可以实时查询到微信使用的转换汇率。汇率更新时间为北京时间上午10:00，一天更新一次。
+   * 文档地址：https://pay.weixin.qq.com/wiki/doc/api/app/app_jw.php?chapter=9_15&index=12
+   * 接口链接：https://api.mch.weixin.qq.com/pay/queryexchagerate
+   * </pre>
+   *
+   * @param feeType 外币币种
+   * @param date    日期，格式为yyyyMMdd，如2009年12月25日表示为20091225。时区为GMT+8 beijing
+   * @return .
+   * @throws WxPayException .
+   */
+  WxPayQueryExchangeRateResult queryExchangeRate(String feeType, String date) throws WxPayException;
 }

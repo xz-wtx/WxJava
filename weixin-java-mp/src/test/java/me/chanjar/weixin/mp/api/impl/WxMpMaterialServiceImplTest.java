@@ -103,7 +103,7 @@ public class WxMpMaterialServiceImplTest {
   public void testAddNews() throws WxErrorException {
     // 单图文消息
     WxMpMaterialNews wxMpMaterialNewsSingle = new WxMpMaterialNews();
-    WxMpMaterialNews.WxMpMaterialNewsArticle article = new WxMpMaterialNews.WxMpMaterialNewsArticle();
+    WxMpNewsArticle article = new WxMpNewsArticle();
     article.setAuthor("author");
     article.setThumbMediaId(this.thumbMediaId);
     article.setTitle("single title");
@@ -115,7 +115,7 @@ public class WxMpMaterialServiceImplTest {
 
     // 多图文消息
     WxMpMaterialNews wxMpMaterialNewsMultiple = new WxMpMaterialNews();
-    WxMpMaterialNews.WxMpMaterialNewsArticle article1 = new WxMpMaterialNews.WxMpMaterialNewsArticle();
+    WxMpNewsArticle article1 = new WxMpNewsArticle();
     article1.setAuthor("author1");
     article1.setThumbMediaId(this.thumbMediaId);
     article1.setTitle("multi title1");
@@ -124,7 +124,7 @@ public class WxMpMaterialServiceImplTest {
     article1.setShowCoverPic(true);
     article1.setDigest("");
 
-    WxMpMaterialNews.WxMpMaterialNewsArticle article2 = new WxMpMaterialNews.WxMpMaterialNewsArticle();
+    WxMpNewsArticle article2 = new WxMpNewsArticle();
     article2.setAuthor("author2");
     article2.setThumbMediaId(this.thumbMediaId);
     article2.setTitle("multi title2");
@@ -196,7 +196,7 @@ public class WxMpMaterialServiceImplTest {
       .getMaterialService().materialNewsInfo(this.singleNewsMediaId);
     assertNotNull(wxMpMaterialNewsSingle);
     WxMpMaterialArticleUpdate wxMpMaterialArticleUpdateSingle = new WxMpMaterialArticleUpdate();
-    WxMpMaterialNews.WxMpMaterialNewsArticle articleSingle = wxMpMaterialNewsSingle.getArticles().get(0);
+    WxMpNewsArticle articleSingle = wxMpMaterialNewsSingle.getArticles().get(0);
     articleSingle.setContent("content single update");
     wxMpMaterialArticleUpdateSingle.setMediaId(this.singleNewsMediaId);
     wxMpMaterialArticleUpdateSingle.setArticles(articleSingle);
@@ -213,7 +213,7 @@ public class WxMpMaterialServiceImplTest {
       .getMaterialService().materialNewsInfo(this.multiNewsMediaId);
     assertNotNull(wxMpMaterialNewsMultiple);
     WxMpMaterialArticleUpdate wxMpMaterialArticleUpdateMulti = new WxMpMaterialArticleUpdate();
-    WxMpMaterialNews.WxMpMaterialNewsArticle articleMulti = wxMpMaterialNewsMultiple.getArticles().get(1);
+    WxMpNewsArticle articleMulti = wxMpMaterialNewsMultiple.getArticles().get(1);
     articleMulti.setContent("content 2 update");
     wxMpMaterialArticleUpdateMulti.setMediaId(this.multiNewsMediaId);
     wxMpMaterialArticleUpdateMulti.setArticles(articleMulti);

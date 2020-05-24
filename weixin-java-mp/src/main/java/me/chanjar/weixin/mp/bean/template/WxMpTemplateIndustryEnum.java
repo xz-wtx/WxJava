@@ -41,9 +41,9 @@ public enum WxMpTemplateIndustryEnum {
    */
   BANK("金融业", "银行", 7),
   /**
-   * 金融业 - 基金|理财|信托
+   * 金融业 - 证券|基金|理财|信托（实际是这个）
    */
-  FUND("金融业", "基金|理财|信托", 8),
+  FUND("金融业", "证券基金理财信托", 8),
   /**
    * 金融业 - 保险
    */
@@ -93,9 +93,9 @@ public enum WxMpTemplateIndustryEnum {
    */
   MUSEUM("政府与公共事业", "博物馆", 20),
   /**
-   * 政府与公共事业 - 公共事业|非盈利机构
+   * 政府与公共事业 - 公共事业非盈利机构
    */
-  PUBLIC_WORKS_NONPROFIT("政府与公共事业", "公共事业|非盈利机构", 21),
+  PUBLIC_WORKS_NONPROFIT("政府与公共事业", "公共事业非盈利机构", 21),
   /**
    * 医药护理 - 医药医疗
    */
@@ -125,7 +125,7 @@ public enum WxMpTemplateIndustryEnum {
    */
   THE_PLANE_RELATED("交通工具", "飞机相关", 28),
   /**
-   * 房地产 - 建筑
+   * 房地产 - 房地产|建筑（实际上是这个）
    */
   ARCHITECTURE("房地产", "建筑", 29),
   /**
@@ -153,9 +153,9 @@ public enum WxMpTemplateIndustryEnum {
    */
   AUTHENTICATION("商业服务", "认证", 35),
   /**
-   * 商业服务 - 会计|审计
+   * 商业服务 - 审计
    */
-  AUDIT("商业服务", "会计|审计", 36),
+  AUDIT("商业服务", "审计", 36),
   /**
    * 文体娱乐 - 传媒
    */
@@ -198,7 +198,7 @@ public enum WxMpTemplateIndustryEnum {
    */
   public static WxMpTemplateIndustryEnum findBySecondary(String industry) {
     for (WxMpTemplateIndustryEnum industryEnum : WxMpTemplateIndustryEnum.values()) {
-      if (industryEnum.secondClass.equals(industry)) {
+      if (industryEnum.secondClass.contains(industry)) {
         return industryEnum;
       }
     }

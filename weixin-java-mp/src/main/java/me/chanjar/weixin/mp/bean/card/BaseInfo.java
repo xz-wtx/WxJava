@@ -1,6 +1,7 @@
 package me.chanjar.weixin.mp.bean.card;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
@@ -104,7 +105,7 @@ public class BaseInfo implements Serializable {
    * 门店位置ID,调用 POI门店管理接口 获取门店位置ID.
    */
   @SerializedName("location_id_list")
-  private String locationIdList;
+  private List<String> locationIdList;
 
   /**
    * 会员卡是否支持全部门店,填写后商户门店更新时会自动同步至卡券.
@@ -191,13 +192,8 @@ public class BaseInfo implements Serializable {
   @SerializedName("need_push_on_view")
   private boolean needPushOnView;
 
-
   /**
    * 微信小程序开放功能 小程序&卡券打通部分新增8个字段 https://mp.weixin.qq.com/cgi-bin/announce?action=getannouncement&key=1490190158&version=1&lang=zh_CN&platform=2
-   * @return
-   */
-
-  /**
    * 自定义使用入口跳转小程序的user_name，格式为原始id+@app
    */
   @SerializedName("custom_app_brand_user_name")
@@ -227,6 +223,28 @@ public class BaseInfo implements Serializable {
    */
   @SerializedName("promotion_app_brand_pass")
   private String promotionAppBrandPass;
+
+  /**
+   * 小程序的user_name,
+   */
+  @SerializedName("activate_app_brand_user_name")
+  private String activateAppBrandUserName;
+  /**
+   * 激活小程序页面地址
+   */
+  @SerializedName("activate_app_brand_pass")
+  private String activateAppBrandPass;
+
+  /**
+   *
+   * https://developers.weixin.qq.com/doc/offiaccount/Cards_and_Offer/Managing_Coupons_Vouchers_and_Cards.html#2
+   * “CARD_STATUS_NOT_VERIFY”,待审核 ；
+   * “CARD_STATUS_VERIFY_FAIL”,审核失败；
+   * “CARD_STATUS_VERIFY_OK”，通过审核；
+   * “CARD_STATUS_DELETE”，卡券被商户删除；
+   * “CARD_STATUS_DISPATCH”，在公众平台投放过的卡券 ；
+   */
+  private String status;
 
   @Override
   public String toString() {

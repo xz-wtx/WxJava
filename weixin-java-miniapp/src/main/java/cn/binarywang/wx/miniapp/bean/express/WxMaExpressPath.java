@@ -2,19 +2,23 @@ package cn.binarywang.wx.miniapp.bean.express;
 
 import cn.binarywang.wx.miniapp.util.json.WxMaGsonBuilder;
 import com.google.gson.annotations.SerializedName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.List;
 
 /**
  * 运单轨迹对象
+ *
  * @author <a href="https://github.com/mr-xiaoyu">xiaoyu</a>
  * @since 2019-11-26
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class WxMaExpressPath implements Serializable {
-
   private static final long serialVersionUID = 5643624677715536605L;
 
   /**
@@ -51,7 +55,7 @@ public class WxMaExpressPath implements Serializable {
   }
 
   @Data
-  private static class PathItem{
+  public static class PathItem {
 
     /**
      * 轨迹节点 Unix 时间戳

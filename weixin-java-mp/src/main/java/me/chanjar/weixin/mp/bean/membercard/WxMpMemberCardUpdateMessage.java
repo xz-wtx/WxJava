@@ -39,11 +39,12 @@ public class WxMpMemberCardUpdateMessage implements Serializable {
    * 需要设置的积分全量值，传入的数值会直接显示
    */
   private Integer bonus;
+
   /**
    * 本次积分变动值，传负数代表减少
    */
   @SerializedName("add_bonus")
-  private Integer addBounus;
+  private Integer addBonus;
   /**
    * 商家自定义积分消耗记录，不超过14个汉字
    */

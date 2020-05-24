@@ -12,7 +12,7 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.test.ApiTestModule;
 import me.chanjar.weixin.mp.api.test.TestConfigStorage;
 import me.chanjar.weixin.mp.bean.result.WxMpCurrentAutoReplyInfo;
-import me.chanjar.weixin.mp.enums.TicketType;
+import me.chanjar.weixin.common.enums.TicketType;
 
 import static org.testng.Assert.*;
 

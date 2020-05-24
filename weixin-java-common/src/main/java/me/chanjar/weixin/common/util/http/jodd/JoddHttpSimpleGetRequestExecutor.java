@@ -41,13 +41,7 @@ public class JoddHttpSimpleGetRequestExecutor extends SimpleGetRequestExecutor<H
     HttpResponse response = request.send();
     response.charset(StringPool.UTF_8);
 
-    String responseContent = response.bodyText();
-
-    WxError error = WxError.fromJson(responseContent, wxType);
-    if (error.getErrorCode() != 0) {
-      throw new WxErrorException(error);
-    }
-    return responseContent;
+    return handleResponse(wxType, response.bodyText());
   }
 
 }

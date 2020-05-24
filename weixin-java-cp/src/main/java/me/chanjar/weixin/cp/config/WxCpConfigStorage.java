@@ -4,6 +4,7 @@ import me.chanjar.weixin.common.bean.WxAccessToken;
 import me.chanjar.weixin.common.util.http.apache.ApacheHttpClientBuilder;
 
 import java.io.File;
+import java.util.concurrent.locks.Lock;
 
 /**
  * 微信客户端配置存储.
@@ -28,6 +29,8 @@ public interface WxCpConfigStorage {
 
   String getAccessToken();
 
+  Lock getAccessTokenLock();
+
   boolean isAccessTokenExpired();
 
   /**
@@ -40,6 +43,8 @@ public interface WxCpConfigStorage {
   void updateAccessToken(String accessToken, int expiresIn);
 
   String getJsapiTicket();
+
+  Lock getJsapiTicketLock();
 
   boolean isJsapiTicketExpired();
 
@@ -54,6 +59,8 @@ public interface WxCpConfigStorage {
   void updateJsapiTicket(String jsapiTicket, int expiresInSeconds);
 
   String getAgentJsapiTicket();
+
+  Lock getAgentJsapiTicketLock();
 
   boolean isAgentJsapiTicketExpired();
 

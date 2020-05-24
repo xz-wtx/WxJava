@@ -1,6 +1,7 @@
 package cn.binarywang.wx.graal;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.RoundEnvironment;
@@ -20,11 +21,14 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-// 目前仅仅处理@Data，且必须在lombok自己的processor之前执行，千万注意！！！！！
+/**
+ * 目前仅仅处理@Data，且必须在lombok自己的processor之前执行，千万注意！！！！！
+ *
+ * @author outersky
+ */
 @SupportedAnnotationTypes("lombok.Data")
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
 public class GraalProcessor extends AbstractProcessor {
-
   private static final String REFLECTION_CONFIG_JSON = "reflection-config.json";
   private static final String NATIVE_IMAGE_PROPERTIES = "native-image.properties";
 
@@ -34,16 +38,19 @@ public class GraalProcessor extends AbstractProcessor {
   @Override
   public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
     for (TypeElement annotatedClass : ElementFilter.typesIn(roundEnv.getElementsAnnotatedWith(Data.class))) {
-
       registerClass(annotatedClass.getQualifiedName().toString());
       handleSuperClass(annotatedClass);
     }
 
     //只有最后一轮才可以写文件，否则文件会被重复打开，报错！
-    if (!roundEnv.processingOver()) return false;
+    if (!roundEnv.processingOver()) {
+      return false;
+    }
 
     // 如果没有文件要写，跳过
-    if (classSet.isEmpty()) return false;
+    if (classSet.isEmpty()) {
+      return false;
+    }
 
     writeFiles();
 
@@ -72,7 +79,9 @@ public class GraalProcessor extends AbstractProcessor {
    */
   private String getPackageName(String fullClassName) {
     int last = fullClassName.lastIndexOf('.');
-    if (last == -1) return fullClassName;
+    if (last == -1) {
+      return fullClassName;
+    }
     return fullClassName.substring(0, last);
   }
 
@@ -98,29 +107,29 @@ public class GraalProcessor extends AbstractProcessor {
     String propsFile = path + NATIVE_IMAGE_PROPERTIES;
     try {
       FileObject fileObject = processingEnv.getFiler().createResource(StandardLocation.CLASS_OUTPUT, "", propsFile);
-      Writer writer = fileObject.openWriter();
-      writer.append("Args = -H:ReflectionConfigurationResources=${.}/" + REFLECTION_CONFIG_JSON);
-      writer.close();
+      try (Writer writer = fileObject.openWriter();) {
+        writer.append("Args = -H:ReflectionConfigurationResources=${.}/" + REFLECTION_CONFIG_JSON);
+      }
     } catch (IOException e) {
       e.printStackTrace();
     }
 
     try {
       FileObject fileObject = processingEnv.getFiler().createResource(StandardLocation.CLASS_OUTPUT, "", reflectFile);
-      Writer writer = fileObject.openWriter();
-      writer.write("[\n");
-      boolean first = true;
-      for (String name : classSet) {
-        if (first) {
-          first = false;
-        } else {
-          writer.write(",");
+      try (Writer writer = fileObject.openWriter();) {
+        writer.write("[\n");
+        boolean first = true;
+        for (String name : classSet) {
+          if (first) {
+            first = false;
+          } else {
+            writer.write(",");
+          }
+          writer.write(assetGraalJsonElement(name));
+          writer.append('\n');
         }
-        writer.write(assetGraalJsonElement(name));
-        writer.append('\n');
+        writer.write("]");
       }
-      writer.write("]");
-      writer.close();
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -158,7 +167,9 @@ public class GraalProcessor extends AbstractProcessor {
       TypeElement s = (TypeElement) ((DeclaredType) superclass).asElement();
       String sName = s.toString();
       // ignore java.**/javax.**
-      if (sName.startsWith("java.") || sName.startsWith("javax.")) return;
+      if (sName.startsWith("java.") || sName.startsWith("javax.")) {
+        return;
+      }
       registerClass(sName);
       handleSuperClass(s);
     }

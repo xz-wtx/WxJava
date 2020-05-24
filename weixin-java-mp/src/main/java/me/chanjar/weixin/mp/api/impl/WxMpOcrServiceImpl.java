@@ -38,7 +38,7 @@ import static me.chanjar.weixin.mp.enums.WxMpApiUrl.Ocr.IDCARD;
  */
 @RequiredArgsConstructor
 public class WxMpOcrServiceImpl implements WxMpOcrService {
-  private final WxMpService wxMpService;
+  private final WxMpService mainService;
 
   @Override
   public WxMpOcrIdCardResult idCard(String imgUrl) throws WxErrorException {
@@ -48,14 +48,15 @@ public class WxMpOcrServiceImpl implements WxMpOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.wxMpService.get(String.format(IDCARD.getUrl(this.wxMpService.getWxMpConfigStorage()),
+    final String result = this.mainService.get(String.format(IDCARD.getUrl(this.mainService.getWxMpConfigStorage()),
       imgUrl), null);
     return WxMpOcrIdCardResult.fromJson(result);
   }
 
   @Override
   public WxMpOcrIdCardResult idCard(File imgFile) throws WxErrorException {
-    String result = this.wxMpService.execute(OcrDiscernRequestExecutor.create(this.wxMpService.getRequestHttp()), FILEIDCARD.getUrl(this.wxMpService.getWxMpConfigStorage()), imgFile);
+    String result = this.mainService.execute(OcrDiscernRequestExecutor.create(this.mainService.getRequestHttp()),
+      FILEIDCARD.getUrl(this.mainService.getWxMpConfigStorage()), imgFile);
     return WxMpOcrIdCardResult.fromJson(result);
   }
 
@@ -67,14 +68,15 @@ public class WxMpOcrServiceImpl implements WxMpOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.wxMpService.get(String.format(BANK_CARD.getUrl(this.wxMpService.getWxMpConfigStorage()),
+    final String result = this.mainService.get(String.format(BANK_CARD.getUrl(this.mainService.getWxMpConfigStorage()),
       imgUrl), null);
     return WxMpOcrBankCardResult.fromJson(result);
   }
 
   @Override
   public WxMpOcrBankCardResult bankCard(File imgFile) throws WxErrorException {
-    String result = this.wxMpService.execute(OcrDiscernRequestExecutor.create(this.wxMpService.getRequestHttp()), FILE_BANK_CARD.getUrl(this.wxMpService.getWxMpConfigStorage()), imgFile);
+    String result = this.mainService.execute(OcrDiscernRequestExecutor.create(this.mainService.getRequestHttp()),
+      FILE_BANK_CARD.getUrl(this.mainService.getWxMpConfigStorage()), imgFile);
     return WxMpOcrBankCardResult.fromJson(result);
   }
 
@@ -86,14 +88,15 @@ public class WxMpOcrServiceImpl implements WxMpOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.wxMpService.get(String.format(DRIVING.getUrl(this.wxMpService.getWxMpConfigStorage()),
+    final String result = this.mainService.get(String.format(DRIVING.getUrl(this.mainService.getWxMpConfigStorage()),
       imgUrl), null);
     return WxMpOcrDrivingResult.fromJson(result);
   }
 
   @Override
   public WxMpOcrDrivingResult driving(File imgFile) throws WxErrorException {
-    String result = this.wxMpService.execute(OcrDiscernRequestExecutor.create(this.wxMpService.getRequestHttp()), FILE_DRIVING.getUrl(this.wxMpService.getWxMpConfigStorage()), imgFile);
+    String result = this.mainService.execute(OcrDiscernRequestExecutor.create(this.mainService.getRequestHttp()),
+      FILE_DRIVING.getUrl(this.mainService.getWxMpConfigStorage()), imgFile);
     return WxMpOcrDrivingResult.fromJson(result);
   }
 
@@ -105,14 +108,15 @@ public class WxMpOcrServiceImpl implements WxMpOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.wxMpService.get(String.format(DRIVING_LICENSE.getUrl(this.wxMpService.getWxMpConfigStorage()),
+    final String result = this.mainService.get(String.format(DRIVING_LICENSE.getUrl(this.mainService.getWxMpConfigStorage()),
       imgUrl), null);
     return WxMpOcrDrivingLicenseResult.fromJson(result);
   }
 
   @Override
   public WxMpOcrDrivingLicenseResult drivingLicense(File imgFile) throws WxErrorException {
-    String result = this.wxMpService.execute(OcrDiscernRequestExecutor.create(this.wxMpService.getRequestHttp()), FILE_DRIVING_LICENSE.getUrl(this.wxMpService.getWxMpConfigStorage()), imgFile);
+    String result = this.mainService.execute(OcrDiscernRequestExecutor.create(this.mainService.getRequestHttp()),
+      FILE_DRIVING_LICENSE.getUrl(this.mainService.getWxMpConfigStorage()), imgFile);
     return WxMpOcrDrivingLicenseResult.fromJson(result);
   }
 
@@ -124,14 +128,15 @@ public class WxMpOcrServiceImpl implements WxMpOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.wxMpService.get(String.format(BIZ_LICENSE.getUrl(this.wxMpService.getWxMpConfigStorage()),
+    final String result = this.mainService.get(String.format(BIZ_LICENSE.getUrl(this.mainService.getWxMpConfigStorage()),
       imgUrl), null);
     return WxMpOcrBizLicenseResult.fromJson(result);
   }
 
   @Override
   public WxMpOcrBizLicenseResult bizLicense(File imgFile) throws WxErrorException {
-    String result = this.wxMpService.execute(OcrDiscernRequestExecutor.create(this.wxMpService.getRequestHttp()), FILE_BIZ_LICENSE.getUrl(this.wxMpService.getWxMpConfigStorage()), imgFile);
+    String result = this.mainService.execute(OcrDiscernRequestExecutor.create(this.mainService.getRequestHttp()),
+      FILE_BIZ_LICENSE.getUrl(this.mainService.getWxMpConfigStorage()), imgFile);
     return WxMpOcrBizLicenseResult.fromJson(result);
   }
 
@@ -143,14 +148,15 @@ public class WxMpOcrServiceImpl implements WxMpOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.wxMpService.get(String.format(COMM.getUrl(this.wxMpService.getWxMpConfigStorage()),
+    final String result = this.mainService.get(String.format(COMM.getUrl(this.mainService.getWxMpConfigStorage()),
       imgUrl), null);
     return WxMpOcrCommResult.fromJson(result);
   }
 
   @Override
   public WxMpOcrCommResult comm(File imgFile) throws WxErrorException {
-    String result = this.wxMpService.execute(OcrDiscernRequestExecutor.create(this.wxMpService.getRequestHttp()), FILE_COMM.getUrl(this.wxMpService.getWxMpConfigStorage()), imgFile);
+    String result = this.mainService.execute(OcrDiscernRequestExecutor.create(this.mainService.getRequestHttp()),
+      FILE_COMM.getUrl(this.mainService.getWxMpConfigStorage()), imgFile);
     return WxMpOcrCommResult.fromJson(result);
   }
 }

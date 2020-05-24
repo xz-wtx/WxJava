@@ -1,5 +1,6 @@
 package cn.binarywang.wx.miniapp.config.impl;
 
+import lombok.RequiredArgsConstructor;
 import redis.clients.jedis.Jedis;
 
 /**
@@ -9,13 +10,9 @@ import redis.clients.jedis.Jedis;
  * 需要引入依赖<a href="https://github.com/abelaska/jedis-lock">jedis-lock</a>，才能使用该类。
  * </pre>
  */
+@RequiredArgsConstructor
 public class WxMaRedisConnectionConfigImpl extends AbstractWxMaRedisConfig {
-
-  public WxMaRedisConnectionConfigImpl(Jedis jedis) {
-    this.jedis = jedis;
-  }
-
-  private Jedis jedis;
+  private final Jedis jedis;
 
   @Override
   protected Jedis getJedis() {

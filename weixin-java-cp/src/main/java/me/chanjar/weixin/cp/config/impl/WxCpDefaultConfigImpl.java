@@ -8,6 +8,8 @@ import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 基于内存的微信配置provider，在实际生产环境中应该将这些配置持久化.
@@ -22,6 +24,7 @@ public class WxCpDefaultConfigImpl implements WxCpConfigStorage, Serializable {
 
   private volatile String token;
   protected volatile String accessToken;
+  protected Lock accessTokenLock = new ReentrantLock();
   private volatile String aesKey;
   protected volatile Integer agentId;
   private volatile long expiresTime;
@@ -34,9 +37,11 @@ public class WxCpDefaultConfigImpl implements WxCpConfigStorage, Serializable {
   private volatile String httpProxyPassword;
 
   private volatile String jsapiTicket;
+  protected Lock jsapiTicketLock = new ReentrantLock();
   private volatile long jsapiTicketExpiresTime;
 
   private volatile String agentJsapiTicket;
+  protected Lock agentJsapiTicketLock = new ReentrantLock();
   private volatile long agentJsapiTicketExpiresTime;
 
   private volatile File tmpDirFile;
@@ -61,6 +66,11 @@ public class WxCpDefaultConfigImpl implements WxCpConfigStorage, Serializable {
   @Override
   public String getAccessToken() {
     return this.accessToken;
+  }
+
+  @Override
+  public Lock getAccessTokenLock() {
+    return this.accessTokenLock;
   }
 
   public void setAccessToken(String accessToken) {
@@ -93,6 +103,11 @@ public class WxCpDefaultConfigImpl implements WxCpConfigStorage, Serializable {
     return this.jsapiTicket;
   }
 
+  @Override
+  public Lock getJsapiTicketLock() {
+    return this.jsapiTicketLock;
+  }
+
   public void setJsapiTicket(String jsapiTicket) {
     this.jsapiTicket = jsapiTicket;
   }
@@ -120,6 +135,11 @@ public class WxCpDefaultConfigImpl implements WxCpConfigStorage, Serializable {
   @Override
   public String getAgentJsapiTicket() {
     return this.agentJsapiTicket;
+  }
+
+  @Override
+  public Lock getAgentJsapiTicketLock() {
+    return this.agentJsapiTicketLock;
   }
 
   @Override

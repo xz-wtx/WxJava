@@ -9,6 +9,8 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 import java.io.File;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * <pre>
@@ -90,6 +92,11 @@ public class WxCpRedisConfigImpl implements WxCpConfigStorage {
   }
 
   @Override
+  public Lock getAccessTokenLock() {
+    return new ReentrantLock();
+  }
+
+  @Override
   public boolean isAccessTokenExpired() {
     try (Jedis jedis = this.jedisPool.getResource()) {
       String expiresTimeStr = jedis.get(ACCESS_TOKEN_EXPIRES_TIME_KEY);
@@ -133,6 +140,11 @@ public class WxCpRedisConfigImpl implements WxCpConfigStorage {
   }
 
   @Override
+  public Lock getJsapiTicketLock() {
+    return new ReentrantLock();
+  }
+
+  @Override
   public boolean isJsapiTicketExpired() {
     try (Jedis jedis = this.jedisPool.getResource()) {
       String expiresTimeStr = jedis.get(JS_API_TICKET_EXPIRES_TIME_KEY);
@@ -168,6 +180,11 @@ public class WxCpRedisConfigImpl implements WxCpConfigStorage {
     try (Jedis jedis = this.jedisPool.getResource()) {
       return jedis.get(String.format(AGENT_JSAPI_TICKET_KEY, agentId));
     }
+  }
+
+  @Override
+  public Lock getAgentJsapiTicketLock() {
+    return new ReentrantLock();
   }
 
   @Override

@@ -66,8 +66,13 @@ public class ProfitSharingFinishRequest extends BaseWxPayRequest {
   private String description;
 
   @Override
-  protected void checkConstraints() throws WxPayException {
+  protected void checkConstraints() {
     this.setSignType(WxPayConstants.SignType.HMAC_SHA256);
+  }
+
+  @Override
+  protected boolean ignoreSubAppId() {
+    return true;
   }
 
   @Override
