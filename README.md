@@ -158,16 +158,16 @@
 <details>
 <summary>点击此处展开查看贡献次数最多的几位同学</summary>
 
-1. [chanjarster (Daniel Qian)](http://github.com/chanjarster)
-1. [binarywang (Binary Wang)](http://github.com/binarywang)
-1. [007gzs](http://github.com/007gzs)
+1. [chanjarster (Daniel Qian)](https://github.com/chanjarster)
+1. [binarywang (Binary Wang)](https://github.com/binarywang)
+1. [007gzs](https://github.com/007gzs)
 1. [Silloy](https://github.com/silloy)
-1. [mgcnrx11](http://github.com/mgcnrx11)
-1. [kakotor](http://github.com/kakotor)
-1. [aimilin6688 (Jonk)](http://github.com/aimilin6688)
-1. [kareanyi (MillerLin)](http://github.com/kareanyi)
-1. [forfuns](https://github.com/forfuns)
-1. [tianmu](http://github.com/tianmu)
+1. [mgcnrx11](https://github.com/mgcnrx11)
+1. [yuanqixun](https://github.com/yuanqixun)
+1. [kakotor](https://github.com/kakotor)
+1. [aimilin6688 (Jonk)](https://github.com/aimilin6688)
+1. [lkqm (Mario Luo)](https://github.com/lkqm)
+1. [kareanyi (MillerLin)](https://github.com/kareanyi)
 
 </details>
 
