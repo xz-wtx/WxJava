@@ -3,7 +3,7 @@ package com.github.binarywang.wxpay.v3.auth;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.binarywang.wxpay.v3.Credentials;
-import com.github.binarywang.wxpay.v3.WechatPayHttpClientBuilder;
+import com.github.binarywang.wxpay.v3.WxPayV3HttpClientBuilder;
 import com.github.binarywang.wxpay.v3.util.AesUtils;
 import com.github.binarywang.wxpay.v3.util.PemUtils;
 import lombok.Getter;
@@ -115,7 +115,7 @@ public class AutoUpdateCertificatesVerifier implements Verifier {
   }
 
   private void autoUpdateCert() throws IOException, GeneralSecurityException {
-    CloseableHttpClient httpClient = WechatPayHttpClientBuilder.create()
+    CloseableHttpClient httpClient = WxPayV3HttpClientBuilder.create()
       .withCredentials(credentials)
       .withValidator(verifier == null ? (response) -> true : new WechatPay2Validator(verifier))
       .build();

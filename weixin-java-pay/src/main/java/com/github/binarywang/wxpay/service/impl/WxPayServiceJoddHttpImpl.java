@@ -4,10 +4,6 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import javax.net.ssl.SSLContext;
 
-import com.github.binarywang.wxpay.bean.request.WxPayQueryCommentRequest;
-import com.github.binarywang.wxpay.bean.request.WxPayRedpackQueryRequest;
-import com.github.binarywang.wxpay.bean.result.WxPayCommonResult;
-import com.github.binarywang.wxpay.bean.result.WxPayRedpackQueryResult;
 import org.apache.commons.lang3.StringUtils;
 
 import com.github.binarywang.wxpay.bean.WxPayApiData;
@@ -20,10 +16,6 @@ import jodd.http.ProxyInfo.ProxyType;
 import jodd.http.net.SSLSocketHttpConnectionProvider;
 import jodd.http.net.SocketHttpConnectionProvider;
 import jodd.util.Base64;
-import org.apache.commons.lang3.StringUtils;
-
-import javax.net.ssl.SSLContext;
-import java.nio.charset.StandardCharsets;
 
 /**
  * 微信支付请求实现类，jodd-http实现.

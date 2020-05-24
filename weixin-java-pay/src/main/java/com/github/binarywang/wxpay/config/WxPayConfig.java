@@ -1,12 +1,13 @@
 package com.github.binarywang.wxpay.config;
 
 import com.github.binarywang.wxpay.exception.WxPayException;
-import com.github.binarywang.wxpay.v3.WechatPayHttpClientBuilder;
+import com.github.binarywang.wxpay.v3.WxPayV3HttpClientBuilder;
 import com.github.binarywang.wxpay.v3.auth.AutoUpdateCertificatesVerifier;
 import com.github.binarywang.wxpay.v3.auth.PrivateKeySigner;
 import com.github.binarywang.wxpay.v3.auth.WechatPay2Credentials;
 import com.github.binarywang.wxpay.v3.auth.WechatPay2Validator;
 import com.github.binarywang.wxpay.v3.util.PemUtils;
+import jodd.util.ResourcesUtil;
 import lombok.Data;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RegExUtils;
@@ -20,8 +21,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyStore;
 import java.security.PrivateKey;
-import java.security.cert.X509Certificate;
-import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * 微信支付配置
@@ -31,6 +31,8 @@ import java.util.ArrayList;
 @Data
 public class WxPayConfig {
   private static final String DEFAULT_PAY_BASE_URL = "https://api.mch.weixin.qq.com";
+  private static final String PROBLEM_MSG = "证书文件【%s】有问题，请核实！";
+  private static final String NOT_FOUND_MSG = "证书文件【%s】不存在，请核实！";
 
   /**
    * 微信支付接口请求地址域名部分.
@@ -184,17 +186,20 @@ public class WxPayConfig {
       }
 
       final String prefix = "classpath:";
-      String fileHasProblemMsg = "证书文件【" + this.getKeyPath() + "】有问题，请核实！";
-      String fileNotFoundMsg = "证书文件【" + this.getKeyPath() + "】不存在，请核实！";
+      String fileHasProblemMsg = String.format(PROBLEM_MSG, this.getKeyPath());
+      String fileNotFoundMsg = String.format(NOT_FOUND_MSG, this.getKeyPath());
       if (this.getKeyPath().startsWith(prefix)) {
         String path = RegExUtils.removeFirst(this.getKeyPath(), prefix);
         if (!path.startsWith("/")) {
           path = "/" + path;
         }
-
-        inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
-        if (inputStream == null) {
-          throw new WxPayException(fileNotFoundMsg);
+        try {
+          inputStream = ResourcesUtil.getResourceAsStream(path);
+          if (inputStream == null) {
+            throw new WxPayException(fileNotFoundMsg);
+          }
+        } catch (Exception e) {
+          throw new WxPayException(fileNotFoundMsg, e);
         }
       } else if (this.getKeyPath().startsWith("http://") || this.getKeyPath().startsWith("https://")) {
         try {
@@ -232,7 +237,6 @@ public class WxPayConfig {
     }
   }
 
-
   /**
    * 初始化api v3请求头 自动签名验签
    * 方法参照微信官方https://github.com/wechatpay-apiv3/wechatpay-apache-httpclient
@@ -266,9 +270,13 @@ public class WxPayConfig {
       if (!keypath.startsWith("/")) {
         keypath = "/" + keypath;
       }
-      keyInputStream = WxPayConfig.class.getResourceAsStream(keypath);
-      if (keyInputStream == null) {
-        throw new WxPayException("证书文件【" + this.getPrivateKeyPath() + "】不存在，请核实！");
+      try {
+        keyInputStream = ResourcesUtil.getResourceAsStream(keypath);
+        if (keyInputStream == null) {
+          throw new WxPayException(String.format(NOT_FOUND_MSG, this.getPrivateKeyPath()));
+        }
+      } catch (Exception e) {
+        throw new WxPayException(String.format(NOT_FOUND_MSG, this.getPrivateKeyPath()), e);
       }
     }
 
@@ -277,32 +285,29 @@ public class WxPayConfig {
       if (!certpath.startsWith("/")) {
         certpath = "/" + certpath;
       }
-      certInputStream = WxPayConfig.class.getResourceAsStream(certpath);
-      if (certInputStream == null) {
-        throw new WxPayException("证书文件【" + this.getPrivateCertPath() + "】不存在，请核实！");
+      try {
+        certInputStream = ResourcesUtil.getResourceAsStream(certpath);
+        if (certInputStream == null) {
+          throw new WxPayException(String.format(NOT_FOUND_MSG, this.getPrivateCertPath()));
+        }
+      } catch (Exception e) {
+        throw new WxPayException(String.format(NOT_FOUND_MSG, this.getPrivateCertPath()), e);
       }
     }
 
-    CloseableHttpClient httpClient;
     try {
-      WechatPayHttpClientBuilder builder = WechatPayHttpClientBuilder.create();
       PrivateKey merchantPrivateKey = PemUtils.loadPrivateKey(keyInputStream);
-      X509Certificate x509Certificate = PemUtils.loadCertificate(certInputStream);
-      ArrayList<X509Certificate> certificates = new ArrayList<>();
-      certificates.add(x509Certificate);
-      builder.withMerchant(mchId, certSerialNo, merchantPrivateKey);
-      builder.withWechatpay(certificates);
-      AutoUpdateCertificatesVerifier verifier = new AutoUpdateCertificatesVerifier(
-        new WechatPay2Credentials(mchId, new PrivateKeySigner(certSerialNo, merchantPrivateKey)),
-        apiV3Key.getBytes(StandardCharsets.UTF_8));
-      builder.withValidator(new WechatPay2Validator(verifier));
-      httpClient = builder.build();
+      CloseableHttpClient httpClient = WxPayV3HttpClientBuilder.create()
+        .withMerchant(mchId, certSerialNo, merchantPrivateKey)
+        .withWechatpay(Collections.singletonList(PemUtils.loadCertificate(certInputStream)))
+        .withValidator(new WechatPay2Validator(new AutoUpdateCertificatesVerifier(
+          new WechatPay2Credentials(mchId, new PrivateKeySigner(certSerialNo, merchantPrivateKey)),
+          apiV3Key.getBytes(StandardCharsets.UTF_8))))
+        .build();
       this.apiV3HttpClient = httpClient;
+      return httpClient;
     } catch (Exception e) {
       throw new WxPayException("v3请求构造异常！", e);
     }
-
-    return httpClient;
-
   }
 }

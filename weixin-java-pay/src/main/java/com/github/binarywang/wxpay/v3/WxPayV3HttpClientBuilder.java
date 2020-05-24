@@ -13,45 +13,45 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.execchain.ClientExecChain;
 
-public class WechatPayHttpClientBuilder extends HttpClientBuilder {
+public class WxPayV3HttpClientBuilder extends HttpClientBuilder {
   private Credentials credentials;
   private Validator validator;
 
-  static final String os = System.getProperty("os.name") + "/" + System.getProperty("os.version");
-  static final String version = System.getProperty("java.version");
+  static final String OS = System.getProperty("os.name") + "/" + System.getProperty("os.version");
+  static final String VERSION = System.getProperty("java.version");
 
-  private WechatPayHttpClientBuilder() {
+  private WxPayV3HttpClientBuilder() {
     super();
 
     String userAgent = String.format(
         "WechatPay-Apache-HttpClient/%s (%s) Java/%s",
         getClass().getPackage().getImplementationVersion(),
-        os,
-        version == null ? "Unknown" : version);
+      OS,
+        VERSION == null ? "Unknown" : VERSION);
     setUserAgent(userAgent);
   }
 
-  public static WechatPayHttpClientBuilder create() {
-    return new WechatPayHttpClientBuilder();
+  public static WxPayV3HttpClientBuilder create() {
+    return new WxPayV3HttpClientBuilder();
   }
 
-  public WechatPayHttpClientBuilder withMerchant(String merchantId, String serialNo, PrivateKey privateKey) {
+  public WxPayV3HttpClientBuilder withMerchant(String merchantId, String serialNo, PrivateKey privateKey) {
     this.credentials =
         new WechatPay2Credentials(merchantId, new PrivateKeySigner(serialNo, privateKey));
     return this;
   }
 
-  public WechatPayHttpClientBuilder withCredentials(Credentials credentials) {
+  public WxPayV3HttpClientBuilder withCredentials(Credentials credentials) {
     this.credentials = credentials;
     return this;
   }
 
-  public WechatPayHttpClientBuilder withWechatpay(List<X509Certificate> certificates) {
+  public WxPayV3HttpClientBuilder withWechatpay(List<X509Certificate> certificates) {
     this.validator = new WechatPay2Validator(new CertificatesVerifier(certificates));
     return this;
   }
 
-  public WechatPayHttpClientBuilder withValidator(Validator validator) {
+  public WxPayV3HttpClientBuilder withValidator(Validator validator) {
     this.validator = validator;
     return this;
   }
