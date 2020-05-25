@@ -1,5 +1,8 @@
 package me.chanjar.weixin.cp.bean;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * <pre>
  *  性别枚举
@@ -8,7 +11,13 @@ package me.chanjar.weixin.cp.bean;
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
  */
+@Getter
+@AllArgsConstructor
 public enum Gender {
+  /**
+   * 未定义
+   */
+  UNDEFINED("未定义", "0"),
   /**
    * 男
    */
@@ -18,28 +27,14 @@ public enum Gender {
    */
   FEMALE("女", "2");
 
-  private String genderName;
-  private String code;
-
-  Gender(String genderName, String code) {
-    this.genderName = genderName;
-    this.code = code;
-  }
-
-  public String getGenderName() {
-    return this.genderName;
-  }
-
-  public String getCode() {
-    return this.code;
-  }
+  private final String genderName;
+  private final String code;
 
   public static Gender fromCode(String code) {
-    if ("1".equals(code)) {
-      return Gender.MALE;
-    }
-    if ("2".equals(code)) {
-      return Gender.FEMALE;
+    for(Gender a: Gender.values()){
+      if(a.code.equals(code)){
+        return a;
+      }
     }
 
     return null;
