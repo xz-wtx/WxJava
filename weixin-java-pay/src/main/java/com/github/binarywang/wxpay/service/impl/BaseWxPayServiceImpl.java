@@ -154,11 +154,20 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
 
   @Override
   public WxPayOrderNotifyResult parseOrderNotifyResult(String xmlData) throws WxPayException {
+    return this.parseOrderNotifyResult(xmlData, null);
+  }
+
+  @Override
+  public WxPayOrderNotifyResult parseOrderNotifyResult(String xmlData, String signType) throws WxPayException {
     try {
       log.debug("微信支付异步通知请求参数：{}", xmlData);
       WxPayOrderNotifyResult result = WxPayOrderNotifyResult.fromXML(xmlData);
+      if (result.getSignType() != null) {
+        // 如果解析的通知对象中signType有值，则使用它进行验签
+        signType = result.getSignType();
+      }
       log.debug("微信支付异步通知请求解析后的对象：{}", result);
-      result.checkResult(this, result.getSignType(), false);
+      result.checkResult(this, signType, false);
       return result;
     } catch (WxPayException e) {
       throw e;

@@ -304,6 +304,17 @@ public interface WxPayService {
   WxPayOrderNotifyResult parseOrderNotifyResult(String xmlData) throws WxPayException;
 
   /**
+   * 解析支付结果通知.
+   * 详见https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_7
+   *
+   * @param xmlData  the xml data
+   * @param signType 签名类型
+   * @return the wx pay order notify result
+   * @throws WxPayException the wx pay exception
+   */
+  WxPayOrderNotifyResult parseOrderNotifyResult(String xmlData, String signType) throws WxPayException;
+
+  /**
    * 解析退款结果通知
    * 详见https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_16&index=9
    *
