@@ -74,6 +74,7 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
     user.setTelephone(GsonHelper.getString(o, "telephone"));
     user.setQrCode(GsonHelper.getString(o, "qr_code"));
     user.setToInvite(GsonHelper.getBoolean(o, "to_invite"));
+    user.setMainDepartment(GsonHelper.getString(o, "main_department"));
 
     if (GsonHelper.isNotNull(o.get(EXTRA_ATTR))) {
       this.buildExtraAttrs(o, user);
@@ -242,6 +243,9 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
     }
     if (user.getToInvite() != null) {
       o.addProperty("to_invite", user.getToInvite());
+    }
+    if (user.getMainDepartment() != null) {
+      o.addProperty("main_department", user.getMainDepartment());
     }
 
     if (user.getExtAttrs().size() > 0) {
