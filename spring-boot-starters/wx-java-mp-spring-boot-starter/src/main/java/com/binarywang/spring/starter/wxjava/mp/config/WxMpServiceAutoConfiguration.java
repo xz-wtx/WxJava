@@ -25,9 +25,9 @@ public class WxMpServiceAutoConfiguration {
     WxMpProperties.HttpClientType httpClientType = wxMpProperties.getConfigStorage().getHttpClientType();
     WxMpService wxMpService;
     if (httpClientType == WxMpProperties.HttpClientType.okhttp) {
-      wxMpService = newWxMpServiceJoddHttpImpl();
-    } else if (httpClientType == WxMpProperties.HttpClientType.joddhttp) {
       wxMpService = newWxMpServiceOkHttpImpl();
+    } else if (httpClientType == WxMpProperties.HttpClientType.joddhttp) {
+      wxMpService = newWxMpServiceJoddHttpImpl();
     } else if (httpClientType == WxMpProperties.HttpClientType.httpclient) {
       wxMpService = newWxMpServiceHttpClientImpl();
     } else {
