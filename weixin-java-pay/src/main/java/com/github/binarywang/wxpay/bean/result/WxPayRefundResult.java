@@ -148,20 +148,20 @@ public class WxPayRefundResult extends BaseWxPayResult implements Serializable {
    */
   @Override
   protected void loadXML(Document d) {
-    transactionId = readXMLString(d, "transaction_id");
-    outTradeNo = readXMLString(d, "out_trade_no");
-    outRefundNo = readXMLString(d, "out_refund_no");
-    refundId = readXMLString(d, "refund_id");
-    refundFee = readXMLInteger(d, "refund_fee");
-    settlementRefundFee = readXMLInteger(d, "settlement_refund_fee");
-    totalFee = readXMLInteger(d, "total_fee");
-    settlementTotalFee = readXMLInteger(d, "settlement_total_fee");
-    feeType = readXMLString(d, "fee_type");
-    cashFee = readXMLInteger(d, "cash_fee");
-    cashFeeType = readXMLString(d, "cash_fee_type");
-    cashRefundFee = readXMLInteger(d, "cash_refund_fee");
-    couponRefundCount = readXMLInteger(d, "coupon_refund_count");
-    couponRefundFee = readXMLInteger(d, "coupon_refund_fee");
+    transactionId = readXmlString(d, "transaction_id");
+    outTradeNo = readXmlString(d, "out_trade_no");
+    outRefundNo = readXmlString(d, "out_refund_no");
+    refundId = readXmlString(d, "refund_id");
+    refundFee = readXmlInteger(d, "refund_fee");
+    settlementRefundFee = readXmlInteger(d, "settlement_refund_fee");
+    totalFee = readXmlInteger(d, "total_fee");
+    settlementTotalFee = readXmlInteger(d, "settlement_total_fee");
+    feeType = readXmlString(d, "fee_type");
+    cashFee = readXmlInteger(d, "cash_fee");
+    cashFeeType = readXmlString(d, "cash_fee_type");
+    cashRefundFee = readXmlInteger(d, "cash_refund_fee");
+    couponRefundCount = readXmlInteger(d, "coupon_refund_count");
+    couponRefundFee = readXmlInteger(d, "coupon_refund_fee");
   }
 
 }

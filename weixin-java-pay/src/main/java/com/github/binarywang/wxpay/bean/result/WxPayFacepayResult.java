@@ -250,23 +250,23 @@ public class WxPayFacepayResult extends BaseWxPayResult {
    */
   @Override
   protected void loadXML(Document d) {
-    deviceInfo = readXMLString(d, "device_info");
-    openid = readXMLString(d, "openid");
-    isSubscribe = readXMLString(d, "is_subscribe");
-    subOpenid = readXMLString(d, "sub_openid");
-    subsSubscribe = readXMLString(d, "sub_is_subscribe");
-    tradeType = readXMLString(d, "trade_type");
-    bankType = readXMLString(d, "bank_type");
-    feeType = readXMLString(d, "fee_type");
-    totalFee = readXMLInteger(d, "total_fee");
-    cashFeeType = readXMLString(d, "cash_fee_type");
-    cashFee = readXMLInteger(d, "cash_fee");
-    transactionId = readXMLString(d, "transaction_id");
-    outTradeNo = readXMLString(d, "out_trade_no");
-    detail = readXMLString(d, "detail");
-    attach = readXMLString(d, "attach");
-    promotionDetail = readXMLString(d, "promotion_detail");
-    timeEnd = readXMLString(d, "time_end");
+    deviceInfo = readXmlString(d, "device_info");
+    openid = readXmlString(d, "openid");
+    isSubscribe = readXmlString(d, "is_subscribe");
+    subOpenid = readXmlString(d, "sub_openid");
+    subsSubscribe = readXmlString(d, "sub_is_subscribe");
+    tradeType = readXmlString(d, "trade_type");
+    bankType = readXmlString(d, "bank_type");
+    feeType = readXmlString(d, "fee_type");
+    totalFee = readXmlInteger(d, "total_fee");
+    cashFeeType = readXmlString(d, "cash_fee_type");
+    cashFee = readXmlInteger(d, "cash_fee");
+    transactionId = readXmlString(d, "transaction_id");
+    outTradeNo = readXmlString(d, "out_trade_no");
+    detail = readXmlString(d, "detail");
+    attach = readXmlString(d, "attach");
+    promotionDetail = readXmlString(d, "promotion_detail");
+    timeEnd = readXmlString(d, "time_end");
   }
 
 }

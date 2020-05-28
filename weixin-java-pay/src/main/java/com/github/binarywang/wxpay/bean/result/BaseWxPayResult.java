@@ -43,6 +43,8 @@ import org.w3c.dom.*;
  */
 @Data
 public abstract class BaseWxPayResult implements Serializable {
+  private static final long serialVersionUID = -3559552761816864481L;
+  
   /**
    * 返回状态码.
    */
@@ -165,39 +167,45 @@ public abstract class BaseWxPayResult implements Serializable {
    * @param d Document
    */
   private void loadBasicXML(Document d) {
-    returnCode = readXMLString(d, "return_code");
-    returnMsg = readXMLString(d, "return_msg");
-    resultCode = readXMLString(d, "result_code");
-    errCode = readXMLString(d, "err_code");
-    errCodeDes = readXMLString(d, "err_code_des");
-    appid = readXMLString(d, "appid");
-    mchId = readXMLString(d, "mch_id");
-    subAppId = readXMLString(d, "sub_appid");
-    subMchId = readXMLString(d, "sub_mch_id");
-    nonceStr = readXMLString(d, "nonce_str");
-    sign = readXMLString(d, "sign");
+    returnCode = readXmlString(d, "return_code");
+    returnMsg = readXmlString(d, "return_msg");
+    resultCode = readXmlString(d, "result_code");
+    errCode = readXmlString(d, "err_code");
+    errCodeDes = readXmlString(d, "err_code_des");
+    appid = readXmlString(d, "appid");
+    mchId = readXmlString(d, "mch_id");
+    subAppId = readXmlString(d, "sub_appid");
+    subMchId = readXmlString(d, "sub_mch_id");
+    nonceStr = readXmlString(d, "nonce_str");
+    sign = readXmlString(d, "sign");
   }
 
-  public static Integer readXMLInteger(Node d, String tagName) {
-    String content = readXMLString(d, tagName);
-    if (content == null || content.trim().length() == 0) return null;
+  protected static Integer readXmlInteger(Node d, String tagName) {
+    String content = readXmlString(d, tagName);
+    if (content == null || content.trim().length() == 0) {
+      return null;
+    }
     return Integer.parseInt(content);
   }
 
-  public static String readXMLString(Node d, String tagName) {
-    if (!d.hasChildNodes()) return null;
+  protected static String readXmlString(Node d, String tagName) {
+    if (!d.hasChildNodes()) {
+      return null;
+    }
     NodeList childNodes = d.getChildNodes();
     for (int i = 0, j = childNodes.getLength(); i < j; i++) {
       Node node = childNodes.item(i);
       if (tagName.equals(node.getNodeName())) {
-        if (!node.hasChildNodes()) return null;
+        if (!node.hasChildNodes()) {
+          return null;
+        }
         return node.getFirstChild().getNodeValue();
       }
     }
     return null;
   }
 
-  public static String readXMLString(Document d, String tagName) {
+  public static String readXmlString(Document d, String tagName) {
     NodeList elements = d.getElementsByTagName(tagName);
     if (elements == null || elements.getLength() == 0) {
       return null;
@@ -210,9 +218,11 @@ public abstract class BaseWxPayResult implements Serializable {
     return node.getNodeValue();
   }
 
-  public static Integer readXMLInteger(Document d, String tagName) {
-    String content = readXMLString(d, tagName);
-    if (content == null || content.trim().length() == 0) return null;
+  protected static Integer readXmlInteger(Document d, String tagName) {
+    String content = readXmlString(d, tagName);
+    if (content == null || content.trim().length() == 0) {
+      return null;
+    }
     return Integer.parseInt(content);
   }
 

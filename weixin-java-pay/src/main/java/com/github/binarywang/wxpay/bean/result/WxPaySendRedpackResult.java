@@ -46,12 +46,12 @@ public class WxPaySendRedpackResult extends BaseWxPayResult implements Serializa
    */
   @Override
   protected void loadXML(Document d) {
-    mchBillno = readXMLString(d, "mch_billno");
-    wxappid = readXMLString(d, "wxappid");
-    reOpenid = readXMLString(d, "re_openid");
-    totalAmount = readXMLInteger(d, "total_amount");
-    sendTime = readXMLString(d, "send_time");
-    sendListid = readXMLString(d, "send_listid");
+    mchBillno = readXmlString(d, "mch_billno");
+    wxappid = readXmlString(d, "wxappid");
+    reOpenid = readXmlString(d, "re_openid");
+    totalAmount = readXmlInteger(d, "total_amount");
+    sendTime = readXmlString(d, "send_time");
+    sendListid = readXmlString(d, "send_listid");
   }
 
 }

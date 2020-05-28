@@ -33,7 +33,7 @@ public class WxPayOrderCloseResult extends BaseWxPayResult {
    */
   @Override
   protected void loadXML(Document d) {
-    resultMsg = readXMLString(d, "result_msg");
+    resultMsg = readXmlString(d, "result_msg");
   }
 
 }

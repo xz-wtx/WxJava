@@ -223,21 +223,21 @@ public class WxPayMicropayResult extends BaseWxPayResult {
    */
   @Override
   protected void loadXML(Document d) {
-    openid = readXMLString(d, "openid");
-    isSubscribe = readXMLString(d, "is_subscribe");
-    tradeType = readXMLString(d, "trade_type");
-    bankType = readXMLString(d, "bank_type");
-    feeType = readXMLString(d, "fee_type");
-    totalFee = readXMLInteger(d, "total_fee");
-    settlementTotalFee = readXMLInteger(d, "settlement_total_fee");
-    couponFee = readXMLInteger(d, "coupon_fee");
-    cashFeeType = readXMLString(d, "cash_fee_type");
-    cashFee = readXMLInteger(d, "cash_fee");
-    transactionId = readXMLString(d, "transaction_id");
-    outTradeNo = readXMLString(d, "out_trade_no");
-    attach = readXMLString(d, "attach");
-    timeEnd = readXMLString(d, "time_end");
-    promotionDetail = readXMLString(d, "promotion_detail");
+    openid = readXmlString(d, "openid");
+    isSubscribe = readXmlString(d, "is_subscribe");
+    tradeType = readXmlString(d, "trade_type");
+    bankType = readXmlString(d, "bank_type");
+    feeType = readXmlString(d, "fee_type");
+    totalFee = readXmlInteger(d, "total_fee");
+    settlementTotalFee = readXmlInteger(d, "settlement_total_fee");
+    couponFee = readXmlInteger(d, "coupon_fee");
+    cashFeeType = readXmlString(d, "cash_fee_type");
+    cashFee = readXmlInteger(d, "cash_fee");
+    transactionId = readXmlString(d, "transaction_id");
+    outTradeNo = readXmlString(d, "out_trade_no");
+    attach = readXmlString(d, "attach");
+    timeEnd = readXmlString(d, "time_end");
+    promotionDetail = readXmlString(d, "promotion_detail");
   }
 
 }
