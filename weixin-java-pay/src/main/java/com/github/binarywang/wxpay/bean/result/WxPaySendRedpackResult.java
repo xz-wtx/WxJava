@@ -1,5 +1,7 @@
 package com.github.binarywang.wxpay.bean.result;
 
+import com.github.binarywang.wxpay.exception.WxPayException;
+import com.github.binarywang.wxpay.service.WxPayService;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -54,4 +56,14 @@ public class WxPaySendRedpackResult extends BaseWxPayResult implements Serializa
     sendListid = readXmlString(d, "send_listid");
   }
 
+  @Override
+  public void checkResult(WxPayService wxPayService, String signType, boolean checkSuccess) throws WxPayException {
+    try {
+      super.checkResult(wxPayService, signType, checkSuccess);
+    } catch (WxPayException e) {
+      if (!"PROCESSING".equals(e.getErrCode())) {
+        throw e;
+      }
+    }
+  }
 }
