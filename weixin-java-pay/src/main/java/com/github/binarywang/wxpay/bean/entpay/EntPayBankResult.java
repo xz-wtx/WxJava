@@ -50,7 +50,7 @@ public class EntPayBankResult extends BaseWxPayResult {
   private Integer cmmsAmount;
 
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     amount = readXmlInteger(d, "amount");
     partnerTradeNo = readXmlString(d, "partner_trade_no");
     paymentNo = readXmlString(d, "payment_no");

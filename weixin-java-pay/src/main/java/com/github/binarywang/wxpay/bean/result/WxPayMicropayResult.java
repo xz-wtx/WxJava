@@ -222,7 +222,7 @@ public class WxPayMicropayResult extends BaseWxPayResult {
    * @param d Document
    */
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     openid = readXmlString(d, "openid");
     isSubscribe = readXmlString(d, "is_subscribe");
     tradeType = readXmlString(d, "trade_type");

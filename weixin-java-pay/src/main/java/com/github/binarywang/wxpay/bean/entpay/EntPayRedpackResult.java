@@ -80,7 +80,7 @@ public class EntPayRedpackResult extends BaseWxPayResult implements Serializable
   private String senderHeaderMediaId;
 
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     mchBillNo = readXmlString(d, "mch_billno");
     mchId = readXmlString(d, "mch_id");
     wxAppId = readXmlString(d, "wxappid");

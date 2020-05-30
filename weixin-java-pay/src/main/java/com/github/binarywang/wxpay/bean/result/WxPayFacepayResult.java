@@ -249,7 +249,7 @@ public class WxPayFacepayResult extends BaseWxPayResult {
    * @param d Document
    */
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     deviceInfo = readXmlString(d, "device_info");
     openid = readXmlString(d, "openid");
     isSubscribe = readXmlString(d, "is_subscribe");

@@ -33,7 +33,7 @@ public class ProfitSharingResult extends BaseWxPayResult {
   private String orderId;
 
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     transactionId = readXmlString(d, "transaction_id");
     outOrderNo = readXmlString(d, "out_order_no");
     orderId = readXmlString(d, "order_id");

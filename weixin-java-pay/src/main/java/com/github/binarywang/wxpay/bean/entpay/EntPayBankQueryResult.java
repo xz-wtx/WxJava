@@ -95,7 +95,7 @@ public class EntPayBankQueryResult extends BaseWxPayResult {
   private String failReason;
 
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     partnerTradeNo = readXmlString(d, "partner_trade_no");
     paymentNo = readXmlString(d, "payment_no");
     bankNoMd5 = readXmlString(d, "bank_no_md5");

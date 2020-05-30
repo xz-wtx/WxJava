@@ -38,7 +38,7 @@ public class WxPaySandboxSignKeyResult extends BaseWxPayResult {
    * @param d Document
    */
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     sandboxSignKey = readXmlString(d, "sandbox_signkey");
   }
 

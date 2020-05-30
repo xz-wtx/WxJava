@@ -341,7 +341,7 @@ public class WxPayOrderQueryResult extends BaseWxPayResult {
    * @param d Document
    */
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     promotionDetail = readXmlString(d, "promotion_detail");
     deviceInfo = readXmlString(d, "device_info");
     openid = readXmlString(d, "openid");

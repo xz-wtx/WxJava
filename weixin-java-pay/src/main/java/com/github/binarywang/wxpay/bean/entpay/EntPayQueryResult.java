@@ -83,7 +83,7 @@ public class EntPayQueryResult extends BaseWxPayResult {
   private String desc;
 
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     partnerTradeNo = readXmlString(d, "partner_trade_no");
     detailId = readXmlString(d, "detail_id");
     status = readXmlString(d, "status");

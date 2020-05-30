@@ -352,7 +352,7 @@ public class WxPayOrderNotifyResult extends BaseWxPayResult {
   }
 
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     promotionDetail = readXmlString(d, "promotion_detail");
     deviceInfo = readXmlString(d, "device_info");
     openid = readXmlString(d, "openid");

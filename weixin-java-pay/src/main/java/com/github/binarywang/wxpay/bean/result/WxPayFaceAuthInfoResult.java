@@ -41,7 +41,7 @@ public class WxPayFaceAuthInfoResult extends BaseWxPayResult implements Serializ
    * @param d Document
    */
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     authinfo = readXmlString(d, "authinfo");
     expiresIn = readXmlString(d, "expires_in");
   }

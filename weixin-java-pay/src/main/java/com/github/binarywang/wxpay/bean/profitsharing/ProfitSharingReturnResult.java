@@ -74,7 +74,7 @@ public class ProfitSharingReturnResult extends BaseWxPayResult {
   private String finishTime;
 
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     orderId = readXmlString(d, "order_id");
     outOrderNo = readXmlString(d, "out_order_no");
     outReturnNo = readXmlString(d, "out_return_no");

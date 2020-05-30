@@ -24,7 +24,7 @@ public class ProfitSharingReceiverResult extends BaseWxPayResult {
   private String receiver;
 
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     receiver = readXmlString(d, "receiver");
   }
 }

@@ -22,24 +22,25 @@ import java.io.Serializable;
 @XStreamAlias("xml")
 public class WxPaySendRedpackResult extends BaseWxPayResult implements Serializable {
   private static final long serialVersionUID = -4837415036337132073L;
+  private static final String PROCESSING = "PROCESSING";
 
   @XStreamAlias("mch_billno")
-  private String mchBillno;
+  private String mchBillNo;
 
   @XStreamAlias("wxappid")
-  private String wxappid;
+  private String wxAppId;
 
   @XStreamAlias("re_openid")
   private String reOpenid;
 
   @XStreamAlias("total_amount")
-  private int totalAmount;
+  private Integer totalAmount;
 
   @XStreamAlias("send_time")
   private String sendTime;
 
   @XStreamAlias("send_listid")
-  private String sendListid;
+  private String sendListId;
 
   /**
    * 从XML结构中加载额外的熟悉
@@ -47,13 +48,13 @@ public class WxPaySendRedpackResult extends BaseWxPayResult implements Serializa
    * @param d Document
    */
   @Override
-  protected void loadXML(Document d) {
-    mchBillno = readXmlString(d, "mch_billno");
-    wxappid = readXmlString(d, "wxappid");
+  protected void loadXml(Document d) {
+    mchBillNo = readXmlString(d, "mch_billno");
+    wxAppId = readXmlString(d, "wxappid");
     reOpenid = readXmlString(d, "re_openid");
     totalAmount = readXmlInteger(d, "total_amount");
     sendTime = readXmlString(d, "send_time");
-    sendListid = readXmlString(d, "send_listid");
+    sendListId = readXmlString(d, "send_listid");
   }
 
   @Override
@@ -61,7 +62,7 @@ public class WxPaySendRedpackResult extends BaseWxPayResult implements Serializa
     try {
       super.checkResult(wxPayService, signType, checkSuccess);
     } catch (WxPayException e) {
-      if (!"PROCESSING".equals(e.getErrCode())) {
+      if (!PROCESSING.equals(e.getErrCode())) {
         throw e;
       }
     }

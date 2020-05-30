@@ -55,7 +55,7 @@ public class WxPaySendMiniProgramRedpackResult extends BaseWxPayResult implement
   private String sendListId;
 
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     mchBillNo = readXmlString(d, "mch_billno");
     wxAppid = readXmlString(d, "wxappid");
     reOpenid = readXmlString(d, "re_openid");

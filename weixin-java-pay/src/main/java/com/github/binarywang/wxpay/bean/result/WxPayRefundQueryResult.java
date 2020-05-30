@@ -179,7 +179,7 @@ public class WxPayRefundQueryResult extends BaseWxPayResult {
    * @param d Document
    */
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     deviceInfo = readXmlString(d, "device_info");
     transactionId = readXmlString(d, "transaction_id");
     outTradeNo = readXmlString(d, "out_trade_no");

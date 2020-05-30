@@ -44,7 +44,7 @@ import org.w3c.dom.*;
 @Data
 public abstract class BaseWxPayResult implements Serializable {
   private static final long serialVersionUID = -3559552761816864481L;
-  
+
   /**
    * 返回状态码.
    */
@@ -141,7 +141,7 @@ public abstract class BaseWxPayResult implements Serializable {
         t.setXmlString(xmlString);
         Document doc = t.getXmlDoc();
         t.loadBasicXML(doc);
-        t.loadXML(doc);
+        t.loadXml(doc);
         return (T) t;
       } catch (Exception e) {
         throw new RuntimeException("parse xml error", e);
@@ -159,7 +159,7 @@ public abstract class BaseWxPayResult implements Serializable {
    *
    * @param d Document
    */
-  protected abstract void loadXML(Document d);
+  protected abstract void loadXml(Document d);
 
   /**
    * 从XML文档中加载基础属性
@@ -223,6 +223,7 @@ public abstract class BaseWxPayResult implements Serializable {
     if (content == null || content.trim().length() == 0) {
       return null;
     }
+
     return Integer.parseInt(content);
   }
 

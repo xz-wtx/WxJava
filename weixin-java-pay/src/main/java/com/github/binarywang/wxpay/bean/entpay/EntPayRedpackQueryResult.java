@@ -132,7 +132,7 @@ public class EntPayRedpackQueryResult extends BaseWxPayResult {
   private Integer senderHeaderMediaId;
 
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     mchBillNo = readXmlString(d, "mch_billno");
     detailId = readXmlString(d, "detailId");
     status = readXmlString(d, "status");

@@ -193,7 +193,7 @@ public class WxPayCouponStockQueryResult extends BaseWxPayResult {
   private Integer couponBudget;
 
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     deviceInfo = readXmlString(d, "device_info");
     couponStockId = readXmlString(d, "coupon_stock_id");
     couponName = readXmlString(d, "coupon_name");

@@ -233,7 +233,7 @@ public class WxPayRedpackQueryResult extends BaseWxPayResult {
    * @param d Document
    */
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     mchBillNo = readXmlString(d, "mch_billno");
     detailId = readXmlString(d, "detail_id");
     status = readXmlString(d, "status");

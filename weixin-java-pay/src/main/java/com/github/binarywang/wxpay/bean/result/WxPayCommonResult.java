@@ -14,6 +14,6 @@ import org.w3c.dom.Document;
 @XStreamAlias("xml")
 public class WxPayCommonResult extends BaseWxPayResult {
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
   }
 }

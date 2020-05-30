@@ -52,7 +52,7 @@ public class WxPayQueryExchangeRateResult extends BaseWxPayResult {
   private String rate;
 
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
 
   }
 }

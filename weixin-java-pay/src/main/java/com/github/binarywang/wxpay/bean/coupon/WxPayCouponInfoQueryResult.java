@@ -229,7 +229,7 @@ public class WxPayCouponInfoQueryResult extends BaseWxPayResult {
   private String isPartialUse;
 
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     deviceInfo = readXmlString(d, "device_info");
     couponStockId = readXmlString(d, "coupon_stock_id");
     couponId = readXmlString(d, "coupon_id");

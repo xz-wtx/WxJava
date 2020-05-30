@@ -85,7 +85,7 @@ public class WxPayRefundNotifyResult extends BaseWxPayResult implements Serializ
   private transient String decryptedReqInfo;
 
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     reqInfoString = readXmlString(d, "req_info");
   }
 

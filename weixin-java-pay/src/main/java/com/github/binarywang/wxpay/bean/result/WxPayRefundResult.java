@@ -147,7 +147,7 @@ public class WxPayRefundResult extends BaseWxPayResult implements Serializable {
    * @param d Document
    */
   @Override
-  protected void loadXML(Document d) {
+  protected void loadXml(Document d) {
     transactionId = readXmlString(d, "transaction_id");
     outTradeNo = readXmlString(d, "out_trade_no");
     outRefundNo = readXmlString(d, "out_refund_no");
