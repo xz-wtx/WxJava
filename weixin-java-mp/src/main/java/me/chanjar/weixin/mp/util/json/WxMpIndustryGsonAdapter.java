@@ -28,8 +28,9 @@ public class WxMpIndustryGsonAdapter implements JsonSerializer<WxMpTemplateIndus
   }
 
   private WxMpTemplateIndustryEnum convertFromJson(JsonObject json) {
+    String firstClass = GsonHelper.getString(json, "first_class");
     String secondClass = GsonHelper.getString(json, "second_class");
-    final WxMpTemplateIndustryEnum industryEnum = WxMpTemplateIndustryEnum.findBySecondary(secondClass);
+    final WxMpTemplateIndustryEnum industryEnum = WxMpTemplateIndustryEnum.findByClass(firstClass, secondClass);
     if (industryEnum != null) {
       return industryEnum;
     }
@@ -38,7 +39,7 @@ public class WxMpIndustryGsonAdapter implements JsonSerializer<WxMpTemplateIndus
       secondClass = secondClass.split("\\|")[1];
     }
 
-    return WxMpTemplateIndustryEnum.findBySecondary(secondClass);
+    return WxMpTemplateIndustryEnum.findByClass(firstClass, secondClass);
   }
 
 }
