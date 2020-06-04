@@ -68,6 +68,6 @@ public class WxPaySendRedpackResultTest {
     Assert.assertEquals("FAIL", wxMpRedpackResult.getReturnCode());
     Assert.assertEquals("FAIL", wxMpRedpackResult.getResultCode());
     Assert.assertEquals("onqOjjmM1tad-3ROpncN-yUfa6uI", wxMpRedpackResult.getReOpenid());
-    Assert.assertEquals(Integer.valueOf(1), wxMpRedpackResult.getTotalAmount());
+    Assert.assertEquals(1, wxMpRedpackResult.getTotalAmount().intValue());
   }
 }
