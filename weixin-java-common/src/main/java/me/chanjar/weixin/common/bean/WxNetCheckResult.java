@@ -13,7 +13,6 @@ import java.util.List;
  */
 @Data
 public class WxNetCheckResult implements Serializable {
-
   private static final long serialVersionUID = 6918924418847404172L;
 
   private List<WxNetCheckDnsInfo> dnsInfos = new ArrayList<>();
