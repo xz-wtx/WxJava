@@ -1,7 +1,6 @@
 package me.chanjar.weixin.open.api;
 
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
-import com.google.gson.JsonObject;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
@@ -10,7 +9,6 @@ import me.chanjar.weixin.open.bean.WxOpenGetResult;
 import me.chanjar.weixin.open.bean.WxOpenMaCodeTemplate;
 import me.chanjar.weixin.open.bean.message.WxOpenXmlMessage;
 import me.chanjar.weixin.open.bean.result.*;
-import me.chanjar.weixin.open.util.json.WxOpenGsonBuilder;
 
 import java.util.List;
 
@@ -218,6 +216,7 @@ public interface WxOpenComponentService {
    *
    * @param appId 公众号/小程序的appId
    * @return .
+   * @throws WxErrorException .
    */
   WxOpenCreateResult createOpenAccount(String appId) throws WxErrorException;
 

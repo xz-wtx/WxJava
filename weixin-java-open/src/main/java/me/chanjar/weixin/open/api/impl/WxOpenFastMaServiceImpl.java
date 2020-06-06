@@ -22,9 +22,9 @@ import java.util.Map;
  * @since 2019/1/23 15:27
  */
 public class WxOpenFastMaServiceImpl extends WxMaServiceImpl implements WxOpenFastMaService {
-  private WxOpenComponentService wxOpenComponentService;
-  private WxMaConfig wxMaConfig;
-  private String appId;
+  private final WxOpenComponentService wxOpenComponentService;
+  private final WxMaConfig wxMaConfig;
+  private final String appId;
 
   public WxOpenFastMaServiceImpl(WxOpenComponentService wxOpenComponentService, String appId, WxMaConfig wxMaConfig) {
     this.wxOpenComponentService = wxOpenComponentService;
