@@ -4,8 +4,11 @@ import com.github.binarywang.wxpay.config.WxPayConfig;
 import com.github.binarywang.wxpay.constant.WxPayConstants.RefundAccountSource;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
 import lombok.*;
+import lombok.experimental.Accessors;
 import me.chanjar.weixin.common.annotation.Required;
+import me.chanjar.weixin.common.util.xml.XStreamCDataConverter;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -26,7 +29,10 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @XStreamAlias("xml")
+@Accessors(chain = true)
 public class WxPayRefundRequest extends BaseWxPayRequest {
+  private static final long serialVersionUID = 522565152886671848L;
+
   private static final String[] REFUND_ACCOUNT = new String[]{
     RefundAccountSource.RECHARGE_FUNDS, RefundAccountSource.UNSETTLED_FUNDS};
 
@@ -127,7 +133,6 @@ public class WxPayRefundRequest extends BaseWxPayRequest {
    * 描述：操作员帐号, 默认为商户号
    * </pre>
    */
-  //@Required
   @XStreamAlias("op_user_id")
   private String opUserId;
   /**
@@ -171,6 +176,54 @@ public class WxPayRefundRequest extends BaseWxPayRequest {
    */
   @XStreamAlias("notify_url")
   private String notifyUrl;
+
+  /**
+   * <pre>
+   * 字段名：商品详情
+   * 变量名：detail
+   * 类型：否
+   * 示例值：String(6000)
+   * 退款包含的商品列表信息detail字段列表说明：
+   *
+   * 字段名	变量名	必填	类型	示例值	描述
+   * 商品列表	goods_detail	是	String	示例见下文	商品信息，使用Json数组格式提交
+   * 商品列表goods_detail字段列表说明：
+   *
+   * 字段名	变量名	必填	类型	示例值	描述
+   * 商品编码	goods_id	是	String(32)	商品编码	由半角的大小写字母、数字、中划线、下划线中的一种或几种组成
+   * 微信侧商品编码	wxpay_goods_id	否	String(32)	1001	微信支付定义的统一商品编号（没有可不传）
+   * 商品名称	goods_name	否	String(256)	iPhone6s 16G	商品的实际名称
+   * 商品退款金额	refund_amount	是	int	528800	商品退款金额
+   * 商品退货数量	refund_quantity	是	int	1	单品的退款数量
+   * 商品单价	price	是	int	528800	单位为：分。如果商户有优惠，需传输商户优惠后的单价(例如：用户对一笔100元的订单使用了商场发的优惠券100-50，则活动商品的单价应为原单价-50)
+   * detail字段值举例如下：
+   *
+   * {
+   * "goods_detail": [
+   * {
+   * "goods_id": "商品编码",
+   * "wxpay_goods_id": "1001",
+   * "goods_name": "iPhone6s 16G",
+   * "refund_amount": 528800,
+   * "refund_quantity": 1,
+   * "price": 528800
+   * },
+   * {
+   * "goods_id": "商品编码",
+   * "wxpay_goods_id": "1001",
+   * "goods_name": "iPhone6s 16G",
+   * "refund_amount": 528800,
+   * "refund_quantity": 1,
+   * "price": 608800
+   * }
+   * ]
+   * }
+   * 描述：退款包含的商品列表信息，全额退款可不传，必须按照规范上传，JSON格式
+   * </pre>
+   */
+  @XStreamAlias("detail")
+  @XStreamConverter(value = XStreamCDataConverter.class)
+  private String detail;
 
   @Override
   public void checkAndSign(WxPayConfig config) throws WxPayException {

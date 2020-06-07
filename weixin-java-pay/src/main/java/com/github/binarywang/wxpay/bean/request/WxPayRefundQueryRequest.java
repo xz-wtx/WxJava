@@ -89,9 +89,8 @@ public class WxPayRefundQueryRequest extends BaseWxPayRequest {
       && StringUtils.isBlank(outRefundNo) && StringUtils.isBlank(refundId)) ||
       (StringUtils.isNotBlank(transactionId) && StringUtils.isNotBlank(outTradeNo)
         && StringUtils.isNotBlank(outRefundNo) && StringUtils.isNotBlank(refundId))) {
-      throw new WxPayException("transaction_id，out_trade_no，out_refund_no，refund_id 必须四选一");
+      throw new WxPayException("transactionId，outRefundNo，transactionId，refundId 必须四选一");
     }
-
   }
 
   @Override

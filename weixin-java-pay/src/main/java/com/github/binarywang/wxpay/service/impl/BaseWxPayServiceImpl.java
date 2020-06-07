@@ -129,6 +129,22 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
   }
 
   @Override
+  public WxPayRefundResult refundV2(WxPayRefundRequest request) throws WxPayException {
+    request.checkAndSign(this.getConfig());
+
+    String url = this.getPayBaseUrl() + "/secapi/pay/refundv2";
+    if (this.getConfig().isUseSandboxEnv()) {
+      url = this.getConfig().getPayBaseUrl() + "/sandboxnew/pay/refundv2";
+    }
+
+    String responseContent = this.post(url, request.toXML(), true);
+    WxPayRefundResult result = BaseWxPayResult.fromXML(responseContent, WxPayRefundResult.class);
+    result.composePromotionDetails();
+    result.checkResult(this, request.getSignType(), true);
+    return result;
+  }
+
+  @Override
   public WxPayRefundQueryResult refundQuery(String transactionId, String outTradeNo, String outRefundNo, String refundId)
     throws WxPayException {
     WxPayRefundQueryRequest request = new WxPayRefundQueryRequest();
@@ -148,6 +164,18 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
     String responseContent = this.post(url, request.toXML(), false);
     WxPayRefundQueryResult result = BaseWxPayResult.fromXML(responseContent, WxPayRefundQueryResult.class);
     result.composeRefundRecords();
+    result.checkResult(this, request.getSignType(), true);
+    return result;
+  }
+
+  @Override
+  public WxPayRefundQueryResult refundQueryV2(WxPayRefundQueryRequest request) throws WxPayException {
+    request.checkAndSign(this.getConfig());
+
+    String url = this.getPayBaseUrl() + "/pay/refundqueryv2";
+    String responseContent = this.post(url, request.toXML(), false);
+    WxPayRefundQueryResult result = BaseWxPayResult.fromXML(responseContent, WxPayRefundQueryResult.class);
+    result.composePromotionDetails();
     result.checkResult(this, request.getSignType(), true);
     return result;
   }
