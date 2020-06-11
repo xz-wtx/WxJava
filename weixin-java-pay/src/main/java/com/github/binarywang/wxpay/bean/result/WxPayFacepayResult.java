@@ -19,7 +19,6 @@ import org.w3c.dom.Document;
 @NoArgsConstructor
 @XStreamAlias("xml")
 public class WxPayFacepayResult extends BaseWxPayResult {
-
   private static final long serialVersionUID = -4116580976046716911L;
 
   /**

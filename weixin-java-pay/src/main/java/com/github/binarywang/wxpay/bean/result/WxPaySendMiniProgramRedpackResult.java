@@ -18,6 +18,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @XStreamAlias("xml")
 public class WxPaySendMiniProgramRedpackResult extends BaseWxPayResult implements Serializable {
+  private static final long serialVersionUID = 5847928569755121611L;
   /**
    * 商户订单号.
    */

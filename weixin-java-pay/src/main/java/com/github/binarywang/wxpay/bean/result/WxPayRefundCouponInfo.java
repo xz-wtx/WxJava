@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * <pre>
  *  退款代金券信息.
@@ -16,7 +18,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class WxPayRefundCouponInfo {
+public class WxPayRefundCouponInfo implements Serializable {
+  private static final long serialVersionUID = -8493640819570138722L;
   /**
    * <pre>
    * 字段名：退款代金券ID.

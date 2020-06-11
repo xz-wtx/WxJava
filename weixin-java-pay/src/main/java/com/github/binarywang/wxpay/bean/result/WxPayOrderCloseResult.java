@@ -6,6 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.w3c.dom.Document;
 
+import java.io.Serializable;
+
 /**
  * <pre>
  * 关闭订单结果对象类
@@ -18,8 +20,8 @@ import org.w3c.dom.Document;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @XStreamAlias("xml")
-public class WxPayOrderCloseResult extends BaseWxPayResult {
-
+public class WxPayOrderCloseResult extends BaseWxPayResult implements Serializable {
+  private static final long serialVersionUID = 800873502890274834L;
   /**
    * 业务结果描述
    */

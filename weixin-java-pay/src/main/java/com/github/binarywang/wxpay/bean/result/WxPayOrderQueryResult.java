@@ -27,7 +27,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @XStreamAlias("xml")
-public class WxPayOrderQueryResult extends BaseWxPayResult {
+public class WxPayOrderQueryResult extends BaseWxPayResult implements Serializable {
   private static final long serialVersionUID = 8241891654782412789L;
 
   /**

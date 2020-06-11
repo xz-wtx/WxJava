@@ -23,7 +23,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @XStreamAlias("xml")
-public class WxPayRedpackQueryResult extends BaseWxPayResult {
+public class WxPayRedpackQueryResult extends BaseWxPayResult implements Serializable {
   private static final long serialVersionUID = -3849864122189552906L;
 
   /**
