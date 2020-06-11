@@ -12,6 +12,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import com.google.common.base.CharMatcher;
+import com.google.common.io.BaseEncoding;
 import org.apache.commons.codec.binary.Base64;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -64,7 +66,7 @@ public class WxCryptUtil {
   public WxCryptUtil(String token, String encodingAesKey, String appidOrCorpid) {
     this.token = token;
     this.appidOrCorpid = appidOrCorpid;
-    this.aesKey = Base64.decodeBase64(encodingAesKey + "=");
+    this.aesKey = BaseEncoding.base64().decode(CharMatcher.whitespace().removeFrom(encodingAesKey));
   }
 
   private static String extractEncryptPart(String xml) {

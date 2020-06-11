@@ -10,6 +10,8 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import com.google.common.base.CharMatcher;
+import com.google.common.io.BaseEncoding;
 import org.apache.commons.codec.binary.Base64;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -25,7 +27,7 @@ public class WxMaCryptUtils extends me.chanjar.weixin.common.util.crypto.WxCrypt
   public WxMaCryptUtils(WxMaConfig config) {
     this.appidOrCorpid = config.getAppid();
     this.token = config.getToken();
-    this.aesKey = Base64.decodeBase64(config.getAesKey() + "=");
+    this.aesKey = BaseEncoding.base64().decode(CharMatcher.whitespace().removeFrom(config.getAesKey()));
   }
 
   /**
