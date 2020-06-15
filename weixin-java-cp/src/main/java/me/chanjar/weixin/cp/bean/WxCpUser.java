@@ -89,7 +89,7 @@ public class WxCpUser implements Serializable {
     /**
      * 属性类型: 0-文本 1-网页
      */
-    private int type;
+    private Integer type;
     private String name;
     private String textValue;
     private String webUrl;
@@ -104,7 +104,7 @@ public class WxCpUser implements Serializable {
     /**
      * 属性类型: 0-本文 1-网页 2-小程序.
      */
-    private int type;
+    private Integer type;
     /**
      * 属性名称： 需要先确保在管理端有创建改属性，否则会忽略.
      */
