@@ -99,6 +99,7 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
       user.getExtAttrs().add(attr);
 
       if (type == null) {
+        attr.setTextValue(GsonHelper.getString(attrJsonElement.getAsJsonObject(), "value"));
         continue;
       }
 
