@@ -67,7 +67,7 @@ public class BaseWxPayServiceImplTest {
     request.setSignType(SignType.HMAC_SHA256);
     WxPayUnifiedOrderResult result = this.payService.unifiedOrder(request);
     log.info(result.toString());
-//    log.warn(this.payService.getWxApiData().toString());
+    log.warn(this.payService.getWxApiData().toString());
   }
 
   /**
