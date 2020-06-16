@@ -175,11 +175,10 @@
         <artifactId>xstream</artifactId>
         <version>1.4.11.1</version>
       </dependency>
-      <!-- 由于guava较新的21.0版本需要jdk8，故而此处采用较低版本 -->
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
-        <version>20.0</version>
+        <version>29.0-android</version>
       </dependency>
       <dependency>
         <groupId>com.google.code.gson</groupId>
