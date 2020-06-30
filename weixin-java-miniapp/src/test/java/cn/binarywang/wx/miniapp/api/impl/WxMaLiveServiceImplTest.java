@@ -70,7 +70,7 @@ public class WxMaLiveServiceImplTest {
 
   @Test
   public void getLiveinfos() throws Exception {
-    List<WxMaLiveResult.RoomInfo> list = this.wxService.getLiveService().getLiveinfos();
+    List<WxMaLiveResult.RoomInfo> list = this.wxService.getLiveService().getLiveInfos();
     assertNotNull(list);
     System.out.println(list.toString());
   }

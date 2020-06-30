@@ -46,35 +46,35 @@ public interface WxMaLiveService {
   /**
    * 获取所有直播间信息（没有分页直接获取全部）
    *
-   * @return
-   * @throws WxErrorException
+   * @return .
+   * @throws WxErrorException .
    */
-  List<WxMaLiveResult.RoomInfo> getLiveinfos() throws WxErrorException;
+  List<WxMaLiveResult.RoomInfo> getLiveInfos() throws WxErrorException;
 
   /**
    * 获取直播房间回放数据信息.
    *
-   * @param action  获取回放
-   * @param room_id 直播间   id
-   * @param start   起始拉取视频，start =   0   表示从第    1   个视频片段开始拉取
-   * @param limit   每次拉取的个数上限，不要设置过大，建议  100 以内
-   * @return
-   * @throws WxErrorException
+   * @param action 获取回放
+   * @param roomId 直播间   id
+   * @param start  起始拉取视频，start =   0   表示从第    1   个视频片段开始拉取
+   * @param limit  每次拉取的个数上限，不要设置过大，建议  100 以内
+   * @return .
+   * @throws WxErrorException .
    */
-  WxMaLiveResult getLiveReplay(String action, Integer room_id, Integer start, Integer limit) throws WxErrorException;
+  WxMaLiveResult getLiveReplay(String action, Integer roomId, Integer start, Integer limit) throws WxErrorException;
 
   /**
    * 获取直播房间回放数据信息.
    * <p>
    * 获取回放 （默认：get_replay）
    *
-   * @param room_id 直播间   id
-   * @param start   起始拉取视频，start =   0   表示从第    1   个视频片段开始拉取
-   * @param limit   每次拉取的个数上限，不要设置过大，建议  100 以内
-   * @return
-   * @throws WxErrorException
+   * @param roomId 直播间   id
+   * @param start  起始拉取视频，start =   0   表示从第    1   个视频片段开始拉取
+   * @param limit  每次拉取的个数上限，不要设置过大，建议  100 以内
+   * @return .
+   * @throws WxErrorException .
    */
-  WxMaLiveResult getLiveReplay(Integer room_id, Integer start, Integer limit) throws WxErrorException;
+  WxMaLiveResult getLiveReplay(Integer roomId, Integer start, Integer limit) throws WxErrorException;
 
   /**
    * 直播间导入商品

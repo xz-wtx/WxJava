@@ -8,6 +8,7 @@ import cn.binarywang.wx.miniapp.util.json.WxMaGsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.WxType;
 import me.chanjar.weixin.common.error.WxError;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -24,10 +25,11 @@ import java.util.Map;
  *
  * @author <a href="https://github.com/yjwang3300300">yjwang</a>
  */
+@Slf4j
 @AllArgsConstructor
 public class WxMaLiveServiceImpl implements WxMaLiveService {
   private static final JsonParser JSON_PARSER = new JsonParser();
-  private WxMaService wxMaService;
+  private final WxMaService wxMaService;
 
   @Override
   public Integer createRoom(WxMaLiveInfo.RoomInfo roomInfo) throws WxErrorException {
@@ -41,19 +43,19 @@ public class WxMaLiveServiceImpl implements WxMaLiveService {
 
   @Override
   public WxMaLiveResult getLiveInfo(Integer start, Integer limit) throws WxErrorException {
-    JsonObject jsonObject = getJsonObject(start, limit, null);
+    JsonObject jsonObject = getLiveInfo(start, limit, null);
     return WxMaLiveResult.fromJson(jsonObject.toString());
   }
 
   @Override
-  public List<WxMaLiveResult.RoomInfo> getLiveinfos() throws WxErrorException {
+  public List<WxMaLiveResult.RoomInfo> getLiveInfos() throws WxErrorException {
     List<WxMaLiveResult.RoomInfo> results = new ArrayList<>();
-    Integer start = 0;
+    int start = 0;
     Integer limit = 80;
-    Integer tatal = 0;
-    WxMaLiveResult liveInfo = null;
+    Integer total = 0;
+    WxMaLiveResult liveInfo;
     do {
-      if (tatal != 0 && tatal <= start) {
+      if (total != 0 && total <= start) {
         break;
       }
       liveInfo = getLiveInfo(start, limit);
@@ -61,29 +63,30 @@ public class WxMaLiveServiceImpl implements WxMaLiveService {
         return null;
       }
       results.addAll(liveInfo.getRoomInfos());
-      tatal = liveInfo.getTotal();
+      total = liveInfo.getTotal();
       start = results.size();
       try {
         Thread.sleep(100);
       } catch (InterruptedException e) {
-        e.printStackTrace();
+        log.error("InterruptedException", e);
       }
-    } while (results.size() <= tatal);
+    } while (results.size() <= total);
+
     return results;
   }
 
   @Override
-  public WxMaLiveResult getLiveReplay(String action, Integer room_id, Integer start, Integer limit) throws WxErrorException {
-    Map<String, Object> map = new HashMap(4);
+  public WxMaLiveResult getLiveReplay(String action, Integer roomId, Integer start, Integer limit) throws WxErrorException {
+    Map<String, Object> map = new HashMap<>(4);
     map.put("action", action);
-    map.put("room_id", room_id);
-    JsonObject jsonObject = getJsonObject(start, limit, map);
+    map.put("room_id", roomId);
+    JsonObject jsonObject = getLiveInfo(start, limit, map);
     return WxMaLiveResult.fromJson(jsonObject.toString());
   }
 
   @Override
-  public WxMaLiveResult getLiveReplay(Integer room_id, Integer start, Integer limit) throws WxErrorException {
-    return getLiveReplay("get_replay", room_id, start, limit);
+  public WxMaLiveResult getLiveReplay(Integer roomId, Integer start, Integer limit) throws WxErrorException {
+    return getLiveReplay("get_replay", roomId, start, limit);
   }
 
   @Override
@@ -99,18 +102,9 @@ public class WxMaLiveServiceImpl implements WxMaLiveService {
     return true;
   }
 
-  /**
-   * 包装一下
-   *
-   * @param start
-   * @param limit
-   * @param map
-   * @return
-   * @throws WxErrorException
-   */
-  private JsonObject getJsonObject(Integer start, Integer limit, Map<String, Object> map) throws WxErrorException {
+  private JsonObject getLiveInfo(Integer start, Integer limit, Map<String, Object> map) throws WxErrorException {
     if (map == null) {
-      map = new HashMap(2);
+      map = new HashMap<>(2);
     }
     map.put("start", start);
     map.put("limit", limit);
