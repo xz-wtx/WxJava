@@ -31,7 +31,7 @@ public class WxMaLiveServiceImplTest {
   @Test
   public void createRoom() throws Exception {
     //上传临时素材
-    WxMediaUploadResult mediaUpload = this.wxService.getMaterialService().mediaUpload("image", new File("E:\\1.png"));
+    WxMediaUploadResult mediaUpload = this.wxService.getMediaService().uploadMedia("image", new File("E:\\1.png"));
 
     WxMaLiveInfo.RoomInfo roomInfo = new WxMaLiveInfo.RoomInfo();
     roomInfo.setName("订阅通知直播间");

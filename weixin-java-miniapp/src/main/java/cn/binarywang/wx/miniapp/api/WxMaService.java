@@ -288,10 +288,4 @@ public interface WxMaService extends WxService {
    */
   WxMaLiveGoodsService getLiveGoodsService();
 
-  /**
-   * 获取小程序素材管理服务对象
-   *
-   * @return .
-   */
-  WxMaMaterialService getMaterialService();
 }
