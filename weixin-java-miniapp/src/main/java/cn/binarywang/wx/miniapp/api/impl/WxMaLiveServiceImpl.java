@@ -2,7 +2,8 @@ package cn.binarywang.wx.miniapp.api.impl;
 
 import cn.binarywang.wx.miniapp.api.WxMaLiveService;
 import cn.binarywang.wx.miniapp.api.WxMaService;
-import cn.binarywang.wx.miniapp.bean.WxMaGetLiveInfo;
+import cn.binarywang.wx.miniapp.bean.WxMaLiveInfo;
+import cn.binarywang.wx.miniapp.bean.WxMaLiveResult;
 import cn.binarywang.wx.miniapp.util.json.WxMaGsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -26,21 +27,31 @@ import java.util.Map;
 @AllArgsConstructor
 public class WxMaLiveServiceImpl implements WxMaLiveService {
   private static final JsonParser JSON_PARSER = new JsonParser();
-  private WxMaService service;
+  private WxMaService wxMaService;
 
   @Override
-  public WxMaGetLiveInfo getLiveInfo(Integer start, Integer limit) throws WxErrorException {
-    JsonObject jsonObject = getJsonObject(start, limit, null);
-    return WxMaGetLiveInfo.fromJson(jsonObject.toString());
+  public Integer createRoom(WxMaLiveInfo.RoomInfo roomInfo) throws WxErrorException {
+    String responseContent = this.wxMaService.post(CREATE_ROOM, WxMaGsonBuilder.create().toJson(roomInfo));
+    JsonObject jsonObject = JSON_PARSER.parse(responseContent).getAsJsonObject();
+    if (jsonObject.get("errcode").getAsInt() != 0) {
+      throw new WxErrorException(WxError.fromJson(responseContent, WxType.MiniApp));
+    }
+    return jsonObject.get("roomId").getAsInt();
   }
 
   @Override
-  public List<WxMaGetLiveInfo.RoomInfo> getLiveinfos() throws WxErrorException {
-    List<WxMaGetLiveInfo.RoomInfo> results = new ArrayList<>();
+  public WxMaLiveResult getLiveInfo(Integer start, Integer limit) throws WxErrorException {
+    JsonObject jsonObject = getJsonObject(start, limit, null);
+    return WxMaLiveResult.fromJson(jsonObject.toString());
+  }
+
+  @Override
+  public List<WxMaLiveResult.RoomInfo> getLiveinfos() throws WxErrorException {
+    List<WxMaLiveResult.RoomInfo> results = new ArrayList<>();
     Integer start = 0;
     Integer limit = 80;
     Integer tatal = 0;
-    WxMaGetLiveInfo liveInfo = null;
+    WxMaLiveResult liveInfo = null;
     do {
       if (tatal != 0 && tatal <= start) {
         break;
@@ -62,17 +73,30 @@ public class WxMaLiveServiceImpl implements WxMaLiveService {
   }
 
   @Override
-  public WxMaGetLiveInfo getLiveReplay(String action, Integer room_id, Integer start, Integer limit) throws WxErrorException {
+  public WxMaLiveResult getLiveReplay(String action, Integer room_id, Integer start, Integer limit) throws WxErrorException {
     Map<String, Object> map = new HashMap(4);
     map.put("action", action);
     map.put("room_id", room_id);
     JsonObject jsonObject = getJsonObject(start, limit, map);
-    return WxMaGetLiveInfo.fromJson(jsonObject.toString());
+    return WxMaLiveResult.fromJson(jsonObject.toString());
   }
 
   @Override
-  public WxMaGetLiveInfo getLiveReplay(Integer room_id, Integer start, Integer limit) throws WxErrorException {
+  public WxMaLiveResult getLiveReplay(Integer room_id, Integer start, Integer limit) throws WxErrorException {
     return getLiveReplay("get_replay", room_id, start, limit);
+  }
+
+  @Override
+  public boolean addGoodsToRoom(Integer roomId, List<Integer> goodsIds) throws WxErrorException {
+    Map<String, Object> map = new HashMap<>(2);
+    map.put("roomId", roomId);
+    map.put("ids", goodsIds);
+    String responseContent = this.wxMaService.post(ADD_GOODS, WxMaGsonBuilder.create().toJson(map));
+    JsonObject jsonObject = JSON_PARSER.parse(responseContent).getAsJsonObject();
+    if (jsonObject.get("errcode").getAsInt() != 0) {
+      throw new WxErrorException(WxError.fromJson(responseContent, WxType.MiniApp));
+    }
+    return true;
   }
 
   /**
@@ -90,7 +114,7 @@ public class WxMaLiveServiceImpl implements WxMaLiveService {
     }
     map.put("start", start);
     map.put("limit", limit);
-    String responseContent = service.post(GET_LIVE_INFO, WxMaGsonBuilder.create().toJson(map));
+    String responseContent = wxMaService.post(GET_LIVE_INFO, WxMaGsonBuilder.create().toJson(map));
     JsonObject jsonObject = JSON_PARSER.parse(responseContent).getAsJsonObject();
     if (jsonObject.get("errcode").getAsInt() != 0) {
       throw new WxErrorException(WxError.fromJson(responseContent, WxType.MiniApp));
