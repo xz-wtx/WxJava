@@ -10,6 +10,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.WxType;
+import me.chanjar.weixin.common.api.WxOcrService;
 import me.chanjar.weixin.common.bean.WxAccessToken;
 import me.chanjar.weixin.common.error.WxError;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -57,6 +58,7 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
   private final WxMaCloudService cloudService = new WxMaCloudServiceImpl(this);
   private final WxMaLiveService liveService = new WxMaLiveServiceImpl(this);
   private final WxMaLiveGoodsService liveGoodsService = new WxMaLiveGoodsServiceImpl(this);
+  private final WxOcrService ocrService = new WxMaOcrServiceImpl(this);
 
   private int retrySleepMillis = 1000;
   private int maxRetryTimes = 5;
@@ -399,6 +401,11 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
   @Override
   public WxMaLiveGoodsService getLiveGoodsService() {
     return this.liveGoodsService;
+  }
+
+  @Override
+  public WxOcrService getOcrService() {
+    return this.ocrService;
   }
 
 }

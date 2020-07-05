@@ -2,6 +2,7 @@ package cn.binarywang.wx.miniapp.api;
 
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.config.WxMaConfig;
+import me.chanjar.weixin.common.api.WxOcrService;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.service.WxService;
 import me.chanjar.weixin.common.util.http.MediaUploadRequestExecutor;
@@ -288,4 +289,10 @@ public interface WxMaService extends WxService {
    */
   WxMaLiveGoodsService getLiveGoodsService();
 
+  /**
+   * 获取ocr实现接口服务对象
+   *
+   * @return 。
+   */
+  WxOcrService getOcrService();
 }
