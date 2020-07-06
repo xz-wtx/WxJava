@@ -6,12 +6,12 @@ import cn.binarywang.wx.miniapp.bean.WxMaLiveInfo;
 import cn.binarywang.wx.miniapp.bean.WxMaLiveResult;
 import cn.binarywang.wx.miniapp.util.json.WxMaGsonBuilder;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.WxType;
 import me.chanjar.weixin.common.error.WxError;
 import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.common.util.json.GsonParser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,13 +28,12 @@ import java.util.Map;
 @Slf4j
 @AllArgsConstructor
 public class WxMaLiveServiceImpl implements WxMaLiveService {
-  private static final JsonParser JSON_PARSER = new JsonParser();
   private final WxMaService wxMaService;
 
   @Override
   public Integer createRoom(WxMaLiveInfo.RoomInfo roomInfo) throws WxErrorException {
     String responseContent = this.wxMaService.post(CREATE_ROOM, WxMaGsonBuilder.create().toJson(roomInfo));
-    JsonObject jsonObject = JSON_PARSER.parse(responseContent).getAsJsonObject();
+    JsonObject jsonObject = GsonParser.parse(responseContent);
     if (jsonObject.get("errcode").getAsInt() != 0) {
       throw new WxErrorException(WxError.fromJson(responseContent, WxType.MiniApp));
     }
@@ -95,7 +94,7 @@ public class WxMaLiveServiceImpl implements WxMaLiveService {
     map.put("roomId", roomId);
     map.put("ids", goodsIds);
     String responseContent = this.wxMaService.post(ADD_GOODS, WxMaGsonBuilder.create().toJson(map));
-    JsonObject jsonObject = JSON_PARSER.parse(responseContent).getAsJsonObject();
+    JsonObject jsonObject = GsonParser.parse(responseContent);
     if (jsonObject.get("errcode").getAsInt() != 0) {
       throw new WxErrorException(WxError.fromJson(responseContent, WxType.MiniApp));
     }
@@ -104,12 +103,12 @@ public class WxMaLiveServiceImpl implements WxMaLiveService {
 
   private JsonObject getLiveInfo(Integer start, Integer limit, Map<String, Object> map) throws WxErrorException {
     if (map == null) {
-      map = new HashMap<>(2);
+      map = new HashMap(2);
     }
     map.put("start", start);
     map.put("limit", limit);
     String responseContent = wxMaService.post(GET_LIVE_INFO, WxMaGsonBuilder.create().toJson(map));
-    JsonObject jsonObject = JSON_PARSER.parse(responseContent).getAsJsonObject();
+    JsonObject jsonObject = GsonParser.parse(responseContent);
     if (jsonObject.get("errcode").getAsInt() != 0) {
       throw new WxErrorException(WxError.fromJson(responseContent, WxType.MiniApp));
     }

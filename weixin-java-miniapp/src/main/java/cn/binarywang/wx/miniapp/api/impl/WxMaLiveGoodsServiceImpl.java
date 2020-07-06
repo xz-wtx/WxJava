@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import me.chanjar.weixin.common.WxType;
 import me.chanjar.weixin.common.error.WxError;
 import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.common.util.json.GsonParser;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -29,7 +30,6 @@ import java.util.Map;
  */
 @AllArgsConstructor
 public class WxMaLiveGoodsServiceImpl implements WxMaLiveGoodsService {
-  private static final JsonParser JSON_PARSER = new JsonParser();
 
   private WxMaService wxMaService;
 
@@ -38,7 +38,7 @@ public class WxMaLiveGoodsServiceImpl implements WxMaLiveGoodsService {
     Map<String, Object> map = new HashMap<>(2);
     map.put("goodsInfo", goods);
     String responseContent = this.wxMaService.post(ADD_GOODS, WxMaGsonBuilder.create().toJson(map));
-    JsonObject jsonObject = JSON_PARSER.parse(responseContent).getAsJsonObject();
+    JsonObject jsonObject = GsonParser.parse(responseContent);
     if (jsonObject.get("errcode").getAsInt() != 0) {
       throw new WxErrorException(WxError.fromJson(responseContent, WxType.MiniApp));
     }
@@ -51,7 +51,7 @@ public class WxMaLiveGoodsServiceImpl implements WxMaLiveGoodsService {
     map.put("auditId", auditId);
     map.put("goodsId", goodsId);
     String responseContent = this.wxMaService.post(RESET_AUDIT_GOODS, WxMaGsonBuilder.create().toJson(map));
-    JsonObject jsonObject = JSON_PARSER.parse(responseContent).getAsJsonObject();
+    JsonObject jsonObject = GsonParser.parse(responseContent);
     if (jsonObject.get("errcode").getAsInt() != 0) {
       throw new WxErrorException(WxError.fromJson(responseContent, WxType.MiniApp));
     }
@@ -63,7 +63,7 @@ public class WxMaLiveGoodsServiceImpl implements WxMaLiveGoodsService {
     Map<String, Integer> map = new HashMap<>(2);
     map.put("goodsId", goodsId);
     String responseContent = this.wxMaService.post(AUDIT_GOODS, WxMaGsonBuilder.create().toJson(map));
-    JsonObject jsonObject = JSON_PARSER.parse(responseContent).getAsJsonObject();
+    JsonObject jsonObject = GsonParser.parse(responseContent);
     if (jsonObject.get("errcode").getAsInt() != 0) {
       throw new WxErrorException(WxError.fromJson(responseContent, WxType.MiniApp));
     }
@@ -75,7 +75,7 @@ public class WxMaLiveGoodsServiceImpl implements WxMaLiveGoodsService {
     Map<String, Integer> map = new HashMap<>(2);
     map.put("goodsId", goodsId);
     String responseContent = this.wxMaService.post(DELETE_GOODS, WxMaGsonBuilder.create().toJson(map));
-    JsonObject jsonObject = JSON_PARSER.parse(responseContent).getAsJsonObject();
+    JsonObject jsonObject = GsonParser.parse(responseContent);
     if (jsonObject.get("errcode").getAsInt() != 0) {
       throw new WxErrorException(WxError.fromJson(responseContent, WxType.MiniApp));
     }
@@ -87,7 +87,7 @@ public class WxMaLiveGoodsServiceImpl implements WxMaLiveGoodsService {
     Map<String, Object> map = new HashMap<>(2);
     map.put("goodsInfo", goods);
     String responseContent = this.wxMaService.post(UPDATE_GOODS, WxMaGsonBuilder.create().toJson(map));
-    JsonObject jsonObject = JSON_PARSER.parse(responseContent).getAsJsonObject();
+    JsonObject jsonObject = GsonParser.parse(responseContent);
     if (jsonObject.get("errcode").getAsInt() != 0) {
       throw new WxErrorException(WxError.fromJson(responseContent, WxType.MiniApp));
     }
@@ -99,7 +99,7 @@ public class WxMaLiveGoodsServiceImpl implements WxMaLiveGoodsService {
     Map<String, Object> map = new HashMap<>(2);
     map.put("goods_ids", goodsIds);
     String responseContent = this.wxMaService.post(GET_GOODS_WARE_HOUSE, WxMaGsonBuilder.create().toJson(map));
-    JsonObject jsonObject = JSON_PARSER.parse(responseContent).getAsJsonObject();
+    JsonObject jsonObject = GsonParser.parse(responseContent);
     if (jsonObject.get("errcode").getAsInt() != 0) {
       throw new WxErrorException(WxError.fromJson(responseContent, WxType.MiniApp));
     }
@@ -110,7 +110,7 @@ public class WxMaLiveGoodsServiceImpl implements WxMaLiveGoodsService {
   public WxMaLiveResult getApprovedGoods(Integer offset, Integer limit, Integer status) throws WxErrorException {
     ImmutableMap<String, ? extends Serializable> params = ImmutableMap.of("status", status, "offset", offset, "limit", limit);
     String responseContent = wxMaService.get(GET_APPROVED_GOODS, Joiner.on("&").withKeyValueSeparator("=").join(params));
-    JsonObject jsonObject = JSON_PARSER.parse(responseContent).getAsJsonObject();
+    JsonObject jsonObject = GsonParser.parse(responseContent);
     if (jsonObject.get("errcode").getAsInt() != 0) {
       throw new WxErrorException(WxError.fromJson(responseContent, WxType.MiniApp));
     }

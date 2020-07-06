@@ -3,8 +3,8 @@ package com.github.binarywang.wxpay.service.impl;
 import com.github.binarywang.wxpay.bean.WxPayApiData;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import jodd.util.Base64;
+import me.chanjar.weixin.common.util.json.GsonParser;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpStatus;
@@ -38,7 +38,6 @@ import java.nio.charset.StandardCharsets;
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
  */
 public class WxPayServiceApacheHttpImpl extends BaseWxPayServiceImpl {
-  private final static JsonParser JSON_PARSER = new JsonParser();
 
   @Override
   public byte[] postForBytes(String url, String requestStr, boolean useKey) throws WxPayException {
@@ -104,7 +103,7 @@ public class WxPayServiceApacheHttpImpl extends BaseWxPayServiceImpl {
         return responseString;
       } else {
         //有错误提示信息返回
-        JsonObject jsonObject = JSON_PARSER.parse(responseString).getAsJsonObject();
+        JsonObject jsonObject = GsonParser.parse(responseString);
         throw new WxPayException(jsonObject.get("message").getAsString());
       }
     } catch (Exception e) {
@@ -132,7 +131,7 @@ public class WxPayServiceApacheHttpImpl extends BaseWxPayServiceImpl {
         return responseString;
       } else {
         //有错误提示信息返回
-        JsonObject jsonObject = JSON_PARSER.parse(responseString).getAsJsonObject();
+        JsonObject jsonObject = GsonParser.parse(responseString);
         throw new WxPayException(jsonObject.get("message").getAsString());
       }
     } catch (Exception e) {

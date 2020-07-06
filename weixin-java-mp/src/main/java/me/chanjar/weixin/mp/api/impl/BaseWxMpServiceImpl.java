@@ -3,9 +3,7 @@ package me.chanjar.weixin.mp.api.impl;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +21,7 @@ import me.chanjar.weixin.common.util.DataUtils;
 import me.chanjar.weixin.common.util.RandomUtils;
 import me.chanjar.weixin.common.util.crypto.SHA1;
 import me.chanjar.weixin.common.util.http.*;
+import me.chanjar.weixin.common.util.json.GsonParser;
 import me.chanjar.weixin.common.util.json.WxGsonBuilder;
 import me.chanjar.weixin.mp.api.*;
 import me.chanjar.weixin.mp.bean.WxMpSemanticQuery;
@@ -48,7 +47,7 @@ import static me.chanjar.weixin.mp.enums.WxMpApiUrl.Other.*;
  */
 @Slf4j
 public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestHttp<H, P> {
-  private static final JsonParser JSON_PARSER = new JsonParser();
+
 
   protected WxSessionManager sessionManager = new StandardSessionManager();
   private WxMpKefuService kefuService = new WxMpKefuServiceImpl(this);
@@ -111,7 +110,7 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
       if (this.getWxMpConfigStorage().isTicketExpired(type)) {
         String responseContent = execute(SimpleGetRequestExecutor.create(this),
           GET_TICKET_URL.getUrl(this.getWxMpConfigStorage()) + type.getCode(), null);
-        JsonObject tmpJsonObject = JSON_PARSER.parse(responseContent).getAsJsonObject();
+        JsonObject tmpJsonObject = GsonParser.parse(responseContent);
         String jsapiTicket = tmpJsonObject.get("ticket").getAsString();
         int expiresInSeconds = tmpJsonObject.get("expires_in").getAsInt();
         this.getWxMpConfigStorage().updateTicket(type, jsapiTicket, expiresInSeconds);
@@ -166,8 +165,7 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
     o.addProperty("action", "long2short");
     o.addProperty("long_url", longUrl);
     String responseContent = this.post(SHORTURL_API_URL, o.toString());
-    JsonElement tmpJsonElement = JSON_PARSER.parse(responseContent);
-    return tmpJsonElement.getAsJsonObject().get("short_url").getAsString();
+    return GsonParser.parse(responseContent).get("short_url").getAsString();
   }
 
   @Override
@@ -245,8 +243,8 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
   @Override
   public String[] getCallbackIP() throws WxErrorException {
     String responseContent = this.get(GET_CALLBACK_IP_URL, null);
-    JsonElement tmpJsonElement = JSON_PARSER.parse(responseContent);
-    JsonArray ipList = tmpJsonElement.getAsJsonObject().get("ip_list").getAsJsonArray();
+    JsonObject tmpJsonObject = GsonParser.parse(responseContent);
+    JsonArray ipList = tmpJsonObject.get("ip_list").getAsJsonArray();
     String[] ipArray = new String[ipList.size()];
     for (int i = 0; i < ipList.size(); i++) {
       ipArray[i] = ipList.get(i).getAsString();
@@ -434,7 +432,11 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
   @Override
   public void addConfigStorage(String mpId, WxMpConfigStorage configStorages) {
     synchronized (this) {
-      this.configStorageMap.put(mpId, configStorages);
+      if (this.configStorageMap == null) {
+        this.setWxMpConfigStorage(configStorages);
+      } else {
+        this.configStorageMap.put(mpId, configStorages);
+      }
     }
   }
 

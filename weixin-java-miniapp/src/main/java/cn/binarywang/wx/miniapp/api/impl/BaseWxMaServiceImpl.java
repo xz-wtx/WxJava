@@ -7,7 +7,6 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.WxType;
 import me.chanjar.weixin.common.api.WxOcrService;
@@ -20,6 +19,7 @@ import me.chanjar.weixin.common.util.http.RequestExecutor;
 import me.chanjar.weixin.common.util.http.RequestHttp;
 import me.chanjar.weixin.common.util.http.SimpleGetRequestExecutor;
 import me.chanjar.weixin.common.util.http.SimplePostRequestExecutor;
+import me.chanjar.weixin.common.util.json.GsonParser;
 import me.chanjar.weixin.common.util.json.WxGsonBuilder;
 import org.apache.commons.lang3.StringUtils;
 
@@ -37,7 +37,7 @@ import static cn.binarywang.wx.miniapp.constant.WxMaConstants.ErrorCode.*;
  */
 @Slf4j
 public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestHttp<H, P> {
-  private static final JsonParser JSON_PARSER = new JsonParser();
+
   private WxMaConfig wxMaConfig;
 
   private final WxMaMsgService kefuService = new WxMaMsgServiceImpl(this);
@@ -94,7 +94,7 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
       throw new WxErrorException(error);
     }
 
-    return JSON_PARSER.parse(responseContent).getAsJsonObject().get("unionid").getAsString();
+    return GsonParser.parse(responseContent).get("unionid").getAsString();
   }
 
   @Override
