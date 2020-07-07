@@ -49,8 +49,16 @@ public class WxMaLiveResult implements Serializable {
     private static final long serialVersionUID = 5769245932149287574L;
     @SerializedName("goods_id")
     private Integer goodsId;
+    /**
+     * 获取商品列表返回的商品图片
+     */
     @SerializedName("cover_img_url")
     private String coverImgUrl;
+    /**
+     * 获取直播间列表返回的商品图片
+     */
+    @SerializedName("cover_img")
+    private String coverImg;
     private String name;
     private String url;
     @SerializedName("price_type")
@@ -76,7 +84,8 @@ public class WxMaLiveResult implements Serializable {
   public static class RoomInfo implements Serializable {
     private static final long serialVersionUID = 7745775280267417154L;
     private String name;
-    private Integer roomid;
+    @SerializedName("roomid")
+    private Integer roomId;
     @SerializedName("cover_img")
     private String coverImg;
     @SerializedName("share_img")
@@ -102,7 +111,7 @@ public class WxMaLiveResult implements Serializable {
     private Integer closeGoods;
     @SerializedName("close_comment")
     private Integer closeComment;
-    private List<WxMaLiveInfo.Goods> goods;
+    private List<Goods> goods;
   }
 
   /**
