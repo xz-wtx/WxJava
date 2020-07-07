@@ -21,10 +21,6 @@ public class WxMaRedisBetterConfigImpl extends WxMaDefaultConfigImpl {
   private volatile String accessTokenKey;
   private volatile String lockKey;
 
-  public WxMaRedisBetterConfigImpl(JedisPool jedisPool) {
-    this(new JedisWxRedisOps(jedisPool), "wa");
-  }
-
   public WxMaRedisBetterConfigImpl(WxRedisOps redisOps, String keyPrefix) {
     this.redisOps = redisOps;
     this.keyPrefix = keyPrefix;
