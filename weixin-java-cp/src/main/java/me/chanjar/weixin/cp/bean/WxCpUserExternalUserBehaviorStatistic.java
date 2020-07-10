@@ -56,8 +56,8 @@ public class WxCpUserExternalUserBehaviorStatistic extends WxCpBaseResp {
     /**
      * 删除/拉黑成员的客户数，即将成员删除或加入黑名单的客户数。
      */
-    @SerializedName("negative_fee_back_cnt")
-    private int negativeFeeBackCnt;
+    @SerializedName("negative_feedback_cnt")
+    private int negativeFeedbackCnt;
 
     /**
      * 发起申请数，成员通过「搜索手机号」、「扫一扫」、「从微信好友中添加」、「从群聊中添加」、「添加共享、分配给我的客户」、「添加单向、双向删除好友关系的好友」、「从新的联系人推荐中添加」等渠道主动向客户发起的好友申请数量。
