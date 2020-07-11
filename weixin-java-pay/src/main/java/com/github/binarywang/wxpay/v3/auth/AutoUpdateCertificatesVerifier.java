@@ -25,6 +25,7 @@ import java.security.cert.CertificateExpiredException;
 import java.security.cert.CertificateNotYetValidException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -148,30 +149,32 @@ public class AutoUpdateCertificatesVerifier implements Verifier {
    * 反序列化证书并解密
    */
   private List<X509Certificate> deserializeToCerts(byte[] apiV3Key, String body) throws GeneralSecurityException, IOException {
-    AesUtils decryptor = new AesUtils(apiV3Key);
+    AesUtils aesUtils = new AesUtils(apiV3Key);
     ObjectMapper mapper = new ObjectMapper();
     JsonNode dataNode = mapper.readTree(body).get("data");
-    List<X509Certificate> newCertList = new ArrayList<>();
-    if (dataNode != null) {
-      for (int i = 0, count = dataNode.size(); i < count; i++) {
-        JsonNode encryptCertificateNode = dataNode.get(i).get("encrypt_certificate");
-        //解密
-        String cert = decryptor.decryptToString(
-          encryptCertificateNode.get("associated_data").toString().replaceAll("\"", "")
-            .getBytes(StandardCharsets.UTF_8),
-          encryptCertificateNode.get("nonce").toString().replaceAll("\"", "")
-            .getBytes(StandardCharsets.UTF_8),
-          encryptCertificateNode.get("ciphertext").toString().replaceAll("\"", ""));
+    if (dataNode == null) {
+      return Collections.emptyList();
+    }
 
-        X509Certificate x509Cert = PemUtils
-          .loadCertificate(new ByteArrayInputStream(cert.getBytes(StandardCharsets.UTF_8)));
-        try {
-          x509Cert.checkValidity();
-        } catch (CertificateExpiredException | CertificateNotYetValidException e) {
-          continue;
-        }
-        newCertList.add(x509Cert);
+    List<X509Certificate> newCertList = new ArrayList<>();
+    for (int i = 0, count = dataNode.size(); i < count; i++) {
+      JsonNode encryptCertificateNode = dataNode.get(i).get("encrypt_certificate");
+      //解密
+      String cert = aesUtils.decryptToString(
+        encryptCertificateNode.get("associated_data").toString().replaceAll("\"", "")
+          .getBytes(StandardCharsets.UTF_8),
+        encryptCertificateNode.get("nonce").toString().replaceAll("\"", "")
+          .getBytes(StandardCharsets.UTF_8),
+        encryptCertificateNode.get("ciphertext").toString().replaceAll("\"", ""));
+
+      X509Certificate x509Cert = PemUtils
+        .loadCertificate(new ByteArrayInputStream(cert.getBytes(StandardCharsets.UTF_8)));
+      try {
+        x509Cert.checkValidity();
+      } catch (CertificateExpiredException | CertificateNotYetValidException e) {
+        continue;
       }
+      newCertList.add(x509Cert);
     }
 
     return newCertList;

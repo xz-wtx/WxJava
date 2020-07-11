@@ -64,7 +64,7 @@ public class PayScoreServiceImplTest {
   }
 
   @Test
-  public void testQueryServiceOrder() throws URISyntaxException, WxPayException {
+  public void testQueryServiceOrder() throws WxPayException {
     //两个参数选填一个
     this.payService.getPayScoreService().queryServiceOrder("11", "");
   }
