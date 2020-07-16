@@ -190,10 +190,16 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
     try {
       log.debug("微信支付异步通知请求参数：{}", xmlData);
       WxPayOrderNotifyResult result = WxPayOrderNotifyResult.fromXML(xmlData);
-      if (result.getSignType() != null) {
-        // 如果解析的通知对象中signType有值，则使用它进行验签
-        signType = result.getSignType();
+      if (signType == null) {
+        if (result.getSignType() != null) {
+          // 如果解析的通知对象中signType有值，则使用它进行验签
+          signType = result.getSignType();
+        } else if (this.getConfig().getSignType() != null) {
+          // 如果配置中signType有值，则使用它进行验签
+          signType = this.getConfig().getSignType();
+        }
       }
+
       log.debug("微信支付异步通知请求解析后的对象：{}", result);
       result.checkResult(this, signType, false);
       return result;
