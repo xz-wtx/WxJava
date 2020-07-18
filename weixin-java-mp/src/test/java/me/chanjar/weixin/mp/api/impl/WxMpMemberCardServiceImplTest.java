@@ -7,7 +7,7 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.test.ApiTestModule;
 import me.chanjar.weixin.mp.bean.card.*;
 import me.chanjar.weixin.mp.bean.card.enums.CardSceneType;
-import me.chanjar.weixin.mp.bean.membercard.*;
+import me.chanjar.weixin.mp.bean.card.membercard.*;
 import org.testng.annotations.Guice;
 import org.testng.annotations.Test;
 

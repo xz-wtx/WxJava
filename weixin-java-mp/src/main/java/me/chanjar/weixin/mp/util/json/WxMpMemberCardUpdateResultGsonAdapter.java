@@ -6,7 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import me.chanjar.weixin.common.util.json.GsonHelper;
-import me.chanjar.weixin.mp.bean.membercard.WxMpMemberCardUpdateResult;
+import me.chanjar.weixin.mp.bean.card.membercard.WxMpMemberCardUpdateResult;
 
 import java.lang.reflect.Type;
 

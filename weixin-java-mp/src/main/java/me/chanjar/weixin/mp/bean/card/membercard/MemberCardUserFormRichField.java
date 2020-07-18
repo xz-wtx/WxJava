@@ -1,4 +1,4 @@
-package me.chanjar.weixin.mp.bean.card;
+package me.chanjar.weixin.mp.bean.card.membercard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class MemberCardUserFormRichField {
 
   public void add(String value) {
     if (valueList == null) {
-      valueList = new ArrayList<String>();
+      valueList = new ArrayList<>();
     }
     valueList.add(value);
   }

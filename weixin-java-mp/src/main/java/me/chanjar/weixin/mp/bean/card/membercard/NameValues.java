@@ -1,4 +1,4 @@
-package me.chanjar.weixin.mp.bean.membercard;
+package me.chanjar.weixin.mp.bean.card.membercard;
 
 import lombok.Data;
 

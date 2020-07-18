@@ -1,4 +1,4 @@
-package me.chanjar.weixin.mp.bean.card;
+package me.chanjar.weixin.mp.bean.card.membercard;
 
 import java.io.Serializable;
 

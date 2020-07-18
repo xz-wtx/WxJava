@@ -1,7 +1,11 @@
-package me.chanjar.weixin.mp.bean.card;
+package me.chanjar.weixin.mp.bean.card.membercard;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
+import me.chanjar.weixin.mp.bean.card.BaseInfoUpdate;
+import me.chanjar.weixin.mp.bean.card.BonusRule;
+import me.chanjar.weixin.mp.bean.card.CustomCell1;
+import me.chanjar.weixin.mp.bean.card.CustomField;
 import me.chanjar.weixin.mp.util.json.WxMpGsonBuilder;
 
 import java.io.Serializable;

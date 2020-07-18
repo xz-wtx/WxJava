@@ -1,4 +1,4 @@
-package me.chanjar.weixin.mp.bean.card;
+package me.chanjar.weixin.mp.bean.card.membercard;
 
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
@@ -46,8 +46,9 @@ public class MemberCardActivateUserFormRequest implements Serializable {
     if (StringUtils.isAnyEmpty(name, url)) {
       return;
     }
-    if (bindOldCard == null)
+    if (bindOldCard == null) {
       bindOldCard = new JsonObject();
+    }
     bindOldCard.addProperty("name", name);
     bindOldCard.addProperty("url", url);
   }
@@ -62,8 +63,9 @@ public class MemberCardActivateUserFormRequest implements Serializable {
     if (StringUtils.isAnyEmpty(name, url)) {
       return;
     }
-    if (serviceStatement == null)
+    if (serviceStatement == null) {
       serviceStatement = new JsonObject();
+    }
     serviceStatement.addProperty("name", name);
     serviceStatement.addProperty("url", url);
   }

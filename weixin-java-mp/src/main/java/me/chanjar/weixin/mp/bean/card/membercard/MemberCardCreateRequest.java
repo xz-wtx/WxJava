@@ -1,4 +1,4 @@
-package me.chanjar.weixin.mp.bean.card;
+package me.chanjar.weixin.mp.bean.card.membercard;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
@@ -7,19 +7,19 @@ import me.chanjar.weixin.mp.util.json.WxMpGsonBuilder;
 import java.io.Serializable;
 
 /**
- * 更新会员卡请求对象.
+ * 创建会员卡请求对象.
  *
  * @author yuanqixun
  */
 @Data
-public class MemberCardUpdateRequest implements Serializable {
-  private static final long serialVersionUID = -1025759626161614466L;
+public class MemberCardCreateRequest implements Serializable {
+  private static final long serialVersionUID = -1044836608401698097L;
 
-  @SerializedName("card_id")
-  private String cardId;
+  @SerializedName("card_type")
+  private String cardType = "MEMBER_CARD";
 
   @SerializedName("member_card")
-  private MemberCardUpdate memberCardUpdate;
+  private MemberCard memberCard;
 
   @Override
   public String toString() {
