@@ -2,6 +2,7 @@ package me.chanjar.weixin.cp.bean.oa.applydata;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
  * @author element
  */
 @Data
+@Accessors(chain = true)
 public class ContentValue implements Serializable {
   private static final long serialVersionUID = -5607678965965065261L;
 
@@ -90,7 +92,7 @@ public class ContentValue implements Serializable {
   @Data
   public static class Child implements Serializable {
     private static final long serialVersionUID = -3500102073821161558L;
-    private List<Content> list;
+    private List<ApplyDataContent> list;
   }
 
 
@@ -113,7 +115,6 @@ public class ContentValue implements Serializable {
       private Long duration;
     }
   }
-
 
 
 }

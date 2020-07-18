@@ -81,12 +81,24 @@ public class WxCpOaServiceImplTest {
   }
 
   @Test
-  public void testGetTemplateDetail() throws WxErrorException{
-    String templateId="3TkZjxugodbqpEMk9j7X6h6zKqYkc7MxQrrFmT7H";
-    WxCpTemplateResult result=wxService.getOAService().getTemplateDetail(templateId);
+  public void testGetTemplateDetail() throws WxErrorException {
+    String templateId = "3TkZjxugodbqpEMk9j7X6h6zKqYkc7MxQrrFmT7H";
+    WxCpTemplateResult result = wxService.getOAService().getTemplateDetail(templateId);
     assertThat(result).isNotNull();
     System.out.println("result ");
     System.out.println(gson.toJson(result));
   }
 
+  @Test
+  public void testApply() throws WxErrorException {
+    this.wxService.getOAService().apply(new WxCpOaApplyEventRequest().setCreatorUserId("123"));
+  }
+
+  @Test
+  public void testGetApprovalData() {
+  }
+
+  @Test
+  public void testGetDialRecord() {
+  }
 }

@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @author element
  */
 @Data
-public class WxCpApprovalApplyer extends WxCpOperator implements Serializable {
+public class WxCpApprovalApplier extends WxCpOperator implements Serializable {
 
   private static final long serialVersionUID = -8974662568286821271L;
 

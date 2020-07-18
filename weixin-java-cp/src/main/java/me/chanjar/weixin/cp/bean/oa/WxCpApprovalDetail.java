@@ -49,7 +49,7 @@ public class WxCpApprovalDetail implements Serializable {
    * 申请人信息
    */
   @SerializedName("applyer")
-  private WxCpApprovalApplyer applier;
+  private WxCpApprovalApplier applier;
 
   /**
    * 审批流程信息，可能有多个审批节点
