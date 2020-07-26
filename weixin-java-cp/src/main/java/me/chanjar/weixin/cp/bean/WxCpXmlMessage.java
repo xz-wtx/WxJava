@@ -405,8 +405,7 @@ public class WxCpXmlMessage implements Serializable {
 
 
   @XStreamAlias("ApprovalInfo")
-  private ApprovalInfo approvalInfo=new ApprovalInfo();
-
+  private ApprovalInfo approvalInfo = new ApprovalInfo();
 
 
   protected static WxCpXmlMessage fromXml(String xml) {
@@ -466,7 +465,8 @@ public class WxCpXmlMessage implements Serializable {
   }
 
   @Data
-  public static class ExtAttr {
+  public static class ExtAttr implements Serializable {
+    private static final long serialVersionUID = -3418685294606228837L;
 
     @XStreamImplicit(itemFieldName = "Item")
     protected final List<Item> items = new ArrayList<>();
@@ -486,7 +486,9 @@ public class WxCpXmlMessage implements Serializable {
 
   @Data
   @XStreamAlias("SendPicsInfo")
-  public static class SendPicsInfo {
+  public static class SendPicsInfo implements Serializable {
+    private static final long serialVersionUID = -6549728838848064881L;
+
     @XStreamAlias("PicList")
     protected final List<Item> picList = new ArrayList<>();
 
@@ -504,7 +506,8 @@ public class WxCpXmlMessage implements Serializable {
 
   @Data
   @XStreamAlias("SendLocationInfo")
-  public static class SendLocationInfo {
+  public static class SendLocationInfo implements Serializable {
+    private static final long serialVersionUID = 6319921071637597406L;
 
     @XStreamAlias("Location_X")
     @XStreamConverter(value = XStreamCDataConverter.class)
@@ -530,7 +533,8 @@ public class WxCpXmlMessage implements Serializable {
 
   @XStreamAlias("ApprovalInfo")
   @Data
-  public static class ApprovalInfo {
+  public static class ApprovalInfo implements Serializable {
+    private static final long serialVersionUID = 8136329462880646091L;
 
     /**
      * 审批编号
@@ -551,7 +555,7 @@ public class WxCpXmlMessage implements Serializable {
     /**
      * 审批模板id。
      */
-    @XStreamAlias("templateId")
+    @XStreamAlias("TemplateId")
     private String templateId;
     /**
      * 审批申请提交时间,Unix时间戳
@@ -563,18 +567,20 @@ public class WxCpXmlMessage implements Serializable {
      * 申请人信息
      */
     @XStreamAlias("Applyer")
-    private Applyer applyer;
+    private Applier applier;
     /**
      * 审批申请单变化类型
      */
     @XStreamAlias("StatuChangeEvent")
-    private Integer statuChangeEvent;
+    private Integer statusChangeEvent;
 
     @XStreamAlias("Applyer")
     @Data
-    public static class Applyer {
+    public static class Applier implements Serializable {
+      private static final long serialVersionUID = -979255011922209018L;
+
       @XStreamAlias("Applyer")
-      private String UserId;
+      private String userId;
       @XStreamAlias("Party")
       private String party;
     }
