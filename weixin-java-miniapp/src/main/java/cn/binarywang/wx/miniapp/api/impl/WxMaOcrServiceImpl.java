@@ -43,7 +43,7 @@ public class WxMaOcrServiceImpl implements WxOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.mainService.get(String.format(IDCARD, imgUrl), null);
+    final String result = this.mainService.post(String.format(IDCARD, imgUrl), null);
     return WxOcrIdCardResult.fromJson(result);
   }
 
@@ -62,7 +62,7 @@ public class WxMaOcrServiceImpl implements WxOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.mainService.get(String.format(BANK_CARD, imgUrl), null);
+    final String result = this.mainService.post(String.format(BANK_CARD, imgUrl), null);
     return WxOcrBankCardResult.fromJson(result);
   }
 
@@ -81,7 +81,7 @@ public class WxMaOcrServiceImpl implements WxOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.mainService.get(String.format(DRIVING, imgUrl), null);
+    final String result = this.mainService.post(String.format(DRIVING, imgUrl), null);
     return WxOcrDrivingResult.fromJson(result);
   }
 
@@ -100,7 +100,7 @@ public class WxMaOcrServiceImpl implements WxOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.mainService.get(String.format(DRIVING_LICENSE, imgUrl), null);
+    final String result = this.mainService.post(String.format(DRIVING_LICENSE, imgUrl), null);
     return WxOcrDrivingLicenseResult.fromJson(result);
   }
 
@@ -119,7 +119,7 @@ public class WxMaOcrServiceImpl implements WxOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.mainService.get(String.format(BIZ_LICENSE, imgUrl), null);
+    final String result = this.mainService.post(String.format(BIZ_LICENSE, imgUrl), null);
     return WxOcrBizLicenseResult.fromJson(result);
   }
 
@@ -138,7 +138,7 @@ public class WxMaOcrServiceImpl implements WxOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.mainService.get(String.format(COMM, imgUrl), null);
+    final String result = this.mainService.post(String.format(COMM, imgUrl), null);
     return WxOcrCommResult.fromJson(result);
   }
 

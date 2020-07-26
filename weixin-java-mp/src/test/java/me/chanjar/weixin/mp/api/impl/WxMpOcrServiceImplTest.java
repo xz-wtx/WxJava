@@ -153,13 +153,13 @@ public class WxMpOcrServiceImplTest {
   }
 
   public static class MockTest {
-    private WxMpService wxService = mock(WxMpService.class);
+    private final WxMpService wxService = mock(WxMpService.class);
 
     @Test
     public void testIdCard() throws Exception {
       String returnJson = "{\"type\":\"Back\",\"name\":\"张三\",\"id\":\"110101199909090099\",\"valid_date\":\"20110101-20210201\"}";
 
-      when(wxService.get(anyString(), anyString())).thenReturn(returnJson);
+      when(wxService.post(anyString(), anyString())).thenReturn(returnJson);
       final WxMpOcrServiceImpl wxMpOcrService = new WxMpOcrServiceImpl(wxService);
 
       final WxOcrIdCardResult result = wxMpOcrService.idCard("abc");
@@ -171,7 +171,7 @@ public class WxMpOcrServiceImplTest {
     public void testBankCard() throws Exception {
       String returnJson = "{\"number\":\"24234234345234\"}";
 
-      when(wxService.get(anyString(), anyString())).thenReturn(returnJson);
+      when(wxService.post(anyString(), anyString())).thenReturn(returnJson);
       final WxMpOcrServiceImpl wxMpOcrService = new WxMpOcrServiceImpl(wxService);
 
       final WxOcrBankCardResult result = wxMpOcrService.bankCard("abc");
@@ -246,7 +246,7 @@ public class WxMpOcrServiceImplTest {
         "    }\n" +
         "}";
 
-      when(wxService.get(anyString(), anyString())).thenReturn(returnJson);
+      when(wxService.post(anyString(), anyString())).thenReturn(returnJson);
       final WxMpOcrServiceImpl wxMpOcrService = new WxMpOcrServiceImpl(wxService);
 
       final WxOcrDrivingResult result = wxMpOcrService.driving("abc");
@@ -271,7 +271,7 @@ public class WxMpOcrServiceImplTest {
         "    \"valid_to\": \"2020-07-01\", //有效期限终止日\n" +
         "    \"official_seal\": \"xx市公安局公安交通管理局\" //印章文字\n" +
         "}";
-      when(wxService.get(anyString(), anyString())).thenReturn(returnJson);
+      when(wxService.post(anyString(), anyString())).thenReturn(returnJson);
       final WxMpOcrServiceImpl wxMpOcrService = new WxMpOcrServiceImpl(wxService);
 
       final WxOcrDrivingLicenseResult result = wxMpOcrService.drivingLicense("abc");
@@ -321,7 +321,7 @@ public class WxMpOcrServiceImplTest {
         "        \"h\": 728\n" +
         "    }\n" +
         "}";
-      when(wxService.get(anyString(), anyString())).thenReturn(returnJson);
+      when(wxService.post(anyString(), anyString())).thenReturn(returnJson);
       final WxMpOcrServiceImpl wxMpOcrService = new WxMpOcrServiceImpl(wxService);
 
       final WxOcrBizLicenseResult result = wxMpOcrService.bizLicense("abc");
@@ -383,7 +383,7 @@ public class WxMpOcrServiceImplTest {
         "        \"h\": 720\n" +
         "    }\n" +
         "}";
-      when(wxService.get(anyString(), anyString())).thenReturn(returnJson);
+      when(wxService.post(anyString(), anyString())).thenReturn(returnJson);
       final WxMpOcrServiceImpl wxMpOcrService = new WxMpOcrServiceImpl(wxService);
 
       final WxOcrCommResult result = wxMpOcrService.comm("abc");

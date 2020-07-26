@@ -48,7 +48,7 @@ public class WxMpOcrServiceImpl implements WxOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.mainService.get(String.format(IDCARD.getUrl(this.mainService.getWxMpConfigStorage()),
+    final String result = this.mainService.post(String.format(IDCARD.getUrl(this.mainService.getWxMpConfigStorage()),
       imgUrl), null);
     return WxOcrIdCardResult.fromJson(result);
   }
@@ -68,7 +68,7 @@ public class WxMpOcrServiceImpl implements WxOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.mainService.get(String.format(BANK_CARD.getUrl(this.mainService.getWxMpConfigStorage()),
+    final String result = this.mainService.post(String.format(BANK_CARD.getUrl(this.mainService.getWxMpConfigStorage()),
       imgUrl), null);
     return WxOcrBankCardResult.fromJson(result);
   }
@@ -88,7 +88,7 @@ public class WxMpOcrServiceImpl implements WxOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.mainService.get(String.format(DRIVING.getUrl(this.mainService.getWxMpConfigStorage()),
+    final String result = this.mainService.post(String.format(DRIVING.getUrl(this.mainService.getWxMpConfigStorage()),
       imgUrl), null);
     return WxOcrDrivingResult.fromJson(result);
   }
@@ -108,7 +108,7 @@ public class WxMpOcrServiceImpl implements WxOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.mainService.get(String.format(DRIVING_LICENSE.getUrl(this.mainService.getWxMpConfigStorage()),
+    final String result = this.mainService.post(String.format(DRIVING_LICENSE.getUrl(this.mainService.getWxMpConfigStorage()),
       imgUrl), null);
     return WxOcrDrivingLicenseResult.fromJson(result);
   }
@@ -128,7 +128,7 @@ public class WxMpOcrServiceImpl implements WxOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.mainService.get(String.format(BIZ_LICENSE.getUrl(this.mainService.getWxMpConfigStorage()),
+    final String result = this.mainService.post(String.format(BIZ_LICENSE.getUrl(this.mainService.getWxMpConfigStorage()),
       imgUrl), null);
     return WxOcrBizLicenseResult.fromJson(result);
   }
@@ -148,7 +148,7 @@ public class WxMpOcrServiceImpl implements WxOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.mainService.get(String.format(COMM.getUrl(this.mainService.getWxMpConfigStorage()),
+    final String result = this.mainService.post(String.format(COMM.getUrl(this.mainService.getWxMpConfigStorage()),
       imgUrl), null);
     return WxOcrCommResult.fromJson(result);
   }
