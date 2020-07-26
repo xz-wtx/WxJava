@@ -447,7 +447,8 @@ public class WxCpXmlMessage implements Serializable {
 
   @Data
   @XStreamAlias("ScanCodeInfo")
-  public static class ScanCodeInfo {
+  public static class ScanCodeInfo implements Serializable {
+    private static final long serialVersionUID = 7420078330239763395L;
 
     /**
      * 扫描类型，一般是qrcode.
