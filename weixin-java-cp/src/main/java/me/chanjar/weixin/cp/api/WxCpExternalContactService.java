@@ -255,7 +255,7 @@ public interface WxCpExternalContactService {
    * @param tagId
    * @return
    */
-  WxCpUserExternalTagGroup  getCorpTagList(String [] tagId) throws WxErrorException;
+  WxCpUserExternalTagGroupList getCorpTagList(String [] tagId) throws WxErrorException;
 
 
   /**
@@ -266,7 +266,7 @@ public interface WxCpExternalContactService {
    * @param tagGroup
    * @return
    */
-  WxCpUserExternalTagGroup  addCorpTag(WxCpUserExternalTagGroup tagGroup)throws WxErrorException;
+  WxCpUserExternalTagGroupInfo addCorpTag(WxCpUserExternalTagGroupInfo tagGroup)throws WxErrorException;
 
   /**
    * <pre>

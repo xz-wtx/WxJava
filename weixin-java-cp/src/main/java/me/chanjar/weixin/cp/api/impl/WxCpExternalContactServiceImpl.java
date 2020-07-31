@@ -225,22 +225,22 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
   }
 
   @Override
-  public WxCpUserExternalTagGroup getCorpTagList(String[] tagId) throws WxErrorException {
+  public WxCpUserExternalTagGroupList getCorpTagList(String[] tagId) throws WxErrorException {
     JsonObject json = new JsonObject();
     if(ArrayUtils.isNotEmpty(tagId)){
       json.add("tag_id",new Gson().toJsonTree(tagId).getAsJsonArray());
     }
     final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GET_CORP_TAG_LIST);
     final String result = this.mainService.post(url,json.toString());
-    return WxCpUserExternalTagGroup.fromJson(result);
+    return WxCpUserExternalTagGroupList.fromJson(result);
   }
 
   @Override
-  public WxCpUserExternalTagGroup addCorpTag(WxCpUserExternalTagGroup tagGroup) throws WxErrorException{
+  public WxCpUserExternalTagGroupInfo addCorpTag(WxCpUserExternalTagGroupInfo tagGroup) throws WxErrorException{
 
     final String url = this.mainService.getWxCpConfigStorage().getApiUrl(ADD_CORP_TAG);
     final String result = this.mainService.post(url,tagGroup.toJson());
-    return WxCpUserExternalTagGroup.fromJson(result);
+    return WxCpUserExternalTagGroupInfo.fromJson(result);
   }
 
   @Override

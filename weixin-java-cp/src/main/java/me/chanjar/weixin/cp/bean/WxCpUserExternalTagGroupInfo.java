@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class WxCpUserExternalTagGroup extends WxCpBaseResp {
+public class WxCpUserExternalTagGroupInfo extends WxCpBaseResp {
 
   @SerializedName("group_id")
   private String groupId;
@@ -63,7 +63,7 @@ public class WxCpUserExternalTagGroup extends WxCpBaseResp {
     return WxGsonBuilder.create().toJson(this);
   }
 
-  public static WxCpUserExternalTagGroup fromJson(String json) {
-    return WxCpGsonBuilder.create().fromJson(json, WxCpUserExternalTagGroup.class);
+  public static WxCpUserExternalTagGroupInfo fromJson(String json) {
+    return WxCpGsonBuilder.create().fromJson(json, WxCpUserExternalTagGroupInfo.class);
   }
 }

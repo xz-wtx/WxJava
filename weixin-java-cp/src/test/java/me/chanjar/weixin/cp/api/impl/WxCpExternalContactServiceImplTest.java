@@ -5,10 +5,7 @@ import com.google.inject.Inject;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.api.ApiTestModule;
 import me.chanjar.weixin.cp.api.WxCpService;
-import me.chanjar.weixin.cp.bean.WxCpBaseResp;
-import me.chanjar.weixin.cp.bean.WxCpContactWayInfo;
-import me.chanjar.weixin.cp.bean.WxCpUserExternalContactInfo;
-import me.chanjar.weixin.cp.bean.WxCpUserExternalTagGroup;
+import me.chanjar.weixin.cp.bean.*;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.testng.annotations.Guice;
 import org.testng.annotations.Test;
@@ -110,7 +107,7 @@ public class WxCpExternalContactServiceImplTest {
   @Test
   public void testGetCorpTagList() throws WxErrorException {
     String tag[]={};
-    WxCpUserExternalTagGroup result = this.wxCpService.getExternalContactService().getCorpTagList(null);
+    WxCpUserExternalTagGroupList result = this.wxCpService.getExternalContactService().getCorpTagList(null);
     System.out.println(result);
     assertNotNull(result);
   }
@@ -118,19 +115,18 @@ public class WxCpExternalContactServiceImplTest {
   @Test
   public void testAddCorpTag() throws WxErrorException {
 
-    List<WxCpUserExternalTagGroup.Tag> list = new ArrayList<>();
-
-    WxCpUserExternalTagGroup.Tag  tag = new  WxCpUserExternalTagGroup.Tag();
-    tag.setName("测试标签1");
+    List<WxCpUserExternalTagGroupInfo.Tag> list = new ArrayList<>();
+    WxCpUserExternalTagGroupInfo.Tag  tag = new  WxCpUserExternalTagGroupInfo.Tag();
+    tag.setName("测试标签2");
     tag.setOrder(1);
     list.add(tag);
 
-    WxCpUserExternalTagGroup tagGroup = new WxCpUserExternalTagGroup();
+    WxCpUserExternalTagGroupInfo tagGroup = new WxCpUserExternalTagGroupInfo();
     tagGroup.setGroupName("其他");
     tagGroup.setOrder(1);
     tagGroup.setTag(list);
 
-    WxCpUserExternalTagGroup result = this.wxCpService.getExternalContactService().addCorpTag(tagGroup);
+    WxCpUserExternalTagGroupInfo result = this.wxCpService.getExternalContactService().addCorpTag(tagGroup);
 
 
 
@@ -141,7 +137,7 @@ public class WxCpExternalContactServiceImplTest {
   @Test
   public void testEditCorpTag() throws WxErrorException {
 
-    WxCpBaseResp result = this.wxCpService.getExternalContactService().editCorpTag("et2omCCwAArxYqGJQn4MNMS_zQKhIUfQ", "未知", 2);
+    WxCpBaseResp result = this.wxCpService.getExternalContactService().editCorpTag("et2omCCwAA6PtGsfeEOQMENl3Ub1FA6A", "未知6", 2);
 
     System.out.println(result);
     assertNotNull(result);
@@ -150,7 +146,7 @@ public class WxCpExternalContactServiceImplTest {
   @Test
   public void testDelCorpTag() throws WxErrorException {
 
-    String tagId[] = {"et2omCCwAArxYqGJQn4MNMS_zQKhIUfQ"};
+    String tagId[] = {"et2omCCwAA6PtGsfeEOQMENl3Ub1FA6A"};
     String groupId[] = {};
 
     WxCpBaseResp result = this.wxCpService.getExternalContactService().delCorpTag(tagId,groupId);
