@@ -150,8 +150,8 @@
 
 #### 其他：
 - 高善人力资源
-- [小猪餐餐](http://www.xzcancan.com/)
-- [餐饮系统](http://canyin.daydao.com)
+- 小猪餐餐
+- 餐饮系统
 - 微信公众号管理系统：http://demo.joolun.com
 - 锐捷网络：Saleslink
 
