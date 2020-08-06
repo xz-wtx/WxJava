@@ -15,24 +15,35 @@ import java.util.List;
 @Setter
 public class WxCpUserExternalTagGroupInfo extends WxCpBaseResp {
 
-  @SerializedName("group_id")
-  private String groupId;
+  @SerializedName("tag_group")
+  private TagGroup tagGroup;
 
-  @SerializedName("group_name")
-  private String groupName;
+  @Getter
+  @Setter
+  public static class TagGroup {
 
-  @SerializedName("create_time")
-  private Long createTime;
+    @SerializedName("group_id")
+    private String groupId;
 
-  @SerializedName("order")
-  private Integer order;
+    @SerializedName("group_name")
+    private String groupName;
 
-  @SerializedName("deleted")
-  private Boolean deleted;
+    @SerializedName("create_time")
+    private Long createTime;
 
+    @SerializedName("order")
+    private Integer order;
 
-  @SerializedName("tag")
-  private List<Tag> tag;
+    @SerializedName("deleted")
+    private Boolean deleted;
+
+    @SerializedName("tag")
+    private List<Tag> tag;
+
+    public String toJson() {
+      return WxGsonBuilder.create().toJson(this);
+    }
+  }
 
   @Getter
   @Setter

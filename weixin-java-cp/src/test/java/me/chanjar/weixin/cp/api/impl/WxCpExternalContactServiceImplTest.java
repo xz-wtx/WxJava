@@ -117,20 +117,20 @@ public class WxCpExternalContactServiceImplTest {
 
     List<WxCpUserExternalTagGroupInfo.Tag> list = new ArrayList<>();
     WxCpUserExternalTagGroupInfo.Tag  tag = new  WxCpUserExternalTagGroupInfo.Tag();
-    tag.setName("测试标签2");
+    tag.setName("测试标签20");
     tag.setOrder(1);
     list.add(tag);
 
-    WxCpUserExternalTagGroupInfo tagGroup = new WxCpUserExternalTagGroupInfo();
+    WxCpUserExternalTagGroupInfo tagGroupInfo = new WxCpUserExternalTagGroupInfo();
+    WxCpUserExternalTagGroupInfo.TagGroup tagGroup = new WxCpUserExternalTagGroupInfo.TagGroup();
     tagGroup.setGroupName("其他");
     tagGroup.setOrder(1);
     tagGroup.setTag(list);
+    tagGroupInfo.setTagGroup(tagGroup);
 
-    WxCpUserExternalTagGroupInfo result = this.wxCpService.getExternalContactService().addCorpTag(tagGroup);
+    WxCpUserExternalTagGroupInfo result = this.wxCpService.getExternalContactService().addCorpTag(tagGroupInfo);
 
-
-
-    System.out.println(result);
+    System.out.println(result.toJson());
     assertNotNull(result);
   }
 
@@ -146,8 +146,8 @@ public class WxCpExternalContactServiceImplTest {
   @Test
   public void testDelCorpTag() throws WxErrorException {
 
-    String tagId[] = {"et2omCCwAA6PtGsfeEOQMENl3Ub1FA6A"};
-    String groupId[] = {};
+    String tagId[] = {};
+    String groupId[] = {"et2omCCwAAM3WzL00QpK9xARab3HGkAg"};
 
     WxCpBaseResp result = this.wxCpService.getExternalContactService().delCorpTag(tagId,groupId);
 
