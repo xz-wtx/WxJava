@@ -6,6 +6,7 @@ import com.github.binarywang.wxpay.v3.auth.*;
 import com.github.binarywang.wxpay.v3.util.PemUtils;
 import jodd.util.ResourcesUtil;
 import lombok.Data;
+import lombok.SneakyThrows;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -167,6 +168,15 @@ public class WxPayConfig {
     }
 
     return this.payBaseUrl;
+  }
+
+  @SneakyThrows
+  public Verifier getVerifier() {
+    if (verifier == null) {
+      //当改对象为null时，初始化api v3的请求头
+      initApiV3HttpClient();
+    }
+    return verifier;
   }
 
   /**
