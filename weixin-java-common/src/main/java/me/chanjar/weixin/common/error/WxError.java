@@ -2,7 +2,7 @@ package me.chanjar.weixin.common.error;
 
 import lombok.Builder;
 import lombok.Data;
-import me.chanjar.weixin.common.WxType;
+import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.util.json.WxGsonBuilder;
 import org.apache.commons.lang3.StringUtils;
 

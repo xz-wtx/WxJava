@@ -7,7 +7,7 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.imgproc.WxMpImgProcAiCropResult;
 import me.chanjar.weixin.mp.bean.imgproc.WxMpImgProcQrCodeResult;
 import me.chanjar.weixin.mp.bean.imgproc.WxMpImgProcSuperResolutionResult;
-import me.chanjar.weixin.mp.util.requestexecuter.ocr.OcrDiscernRequestExecutor;
+import me.chanjar.weixin.common.requestexecuter.ocr.OcrDiscernRequestExecutor;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;

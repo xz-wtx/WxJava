@@ -1,4 +1,4 @@
-package me.chanjar.weixin.common;
+package me.chanjar.weixin.common.enums;
 
 /**
  * <pre>

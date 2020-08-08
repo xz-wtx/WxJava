@@ -10,7 +10,7 @@ import me.chanjar.weixin.common.bean.ocr.WxOcrCommResult;
 import me.chanjar.weixin.common.bean.ocr.WxOcrDrivingLicenseResult;
 import me.chanjar.weixin.common.bean.ocr.WxOcrDrivingResult;
 import me.chanjar.weixin.common.bean.ocr.WxOcrIdCardResult;
-import me.chanjar.weixin.mp.util.requestexecuter.ocr.OcrDiscernRequestExecutor;
+import me.chanjar.weixin.common.requestexecuter.ocr.OcrDiscernRequestExecutor;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;

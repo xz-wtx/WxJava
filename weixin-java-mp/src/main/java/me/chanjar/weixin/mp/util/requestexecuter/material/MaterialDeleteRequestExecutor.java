@@ -2,7 +2,7 @@ package me.chanjar.weixin.mp.util.requestexecuter.material;
 
 import java.io.IOException;
 
-import me.chanjar.weixin.common.WxType;
+import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.util.http.RequestExecutor;
 import me.chanjar.weixin.common.util.http.RequestHttp;

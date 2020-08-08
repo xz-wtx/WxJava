@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.api.WxOcrService;
 import me.chanjar.weixin.common.bean.ocr.*;
 import me.chanjar.weixin.common.error.WxErrorException;
-import me.chanjar.weixin.mp.util.requestexecuter.ocr.OcrDiscernRequestExecutor;
+import me.chanjar.weixin.common.requestexecuter.ocr.OcrDiscernRequestExecutor;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;

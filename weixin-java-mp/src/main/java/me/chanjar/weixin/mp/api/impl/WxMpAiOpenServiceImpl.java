@@ -1,7 +1,7 @@
 package me.chanjar.weixin.mp.api.impl;
 
 import lombok.RequiredArgsConstructor;
-import me.chanjar.weixin.common.WxType;
+import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.error.WxError;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.util.json.GsonParser;
@@ -23,7 +23,6 @@ import static me.chanjar.weixin.mp.enums.WxMpApiUrl.AiOpen.*;
  */
 @RequiredArgsConstructor
 public class WxMpAiOpenServiceImpl implements WxMpAiOpenService {
-
   private final WxMpService wxMpService;
 
   @Override
