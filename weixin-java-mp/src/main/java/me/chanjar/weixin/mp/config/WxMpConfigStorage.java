@@ -1,9 +1,9 @@
 package me.chanjar.weixin.mp.config;
 
 import me.chanjar.weixin.common.bean.WxAccessToken;
+import me.chanjar.weixin.common.enums.TicketType;
 import me.chanjar.weixin.common.util.http.apache.ApacheHttpClientBuilder;
 import me.chanjar.weixin.mp.bean.WxMpHostConfig;
-import me.chanjar.weixin.common.enums.TicketType;
 
 import java.io.File;
 import java.util.concurrent.locks.Lock;
@@ -14,10 +14,25 @@ import java.util.concurrent.locks.Lock;
  * @author chanjarster
  */
 public interface WxMpConfigStorage {
+  /**
+   * Gets access token.
+   *
+   * @return the access token
+   */
   String getAccessToken();
 
+  /**
+   * Gets access token lock.
+   *
+   * @return the access token lock
+   */
   Lock getAccessTokenLock();
 
+  /**
+   * Is access token expired boolean.
+   *
+   * @return the boolean
+   */
   boolean isAccessTokenExpired();
 
   /**
@@ -40,14 +55,34 @@ public interface WxMpConfigStorage {
    */
   void updateAccessToken(String accessToken, int expiresInSeconds);
 
+  /**
+   * Gets ticket.
+   *
+   * @param type the type
+   * @return the ticket
+   */
   String getTicket(TicketType type);
 
+  /**
+   * Gets ticket lock.
+   *
+   * @param type the type
+   * @return the ticket lock
+   */
   Lock getTicketLock(TicketType type);
 
+  /**
+   * Is ticket expired boolean.
+   *
+   * @param type the type
+   * @return the boolean
+   */
   boolean isTicketExpired(TicketType type);
 
   /**
    * 强制将ticket过期掉.
+   *
+   * @param type the type
    */
   void expireTicket(TicketType type);
 
@@ -61,44 +96,115 @@ public interface WxMpConfigStorage {
    */
   void updateTicket(TicketType type, String ticket, int expiresInSeconds);
 
+  /**
+   * Gets app id.
+   *
+   * @return the app id
+   */
   String getAppId();
 
+  /**
+   * Gets secret.
+   *
+   * @return the secret
+   */
   String getSecret();
 
+  /**
+   * Gets token.
+   *
+   * @return the token
+   */
   String getToken();
 
+  /**
+   * Gets aes key.
+   *
+   * @return the aes key
+   */
   String getAesKey();
 
+  /**
+   * Gets template id.
+   *
+   * @return the template id
+   */
   String getTemplateId();
 
+  /**
+   * Gets expires time.
+   *
+   * @return the expires time
+   */
   long getExpiresTime();
 
+  /**
+   * Gets oauth 2 redirect uri.
+   *
+   * @return the oauth 2 redirect uri
+   */
   String getOauth2redirectUri();
 
+  /**
+   * Gets http proxy host.
+   *
+   * @return the http proxy host
+   */
   String getHttpProxyHost();
 
+  /**
+   * Gets http proxy port.
+   *
+   * @return the http proxy port
+   */
   int getHttpProxyPort();
 
+  /**
+   * Gets http proxy username.
+   *
+   * @return the http proxy username
+   */
   String getHttpProxyUsername();
 
+  /**
+   * Gets http proxy password.
+   *
+   * @return the http proxy password
+   */
   String getHttpProxyPassword();
 
+  /**
+   * Gets tmp dir file.
+   *
+   * @return the tmp dir file
+   */
   File getTmpDirFile();
 
   /**
    * http client builder.
    *
-   * @return ApacheHttpClientBuilder
+   * @return ApacheHttpClientBuilder apache http client builder
    */
   ApacheHttpClientBuilder getApacheHttpClientBuilder();
 
   /**
    * 是否自动刷新token.
+   *
+   * @return the boolean
    */
   boolean autoRefreshToken();
 
   /**
    * 得到微信接口地址域名部分的自定义设置信息.
+   *
+   * @return the host config
    */
   WxMpHostConfig getHostConfig();
+
+  /**
+   * 设置微信接口地址域名部分的自定义设置信息.
+   *
+   * @param hostConfig host config
+   */
+  void setHostConfig(WxMpHostConfig hostConfig);
 }
