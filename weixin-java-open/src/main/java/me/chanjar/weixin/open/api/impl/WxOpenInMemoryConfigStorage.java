@@ -235,8 +235,10 @@ public class WxOpenInMemoryConfigStorage implements WxOpenConfigStorage {
   }
 
   private static class WxOpenInnerConfigStorage implements WxMpConfigStorage, WxMaConfig {
-    private WxOpenConfigStorage wxOpenConfigStorage;
-    private String appId;
+    private final WxOpenConfigStorage wxOpenConfigStorage;
+    private final String appId;
+    private WxMpHostConfig hostConfig;
+
     /**
      * 小程序原始ID
      */
@@ -527,7 +529,12 @@ public class WxOpenInMemoryConfigStorage implements WxOpenConfigStorage {
 
     @Override
     public WxMpHostConfig getHostConfig() {
-      return null;
+      return this.hostConfig;
+    }
+
+    @Override
+    public void setHostConfig(WxMpHostConfig hostConfig) {
+      this.hostConfig = hostConfig;
     }
   }
 }
