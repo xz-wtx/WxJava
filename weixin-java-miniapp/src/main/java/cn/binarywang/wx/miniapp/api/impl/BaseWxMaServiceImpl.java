@@ -8,6 +8,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import lombok.extern.slf4j.Slf4j;
+import me.chanjar.weixin.common.api.WxImgProcService;
 import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.api.WxOcrService;
 import me.chanjar.weixin.common.bean.WxAccessToken;
@@ -59,6 +60,7 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
   private final WxMaLiveService liveService = new WxMaLiveServiceImpl(this);
   private final WxMaLiveGoodsService liveGoodsService = new WxMaLiveGoodsServiceImpl(this);
   private final WxOcrService ocrService = new WxMaOcrServiceImpl(this);
+  private final WxImgProcService imgProcService = new WxMaImgProcServiceImpl(this);
 
   private int retrySleepMillis = 1000;
   private int maxRetryTimes = 5;
@@ -406,6 +408,11 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
   @Override
   public WxOcrService getOcrService() {
     return this.ocrService;
+  }
+
+  @Override
+  public WxImgProcService getImgProcService() {
+    return this.imgProcService;
   }
 
 }

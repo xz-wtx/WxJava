@@ -1,9 +1,9 @@
-package me.chanjar.weixin.mp.api;
+package me.chanjar.weixin.common.api;
 
 import me.chanjar.weixin.common.error.WxErrorException;
-import me.chanjar.weixin.mp.bean.imgproc.WxMpImgProcAiCropResult;
-import me.chanjar.weixin.mp.bean.imgproc.WxMpImgProcQrCodeResult;
-import me.chanjar.weixin.mp.bean.imgproc.WxMpImgProcSuperResolutionResult;
+import me.chanjar.weixin.common.bean.imgproc.WxImgProcAiCropResult;
+import me.chanjar.weixin.common.bean.imgproc.WxImgProcQrCodeResult;
+import me.chanjar.weixin.common.bean.imgproc.WxImgProcSuperResolutionResult;
 
 import java.io.File;
 
@@ -13,7 +13,7 @@ import java.io.File;
  *
  * @author Theo Nie
  */
-public interface WxMpImgProcService {
+public interface WxImgProcService {
 
   /**
    * 二维码/条码识别接口
@@ -27,7 +27,7 @@ public interface WxMpImgProcService {
    * @return WxMpImgProcQrCodeResult
    * @throws WxErrorException .
    */
-  WxMpImgProcQrCodeResult qrCode(String imgUrl) throws WxErrorException;
+  WxImgProcQrCodeResult qrCode(String imgUrl) throws WxErrorException;
 
   /**
    * 二维码/条码识别接口
@@ -41,7 +41,7 @@ public interface WxMpImgProcService {
    * @return WxMpImgProcQrCodeResult
    * @throws WxErrorException .
    */
-  WxMpImgProcQrCodeResult qrCode(File imgFile) throws WxErrorException;
+  WxImgProcQrCodeResult qrCode(File imgFile) throws WxErrorException;
 
   /**
    * 图片高清化接口
@@ -55,7 +55,7 @@ public interface WxMpImgProcService {
    * @return WxMpImgProcSuperResolutionResult
    * @throws WxErrorException .
    */
-  WxMpImgProcSuperResolutionResult superResolution(String imgUrl) throws WxErrorException;
+  WxImgProcSuperResolutionResult superResolution(String imgUrl) throws WxErrorException;
 
   /**
    * 图片高清化接口
@@ -69,7 +69,7 @@ public interface WxMpImgProcService {
    * @return WxMpImgProcSuperResolutionResult
    * @throws WxErrorException .
    */
-  WxMpImgProcSuperResolutionResult superResolution(File imgFile) throws WxErrorException;
+  WxImgProcSuperResolutionResult superResolution(File imgFile) throws WxErrorException;
 
   /**
    * 图片智能裁剪接口
@@ -81,7 +81,7 @@ public interface WxMpImgProcService {
    * @return WxMpImgProcAiCropResult
    * @throws WxErrorException .
    */
-  WxMpImgProcAiCropResult aiCrop(String imgUrl) throws WxErrorException;
+  WxImgProcAiCropResult aiCrop(String imgUrl) throws WxErrorException;
 
   /**
    * 图片智能裁剪接口
@@ -93,7 +93,7 @@ public interface WxMpImgProcService {
    * @return WxMpImgProcAiCropResult
    * @throws WxErrorException .
    */
-  WxMpImgProcAiCropResult aiCrop(String imgUrl, String ratios) throws WxErrorException;
+  WxImgProcAiCropResult aiCrop(String imgUrl, String ratios) throws WxErrorException;
 
   /**
    * 图片智能裁剪接口
@@ -105,7 +105,7 @@ public interface WxMpImgProcService {
    * @return WxMpImgProcAiCropResult
    * @throws WxErrorException .
    */
-  WxMpImgProcAiCropResult aiCrop(File imgFile) throws WxErrorException;
+  WxImgProcAiCropResult aiCrop(File imgFile) throws WxErrorException;
 
   /**
    * 图片智能裁剪接口
@@ -117,5 +117,5 @@ public interface WxMpImgProcService {
    * @return WxMpImgProcAiCropResult
    * @throws WxErrorException .
    */
-  WxMpImgProcAiCropResult aiCrop(File imgFile, String ratios) throws WxErrorException;
+  WxImgProcAiCropResult aiCrop(File imgFile, String ratios) throws WxErrorException;
 }

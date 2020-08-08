@@ -1,12 +1,12 @@
-package me.chanjar.weixin.mp.api.impl;
+package cn.binarywang.wx.miniapp.api.impl;
 
+import cn.binarywang.wx.miniapp.api.WxMaService;
 import lombok.RequiredArgsConstructor;
-import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.api.WxImgProcService;
-import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.common.bean.imgproc.WxImgProcAiCropResult;
 import me.chanjar.weixin.common.bean.imgproc.WxImgProcQrCodeResult;
 import me.chanjar.weixin.common.bean.imgproc.WxImgProcSuperResolutionResult;
+import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.requestexecuter.ocr.OcrDiscernRequestExecutor;
 import org.apache.commons.lang3.StringUtils;
 
@@ -15,20 +15,44 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-import static me.chanjar.weixin.mp.enums.WxMpApiUrl.ImgProc.AI_CROP;
-import static me.chanjar.weixin.mp.enums.WxMpApiUrl.ImgProc.FILE_AI_CROP;
-import static me.chanjar.weixin.mp.enums.WxMpApiUrl.ImgProc.FILE_QRCODE;
-import static me.chanjar.weixin.mp.enums.WxMpApiUrl.ImgProc.FILE_SUPER_RESOLUTION;
-import static me.chanjar.weixin.mp.enums.WxMpApiUrl.ImgProc.QRCODE;
-import static me.chanjar.weixin.mp.enums.WxMpApiUrl.ImgProc.SUPER_RESOLUTION;
 
 /**
  * 图像处理接口实现.
+ *
  * @author Theo Nie
  */
 @RequiredArgsConstructor
-public class WxMpImgProcServiceImpl implements WxImgProcService {
-  private final WxMpService wxMpService;
+public class WxMaImgProcServiceImpl implements WxImgProcService {
+  /**
+   * 二维码/条码识别
+   */
+  private static final String QRCODE = "/cv/img/qrcode?img_url=%s";
+
+  /**
+   * 二维码/条码识别(文件)
+   */
+  private static final String FILE_QRCODE = "/cv/img/qrcode";
+
+  /**
+   * 图片高清化
+   */
+  private static final String SUPER_RESOLUTION = "/cv/img/superresolution?img_url=%s";
+
+  /**
+   * 图片高清化(文件)
+   */
+  private static final String FILE_SUPER_RESOLUTION = "/cv/img/superresolution";
+
+  /**
+   * 图片智能裁剪
+   */
+  private static final String AI_CROP = "/cv/img/aicrop?img_url=%s&ratios=%s";
+
+  /**
+   * 图片智能裁剪(文件)
+   */
+  private static final String FILE_AI_CROP = "/cv/img/aicrop?ratios=%s";
+  private final WxMaService service;
 
   @Override
   public WxImgProcQrCodeResult qrCode(String imgUrl) throws WxErrorException {
@@ -38,15 +62,14 @@ public class WxMpImgProcServiceImpl implements WxImgProcService {
       //ignore
     }
 
-    String result = this.wxMpService.get(String.format(QRCODE.getUrl(this.wxMpService.getWxMpConfigStorage()), imgUrl),
-      null);
+    final String result = this.service.get(String.format(QRCODE, imgUrl), null);
     return WxImgProcQrCodeResult.fromJson(result);
   }
 
   @Override
   public WxImgProcQrCodeResult qrCode(File imgFile) throws WxErrorException {
-    String result = this.wxMpService.execute(OcrDiscernRequestExecutor.create(this.wxMpService.getRequestHttp()),
-      FILE_QRCODE.getUrl(this.wxMpService.getWxMpConfigStorage()), imgFile);
+    String result = this.service.execute(OcrDiscernRequestExecutor.create(this.service.getRequestHttp()),
+      FILE_QRCODE, imgFile);
     return WxImgProcQrCodeResult.fromJson(result);
   }
 
@@ -58,14 +81,14 @@ public class WxMpImgProcServiceImpl implements WxImgProcService {
       //ignore
     }
 
-    final String result = this.wxMpService.get(String.format(SUPER_RESOLUTION.getUrl(this.wxMpService.getWxMpConfigStorage()), imgUrl), null);
+    final String result = this.service.get(String.format(SUPER_RESOLUTION, imgUrl), null);
     return WxImgProcSuperResolutionResult.fromJson(result);
   }
 
   @Override
   public WxImgProcSuperResolutionResult superResolution(File imgFile) throws WxErrorException {
-    String result = this.wxMpService.execute(OcrDiscernRequestExecutor.create(this.wxMpService.getRequestHttp()),
-      FILE_SUPER_RESOLUTION.getUrl(this.wxMpService.getWxMpConfigStorage()), imgFile);
+    String result = this.service.execute(OcrDiscernRequestExecutor.create(this.service.getRequestHttp()),
+      FILE_SUPER_RESOLUTION, imgFile);
     return WxImgProcSuperResolutionResult.fromJson(result);
   }
 
@@ -86,8 +109,7 @@ public class WxMpImgProcServiceImpl implements WxImgProcService {
       ratios = "";
     }
 
-    final String result = this.wxMpService.get(String.format(AI_CROP.getUrl(this.wxMpService.getWxMpConfigStorage()),
-      imgUrl, ratios), null);
+    final String result = this.service.get(String.format(AI_CROP, imgUrl, ratios), null);
     return WxImgProcAiCropResult.fromJson(result);
   }
 
@@ -102,8 +124,8 @@ public class WxMpImgProcServiceImpl implements WxImgProcService {
       ratios = "";
     }
 
-    String result = this.wxMpService.execute(OcrDiscernRequestExecutor.create(this.wxMpService.getRequestHttp()),
-      String.format(FILE_AI_CROP.getUrl(this.wxMpService.getWxMpConfigStorage()), ratios), imgFile);
+    String result = this.service.execute(OcrDiscernRequestExecutor.create(this.service.getRequestHttp()),
+      String.format(FILE_AI_CROP, ratios), imgFile);
     return WxImgProcAiCropResult.fromJson(result);
   }
 }

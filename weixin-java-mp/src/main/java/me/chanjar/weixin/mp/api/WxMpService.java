@@ -1,5 +1,6 @@
 package me.chanjar.weixin.mp.api;
 
+import me.chanjar.weixin.common.api.WxImgProcService;
 import me.chanjar.weixin.common.api.WxOcrService;
 import me.chanjar.weixin.common.bean.WxJsapiSignature;
 import me.chanjar.weixin.common.bean.WxNetCheckResult;
@@ -561,9 +562,9 @@ public interface WxMpService extends WxService {
   /**
    * 返回图像处理接口的实现类对象，以方便调用其各个接口.
    *
-   * @return WxMpImgProcService
+   * @return WxImgProcService
    */
-  WxMpImgProcService getImgProcService();
+  WxImgProcService getImgProcService();
 
   /**
    * .
@@ -696,7 +697,7 @@ public interface WxMpService extends WxService {
    *
    * @param imgProcService .
    */
-  void setImgProcService(WxMpImgProcService imgProcService);
+  void setImgProcService(WxImgProcService imgProcService);
 
   /**
    * 返回评论数据管理接口方法的实现类对象，以方便调用其各个接口.

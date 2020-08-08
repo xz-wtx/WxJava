@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import me.chanjar.weixin.common.api.WxImgProcService;
 import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.api.WxOcrService;
 import me.chanjar.weixin.common.bean.WxAccessToken;
@@ -71,7 +72,7 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
   private WxMpMarketingService marketingService = new WxMpMarketingServiceImpl(this);
   private WxMpCommentService commentService = new WxMpCommentServiceImpl(this);
   private WxOcrService ocrService = new WxMpOcrServiceImpl(this);
-  private WxMpImgProcService imgProcService = new WxMpImgProcServiceImpl(this);
+  private WxImgProcService imgProcService = new WxMpImgProcServiceImpl(this);
 
   @Getter
   @Setter
@@ -696,12 +697,12 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
   }
 
   @Override
-  public WxMpImgProcService getImgProcService() {
+  public WxImgProcService getImgProcService() {
     return this.imgProcService;
   }
 
   @Override
-  public void setImgProcService(WxMpImgProcService imgProcService) {
+  public void setImgProcService(WxImgProcService imgProcService) {
     this.imgProcService = imgProcService;
   }
 }

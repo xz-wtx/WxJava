@@ -2,6 +2,7 @@ package cn.binarywang.wx.miniapp.api;
 
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.config.WxMaConfig;
+import me.chanjar.weixin.common.api.WxImgProcService;
 import me.chanjar.weixin.common.api.WxOcrService;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.service.WxService;
@@ -295,4 +296,12 @@ public interface WxMaService extends WxService {
    * @return 。
    */
   WxOcrService getOcrService();
+
+  /**
+   * 返回图像处理接口的实现类对象，以方便调用其各个接口.
+   *
+   * @return WxImgProcService
+   */
+  WxImgProcService getImgProcService();
+
 }

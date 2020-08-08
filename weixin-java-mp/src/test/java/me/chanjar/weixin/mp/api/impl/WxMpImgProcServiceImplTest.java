@@ -2,13 +2,13 @@ package me.chanjar.weixin.mp.api.impl;
 
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.util.fs.FileUtils;
-import me.chanjar.weixin.mp.api.WxMpImgProcService;
+import me.chanjar.weixin.common.api.WxImgProcService;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.test.ApiTestModule;
 import me.chanjar.weixin.mp.api.test.TestConstants;
-import me.chanjar.weixin.mp.bean.imgproc.WxMpImgProcAiCropResult;
-import me.chanjar.weixin.mp.bean.imgproc.WxMpImgProcQrCodeResult;
-import me.chanjar.weixin.mp.bean.imgproc.WxMpImgProcSuperResolutionResult;
+import me.chanjar.weixin.common.bean.imgproc.WxImgProcAiCropResult;
+import me.chanjar.weixin.common.bean.imgproc.WxImgProcQrCodeResult;
+import me.chanjar.weixin.common.bean.imgproc.WxImgProcSuperResolutionResult;
 import org.testng.annotations.Guice;
 import org.testng.annotations.Test;
 
@@ -29,7 +29,7 @@ public class WxMpImgProcServiceImplTest {
 
   @Test
   public void testQrCode() throws WxErrorException {
-    final WxMpImgProcQrCodeResult result = this.mpService.getImgProcService().qrCode("https://gitee.com/binary/weixin-java-tools/raw/master/images/qrcodes/mp.png");
+    final WxImgProcQrCodeResult result = this.mpService.getImgProcService().qrCode("https://gitee.com/binary/weixin-java-tools/raw/master/images/qrcodes/mp.png");
     assertThat(result).isNotNull();
     System.out.println(result);
   }
@@ -38,14 +38,14 @@ public class WxMpImgProcServiceImplTest {
   public void testQrCode2() throws Exception {
     InputStream inputStream = ClassLoader.getSystemResourceAsStream("mm.jpeg");
     File tempFile = FileUtils.createTmpFile(inputStream, UUID.randomUUID().toString(), TestConstants.FILE_JPG);
-    final WxMpImgProcQrCodeResult result = this.mpService.getImgProcService().qrCode(tempFile);
+    final WxImgProcQrCodeResult result = this.mpService.getImgProcService().qrCode(tempFile);
     assertThat(result).isNotNull();
     System.out.println(result);
   }
 
   @Test
   public void testSuperResolution() throws WxErrorException {
-    final WxMpImgProcSuperResolutionResult result = this.mpService.getImgProcService().superResolution("https://gitee.com/binary/weixin-java-tools/raw/master/images/qrcodes/mp.png");
+    final WxImgProcSuperResolutionResult result = this.mpService.getImgProcService().superResolution("https://gitee.com/binary/weixin-java-tools/raw/master/images/qrcodes/mp.png");
     assertThat(result).isNotNull();
     System.out.println(result);
   }
@@ -54,21 +54,21 @@ public class WxMpImgProcServiceImplTest {
   public void testSuperResolution2() throws Exception {
     InputStream inputStream = ClassLoader.getSystemResourceAsStream("mm.jpeg");
     File tempFile = FileUtils.createTmpFile(inputStream, UUID.randomUUID().toString(), TestConstants.FILE_JPG);
-    final WxMpImgProcSuperResolutionResult result = this.mpService.getImgProcService().superResolution(tempFile);
+    final WxImgProcSuperResolutionResult result = this.mpService.getImgProcService().superResolution(tempFile);
     assertThat(result).isNotNull();
     System.out.println(result);
   }
 
   @Test
   public void testAiCrop() throws WxErrorException {
-    final WxMpImgProcAiCropResult result = this.mpService.getImgProcService().aiCrop("https://gitee.com/binary/weixin-java-tools/raw/master/images/qrcodes/mp.png");
+    final WxImgProcAiCropResult result = this.mpService.getImgProcService().aiCrop("https://gitee.com/binary/weixin-java-tools/raw/master/images/qrcodes/mp.png");
     assertThat(result).isNotNull();
     System.out.println(result);
   }
 
   @Test
   public void testAiCrop2() throws WxErrorException {
-    final WxMpImgProcAiCropResult result = this.mpService.getImgProcService().aiCrop("https://gitee.com/binary/weixin-java-tools/raw/master/images/qrcodes/mp.png", "1,2.35");
+    final WxImgProcAiCropResult result = this.mpService.getImgProcService().aiCrop("https://gitee.com/binary/weixin-java-tools/raw/master/images/qrcodes/mp.png", "1,2.35");
     assertThat(result).isNotNull();
     System.out.println(result);
   }
@@ -77,7 +77,7 @@ public class WxMpImgProcServiceImplTest {
   public void testAiCrop3() throws Exception {
     InputStream inputStream = ClassLoader.getSystemResourceAsStream("mm.jpeg");
     File tempFile = FileUtils.createTmpFile(inputStream, UUID.randomUUID().toString(), TestConstants.FILE_JPG);
-    final WxMpImgProcAiCropResult result = this.mpService.getImgProcService().aiCrop(tempFile);
+    final WxImgProcAiCropResult result = this.mpService.getImgProcService().aiCrop(tempFile);
     assertThat(result).isNotNull();
     System.out.println(result);
   }
@@ -86,7 +86,7 @@ public class WxMpImgProcServiceImplTest {
   public void testAiCrop4() throws Exception {
     InputStream inputStream = ClassLoader.getSystemResourceAsStream("mm.jpeg");
     File tempFile = FileUtils.createTmpFile(inputStream, UUID.randomUUID().toString(), TestConstants.FILE_JPG);
-    final WxMpImgProcAiCropResult result = this.mpService.getImgProcService().aiCrop(tempFile, "1,2.35,3.5");
+    final WxImgProcAiCropResult result = this.mpService.getImgProcService().aiCrop(tempFile, "1,2.35,3.5");
     assertThat(result).isNotNull();
     System.out.println(result);
   }
@@ -159,8 +159,8 @@ public class WxMpImgProcServiceImplTest {
         "    }\n" +
         "}";
       when(wxService.get(anyString(), anyString())).thenReturn(returnJson);
-      final WxMpImgProcService wxMpImgProcService = new WxMpImgProcServiceImpl(wxService);
-      final WxMpImgProcQrCodeResult result = wxMpImgProcService.qrCode("abc");
+      final WxImgProcService wxMpImgProcService = new WxMpImgProcServiceImpl(wxService);
+      final WxImgProcQrCodeResult result = wxMpImgProcService.qrCode("abc");
       assertThat(result).isNotNull();
       System.out.println(result);
     }
@@ -173,8 +173,8 @@ public class WxMpImgProcServiceImplTest {
         "    \"media_id\": \"6WXsIXkG7lXuDLspD9xfm5dsvHzb0EFl0li6ySxi92ap8Vl3zZoD9DpOyNudeJGB\"\n" +
         "}";
       when(wxService.get(anyString(), anyString())).thenReturn(returnJson);
-      final WxMpImgProcService wxMpImgProcService = new WxMpImgProcServiceImpl(wxService);
-      final WxMpImgProcSuperResolutionResult result = wxMpImgProcService.superResolution("abc");
+      final WxImgProcService wxMpImgProcService = new WxMpImgProcServiceImpl(wxService);
+      final WxImgProcSuperResolutionResult result = wxMpImgProcService.superResolution("abc");
       assertThat(result).isNotNull();
       System.out.println(result);
     }
@@ -204,8 +204,8 @@ public class WxMpImgProcServiceImplTest {
         "    }\n" +
         "}";
       when(wxService.get(anyString(), anyString())).thenReturn(returnJson);
-      final WxMpImgProcService wxMpImgProcService = new WxMpImgProcServiceImpl(wxService);
-      final WxMpImgProcAiCropResult result = wxMpImgProcService.aiCrop("abc");
+      final WxImgProcService wxMpImgProcService = new WxMpImgProcServiceImpl(wxService);
+      final WxImgProcAiCropResult result = wxMpImgProcService.aiCrop("abc");
       assertThat(result).isNotNull();
       System.out.println(result);
     }
