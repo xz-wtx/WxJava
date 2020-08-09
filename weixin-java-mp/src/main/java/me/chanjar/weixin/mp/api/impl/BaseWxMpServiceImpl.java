@@ -8,12 +8,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxImgProcService;
-import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.api.WxOcrService;
 import me.chanjar.weixin.common.bean.WxAccessToken;
 import me.chanjar.weixin.common.bean.WxJsapiSignature;
 import me.chanjar.weixin.common.bean.WxNetCheckResult;
 import me.chanjar.weixin.common.enums.TicketType;
+import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.error.WxError;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.session.StandardSessionManager;
@@ -48,35 +48,80 @@ import static me.chanjar.weixin.mp.enums.WxMpApiUrl.Other.*;
  */
 @Slf4j
 public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestHttp<H, P> {
-
-
   protected WxSessionManager sessionManager = new StandardSessionManager();
+  @Getter
+  @Setter
   private WxMpKefuService kefuService = new WxMpKefuServiceImpl(this);
+  @Getter
+  @Setter
   private WxMpMaterialService materialService = new WxMpMaterialServiceImpl(this);
+  @Getter
+  @Setter
   private WxMpMenuService menuService = new WxMpMenuServiceImpl(this);
+  @Getter
+  @Setter
   private WxMpUserService userService = new WxMpUserServiceImpl(this);
-  private WxMpUserTagService tagService = new WxMpUserTagServiceImpl(this);
-  private WxMpQrcodeService qrCodeService = new WxMpQrcodeServiceImpl(this);
+  @Getter
+  @Setter
+  private WxMpUserTagService userTagService = new WxMpUserTagServiceImpl(this);
+  @Getter
+  @Setter
+  private WxMpQrcodeService qrcodeService = new WxMpQrcodeServiceImpl(this);
+  @Getter
+  @Setter
   private WxMpCardService cardService = new WxMpCardServiceImpl(this);
+  @Getter
+  @Setter
   private WxMpStoreService storeService = new WxMpStoreServiceImpl(this);
+  @Getter
+  @Setter
   private WxMpDataCubeService dataCubeService = new WxMpDataCubeServiceImpl(this);
+  @Getter
+  @Setter
   private WxMpUserBlacklistService blackListService = new WxMpUserBlacklistServiceImpl(this);
+  @Getter
+  @Setter
   private WxMpTemplateMsgService templateMsgService = new WxMpTemplateMsgServiceImpl(this);
+  @Getter
+  @Setter
   private final WxMpSubscribeMsgService subscribeMsgService = new WxMpSubscribeMsgServiceImpl(this);
+  @Getter
+  @Setter
   private WxMpDeviceService deviceService = new WxMpDeviceServiceImpl(this);
+  @Getter
+  @Setter
   private WxMpShakeService shakeService = new WxMpShakeServiceImpl(this);
+  @Getter
+  @Setter
   private WxMpMemberCardService memberCardService = new WxMpMemberCardServiceImpl(this);
+  @Getter
+  @Setter
   private WxMpMassMessageService massMessageService = new WxMpMassMessageServiceImpl(this);
+  @Getter
+  @Setter
   private WxMpAiOpenService aiOpenService = new WxMpAiOpenServiceImpl(this);
+  @Getter
+  @Setter
   private final WxMpWifiService wifiService = new WxMpWifiServiceImpl(this);
+  @Getter
+  @Setter
   private WxMpMarketingService marketingService = new WxMpMarketingServiceImpl(this);
+  @Getter
+  @Setter
   private WxMpCommentService commentService = new WxMpCommentServiceImpl(this);
+  @Getter
+  @Setter
   private WxOcrService ocrService = new WxMpOcrServiceImpl(this);
+  @Getter
+  @Setter
   private WxImgProcService imgProcService = new WxMpImgProcServiceImpl(this);
-
   @Getter
   @Setter
   private WxMpMerchantInvoiceService merchantInvoiceService = new WxMpMerchantInvoiceServiceImpl(this, this.cardService);
+
+  @Getter
+  @Setter
+  private WxOAuth2Service oAuth2Service = new WxOAuth2ServiceImpl(this);
 
   private Map<String, WxMpConfigStorage> configStorageMap;
 
@@ -182,9 +227,9 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
   }
 
   @Override
-  public String buildQrConnectUrl(String redirectURI, String scope, String state) {
+  public String buildQrConnectUrl(String redirectUri, String scope, String state) {
     return String.format(QRCONNECT_URL.getUrl(this.getWxMpConfigStorage()), this.getWxMpConfigStorage().getAppId(),
-      URIUtil.encodeURIComponent(redirectURI), scope, StringUtils.trimToEmpty(state));
+      URIUtil.encodeURIComponent(redirectUri), scope, StringUtils.trimToEmpty(state));
   }
 
   private WxMpOAuth2AccessToken getOAuth2AccessToken(String url) throws WxErrorException {
@@ -199,46 +244,22 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
 
   @Override
   public WxMpOAuth2AccessToken oauth2getAccessToken(String code) throws WxErrorException {
-    String url = String.format(OAUTH2_ACCESS_TOKEN_URL.getUrl(this.getWxMpConfigStorage()), this.getWxMpConfigStorage().getAppId(),
-      this.getWxMpConfigStorage().getSecret(), code);
-    return this.getOAuth2AccessToken(url);
+    return this.oAuth2Service.getAccessToken(code);
   }
 
   @Override
   public WxMpOAuth2AccessToken oauth2refreshAccessToken(String refreshToken) throws WxErrorException {
-    String url = String.format(OAUTH2_REFRESH_TOKEN_URL.getUrl(this.getWxMpConfigStorage()), this.getWxMpConfigStorage().getAppId(), refreshToken);
-    return this.getOAuth2AccessToken(url);
+    return this.oAuth2Service.refreshAccessToken(refreshToken);
   }
 
   @Override
   public WxMpUser oauth2getUserInfo(WxMpOAuth2AccessToken token, String lang) throws WxErrorException {
-    if (lang == null) {
-      lang = "zh_CN";
-    }
-
-    String url = String.format(OAUTH2_USERINFO_URL.getUrl(this.getWxMpConfigStorage()), token.getAccessToken(), token.getOpenId(), lang);
-
-    try {
-      RequestExecutor<String, String> executor = SimpleGetRequestExecutor.create(this);
-      String responseText = executor.execute(url, null, WxType.MP);
-      return WxMpUser.fromJson(responseText);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+      return this.oAuth2Service.getUserInfo(token,lang);
   }
 
   @Override
   public boolean oauth2validateAccessToken(WxMpOAuth2AccessToken token) {
-    String url = String.format(OAUTH2_VALIDATE_TOKEN_URL.getUrl(this.getWxMpConfigStorage()), token.getAccessToken(), token.getOpenId());
-
-    try {
-      SimpleGetRequestExecutor.create(this).execute(url, null, WxType.MP);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    } catch (WxErrorException e) {
-      return false;
-    }
-    return true;
+    return this.oAuth2Service.validateAccessToken(token);
   }
 
   @Override
@@ -492,217 +513,8 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
   }
 
   @Override
-  public WxMpKefuService getKefuService() {
-    return this.kefuService;
-  }
-
-  @Override
-  public WxMpMaterialService getMaterialService() {
-    return this.materialService;
-  }
-
-  @Override
-  public WxMpMenuService getMenuService() {
-    return this.menuService;
-  }
-
-  @Override
-  public WxMpUserService getUserService() {
-    return this.userService;
-  }
-
-  @Override
-  public WxMpUserTagService getUserTagService() {
-    return this.tagService;
-  }
-
-  @Override
-  public WxMpQrcodeService getQrcodeService() {
-    return this.qrCodeService;
-  }
-
-  @Override
-  public WxMpCardService getCardService() {
-    return this.cardService;
-  }
-
-  @Override
-  public WxMpDataCubeService getDataCubeService() {
-    return this.dataCubeService;
-  }
-
-  @Override
-  public WxMpUserBlacklistService getBlackListService() {
-    return this.blackListService;
-  }
-
-  @Override
-  public WxMpStoreService getStoreService() {
-    return this.storeService;
-  }
-
-  @Override
-  public WxMpTemplateMsgService getTemplateMsgService() {
-    return this.templateMsgService;
-  }
-
-  @Override
-  public WxMpSubscribeMsgService getSubscribeMsgService() {
-    return this.subscribeMsgService;
-  }
-
-  @Override
-  public WxMpDeviceService getDeviceService() {
-    return this.deviceService;
-  }
-
-  @Override
-  public WxMpShakeService getShakeService() {
-    return this.shakeService;
-  }
-
-  @Override
-  public WxMpMemberCardService getMemberCardService() {
-    return this.memberCardService;
-  }
-
-  @Override
   public RequestHttp getRequestHttp() {
     return this;
   }
 
-  @Override
-  public WxMpMassMessageService getMassMessageService() {
-    return this.massMessageService;
-  }
-
-  @Override
-  public void setKefuService(WxMpKefuService kefuService) {
-    this.kefuService = kefuService;
-  }
-
-  @Override
-  public void setMaterialService(WxMpMaterialService materialService) {
-    this.materialService = materialService;
-  }
-
-  @Override
-  public void setMenuService(WxMpMenuService menuService) {
-    this.menuService = menuService;
-  }
-
-  @Override
-  public void setUserService(WxMpUserService userService) {
-    this.userService = userService;
-  }
-
-  @Override
-  public void setTagService(WxMpUserTagService tagService) {
-    this.tagService = tagService;
-  }
-
-  @Override
-  public void setQrCodeService(WxMpQrcodeService qrCodeService) {
-    this.qrCodeService = qrCodeService;
-  }
-
-  @Override
-  public void setCardService(WxMpCardService cardService) {
-    this.cardService = cardService;
-  }
-
-  @Override
-  public void setStoreService(WxMpStoreService storeService) {
-    this.storeService = storeService;
-  }
-
-  @Override
-  public void setDataCubeService(WxMpDataCubeService dataCubeService) {
-    this.dataCubeService = dataCubeService;
-  }
-
-  @Override
-  public void setBlackListService(WxMpUserBlacklistService blackListService) {
-    this.blackListService = blackListService;
-  }
-
-  @Override
-  public void setTemplateMsgService(WxMpTemplateMsgService templateMsgService) {
-    this.templateMsgService = templateMsgService;
-  }
-
-  @Override
-  public void setDeviceService(WxMpDeviceService deviceService) {
-    this.deviceService = deviceService;
-  }
-
-  @Override
-  public void setShakeService(WxMpShakeService shakeService) {
-    this.shakeService = shakeService;
-  }
-
-  @Override
-  public void setMemberCardService(WxMpMemberCardService memberCardService) {
-    this.memberCardService = memberCardService;
-  }
-
-  @Override
-  public void setMassMessageService(WxMpMassMessageService massMessageService) {
-    this.massMessageService = massMessageService;
-  }
-
-  @Override
-  public WxMpAiOpenService getAiOpenService() {
-    return this.aiOpenService;
-  }
-
-  @Override
-  public void setAiOpenService(WxMpAiOpenService aiOpenService) {
-    this.aiOpenService = aiOpenService;
-  }
-
-  @Override
-  public WxMpWifiService getWifiService() {
-    return this.wifiService;
-  }
-
-  @Override
-  public WxOcrService getOcrService() {
-    return this.ocrService;
-  }
-
-  @Override
-  public WxMpMarketingService getMarketingService() {
-    return this.marketingService;
-  }
-
-  @Override
-  public void setMarketingService(WxMpMarketingService marketingService) {
-    this.marketingService = marketingService;
-  }
-
-  @Override
-  public void setOcrService(WxOcrService ocrService) {
-    this.ocrService = ocrService;
-  }
-
-  @Override
-  public WxMpCommentService getCommentService() {
-    return this.commentService;
-  }
-
-  @Override
-  public void setCommentService(WxMpCommentService commentService) {
-    this.commentService = commentService;
-  }
-
-  @Override
-  public WxImgProcService getImgProcService() {
-    return this.imgProcService;
-  }
-
-  @Override
-  public void setImgProcService(WxImgProcService imgProcService) {
-    this.imgProcService = imgProcService;
-  }
 }
