@@ -4,7 +4,7 @@ import lombok.NonNull;
 import me.chanjar.weixin.common.redis.JedisWxRedisOps;
 import me.chanjar.weixin.common.redis.WxRedisOps;
 import redis.clients.jedis.Jedis;
-import redis.clients.util.Pool;
+import redis.clients.jedis.util.Pool;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
