@@ -132,6 +132,7 @@ public final class WxCpApiPathConsts {
     public static final String LIST_USER_BEHAVIOR_DATA = "/cgi-bin/externalcontact/get_user_behavior_data";
     public static final String LIST_GROUP_CHAT_DATA = "/cgi-bin/externalcontact/groupchat/statistic";
     public static final String ADD_MSG_TEMPLATE = "/cgi-bin/externalcontact/add_msg_template";
+    public static final String SEND_WELCOME_MSG = "/cgi-bin/externalcontact/send_welcome_msg";
 
     public static final String GET_CORP_TAG_LIST = "/cgi-bin/externalcontact/get_corp_tag_list";
     public static final String ADD_CORP_TAG = "/cgi-bin/externalcontact/add_corp_tag";

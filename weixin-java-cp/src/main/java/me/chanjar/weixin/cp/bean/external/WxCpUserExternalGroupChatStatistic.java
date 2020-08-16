@@ -1,10 +1,12 @@
-package me.chanjar.weixin.cp.bean;
+package me.chanjar.weixin.cp.bean.external;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 import lombok.Setter;
+import me.chanjar.weixin.cp.bean.WxCpBaseResp;
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -15,73 +17,76 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class WxCpUserExternalGroupChatStatistic extends WxCpBaseResp{
+public class WxCpUserExternalGroupChatStatistic extends WxCpBaseResp implements Serializable {
+  private static final long serialVersionUID = -3548998672207956622L;
 
   @SerializedName("total")
-  int total;
+  private int total;
 
   @SerializedName("next_offset")
-  int nextOffset;
+  private int nextOffset;
 
   @SerializedName("items")
-  List<StatisticItem> itemList;
+  private List<StatisticItem> itemList;
 
   @Getter
   @Setter
-  public static class StatisticItem {
+  public static class StatisticItem implements Serializable {
+    private static final long serialVersionUID = -7272935708787587856L;
 
     @SerializedName("owner")
-    String owner;
+    private String owner;
 
     @SerializedName("data")
-    ItemData itemData;
+    private ItemData itemData;
   }
 
   @Getter
   @Setter
-  public static class ItemData {
+  public static class ItemData implements Serializable {
+    private static final long serialVersionUID = 354382008606856587L;
 
     /**
      * 新增客户群数量
      */
     @SerializedName("new_chat_cnt")
-    int newChatCnt;
+    private int newChatCnt;
 
     /**
      * 截至当天客户群总数量
      */
     @SerializedName("chat_total")
-    int chatTotal;
+    private int chatTotal;
 
     /**
      * 截至当天有发过消息的客户群数量
      */
     @SerializedName("chat_has_msg")
-    int chatHasMsg;
+    private int chatHasMsg;
 
     /**
      * 客户群新增群人数。
      */
     @SerializedName("new_member_cnt")
-    int newMemberCnt;
+    private int newMemberCnt;
 
     /**
      * 截至当天客户群总人数
      */
     @SerializedName("member_total")
-    int memberTotal;
+    private int memberTotal;
 
     /**
      * 截至当天有发过消息的群成员数
      */
     @SerializedName("member_has_msg")
-    int memberHasMsg;
+    private int memberHasMsg;
 
     /**
      * 截至当天客户群消息总数
      */
     @SerializedName("msg_total")
-    int msgTotal;
+    private int msgTotal;
   }
 
   public static WxCpUserExternalGroupChatStatistic fromJson(String json) {

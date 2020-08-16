@@ -10,7 +10,6 @@ import java.util.concurrent.locks.Lock;
 
 @RequiredArgsConstructor
 public class JedisWxRedisOps implements WxRedisOps {
-
   private final Pool<Jedis> jedisPool;
 
   @Override

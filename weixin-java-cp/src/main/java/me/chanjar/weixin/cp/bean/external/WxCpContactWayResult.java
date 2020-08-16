@@ -1,7 +1,8 @@
-package me.chanjar.weixin.cp.bean;
+package me.chanjar.weixin.cp.bean.external;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
+import me.chanjar.weixin.cp.bean.WxCpBaseResp;
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
 /**

@@ -1,4 +1,4 @@
-package me.chanjar.weixin.cp.bean;
+package me.chanjar.weixin.cp.bean.external;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * Created by songfan on 2020/7/14.
+ *
+ * @author songfan
  */
 @Data
 public class WxCpMsgTemplateAddResult implements Serializable {

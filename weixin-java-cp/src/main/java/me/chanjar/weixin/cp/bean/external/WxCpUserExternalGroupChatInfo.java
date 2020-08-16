@@ -1,8 +1,9 @@
-package me.chanjar.weixin.cp.bean;
+package me.chanjar.weixin.cp.bean.external;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 import lombok.Setter;
+import me.chanjar.weixin.cp.bean.WxCpBaseResp;
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class WxCpUserExternalGroupChatInfo extends WxCpBaseResp{
+public class WxCpUserExternalGroupChatInfo extends WxCpBaseResp {
 
   @SerializedName("group_chat")
   private GroupChat groupChat;

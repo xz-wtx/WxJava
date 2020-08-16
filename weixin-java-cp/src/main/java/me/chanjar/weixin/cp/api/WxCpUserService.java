@@ -3,7 +3,7 @@ package me.chanjar.weixin.cp.api;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.bean.WxCpInviteResult;
 import me.chanjar.weixin.cp.bean.WxCpUser;
-import me.chanjar.weixin.cp.bean.WxCpUserExternalContactInfo;
+import me.chanjar.weixin.cp.bean.external.WxCpUserExternalContactInfo;
 
 import java.util.List;
 import java.util.Map;

@@ -1,7 +1,7 @@
 package me.chanjar.weixin.cp.util.json;
 
 import com.google.gson.*;
-import me.chanjar.weixin.cp.bean.WxCpContactWayInfo;
+import me.chanjar.weixin.cp.bean.external.WxCpContactWayInfo;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;

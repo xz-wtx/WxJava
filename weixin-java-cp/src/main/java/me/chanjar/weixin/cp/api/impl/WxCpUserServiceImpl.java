@@ -10,7 +10,7 @@ import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.api.WxCpUserService;
 import me.chanjar.weixin.cp.bean.WxCpInviteResult;
 import me.chanjar.weixin.cp.bean.WxCpUser;
-import me.chanjar.weixin.cp.bean.WxCpUserExternalContactInfo;
+import me.chanjar.weixin.cp.bean.external.WxCpUserExternalContactInfo;
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
 import java.util.List;

@@ -9,6 +9,7 @@ import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.api.WxCpExternalContactService;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.*;
+import me.chanjar.weixin.cp.bean.external.*;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -221,6 +222,12 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
     final String url = this.mainService.getWxCpConfigStorage().getApiUrl(ADD_MSG_TEMPLATE);
     final String result = this.mainService.post(url, wxCpMsgTemplate.toJson());
     return WxCpMsgTemplateAddResult.fromJson(result);
+  }
+
+  @Override
+  public void sendWelcomeMsg(WxCpWelcomeMsg msg) throws WxErrorException {
+    final String url = this.mainService.getWxCpConfigStorage().getApiUrl(SEND_WELCOME_MSG);
+    this.mainService.post(url, msg.toJson());
   }
 
   @Override
