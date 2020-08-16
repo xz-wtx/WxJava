@@ -28,12 +28,12 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
   @Override
   public WxCpContactWayResult addContactWay(@NonNull WxCpContactWayInfo info) throws WxErrorException {
 
-    if (info.getUsers() != null && info.getUsers().size() > 100) {
+    if (info.getContactWay().getUsers() != null && info.getContactWay().getUsers().size() > 100) {
       throw new RuntimeException("「联系我」使用人数默认限制不超过100人(包括部门展开后的人数)");
     }
 
     final String url = this.mainService.getWxCpConfigStorage().getApiUrl(ADD_CONTACT_WAY);
-    String responseContent = this.mainService.post(url, info.toJson());
+    String responseContent = this.mainService.post(url, info.getContactWay().toJson());
 
     return WxCpContactWayResult.fromJson(responseContent);
   }
@@ -45,21 +45,20 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
 
     final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GET_CONTACT_WAY);
     String responseContent = this.mainService.post(url, json.toString());
-
     return WxCpContactWayInfo.fromJson(responseContent);
   }
 
   @Override
   public WxCpBaseResp updateContactWay(@NonNull WxCpContactWayInfo info) throws WxErrorException {
-    if (StringUtils.isBlank(info.getConfigId())) {
+    if (StringUtils.isBlank(info.getContactWay().getConfigId())) {
       throw new RuntimeException("更新「联系我」方式需要指定configId");
     }
-    if (info.getUsers() != null && info.getUsers().size() > 100) {
+    if (info.getContactWay().getUsers() != null && info.getContactWay().getUsers().size() > 100) {
       throw new RuntimeException("「联系我」使用人数默认限制不超过100人(包括部门展开后的人数)");
     }
 
     final String url = this.mainService.getWxCpConfigStorage().getApiUrl(UPDATE_CONTACT_WAY);
-    String responseContent = this.mainService.post(url, info.toJson());
+    String responseContent = this.mainService.post(url, info.getContactWay().toJson());
 
     return WxCpBaseResp.fromJson(responseContent);
   }

@@ -35,21 +35,24 @@ public class WxCpExternalContactServiceImplTest {
   @Test
   public void testAddContactWay() throws WxErrorException {
 
-    final String concatUserId = "符合要求的userId";
+    final String concatUserId = "HuangXiaoMing";
+
+    WxCpContactWayInfo.ContactWay wayInfo = new WxCpContactWayInfo.ContactWay();
+    wayInfo.setType(WxCpContactWayInfo.TYPE.SIGLE);
+    wayInfo.setScene(WxCpContactWayInfo.SCENE.QRCODE);
+    wayInfo.setUsers(Lists.newArrayList(concatUserId));
+    wayInfo.setRemark("CreateDate:" + DateFormatUtils.ISO_8601_EXTENDED_DATETIME_FORMAT.format(new Date()));
 
     WxCpContactWayInfo info = new WxCpContactWayInfo();
-    info.setType(WxCpContactWayInfo.TYPE.SIGLE);
-    info.setScene(WxCpContactWayInfo.SCENE.MINIPROGRAM);
-    info.setUsers(Lists.newArrayList(concatUserId));
-    info.setRemark("CreateDate:" + DateFormatUtils.ISO_8601_EXTENDED_DATETIME_FORMAT.format(new Date()));
+    info.setContactWay(wayInfo);
     this.wxCpService.getExternalContactService().addContactWay(info);
   }
 
   @Test
   public void testGetContactWay() throws WxErrorException {
-    final String configId = "2d7a68c657663afbd1d90db19a4b5ee9";
+    final String configId = "39fea3d93e30faaa8c7a9edd4cfe4d08";
     WxCpContactWayInfo contactWayInfo = this.wxCpService.getExternalContactService().getContactWay(configId);
-    System.out.println(contactWayInfo);
+    System.out.println(contactWayInfo.toJson());
     assertNotNull(contactWayInfo);
   }
 
@@ -57,10 +60,12 @@ public class WxCpExternalContactServiceImplTest {
   public void testUpdateContactWay() throws WxErrorException {
     final String configId = "2d7a68c657663afbd1d90db19a4b5ee9";
     final String concatUserId = "符合要求的userId";
+    WxCpContactWayInfo.ContactWay wayInfo = new WxCpContactWayInfo.ContactWay();
+    wayInfo.setConfigId(configId);
+    wayInfo.setUsers(Lists.newArrayList(concatUserId));
+    wayInfo.setRemark("CreateDate:" + DateFormatUtils.ISO_8601_EXTENDED_DATETIME_FORMAT.format(new Date()));
     WxCpContactWayInfo info = new WxCpContactWayInfo();
-    info.setConfigId(configId);
-    info.setUsers(Lists.newArrayList(concatUserId));
-    info.setRemark("CreateDate:" + DateFormatUtils.ISO_8601_EXTENDED_DATETIME_FORMAT.format(new Date()));
+    info.setContactWay(wayInfo);
     WxCpBaseResp resp = this.wxCpService.getExternalContactService().updateContactWay(info);
     System.out.println(resp);
     assertNotNull(resp);
