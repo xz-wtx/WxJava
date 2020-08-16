@@ -3,15 +3,17 @@ package cn.binarywang.wx.miniapp.api.impl;
 import cn.binarywang.wx.miniapp.api.*;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.config.WxMaConfig;
+import cn.binarywang.wx.miniapp.util.WxMaConfigHolder;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxImgProcService;
-import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.api.WxOcrService;
 import me.chanjar.weixin.common.bean.WxAccessToken;
+import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.error.WxError;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.util.DataUtils;
@@ -38,7 +40,7 @@ import static cn.binarywang.wx.miniapp.constant.WxMaConstants.ErrorCode.*;
  */
 @Slf4j
 public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestHttp<H, P> {
-
+  private Map<String, WxMaConfig> configMap;
   private WxMaConfig wxMaConfig;
 
   private final WxMaMsgService kefuService = new WxMaMsgServiceImpl(this);
@@ -300,9 +302,72 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
   }
 
   @Override
-  public void setWxMaConfig(WxMaConfig wxConfigProvider) {
-    this.wxMaConfig = wxConfigProvider;
+  public void setWxMaConfig(WxMaConfig maConfig) {
+    final String appid = maConfig.getAppid();
+    this.setMultiConfigs(ImmutableMap.of(appid, maConfig), appid);
+  }
+
+  @Override
+  public void setMultiConfigs(Map<String, WxMaConfig> configs) {
+    this.setMultiConfigs(configs, configs.keySet().iterator().next());
+  }
+
+  @Override
+  public void setMultiConfigs(Map<String, WxMaConfig> configs, String defaultMiniappId) {
+    this.configMap = Maps.newHashMap(configs);
+    WxMaConfigHolder.set(defaultMiniappId);
     this.initHttp();
+  }
+
+  @Override
+  public void addConfig(String mpId, WxMaConfig configStorages) {
+    synchronized (this) {
+      if (this.configMap == null) {
+        this.setWxMaConfig(configStorages);
+      } else {
+        this.configMap.put(mpId, configStorages);
+      }
+    }
+  }
+
+  @Override
+  public void removeConfig(String miniappId) {
+    synchronized (this) {
+      if (this.configMap.size() == 1) {
+        this.configMap.remove(miniappId);
+        log.warn("已删除最后一个小程序配置：{}，须立即使用setWxMaConfig或setMultiConfigs添加配置", miniappId);
+        return;
+      }
+      if (WxMaConfigHolder.get().equals(miniappId)) {
+        this.configMap.remove(miniappId);
+        final String defaultMpId = this.configMap.keySet().iterator().next();
+        WxMaConfigHolder.set(defaultMpId);
+        log.warn("已删除默认小程序配置，小程序【{}】被设为默认配置", defaultMpId);
+        return;
+      }
+      this.configMap.remove(miniappId);
+    }
+  }
+
+  @Override
+  public WxMaService switchoverTo(String miniappId) {
+    if (this.configMap.containsKey(miniappId)) {
+      WxMaConfigHolder.set(miniappId);
+      return this;
+    }
+
+    throw new RuntimeException(String.format("无法找到对应【%s】的小程序配置信息，请核实！", miniappId));
+  }
+
+  @Override
+  public boolean switchover(String mpId) {
+    if (this.configMap.containsKey(mpId)) {
+      WxMaConfigHolder.set(mpId);
+      return true;
+    }
+
+    log.error("无法找到对应【{}】的小程序配置信息，请核实！", mpId);
+    return false;
   }
 
   @Override
