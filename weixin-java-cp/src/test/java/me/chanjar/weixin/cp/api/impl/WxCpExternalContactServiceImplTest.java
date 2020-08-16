@@ -38,7 +38,7 @@ public class WxCpExternalContactServiceImplTest {
     final String concatUserId = "HuangXiaoMing";
 
     WxCpContactWayInfo.ContactWay wayInfo = new WxCpContactWayInfo.ContactWay();
-    wayInfo.setType(WxCpContactWayInfo.TYPE.SIGLE);
+    wayInfo.setType(WxCpContactWayInfo.TYPE.SINGLE);
     wayInfo.setScene(WxCpContactWayInfo.SCENE.QRCODE);
     wayInfo.setUsers(Lists.newArrayList(concatUserId));
     wayInfo.setRemark("CreateDate:" + DateFormatUtils.ISO_8601_EXTENDED_DATETIME_FORMAT.format(new Date()));
