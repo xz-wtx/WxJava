@@ -131,6 +131,10 @@ public class WxPayConfig {
    */
   private PrivateKey privateKey;
   /**
+   * 证书自动更新时间差(分钟)，默认一分钟
+   */
+  private int certAutoUpdateTime = 60;
+  /**
    * p12证书文件内容的字节数组.
    */
   private byte[] keyContent;
@@ -245,8 +249,7 @@ public class WxPayConfig {
 
       AutoUpdateCertificatesVerifier verifier = new AutoUpdateCertificatesVerifier(
         new WxPayCredentials(mchId, new PrivateKeySigner(certSerialNo, merchantPrivateKey)),
-        apiV3Key.getBytes(StandardCharsets.UTF_8));
-
+        apiV3Key.getBytes(StandardCharsets.UTF_8), this.getCertAutoUpdateTime());
 
       CloseableHttpClient httpClient = WxPayV3HttpClientBuilder.create()
         .withMerchant(mchId, certSerialNo, merchantPrivateKey)

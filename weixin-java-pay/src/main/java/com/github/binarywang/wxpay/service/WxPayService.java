@@ -127,6 +127,12 @@ public interface WxPayService {
   PayScoreService getPayScoreService();
 
   /**
+   * 获取电商收付通服务类
+   * @return
+   */
+  EcommerceService getEcommerceService();
+
+  /**
    * 设置企业付款服务类，允许开发者自定义实现类.
    *
    * @param entPayService the ent pay service
