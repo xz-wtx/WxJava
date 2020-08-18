@@ -29,10 +29,8 @@ public class RsaCryptoUtil {
   public static void encryptFields(Object encryptObject, X509Certificate certificate) throws WxPayException {
     try {
       encryptField(encryptObject, certificate);
-    } catch (IllegalAccessException | IllegalBlockSizeException e) {
+    } catch (Exception e) {
       throw new WxPayException("敏感信息加密失败", e);
-    } catch (Exception e2) {
-      throw new WxPayException("敏感信息加密失败", e2);
     }
   }
 
