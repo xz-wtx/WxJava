@@ -21,11 +21,11 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Accessors(chain = true)
 public class WxPayApplymentCreateResult implements Serializable {
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * 微信支付申请单号
-     */
-    @SerializedName("applyment_id")
-    private String applymentId;
+  /**
+   * 微信支付申请单号
+   */
+  @SerializedName("applyment_id")
+  private String applymentId;
 }
