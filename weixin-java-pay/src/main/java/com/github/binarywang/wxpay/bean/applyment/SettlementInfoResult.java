@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /**
  * 查询结算账户返回对象信息
  */
@@ -15,9 +17,9 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class SettlementInfoResult {
-
-    /**
+public class SettlementInfoResult implements Serializable {
+  private static final long serialVersionUID = 4568552340365230872L;
+  /**
      * 账户类型
      */
     @SerializedName("account_type")

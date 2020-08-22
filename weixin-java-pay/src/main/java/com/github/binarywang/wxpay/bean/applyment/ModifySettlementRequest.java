@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import com.github.binarywang.wxpay.v3.SpecEncrypt;
 
+import java.io.Serializable;
+
 /**
  * 修改结算账户请求对象
  */
@@ -17,7 +19,8 @@ import com.github.binarywang.wxpay.v3.SpecEncrypt;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class ModifySettlementRequest {
+public class ModifySettlementRequest implements Serializable {
+  private static final long serialVersionUID = 4568552340365230872L;
     /**
      *账户类型
      */

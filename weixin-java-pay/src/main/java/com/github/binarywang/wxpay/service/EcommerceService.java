@@ -24,7 +24,8 @@ public interface EcommerceService {
    * </pre>
    *
    * @param request 请求对象
-   * @return .
+   * @return . applyments result
+   * @throws WxPayException the wx pay exception
    */
   ApplymentsResult createApply(ApplymentsRequest request) throws WxPayException;
 
@@ -36,7 +37,8 @@ public interface EcommerceService {
    * </pre>
    *
    * @param applymentId 申请单ID
-   * @return .
+   * @return . applyments status result
+   * @throws WxPayException the wx pay exception
    */
   ApplymentsStatusResult queryApplyStatusByApplymentId(String applymentId) throws WxPayException;
 
@@ -48,7 +50,8 @@ public interface EcommerceService {
    * </pre>
    *
    * @param outRequestNo 业务申请编号
-   * @return .
+   * @return . applyments status result
+   * @throws WxPayException the wx pay exception
    */
   ApplymentsStatusResult queryApplyStatusByOutRequestNo(String outRequestNo) throws WxPayException;
 
