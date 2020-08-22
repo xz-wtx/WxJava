@@ -27,7 +27,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import javax.net.ssl.SSLContext;
-import java.math.BigInteger;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
@@ -262,7 +261,7 @@ public class WxPayServiceApacheHttpImpl extends BaseWxPayServiceImpl {
     }
 
     SSLConnectionSocketFactory connectionSocketFactory = new SSLConnectionSocketFactory(sslContext,
-      new String[]{"TLSv1"}, null, new DefaultHostnameVerifier());
+        new DefaultHostnameVerifier());
     httpClientBuilder.setSSLSocketFactory(connectionSocketFactory);
   }
 
