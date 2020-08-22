@@ -298,7 +298,12 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
 
   @Override
   public WxMaConfig getWxMaConfig() {
-    return this.wxMaConfig;
+    if (this.configMap.size() == 1) {
+      // 只有一个小程序，直接返回其配置即可
+      return this.configMap.values().iterator().next();
+    }
+
+    return this.configMap.get(WxMaConfigHolder.get());
   }
 
   @Override
