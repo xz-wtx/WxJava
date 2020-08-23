@@ -255,6 +255,7 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
           lock.unlock();
         }
         if (this.getWxMaConfig().autoRefreshToken()) {
+          log.warn("即将重新获取新的access_token，错误代码：{}，错误信息：{}", error.getErrorCode(), error.getErrorMsg());
           return this.execute(executor, uri, data);
         }
       }

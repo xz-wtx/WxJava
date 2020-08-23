@@ -161,6 +161,7 @@ public class WxOpenComponentServiceImpl implements WxOpenComponentService {
         }
 
         if (this.getWxOpenConfigStorage().autoRefreshToken()) {
+          log.warn("即将重新获取新的access_token，错误代码：{}，错误信息：{}", error.getErrorCode(), error.getErrorMsg());
           return this.post(uri, postData, accessTokenKey);
         }
       }
@@ -198,6 +199,7 @@ public class WxOpenComponentServiceImpl implements WxOpenComponentService {
           lock.unlock();
         }
         if (this.getWxOpenConfigStorage().autoRefreshToken()) {
+          log.warn("即将重新获取新的access_token，错误代码：{}，错误信息：{}", error.getErrorCode(), error.getErrorMsg());
           return this.get(uri, accessTokenKey);
         }
       }

@@ -372,6 +372,7 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
           lock.unlock();
         }
         if (this.getWxMpConfigStorage().autoRefreshToken()) {
+          log.warn("即将重新获取新的access_token，错误代码：{}，错误信息：{}", error.getErrorCode(), error.getErrorMsg());
           return this.execute(executor, uri, data);
         }
       }

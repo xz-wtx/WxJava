@@ -283,6 +283,7 @@ public abstract class BaseWxCpServiceImpl<H, P> implements WxCpService, RequestH
         // 强制设置wxCpConfigStorage它的access token过期了，这样在下一次请求里就会刷新access token
         this.configStorage.expireAccessToken();
         if (this.getWxCpConfigStorage().autoRefreshToken()) {
+          log.warn("即将重新获取新的access_token，错误代码：{}，错误信息：{}", error.getErrorCode(), error.getErrorMsg());
           return this.execute(executor, uri, data);
         }
       }
