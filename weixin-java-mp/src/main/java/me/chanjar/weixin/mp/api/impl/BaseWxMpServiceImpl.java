@@ -244,26 +244,6 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
   }
 
   @Override
-  public WxMpOAuth2AccessToken oauth2getAccessToken(String code) throws WxErrorException {
-    return this.oAuth2Service.getAccessToken(code);
-  }
-
-  @Override
-  public WxMpOAuth2AccessToken oauth2refreshAccessToken(String refreshToken) throws WxErrorException {
-    return this.oAuth2Service.refreshAccessToken(refreshToken);
-  }
-
-  @Override
-  public WxMpUser oauth2getUserInfo(WxMpOAuth2AccessToken token, String lang) throws WxErrorException {
-      return this.oAuth2Service.getUserInfo(token,lang);
-  }
-
-  @Override
-  public boolean oauth2validateAccessToken(WxMpOAuth2AccessToken token) {
-    return this.oAuth2Service.validateAccessToken(token);
-  }
-
-  @Override
   public String[] getCallbackIP() throws WxErrorException {
     String responseContent = this.get(GET_CALLBACK_IP_URL, null);
     JsonObject tmpJsonObject = GsonParser.parse(responseContent);

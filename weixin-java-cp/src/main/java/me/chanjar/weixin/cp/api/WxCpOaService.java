@@ -111,23 +111,6 @@ public interface WxCpOaService {
   WxCpApprovalDetailResult getApprovalDetail(@NonNull String spNo) throws WxErrorException;
 
   /**
-   * <pre>
-   *   获取审批数据 (已过期, 请使用"批量获取审批单号" && "获取审批申请详情")
-   *   通过本接口来获取公司一段时间内的审批记录。一次拉取调用最多拉取10000个审批记录，可以通过多次拉取的方式来满足需求，但调用频率不可超过600次/分。
-   *   API doc : https://work.weixin.qq.com/api/doc#90000/90135/91530
-   * </pre>
-   *
-   * @param startTime 获取审批记录的开始时间
-   * @param endTime   获取审批记录的结束时间
-   * @param nextSpnum 第一个拉取的审批单号，不填从该时间段的第一个审批单拉取
-   * @throws WxErrorException .
-   * @see me.chanjar.weixin.cp.api.WxCpOaService#getApprovalInfo
-   * @see me.chanjar.weixin.cp.api.WxCpOaService#getApprovalDetail
-   */
-  @Deprecated
-  WxCpApprovalDataResult getApprovalData(Date startTime, Date endTime, Long nextSpnum) throws WxErrorException;
-
-  /**
    * 获取公费电话拨打记录
    *
    * @param startTime 查询的起始时间戳

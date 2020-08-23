@@ -11,7 +11,6 @@ import lombok.Data;
  */
 @Data
 public class WxCpApprovalInfo implements Serializable {
-
   private static final long serialVersionUID = 7387181805254287167L;
 
   @SerializedName("errcode")

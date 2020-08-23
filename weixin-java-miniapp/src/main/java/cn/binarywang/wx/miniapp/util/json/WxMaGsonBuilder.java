@@ -1,7 +1,6 @@
 package cn.binarywang.wx.miniapp.util.json;
 
 import cn.binarywang.wx.miniapp.bean.WxMaSubscribeMessage;
-import cn.binarywang.wx.miniapp.bean.WxMaTemplateMessage;
 import cn.binarywang.wx.miniapp.bean.WxMaUniformMessage;
 import cn.binarywang.wx.miniapp.bean.analysis.WxMaRetainInfo;
 import cn.binarywang.wx.miniapp.bean.analysis.WxMaUserPortrait;
@@ -19,7 +18,6 @@ public class WxMaGsonBuilder {
 
   static {
     INSTANCE.disableHtmlEscaping();
-    INSTANCE.registerTypeAdapter(WxMaTemplateMessage.class, new WxMaTemplateMessageGsonAdapter());
     INSTANCE.registerTypeAdapter(WxMaSubscribeMessage.class, new WxMaSubscribeMessageGsonAdapter());
     INSTANCE.registerTypeAdapter(WxMaUniformMessage.class, new WxMaUniformMessageGsonAdapter());
     INSTANCE.registerTypeAdapter(WxMaCodeCommitRequest.class, new WxMaCodeCommitRequestGsonAdapter());

@@ -40,13 +40,11 @@ import java.util.concurrent.locks.Lock;
 @Slf4j
 public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestHttp<H, P> {
   private Map<String, WxMaConfig> configMap;
-  private WxMaConfig wxMaConfig;
 
   private final WxMaMsgService kefuService = new WxMaMsgServiceImpl(this);
   private final WxMaMediaService materialService = new WxMaMediaServiceImpl(this);
   private final WxMaUserService userService = new WxMaUserServiceImpl(this);
   private final WxMaQrcodeService qrCodeService = new WxMaQrcodeServiceImpl(this);
-  private final WxMaTemplateService templateService = new WxMaTemplateServiceImpl(this);
   private final WxMaAnalysisService analysisService = new WxMaAnalysisServiceImpl(this);
   private final WxMaCodeService codeService = new WxMaCodeServiceImpl(this);
   private final WxMaSettingService settingService = new WxMaSettingServiceImpl(this);
@@ -275,9 +273,9 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
   /**
    * 设置当前的AccessToken
    *
-   * @param resultContent
-   * @return
-   * @throws WxErrorException
+   * @param resultContent 响应内容
+   * @return access token
+   * @throws WxErrorException 异常
    */
   protected String extractAccessToken(String resultContent) throws WxErrorException {
     WxMaConfig config = this.getWxMaConfig();
@@ -397,11 +395,6 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
   @Override
   public WxMaQrcodeService getQrcodeService() {
     return this.qrCodeService;
-  }
-
-  @Override
-  public WxMaTemplateService getTemplateService() {
-    return this.templateService;
   }
 
   @Override
