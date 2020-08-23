@@ -222,25 +222,9 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
   }
 
   @Override
-  public String oauth2buildAuthorizationUrl(String redirectURI, String scope, String state) {
-    return String.format(CONNECT_OAUTH2_AUTHORIZE_URL.getUrl(this.getWxMpConfigStorage()),
-      this.getWxMpConfigStorage().getAppId(), URIUtil.encodeURIComponent(redirectURI), scope, StringUtils.trimToEmpty(state));
-  }
-
-  @Override
   public String buildQrConnectUrl(String redirectUri, String scope, String state) {
     return String.format(QRCONNECT_URL.getUrl(this.getWxMpConfigStorage()), this.getWxMpConfigStorage().getAppId(),
       URIUtil.encodeURIComponent(redirectUri), scope, StringUtils.trimToEmpty(state));
-  }
-
-  private WxMpOAuth2AccessToken getOAuth2AccessToken(String url) throws WxErrorException {
-    try {
-      RequestExecutor<String, String> executor = SimpleGetRequestExecutor.create(this);
-      String responseText = executor.execute(url, null, WxType.MP);
-      return WxMpOAuth2AccessToken.fromJson(responseText);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
   }
 
   @Override
