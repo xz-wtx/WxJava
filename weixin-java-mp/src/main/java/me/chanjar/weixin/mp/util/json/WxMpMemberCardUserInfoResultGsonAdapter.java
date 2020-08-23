@@ -9,9 +9,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import me.chanjar.weixin.common.util.json.GsonHelper;
-import me.chanjar.weixin.mp.bean.membercard.MemberCardUserInfo;
-import me.chanjar.weixin.mp.bean.membercard.NameValues;
-import me.chanjar.weixin.mp.bean.membercard.WxMpMemberCardUserInfoResult;
+import me.chanjar.weixin.mp.bean.card.membercard.MemberCardUserInfo;
+import me.chanjar.weixin.mp.bean.card.membercard.NameValues;
+import me.chanjar.weixin.mp.bean.card.membercard.WxMpMemberCardUserInfoResult;
 
 import static me.chanjar.weixin.common.util.json.GsonHelper.getString;
 

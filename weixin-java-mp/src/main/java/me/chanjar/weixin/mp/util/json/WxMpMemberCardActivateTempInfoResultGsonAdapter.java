@@ -2,9 +2,9 @@ package me.chanjar.weixin.mp.util.json;
 
 import com.google.gson.*;
 import me.chanjar.weixin.common.util.json.GsonHelper;
-import me.chanjar.weixin.mp.bean.membercard.MemberCardUserInfo;
-import me.chanjar.weixin.mp.bean.membercard.NameValues;
-import me.chanjar.weixin.mp.bean.membercard.WxMpMemberCardActivateTempInfoResult;
+import me.chanjar.weixin.mp.bean.card.membercard.MemberCardUserInfo;
+import me.chanjar.weixin.mp.bean.card.membercard.NameValues;
+import me.chanjar.weixin.mp.bean.card.membercard.WxMpMemberCardActivateTempInfoResult;
 
 import java.lang.reflect.Type;
 

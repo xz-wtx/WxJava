@@ -40,7 +40,7 @@ public class WxCpTagServiceImplTest {
 
   @Test
   public void testCreate() throws Exception {
-    this.tagId = this.wxService.getTagService().create("测试标签" + System.currentTimeMillis());
+    this.tagId = this.wxService.getTagService().create("测试标签" + System.currentTimeMillis(), null);
     System.out.println(this.tagId);
   }
 

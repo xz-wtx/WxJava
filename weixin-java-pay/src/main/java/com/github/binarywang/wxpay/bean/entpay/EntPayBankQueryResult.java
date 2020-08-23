@@ -95,16 +95,16 @@ public class EntPayBankQueryResult extends BaseWxPayResult {
   private String failReason;
 
   @Override
-  protected void loadXML(Document d) {
-    partnerTradeNo = readXMLString(d, "partner_trade_no");
-    paymentNo = readXMLString(d, "payment_no");
-    bankNoMd5 = readXMLString(d, "bank_no_md5");
-    trueNameMd5 = readXMLString(d, "true_name_md5");
-    amount = readXMLInteger(d, "amount");
-    status = readXMLString(d, "status");
-    cmmsAmount = readXMLInteger(d, "cmms_amt");
-    createTime = readXMLString(d, "create_time");
-    paySuccessTime = readXMLString(d, "pay_succ_time");
-    failReason = readXMLString(d, "reason");
+  protected void loadXml(Document d) {
+    partnerTradeNo = readXmlString(d, "partner_trade_no");
+    paymentNo = readXmlString(d, "payment_no");
+    bankNoMd5 = readXmlString(d, "bank_no_md5");
+    trueNameMd5 = readXmlString(d, "true_name_md5");
+    amount = readXmlInteger(d, "amount");
+    status = readXmlString(d, "status");
+    cmmsAmount = readXmlInteger(d, "cmms_amt");
+    createTime = readXmlString(d, "create_time");
+    paySuccessTime = readXmlString(d, "pay_succ_time");
+    failReason = readXmlString(d, "reason");
   }
 }

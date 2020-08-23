@@ -12,10 +12,6 @@ import java.util.List;
  * @author gaigeshen
  */
 public interface WxCpChatService {
-
-  @Deprecated
-  String chatCreate(String name, String owner, List<String> users, String chatId) throws WxErrorException;
-
   /**
    * 创建群聊会话，注意：刚创建的群，如果没有下发消息，在企业微信不会出现该群.
    *
@@ -28,9 +24,6 @@ public interface WxCpChatService {
    */
   String create(String name, String owner, List<String> users, String chatId) throws WxErrorException;
 
-  @Deprecated
-  void chatUpdate(String chatId, String name, String owner, List<String> usersToAdd, List<String> usersToDelete) throws WxErrorException;
-
   /**
    * 修改群聊会话.
    *
@@ -42,9 +35,6 @@ public interface WxCpChatService {
    * @throws WxErrorException 异常
    */
   void update(String chatId, String name, String owner, List<String> usersToAdd, List<String> usersToDelete) throws WxErrorException;
-
-  @Deprecated
-  WxCpChat chatGet(String chatId) throws WxErrorException;
 
   /**
    * 获取群聊会话.

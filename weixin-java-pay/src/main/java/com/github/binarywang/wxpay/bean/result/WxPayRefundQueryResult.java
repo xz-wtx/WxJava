@@ -1,15 +1,17 @@
 package com.github.binarywang.wxpay.bean.result;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import me.chanjar.weixin.common.util.json.GsonParser;
+import me.chanjar.weixin.common.util.json.WxGsonBuilder;
+import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * <pre>
@@ -23,7 +25,8 @@ import org.w3c.dom.Document;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @XStreamAlias("xml")
-public class WxPayRefundQueryResult extends BaseWxPayResult {
+public class WxPayRefundQueryResult extends BaseWxPayResult implements Serializable {
+  private static final long serialVersionUID = 5392369423225328754L;
   /**
    * <pre>
    * 字段名：设备号.
@@ -131,6 +134,34 @@ public class WxPayRefundQueryResult extends BaseWxPayResult {
   private List<RefundRecord> refundRecords;
 
   /**
+   * 营销详情.
+   */
+  @XStreamAlias("promotion_detail")
+  private String promotionDetailString;
+
+  private List<WxPayRefundPromotionDetail> promotionDetails;
+
+  /**
+   * 组装生成营销详情信息.
+   */
+  public void composePromotionDetails() {
+    if (StringUtils.isEmpty(this.promotionDetailString)) {
+      return;
+    }
+
+    JsonObject tmpJson = GsonParser.parse(this.promotionDetailString);
+
+    final List<WxPayRefundPromotionDetail> promotionDetail = WxGsonBuilder.create()
+      .fromJson(tmpJson.get("promotion_detail"),
+        new TypeToken<List<WxPayRefundPromotionDetail>>() {
+        }.getType()
+      );
+
+    this.setPromotionDetails(promotionDetail);
+  }
+
+
+  /**
    * 组装生成退款记录属性的内容.
    */
   public void composeRefundRecords() {
@@ -179,15 +210,15 @@ public class WxPayRefundQueryResult extends BaseWxPayResult {
    * @param d Document
    */
   @Override
-  protected void loadXML(Document d) {
-    deviceInfo = readXMLString(d, "device_info");
-    transactionId = readXMLString(d, "transaction_id");
-    outTradeNo = readXMLString(d, "out_trade_no");
-    totalFee = readXMLInteger(d, "total_fee");
-    settlementTotalFee = readXMLInteger(d, "settlement_total_fee");
-    feeType = readXMLString(d, "fee_type");
-    cashFee = readXMLInteger(d, "cash_fee");
-    refundCount = readXMLInteger(d, "refund_count");
+  protected void loadXml(Document d) {
+    deviceInfo = readXmlString(d, "device_info");
+    transactionId = readXmlString(d, "transaction_id");
+    outTradeNo = readXmlString(d, "out_trade_no");
+    totalFee = readXmlInteger(d, "total_fee");
+    settlementTotalFee = readXmlInteger(d, "settlement_total_fee");
+    feeType = readXmlString(d, "fee_type");
+    cashFee = readXmlInteger(d, "cash_fee");
+    refundCount = readXmlInteger(d, "refund_count");
   }
 
   /**

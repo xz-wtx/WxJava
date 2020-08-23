@@ -1,13 +1,13 @@
 package me.chanjar.weixin.cp.api.impl;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.common.util.json.GsonParser;
 import me.chanjar.weixin.cp.api.WxCpOaService;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.oa.*;
@@ -32,6 +32,13 @@ public class WxCpOaServiceImpl implements WxCpOaService {
   private static final int USER_IDS_LIMIT = 100;
 
   @Override
+  public String apply(WxCpOaApplyEventRequest request) throws WxErrorException {
+    String responseContent = this.mainService.post(this.mainService.getWxCpConfigStorage().getApiUrl(APPLY_EVENT),
+      request.toJson());
+    return GsonParser.parse(responseContent).get("sp_no").getAsString();
+  }
+
+  @Override
   public List<WxCpCheckinData> getCheckinData(Integer openCheckinDataType, Date startTime, Date endTime,
                                               List<String> userIdList) throws WxErrorException {
     if (startTime == null || endTime == null) {
@@ -42,10 +49,10 @@ public class WxCpOaServiceImpl implements WxCpOaService {
       throw new RuntimeException("用户列表不能为空，不超过 " + USER_IDS_LIMIT + " 个，若用户超过 " + USER_IDS_LIMIT + " 个，请分批获取");
     }
 
-    long endtimestamp = endTime.getTime() / 1000L;
-    long starttimestamp = startTime.getTime() / 1000L;
+    long endTimestamp = endTime.getTime() / 1000L;
+    long startTimestamp = startTime.getTime() / 1000L;
 
-    if (endtimestamp - starttimestamp < 0 || endtimestamp - starttimestamp >= MONTH_SECONDS) {
+    if (endTimestamp - startTimestamp < 0 || endTimestamp - startTimestamp >= MONTH_SECONDS) {
       throw new RuntimeException("获取记录时间跨度不超过一个月");
     }
 
@@ -53,8 +60,8 @@ public class WxCpOaServiceImpl implements WxCpOaService {
     JsonArray jsonArray = new JsonArray();
 
     jsonObject.addProperty("opencheckindatatype", openCheckinDataType);
-    jsonObject.addProperty("starttime", starttimestamp);
-    jsonObject.addProperty("endtime", endtimestamp);
+    jsonObject.addProperty("starttime", startTimestamp);
+    jsonObject.addProperty("endtime", endTimestamp);
 
     for (String userid : userIdList) {
       jsonArray.add(userid);
@@ -64,10 +71,10 @@ public class WxCpOaServiceImpl implements WxCpOaService {
 
     final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GET_CHECKIN_DATA);
     String responseContent = this.mainService.post(url, jsonObject.toString());
-    JsonElement tmpJsonElement = new JsonParser().parse(responseContent);
+    JsonObject tmpJson = GsonParser.parse(responseContent);
     return WxCpGsonBuilder.create()
       .fromJson(
-        tmpJsonElement.getAsJsonObject().get("checkindata"),
+        tmpJson.get("checkindata"),
         new TypeToken<List<WxCpCheckinData>>() {
         }.getType()
       );
@@ -94,11 +101,11 @@ public class WxCpOaServiceImpl implements WxCpOaService {
 
     final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GET_CHECKIN_OPTION);
     String responseContent = this.mainService.post(url, jsonObject.toString());
-    JsonElement tmpJsonElement = new JsonParser().parse(responseContent);
+    JsonObject tmpJson = GsonParser.parse(responseContent);
 
     return WxCpGsonBuilder.create()
       .fromJson(
-        tmpJsonElement.getAsJsonObject().get("info"),
+        tmpJson.get("info"),
         new TypeToken<List<WxCpCheckinOption>>() {
         }.getType()
       );
@@ -158,20 +165,6 @@ public class WxCpOaServiceImpl implements WxCpOaService {
   }
 
   @Override
-  public WxCpApprovalDataResult getApprovalData(Date startTime, Date endTime, Long nextSpnum) throws WxErrorException {
-    JsonObject jsonObject = new JsonObject();
-    jsonObject.addProperty("starttime", startTime.getTime() / 1000L);
-    jsonObject.addProperty("endtime", endTime.getTime() / 1000L);
-    if (nextSpnum != null) {
-      jsonObject.addProperty("next_spnum", nextSpnum);
-    }
-
-    final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GET_APPROVAL_DATA);
-    String responseContent = this.mainService.post(url, jsonObject.toString());
-    return WxCpGsonBuilder.create().fromJson(responseContent, WxCpApprovalDataResult.class);
-  }
-
-  @Override
   public List<WxCpDialRecord> getDialRecord(Date startTime, Date endTime, Integer offset, Integer limit)
     throws WxErrorException {
     JsonObject jsonObject = new JsonObject();
@@ -202,9 +195,9 @@ public class WxCpOaServiceImpl implements WxCpOaService {
 
     final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GET_DIAL_RECORD);
     String responseContent = this.mainService.post(url, jsonObject.toString());
-    JsonElement tmpJsonElement = new JsonParser().parse(responseContent);
+    JsonObject tmpJson = GsonParser.parse(responseContent);
 
-    return WxCpGsonBuilder.create().fromJson(tmpJsonElement.getAsJsonObject().get("record"),
+    return WxCpGsonBuilder.create().fromJson(tmpJson.get("record"),
       new TypeToken<List<WxCpDialRecord>>() {
       }.getType()
     );
@@ -213,9 +206,9 @@ public class WxCpOaServiceImpl implements WxCpOaService {
   @Override
   public WxCpTemplateResult getTemplateDetail(@NonNull String templateId) throws WxErrorException {
     JsonObject jsonObject = new JsonObject();
-    jsonObject.addProperty("template_id",templateId);
+    jsonObject.addProperty("template_id", templateId);
     final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GET_TEMPLATE_DETAIL);
     String responseContent = this.mainService.post(url, jsonObject.toString());
-    return WxCpGsonBuilder.create().fromJson(responseContent,WxCpTemplateResult.class);
+    return WxCpGsonBuilder.create().fromJson(responseContent, WxCpTemplateResult.class);
   }
 }

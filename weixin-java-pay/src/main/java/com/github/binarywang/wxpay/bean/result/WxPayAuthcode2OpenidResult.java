@@ -6,6 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.w3c.dom.Document;
 
+import java.io.Serializable;
+
 /**
  * <pre>
  *  授权码查询openid接口请求结果类
@@ -18,7 +20,8 @@ import org.w3c.dom.Document;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @XStreamAlias("xml")
-public class WxPayAuthcode2OpenidResult extends BaseWxPayResult {
+public class WxPayAuthcode2OpenidResult extends BaseWxPayResult implements Serializable {
+  private static final long serialVersionUID = -2409408725777108398L;
   /**
    * <pre>
    *   用户标识.
@@ -37,8 +40,8 @@ public class WxPayAuthcode2OpenidResult extends BaseWxPayResult {
    * @param d Document
    */
   @Override
-  protected void loadXML(Document d) {
-    openid = readXMLString(d, "openid");
+  protected void loadXml(Document d) {
+    openid = readXmlString(d, "openid");
   }
 
 }

@@ -23,7 +23,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @XStreamAlias("xml")
-public class WxPayRedpackQueryResult extends BaseWxPayResult {
+public class WxPayRedpackQueryResult extends BaseWxPayResult implements Serializable {
   private static final long serialVersionUID = -3849864122189552906L;
 
   /**
@@ -233,21 +233,21 @@ public class WxPayRedpackQueryResult extends BaseWxPayResult {
    * @param d Document
    */
   @Override
-  protected void loadXML(Document d) {
-    mchBillNo = readXMLString(d, "mch_billno");
-    detailId = readXMLString(d, "detail_id");
-    status = readXMLString(d, "status");
-    sendType = readXMLString(d, "send_type");
-    hbType = readXMLString(d, "hb_type");
-    totalNum = readXMLInteger(d, "total_num");
-    totalAmount = readXMLInteger(d, "total_amount");
-    reason = readXMLString(d, "reason");
-    sendTime = readXMLString(d, "send_time");
-    refundTime = readXMLString(d, "refund_time");
-    refundAmount = readXMLInteger(d, "refund_amount");
-    wishing = readXMLString(d, "wishing");
-    remark = readXMLString(d, "remark");
-    actName = readXMLString(d, "act_name");
+  protected void loadXml(Document d) {
+    mchBillNo = readXmlString(d, "mch_billno");
+    detailId = readXmlString(d, "detail_id");
+    status = readXmlString(d, "status");
+    sendType = readXmlString(d, "send_type");
+    hbType = readXmlString(d, "hb_type");
+    totalNum = readXmlInteger(d, "total_num");
+    totalAmount = readXmlInteger(d, "total_amount");
+    reason = readXmlString(d, "reason");
+    sendTime = readXmlString(d, "send_time");
+    refundTime = readXmlString(d, "refund_time");
+    refundAmount = readXmlInteger(d, "refund_amount");
+    wishing = readXmlString(d, "wishing");
+    remark = readXmlString(d, "remark");
+    actName = readXmlString(d, "act_name");
 
     NodeList nodeList = d.getElementsByTagName("hbinfo");
     List<RedpackInfo> list = new ArrayList<>(nodeList.getLength());
@@ -255,9 +255,9 @@ public class WxPayRedpackQueryResult extends BaseWxPayResult {
     for (int i = 0, j = nodeList.getLength(); i < j; i++) {
       Node node = nodeList.item(i);
       RedpackInfo rp = new RedpackInfo();
-      rp.amount = readXMLInteger(node, "amount");
-      rp.openid = readXMLString(node, "openid");
-      rp.receiveTime = readXMLString(node, "rcv_time");
+      rp.amount = readXmlInteger(node, "amount");
+      rp.openid = readXmlString(node, "openid");
+      rp.receiveTime = readXmlString(node, "rcv_time");
       list.add(rp);
     }
 

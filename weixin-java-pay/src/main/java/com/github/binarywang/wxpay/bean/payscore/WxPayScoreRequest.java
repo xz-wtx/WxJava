@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import me.chanjar.weixin.common.util.json.WxGsonBuilder;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,6 +22,10 @@ import java.util.List;
 @Accessors(chain = true)
 public class WxPayScoreRequest implements Serializable {
   private static final long serialVersionUID = 364764508076146082L;
+
+  public String toJson() {
+    return WxGsonBuilder.create().toJson(this);
+  }
 
   /**
    * out_order_no : 1234323JKHDFE1243252

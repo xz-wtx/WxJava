@@ -31,18 +31,4 @@ public class WxOpenMpServiceImpl extends WxMpServiceImpl {
     return wxOpenComponentService.getAuthorizerAccessToken(appId, forceRefresh);
   }
 
-  @Override
-  public WxMpOAuth2AccessToken oauth2getAccessToken(String code) throws WxErrorException {
-    return wxOpenComponentService.oauth2getAccessToken(appId, code);
-  }
-
-  @Override
-  public WxMpOAuth2AccessToken oauth2refreshAccessToken(String refreshToken) throws WxErrorException {
-    return wxOpenComponentService.oauth2refreshAccessToken(appId, refreshToken);
-  }
-
-  @Override
-  public String oauth2buildAuthorizationUrl(String redirectURI, String scope, String state) {
-    return wxOpenComponentService.oauth2buildAuthorizationUrl(appId, redirectURI, scope, state);
-  }
 }

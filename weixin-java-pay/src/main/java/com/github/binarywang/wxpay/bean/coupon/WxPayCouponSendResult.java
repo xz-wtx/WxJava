@@ -138,15 +138,15 @@ public class WxPayCouponSendResult extends BaseWxPayResult {
   private String retMsg;
 
   @Override
-  protected void loadXML(Document d) {
-    deviceInfo = readXMLString(d, "device_info");
-    couponStockId = readXMLString(d, "coupon_stock_id");
-    respCount = readXMLInteger(d, "resp_count");
-    successCount = readXMLInteger(d, "success_count");
-    failedCount = readXMLInteger(d, "failed_count");
-    openid = readXMLString(d, "openid");
-    retCode = readXMLString(d, "ret_code");
-    couponId = readXMLString(d, "coupon_id");
-    retMsg = readXMLString(d, "ret_msg");
+  protected void loadXml(Document d) {
+    deviceInfo = readXmlString(d, "device_info");
+    couponStockId = readXmlString(d, "coupon_stock_id");
+    respCount = readXmlInteger(d, "resp_count");
+    successCount = readXmlInteger(d, "success_count");
+    failedCount = readXmlInteger(d, "failed_count");
+    openid = readXmlString(d, "openid");
+    retCode = readXmlString(d, "ret_code");
+    couponId = readXmlString(d, "coupon_id");
+    retMsg = readXmlString(d, "ret_msg");
   }
 }

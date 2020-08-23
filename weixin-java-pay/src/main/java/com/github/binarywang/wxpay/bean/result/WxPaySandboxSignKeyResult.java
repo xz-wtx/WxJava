@@ -6,6 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.w3c.dom.Document;
 
+import java.io.Serializable;
+
 /**
  * <pre>
  *  Created by BinaryWang on 2017/6/18.
@@ -17,8 +19,8 @@ import org.w3c.dom.Document;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @XStreamAlias("xml")
-public class WxPaySandboxSignKeyResult extends BaseWxPayResult {
-
+public class WxPaySandboxSignKeyResult extends BaseWxPayResult implements Serializable {
+  private static final long serialVersionUID = -5793375529340378941L;
   /**
    * <pre>
    * 沙箱密钥
@@ -38,8 +40,8 @@ public class WxPaySandboxSignKeyResult extends BaseWxPayResult {
    * @param d Document
    */
   @Override
-  protected void loadXML(Document d) {
-    sandboxSignKey = readXMLString(d, "sandbox_signkey");
+  protected void loadXml(Document d) {
+    sandboxSignKey = readXmlString(d, "sandbox_signkey");
   }
 
 }

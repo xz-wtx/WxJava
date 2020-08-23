@@ -16,6 +16,22 @@ import java.util.List;
 public interface WxCpOaService {
 
   /**
+   * <pre>提交审批申请
+   * 调试工具
+   * 企业可通过审批应用或自建应用Secret调用本接口，代应用可见范围内员工在企业微信“审批应用”内提交指定类型的审批申请。
+   *
+   * 请求方式：POST（HTTPS）
+   * 请求地址： https://qyapi.weixin.qq.com/cgi-bin/oa/applyevent?access_token=ACCESS_TOKEN
+   * 文档地址：https://work.weixin.qq.com/api/doc/90000/90135/91853
+   * </pre>
+   *
+   * @param request 请求
+   * @return 表单提交成功后，返回的表单编号
+   * @throws WxErrorException .
+   */
+  String apply(WxCpOaApplyEventRequest request) throws WxErrorException;
+
+  /**
    * <pre>
    *  获取打卡数据
    *  API doc : https://work.weixin.qq.com/api/doc#90000/90135/90262
@@ -40,7 +56,7 @@ public interface WxCpOaService {
    * @param datetime   需要获取规则的当天日期
    * @param userIdList 需要获取打卡规则的用户列表
    * @return 打卡规则列表
-   * @throws WxErrorException
+   * @throws WxErrorException .
    */
   List<WxCpCheckinOption> getCheckinOption(Date datetime, List<String> userIdList) throws WxErrorException;
 
@@ -63,7 +79,7 @@ public interface WxCpOaService {
    * @param size      一次请求拉取审批单数量，默认值为100，上限值为100
    * @param filters   筛选条件，可对批量拉取的审批申请设置约束条件，支持设置多个条件,nullable
    * @return WxCpApprovalInfo
-   * @throws WxErrorException
+   * @throws WxErrorException .
    */
   WxCpApprovalInfo getApprovalInfo(@NonNull Date startTime, @NonNull Date endTime, Integer cursor, Integer size,
                                    List<WxCpApprovalInfoQueryFilter> filters) throws WxErrorException;
@@ -74,7 +90,7 @@ public interface WxCpOaService {
    * @param startTime 开始时间
    * @param endTime   结束时间
    * @return WxCpApprovalInfo
-   * @throws WxErrorException
+   * @throws WxErrorException .
    * @see me.chanjar.weixin.cp.api.WxCpOaService#getApprovalInfo
    */
   WxCpApprovalInfo getApprovalInfo(@NonNull Date startTime, @NonNull Date endTime) throws WxErrorException;
@@ -90,26 +106,9 @@ public interface WxCpOaService {
    *
    * @param spNo 审批单编号。
    * @return WxCpApprovaldetail
-   * @throws WxErrorException
+   * @throws WxErrorException .
    */
   WxCpApprovalDetailResult getApprovalDetail(@NonNull String spNo) throws WxErrorException;
-
-  /**
-   * <pre>
-   *   获取审批数据 (已过期, 请使用"批量获取审批单号" && "获取审批申请详情")
-   *   通过本接口来获取公司一段时间内的审批记录。一次拉取调用最多拉取10000个审批记录，可以通过多次拉取的方式来满足需求，但调用频率不可超过600次/分。
-   *   API doc : https://work.weixin.qq.com/api/doc#90000/90135/91530
-   * </pre>
-   *
-   * @param startTime 获取审批记录的开始时间
-   * @param endTime   获取审批记录的结束时间
-   * @param nextSpnum 第一个拉取的审批单号，不填从该时间段的第一个审批单拉取
-   * @throws WxErrorException
-   * @see me.chanjar.weixin.cp.api.WxCpOaService#getApprovalInfo
-   * @see me.chanjar.weixin.cp.api.WxCpOaService#getApprovalDetail
-   */
-  @Deprecated
-  WxCpApprovalDataResult getApprovalData(Date startTime, Date endTime, Long nextSpnum) throws WxErrorException;
 
   /**
    * 获取公费电话拨打记录
@@ -118,18 +117,19 @@ public interface WxCpOaService {
    * @param endTime   查询的结束时间戳
    * @param offset    分页查询的偏移量
    * @param limit     分页查询的每页大小,默认为100条，如该参数大于100则按100处理
-   * @return
-   * @throws WxErrorException
+   * @return .
+   * @throws WxErrorException .
    */
   List<WxCpDialRecord> getDialRecord(Date startTime, Date endTime, Integer offset,
                                      Integer limit) throws WxErrorException;
 
   /**
    * 获取审批模板详情
+   *
    * @param templateId 模板ID
-   * @return
-   * @throws WxErrorException
+   * @return .
+   * @throws WxErrorException .
    */
-  WxCpTemplateResult getTemplateDetail(@NonNull String templateId)throws WxErrorException;
+  WxCpTemplateResult getTemplateDetail(@NonNull String templateId) throws WxErrorException;
 
 }

@@ -193,12 +193,13 @@ public enum WxMpTemplateIndustryEnum {
   /**
    * 查找行业
    *
-   * @param industry 二级行业名称
+   * @param firstClass  主行业名称
+   * @param secondClass 副行业名称
    * @return .
    */
-  public static WxMpTemplateIndustryEnum findBySecondary(String industry) {
+  public static WxMpTemplateIndustryEnum findByClass(String firstClass, String secondClass) {
     for (WxMpTemplateIndustryEnum industryEnum : WxMpTemplateIndustryEnum.values()) {
-      if (industryEnum.secondClass.contains(industry)) {
+      if (industryEnum.firstClass.equals(firstClass) && industryEnum.secondClass.contains(secondClass)) {
         return industryEnum;
       }
     }

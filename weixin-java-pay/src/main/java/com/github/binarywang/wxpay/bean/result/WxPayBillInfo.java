@@ -1,10 +1,10 @@
 package com.github.binarywang.wxpay.bean.result;
 
-import java.io.Serializable;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import me.chanjar.weixin.common.util.json.WxGsonBuilder;
+
+import java.io.Serializable;
 
 /**
  * 交易时间:2017-04-06 01:00:02 公众账号ID: 商户号: 子商户号:0 设备号:WEB 微信订单号: 商户订单号:2017040519091071873216 用户标识: 交易类型:NATIVE

@@ -80,14 +80,14 @@ public class EntPayRedpackResult extends BaseWxPayResult implements Serializable
   private String senderHeaderMediaId;
 
   @Override
-  protected void loadXML(Document d) {
-    mchBillNo = readXMLString(d, "mch_billno");
-    mchId = readXMLString(d, "mch_id");
-    wxAppId = readXMLString(d, "wxappid");
-    reOpenid = readXMLString(d, "re_openid");
-    totalAmount = readXMLString(d, "totalAmount");
-    sendListId = readXMLString(d, "sendListid");
-    senderName = readXMLString(d, "sender_name");
-    senderHeaderMediaId = readXMLString(d, "sender_header_media_id");
+  protected void loadXml(Document d) {
+    mchBillNo = readXmlString(d, "mch_billno");
+    mchId = readXmlString(d, "mch_id");
+    wxAppId = readXmlString(d, "wxappid");
+    reOpenid = readXmlString(d, "re_openid");
+    totalAmount = readXmlString(d, "totalAmount");
+    sendListId = readXmlString(d, "sendListid");
+    senderName = readXmlString(d, "sender_name");
+    senderHeaderMediaId = readXmlString(d, "sender_header_media_id");
   }
 }

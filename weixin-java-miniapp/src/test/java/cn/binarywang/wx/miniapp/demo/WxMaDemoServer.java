@@ -4,15 +4,12 @@ import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.api.impl.WxMaServiceImpl;
 import cn.binarywang.wx.miniapp.bean.WxMaKefuMessage;
 import cn.binarywang.wx.miniapp.bean.WxMaMessage;
-import cn.binarywang.wx.miniapp.bean.WxMaTemplateData;
-import cn.binarywang.wx.miniapp.bean.WxMaTemplateMessage;
 import cn.binarywang.wx.miniapp.config.WxMaConfig;
 import cn.binarywang.wx.miniapp.constant.WxMaConstants;
 import cn.binarywang.wx.miniapp.message.WxMaMessageHandler;
 import cn.binarywang.wx.miniapp.message.WxMaMessageRouter;
 import cn.binarywang.wx.miniapp.message.WxMaXmlOutMessage;
 import cn.binarywang.wx.miniapp.test.TestConfig;
-import com.google.common.collect.Lists;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.bean.result.WxMediaUploadResult;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -97,22 +94,6 @@ public class WxMaDemoServer {
     }
   };
 
-  private static final WxMaMessageHandler templateMsgHandler = new WxMaMessageHandler() {
-    @Override
-    public WxMaXmlOutMessage handle(WxMaMessage wxMessage, Map<String, Object> context,
-                                    WxMaService service, WxSessionManager sessionManager)
-      throws WxErrorException {
-      service.getMsgService().sendTemplateMsg(WxMaTemplateMessage.builder()
-        .templateId(templateId).data(Lists.newArrayList(
-          new WxMaTemplateData("keyword1", "339208499", "#173177")))
-        .toUser(wxMessage.getFromUser())
-        .formId("自己替换可用的formid")
-        .build());
-      return null;
-    }
-
-  };
-
   private static final WxMaMessageHandler customerServiceMessageHandler = new WxMaMessageHandler() {
     @Override
     public WxMaXmlOutMessage handle(WxMaMessage message, Map<String, Object> context, WxMaService service, WxSessionManager sessionManager) {
@@ -157,7 +138,6 @@ public class WxMaDemoServer {
       router = new WxMaMessageRouter(service);
 
       router.rule().handler(logHandler).next()
-        .rule().async(false).content("模板").handler(templateMsgHandler).end()
         .rule().async(false).content("文本").handler(textHandler).end()
         .rule().async(false).content("图片").handler(picHandler).end()
         .rule().async(false).content("二维码").handler(qrcodeHandler).end()

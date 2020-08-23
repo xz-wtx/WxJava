@@ -1,8 +1,6 @@
 package com.github.binarywang.wxpay.service.impl;
 
 import com.github.binarywang.wxpay.bean.profitsharing.*;
-import com.github.binarywang.wxpay.bean.profitsharing.ProfitSharingResult;
-import com.github.binarywang.wxpay.bean.profitsharing.ProfitSharingRequest;
 import com.github.binarywang.wxpay.bean.result.BaseWxPayResult;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.ProfitSharingService;
@@ -76,6 +74,8 @@ public class ProfitSharingServiceImpl implements ProfitSharingService {
 
   @Override
   public ProfitSharingQueryResult profitSharingQuery(ProfitSharingQueryRequest request) throws WxPayException {
+    request.setAppid(null);
+
     request.checkAndSign(this.payService.getConfig());
     String url = this.payService.getPayBaseUrl() + "/pay/profitsharingquery";
 

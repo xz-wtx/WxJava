@@ -27,7 +27,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @XStreamAlias("xml")
-public class WxPayOrderQueryResult extends BaseWxPayResult {
+public class WxPayOrderQueryResult extends BaseWxPayResult implements Serializable {
   private static final long serialVersionUID = 8241891654782412789L;
 
   /**
@@ -341,26 +341,26 @@ public class WxPayOrderQueryResult extends BaseWxPayResult {
    * @param d Document
    */
   @Override
-  protected void loadXML(Document d) {
-    promotionDetail = readXMLString(d, "promotion_detail");
-    deviceInfo = readXMLString(d, "device_info");
-    openid = readXMLString(d, "openid");
-    isSubscribe = readXMLString(d, "is_subscribe");
-    tradeType = readXMLString(d, "trade_type");
-    tradeState = readXMLString(d, "trade_state");
-    bankType = readXMLString(d, "bank_type");
-    totalFee = readXMLInteger(d, "total_fee");
-    settlementTotalFee = readXMLInteger(d, "settlement_total_fee");
-    feeType = readXMLString(d, "fee_type");
-    cashFee = readXMLInteger(d, "cash_fee");
-    cashFeeType = readXMLString(d, "cash_fee_type");
-    couponFee = readXMLInteger(d, "coupon_fee");
-    couponCount = readXMLInteger(d, "coupon_count");
-    this.transactionId = readXMLString(d, "transaction_id");
-    this.outTradeNo = readXMLString(d, "out_trade_no");
-    this.attach = readXMLString(d, "attach");
-    this.timeEnd = readXMLString(d, "time_end");
-    this.tradeStateDesc = readXMLString(d, "trade_state_desc");
+  protected void loadXml(Document d) {
+    promotionDetail = readXmlString(d, "promotion_detail");
+    deviceInfo = readXmlString(d, "device_info");
+    openid = readXmlString(d, "openid");
+    isSubscribe = readXmlString(d, "is_subscribe");
+    tradeType = readXmlString(d, "trade_type");
+    tradeState = readXmlString(d, "trade_state");
+    bankType = readXmlString(d, "bank_type");
+    totalFee = readXmlInteger(d, "total_fee");
+    settlementTotalFee = readXmlInteger(d, "settlement_total_fee");
+    feeType = readXmlString(d, "fee_type");
+    cashFee = readXmlInteger(d, "cash_fee");
+    cashFeeType = readXmlString(d, "cash_fee_type");
+    couponFee = readXmlInteger(d, "coupon_fee");
+    couponCount = readXmlInteger(d, "coupon_count");
+    this.transactionId = readXmlString(d, "transaction_id");
+    this.outTradeNo = readXmlString(d, "out_trade_no");
+    this.attach = readXmlString(d, "attach");
+    this.timeEnd = readXmlString(d, "time_end");
+    this.tradeStateDesc = readXmlString(d, "trade_state_desc");
   }
 
   /**

@@ -1,10 +1,14 @@
 package com.binarywang.spring.starter.wxjava.miniapp.config;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
+import cn.binarywang.wx.miniapp.api.impl.WxMaServiceHttpClientImpl;
 import cn.binarywang.wx.miniapp.api.impl.WxMaServiceImpl;
+import cn.binarywang.wx.miniapp.api.impl.WxMaServiceJoddHttpImpl;
+import cn.binarywang.wx.miniapp.api.impl.WxMaServiceOkHttpImpl;
 import cn.binarywang.wx.miniapp.config.WxMaConfig;
 import cn.binarywang.wx.miniapp.config.impl.WxMaDefaultConfigImpl;
 import cn.binarywang.wx.miniapp.config.impl.WxMaRedisBetterConfigImpl;
+import com.binarywang.spring.starter.wxjava.miniapp.enums.HttpClientType;
 import com.binarywang.spring.starter.wxjava.miniapp.properties.WxMaProperties;
 import lombok.AllArgsConstructor;
 import me.chanjar.weixin.common.redis.JedisWxRedisOps;
@@ -46,22 +50,35 @@ public class WxMaAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean(WxMaService.class)
   public WxMaService service(WxMaConfig wxMaConfig) {
-    final WxMaServiceImpl service = new WxMaServiceImpl();
-    service.setWxMaConfig(wxMaConfig);
-    return service;
+    HttpClientType httpClientType = wxMaProperties.getConfigStorage().getHttpClientType();
+    WxMaService wxMaService;
+    if (httpClientType == HttpClientType.OkHttp) {
+      wxMaService = new WxMaServiceOkHttpImpl();
+    } else if (httpClientType == HttpClientType.JoddHttp) {
+      wxMaService = new WxMaServiceJoddHttpImpl();
+    } else if (httpClientType == HttpClientType.HttpClient) {
+      wxMaService = new WxMaServiceHttpClientImpl();
+    } else {
+      wxMaService = new WxMaServiceImpl();
+    }
+    wxMaService.setWxMaConfig(wxMaConfig);
+    return wxMaService;
   }
 
   @Bean
   @ConditionalOnMissingBean(WxMaConfig.class)
   public WxMaConfig wxMaConfig() {
-    WxMaProperties.StorageType type = wxMaProperties.getConfigStorage().getType();
     WxMaDefaultConfigImpl config;
-    if (type == WxMaProperties.StorageType.jedis) {
-      config = wxMaInJedisConfigStorage();
-    } else if (type == WxMaProperties.StorageType.redistemplate) {
-      config = wxMaInRedisTemplateConfigStorage();
-    } else {
-      config = wxMaInMemoryConfigStorage();
+    switch (wxMaProperties.getConfigStorage().getType()) {
+      case Jedis:
+        config = wxMaJedisConfigStorage();
+        break;
+      case RedisTemplate:
+        config = wxMaRedisTemplateConfigStorage();
+        break;
+      default:
+        config = wxMaDefaultConfigStorage();
+        break;
     }
 
     config.setAppid(StringUtils.trimToNull(this.wxMaProperties.getAppid()));
@@ -80,52 +97,42 @@ public class WxMaAutoConfiguration {
     return config;
   }
 
-  private WxMaDefaultConfigImpl wxMaInMemoryConfigStorage() {
-    WxMaDefaultConfigImpl config = new WxMaDefaultConfigImpl();
-    return config;
+  private WxMaDefaultConfigImpl wxMaDefaultConfigStorage() {
+    return new WxMaDefaultConfigImpl();
   }
 
-  private WxMaDefaultConfigImpl wxMaInJedisConfigStorage() {
+  private WxMaDefaultConfigImpl wxMaJedisConfigStorage() {
     WxMaProperties.RedisProperties redisProperties = wxMaProperties.getConfigStorage().getRedis();
     JedisPool jedisPool;
-    if (redisProperties != null && StringUtils.isNotEmpty(redisProperties.getHost())) {
-      jedisPool = getJedisPool();
+    if (StringUtils.isNotEmpty(redisProperties.getHost())) {
+      JedisPoolConfig config = new JedisPoolConfig();
+      if (redisProperties.getMaxActive() != null) {
+        config.setMaxTotal(redisProperties.getMaxActive());
+      }
+      if (redisProperties.getMaxIdle() != null) {
+        config.setMaxIdle(redisProperties.getMaxIdle());
+      }
+      if (redisProperties.getMaxWaitMillis() != null) {
+        config.setMaxWaitMillis(redisProperties.getMaxWaitMillis());
+      }
+      if (redisProperties.getMinIdle() != null) {
+        config.setMinIdle(redisProperties.getMinIdle());
+      }
+      config.setTestOnBorrow(true);
+      config.setTestWhileIdle(true);
+
+      jedisPool = new JedisPool(config, redisProperties.getHost(), redisProperties.getPort(),
+        redisProperties.getTimeout(), redisProperties.getPassword(), redisProperties.getDatabase());
     } else {
       jedisPool = applicationContext.getBean(JedisPool.class);
     }
     WxRedisOps redisOps = new JedisWxRedisOps(jedisPool);
-    WxMaRedisBetterConfigImpl wxMaRedisConfig = new WxMaRedisBetterConfigImpl(redisOps, wxMaProperties.getConfigStorage().getKeyPrefix());
-    return wxMaRedisConfig;
+    return new WxMaRedisBetterConfigImpl(redisOps, wxMaProperties.getConfigStorage().getKeyPrefix());
   }
 
-  private WxMaDefaultConfigImpl wxMaInRedisTemplateConfigStorage() {
+  private WxMaDefaultConfigImpl wxMaRedisTemplateConfigStorage() {
     StringRedisTemplate redisTemplate = applicationContext.getBean(StringRedisTemplate.class);
     WxRedisOps redisOps = new RedisTemplateWxRedisOps(redisTemplate);
-    WxMaRedisBetterConfigImpl wxMaRedisConfig = new WxMaRedisBetterConfigImpl(redisOps, wxMaProperties.getConfigStorage().getKeyPrefix());
-    return wxMaRedisConfig;
-  }
-
-  private JedisPool getJedisPool() {
-    WxMaProperties.ConfigStorage storage = wxMaProperties.getConfigStorage();
-    WxMaProperties.RedisProperties redis = storage.getRedis();
-
-    JedisPoolConfig config = new JedisPoolConfig();
-    if (redis.getMaxActive() != null) {
-      config.setMaxTotal(redis.getMaxActive());
-    }
-    if (redis.getMaxIdle() != null) {
-      config.setMaxIdle(redis.getMaxIdle());
-    }
-    if (redis.getMaxWaitMillis() != null) {
-      config.setMaxWaitMillis(redis.getMaxWaitMillis());
-    }
-    if (redis.getMinIdle() != null) {
-      config.setMinIdle(redis.getMinIdle());
-    }
-    config.setTestOnBorrow(true);
-    config.setTestWhileIdle(true);
-
-    return new JedisPool(config, redis.getHost(), redis.getPort(), redis.getTimeout(), redis.getPassword(),
-      redis.getDatabase());
+    return new WxMaRedisBetterConfigImpl(redisOps, wxMaProperties.getConfigStorage().getKeyPrefix());
   }
 }

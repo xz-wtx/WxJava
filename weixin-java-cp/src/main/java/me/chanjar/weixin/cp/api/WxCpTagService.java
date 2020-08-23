@@ -17,7 +17,6 @@ import java.util.List;
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
  */
 public interface WxCpTagService {
-
   /**
    * 创建标签.
    * <pre>
@@ -31,17 +30,6 @@ public interface WxCpTagService {
    * @throws WxErrorException .
    */
   String create(String name, Integer id) throws WxErrorException;
-
-  /**
-   * 创建标签.
-   *
-   * @param tagName 标签名
-   * @return 标签id
-   * @throws WxErrorException .
-   * @deprecated 建议使用 {@link #create(String, Integer)}，其中后面的参数可以为空
-   */
-  @Deprecated
-  String create(String tagName) throws WxErrorException;
 
   /**
    * 更新标签.

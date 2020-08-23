@@ -1,7 +1,7 @@
 package me.chanjar.weixin.cp.bean.oa;
 
 import lombok.Data;
-import me.chanjar.weixin.cp.bean.oa.applydata.Content;
+import me.chanjar.weixin.cp.bean.oa.applydata.ApplyDataContent;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,6 +16,6 @@ public class WxCpApprovalApplyData implements Serializable {
 
   private static final long serialVersionUID = 4061352949894274704L;
 
-  private List<Content> contents;
+  private List<ApplyDataContent> contents;
 
 }

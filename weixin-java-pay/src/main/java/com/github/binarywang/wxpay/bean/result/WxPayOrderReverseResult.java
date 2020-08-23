@@ -6,6 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.w3c.dom.Document;
 
+import java.io.Serializable;
+
 /**
  * <pre>
  * 撤销订单响应结果类
@@ -18,8 +20,8 @@ import org.w3c.dom.Document;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @XStreamAlias("xml")
-public class WxPayOrderReverseResult extends BaseWxPayResult {
-
+public class WxPayOrderReverseResult extends BaseWxPayResult implements Serializable {
+  private static final long serialVersionUID = 3615350465758009338L;
   /**
    * <pre>
    * 是否重调
@@ -39,8 +41,8 @@ public class WxPayOrderReverseResult extends BaseWxPayResult {
    * @param d Document
    */
   @Override
-  protected void loadXML(Document d) {
-    isRecall = readXMLString(d, "recall");
+  protected void loadXml(Document d) {
+    isRecall = readXmlString(d, "recall");
   }
 
 }

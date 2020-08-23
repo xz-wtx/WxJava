@@ -31,8 +31,8 @@ public class GetPublicKeyResult extends BaseWxPayResult {
   private String pubKey;
 
   @Override
-  protected void loadXML(Document d) {
-    mchId = readXMLString(d, "mch_id");
-    pubKey = readXMLString(d, "pub_key");
+  protected void loadXml(Document d) {
+    mchId = readXmlString(d, "mch_id");
+    pubKey = readXmlString(d, "pub_key");
   }
 }

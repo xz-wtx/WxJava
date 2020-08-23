@@ -67,7 +67,7 @@ public class BaseWxPayServiceImplTest {
     request.setSignType(SignType.HMAC_SHA256);
     WxPayUnifiedOrderResult result = this.payService.unifiedOrder(request);
     log.info(result.toString());
-//    log.warn(this.payService.getWxApiData().toString());
+    log.warn(this.payService.getWxApiData().toString());
   }
 
   /**
@@ -315,6 +315,18 @@ public class BaseWxPayServiceImplTest {
     log.info(result.toString());
   }
 
+  @Test
+  public void testRefundV2() throws WxPayException {
+    WxPayRefundResult result = this.payService.refundV2(
+      WxPayRefundRequest.newBuilder()
+        .outRefundNo("aaa")
+        .outTradeNo("1111")
+        .totalFee(1222)
+        .refundFee(111)
+        .build());
+    log.info(result.toString());
+  }
+
   /**
    * Test method for {@link WxPayService#refundQuery(String, String, String, String)} .
    *
@@ -339,6 +351,11 @@ public class BaseWxPayServiceImplTest {
     //测试四个参数都填的情况，应该报异常的
     result = this.payService.refundQuery("1", "2", "3", "4");
     log.info(result.toString());
+  }
+
+  @Test
+  public void testRefundQueryV2() throws WxPayException {
+    this.payService.refundQueryV2(WxPayRefundQueryRequest.newBuilder().outRefundNo("1").build());
   }
 
   /**
@@ -686,4 +703,5 @@ public class BaseWxPayServiceImplTest {
     assertThat(result).isNotNull();
     System.out.println(result);
   }
+
 }

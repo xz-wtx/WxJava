@@ -85,8 +85,8 @@ public class WxPayRefundNotifyResult extends BaseWxPayResult implements Serializ
   private transient String decryptedReqInfo;
 
   @Override
-  protected void loadXML(Document d) {
-    reqInfoString = readXMLString(d, "req_info");
+  protected void loadXml(Document d) {
+    reqInfoString = readXmlString(d, "req_info");
   }
 
   /**
@@ -314,19 +314,19 @@ public class WxPayRefundNotifyResult extends BaseWxPayResult implements Serializ
     }
 
     public void loadXML(Document d) {
-      transactionId = readXMLString(d, "transaction_id");
-      outTradeNo = readXMLString(d, "out_trade_no");
-      refundId = readXMLString(d, "refund_id");
-      outRefundNo = readXMLString(d, "out_refund_no");
-      totalFee = readXMLInteger(d, "total_fee");
-      settlementTotalFee = readXMLInteger(d, "settlement_total_fee");
-      refundFee = readXMLInteger(d, "refund_fee");
-      settlementRefundFee = readXMLInteger(d, "settlement_refund_fee");
-      refundStatus = readXMLString(d, "refund_status");
-      successTime = readXMLString(d, "success_time");
-      refundRecvAccout = readXMLString(d, "refund_recv_accout");
-      refundAccount = readXMLString(d, "refund_account");
-      refundRequestSource = readXMLString(d, "refund_request_source");
+      transactionId = readXmlString(d, "transaction_id");
+      outTradeNo = readXmlString(d, "out_trade_no");
+      refundId = readXmlString(d, "refund_id");
+      outRefundNo = readXmlString(d, "out_refund_no");
+      totalFee = readXmlInteger(d, "total_fee");
+      settlementTotalFee = readXmlInteger(d, "settlement_total_fee");
+      refundFee = readXmlInteger(d, "refund_fee");
+      settlementRefundFee = readXmlInteger(d, "settlement_refund_fee");
+      refundStatus = readXmlString(d, "refund_status");
+      successTime = readXmlString(d, "success_time");
+      refundRecvAccout = readXmlString(d, "refund_recv_accout");
+      refundAccount = readXmlString(d, "refund_account");
+      refundRequestSource = readXmlString(d, "refund_request_source");
     }
   }
 

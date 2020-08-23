@@ -4,6 +4,7 @@ import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.common.util.json.GsonParser;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.api.WxCpTagService;
 import me.chanjar.weixin.cp.bean.WxCpTag;
@@ -39,18 +40,11 @@ public class WxCpTagServiceImpl implements WxCpTagService {
     return this.create(o);
   }
 
-  @Override
-  public String create(String tagName) throws WxErrorException {
-    JsonObject o = new JsonObject();
-    o.addProperty("tagname", tagName);
-    return this.create(o);
-  }
-
   private String create(JsonObject param) throws WxErrorException {
     String url = this.mainService.getWxCpConfigStorage().getApiUrl(TAG_CREATE);
     String responseContent = this.mainService.post(url, param.toString());
-    JsonElement tmpJsonElement = new JsonParser().parse(responseContent);
-    return tmpJsonElement.getAsJsonObject().get("tagid").getAsString();
+    JsonObject jsonObject = GsonParser.parse(responseContent);
+    return jsonObject.get("tagid").getAsString();
   }
 
   @Override
@@ -72,10 +66,10 @@ public class WxCpTagServiceImpl implements WxCpTagService {
   public List<WxCpTag> listAll() throws WxErrorException {
     String url = this.mainService.getWxCpConfigStorage().getApiUrl(TAG_LIST);
     String responseContent = this.mainService.get(url, null);
-    JsonElement tmpJsonElement = new JsonParser().parse(responseContent);
+    JsonObject tmpJson = GsonParser.parse(responseContent);
     return WxCpGsonBuilder.create()
       .fromJson(
-        tmpJsonElement.getAsJsonObject().get("taglist"),
+        tmpJson.get("taglist"),
         new TypeToken<List<WxCpTag>>() {
         }.getType()
       );
@@ -85,10 +79,10 @@ public class WxCpTagServiceImpl implements WxCpTagService {
   public List<WxCpUser> listUsersByTagId(String tagId) throws WxErrorException {
     String url = String.format(this.mainService.getWxCpConfigStorage().getApiUrl(TAG_GET), tagId);
     String responseContent = this.mainService.get(url, null);
-    JsonElement tmpJsonElement = new JsonParser().parse(responseContent);
+    JsonObject tmpJson = GsonParser.parse(responseContent);
     return WxCpGsonBuilder.create()
       .fromJson(
-        tmpJsonElement.getAsJsonObject().get("userlist"),
+        tmpJson.get("userlist"),
         new TypeToken<List<WxCpUser>>() {
         }.getType()
       );

@@ -229,22 +229,22 @@ public class WxPayCouponInfoQueryResult extends BaseWxPayResult {
   private String isPartialUse;
 
   @Override
-  protected void loadXML(Document d) {
-    deviceInfo = readXMLString(d, "device_info");
-    couponStockId = readXMLString(d, "coupon_stock_id");
-    couponId = readXMLString(d, "coupon_id");
-    couponValue = readXMLInteger(d, "coupon_value");
-    couponMinimum = readXMLInteger(d, "coupon_minimum");
-    couponName = readXMLString(d, "coupon_name");
-    couponState = readXMLString(d, "coupon_state");
-    couponDesc = readXMLString(d, "coupon_desc");
-    couponUseValue = readXMLInteger(d, "coupon_use_value");
-    couponRemainValue = readXMLInteger(d, "coupon_remain_value");
-    beginTime = readXMLString(d, "begin_time");
-    endTime = readXMLString(d, "end_time");
-    sendTime = readXMLString(d, "send_time");
-    consumerMchId = readXMLString(d, "consumer_mch_id");
-    sendSource = readXMLString(d, "send_source");
-    isPartialUse = readXMLString(d, "is_partial_use");
+  protected void loadXml(Document d) {
+    deviceInfo = readXmlString(d, "device_info");
+    couponStockId = readXmlString(d, "coupon_stock_id");
+    couponId = readXmlString(d, "coupon_id");
+    couponValue = readXmlInteger(d, "coupon_value");
+    couponMinimum = readXmlInteger(d, "coupon_minimum");
+    couponName = readXmlString(d, "coupon_name");
+    couponState = readXmlString(d, "coupon_state");
+    couponDesc = readXmlString(d, "coupon_desc");
+    couponUseValue = readXmlInteger(d, "coupon_use_value");
+    couponRemainValue = readXmlInteger(d, "coupon_remain_value");
+    beginTime = readXmlString(d, "begin_time");
+    endTime = readXmlString(d, "end_time");
+    sendTime = readXmlString(d, "send_time");
+    consumerMchId = readXmlString(d, "consumer_mch_id");
+    sendSource = readXmlString(d, "send_source");
+    isPartialUse = readXmlString(d, "is_partial_use");
   }
 }

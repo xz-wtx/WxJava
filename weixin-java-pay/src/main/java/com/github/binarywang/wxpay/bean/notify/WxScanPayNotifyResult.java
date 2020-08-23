@@ -47,10 +47,10 @@ public class WxScanPayNotifyResult extends BaseWxPayResult {
   private String productId;
 
   @Override
-  protected void loadXML(Document d) {
-    openid = readXMLString(d, "openid");
-    isSubscribe = readXMLString(d, "is_subscribe");
-    productId = readXMLString(d, "product_id");
+  protected void loadXml(Document d) {
+    openid = readXmlString(d, "openid");
+    isSubscribe = readXmlString(d, "is_subscribe");
+    productId = readXmlString(d, "product_id");
   }
 
 }

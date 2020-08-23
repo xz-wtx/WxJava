@@ -60,12 +60,12 @@ public class EntPayResult extends BaseWxPayResult {
   private String paymentTime;
 
   @Override
-  protected void loadXML(Document d) {
-    mchId = readXMLString(d, "mchid");
-    mchAppid = readXMLString(d, "mch_appid");
-    deviceInfo = readXMLString(d, "device_info");
-    partnerTradeNo = readXMLString(d, "partner_trade_no");
-    paymentNo = readXMLString(d, "payment_no");
-    paymentTime = readXMLString(d, "payment_time");
+  protected void loadXml(Document d) {
+    mchId = readXmlString(d, "mchid");
+    mchAppid = readXmlString(d, "mch_appid");
+    deviceInfo = readXmlString(d, "device_info");
+    partnerTradeNo = readXmlString(d, "partner_trade_no");
+    paymentNo = readXmlString(d, "payment_no");
+    paymentTime = readXmlString(d, "payment_time");
   }
 }

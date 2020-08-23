@@ -1,10 +1,10 @@
 package me.chanjar.weixin.mp.api.impl;
 
-import com.google.gson.JsonParser;
 import lombok.RequiredArgsConstructor;
-import me.chanjar.weixin.common.WxType;
+import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.error.WxError;
 import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.common.util.json.GsonParser;
 import me.chanjar.weixin.mp.api.WxMpAiOpenService;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.enums.AiLangType;
@@ -23,7 +23,6 @@ import static me.chanjar.weixin.mp.enums.WxMpApiUrl.AiOpen.*;
  */
 @RequiredArgsConstructor
 public class WxMpAiOpenServiceImpl implements WxMpAiOpenService {
-  private static final JsonParser JSON_PARSER = new JsonParser();
   private final WxMpService wxMpService;
 
   @Override
@@ -53,7 +52,7 @@ public class WxMpAiOpenServiceImpl implements WxMpAiOpenService {
       throw new WxErrorException(error);
     }
 
-    return JSON_PARSER.parse(response).getAsJsonObject().get("to_content").getAsString();
+    return GsonParser.parse(response).get("to_content").getAsString();
   }
 
   @Override
@@ -69,6 +68,6 @@ public class WxMpAiOpenServiceImpl implements WxMpAiOpenService {
       throw new WxErrorException(error);
     }
 
-    return JSON_PARSER.parse(response).getAsJsonObject().get("result").getAsString();
+    return GsonParser.parse(response).get("result").getAsString();
   }
 }

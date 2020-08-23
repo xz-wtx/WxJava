@@ -12,7 +12,6 @@ import java.io.Serializable;
  */
 @Data
 public class WxCpApprovalDetailResult implements Serializable {
-
   private static final long serialVersionUID = 3909779949756252918L;
 
   @SerializedName("errcode")

@@ -1,14 +1,19 @@
 package com.github.binarywang.wxpay.bean.result;
 
-import java.io.Serializable;
-import java.util.List;
-
 import com.google.common.collect.Lists;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import me.chanjar.weixin.common.util.json.GsonParser;
+import me.chanjar.weixin.common.util.json.WxGsonBuilder;
+import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * <pre>
@@ -115,7 +120,34 @@ public class WxPayRefundResult extends BaseWxPayResult implements Serializable {
   @XStreamAlias("coupon_refund_fee")
   private Integer couponRefundFee;
 
+  /**
+   * 营销详情.
+   */
+  @XStreamAlias("promotion_detail")
+  private String promotionDetailString;
+
+  private List<WxPayRefundPromotionDetail> promotionDetails;
+
   private List<WxPayRefundCouponInfo> refundCoupons;
+
+  /**
+   * 组装生成营销详情信息.
+   */
+  public void composePromotionDetails() {
+    if (StringUtils.isEmpty(this.promotionDetailString)) {
+      return;
+    }
+
+    JsonObject tmpJson = GsonParser.parse(this.promotionDetailString);
+
+    final List<WxPayRefundPromotionDetail> promotionDetail = WxGsonBuilder.create()
+      .fromJson(tmpJson.get("promotion_detail"),
+        new TypeToken<List<WxPayRefundPromotionDetail>>() {
+        }.getType()
+      );
+
+    this.setPromotionDetails(promotionDetail);
+  }
 
   /**
    * 组装生成退款代金券信息.
@@ -147,21 +179,21 @@ public class WxPayRefundResult extends BaseWxPayResult implements Serializable {
    * @param d Document
    */
   @Override
-  protected void loadXML(Document d) {
-    transactionId = readXMLString(d, "transaction_id");
-    outTradeNo = readXMLString(d, "out_trade_no");
-    outRefundNo = readXMLString(d, "out_refund_no");
-    refundId = readXMLString(d, "refund_id");
-    refundFee = readXMLInteger(d, "refund_fee");
-    settlementRefundFee = readXMLInteger(d, "settlement_refund_fee");
-    totalFee = readXMLInteger(d, "total_fee");
-    settlementTotalFee = readXMLInteger(d, "settlement_total_fee");
-    feeType = readXMLString(d, "fee_type");
-    cashFee = readXMLInteger(d, "cash_fee");
-    cashFeeType = readXMLString(d, "cash_fee_type");
-    cashRefundFee = readXMLInteger(d, "cash_refund_fee");
-    couponRefundCount = readXMLInteger(d, "coupon_refund_count");
-    couponRefundFee = readXMLInteger(d, "coupon_refund_fee");
+  protected void loadXml(Document d) {
+    transactionId = readXmlString(d, "transaction_id");
+    outTradeNo = readXmlString(d, "out_trade_no");
+    outRefundNo = readXmlString(d, "out_refund_no");
+    refundId = readXmlString(d, "refund_id");
+    refundFee = readXmlInteger(d, "refund_fee");
+    settlementRefundFee = readXmlInteger(d, "settlement_refund_fee");
+    totalFee = readXmlInteger(d, "total_fee");
+    settlementTotalFee = readXmlInteger(d, "settlement_total_fee");
+    feeType = readXmlString(d, "fee_type");
+    cashFee = readXmlInteger(d, "cash_fee");
+    cashFeeType = readXmlString(d, "cash_fee_type");
+    cashRefundFee = readXmlInteger(d, "cash_refund_fee");
+    couponRefundCount = readXmlInteger(d, "coupon_refund_count");
+    couponRefundFee = readXmlInteger(d, "coupon_refund_fee");
   }
 
 }

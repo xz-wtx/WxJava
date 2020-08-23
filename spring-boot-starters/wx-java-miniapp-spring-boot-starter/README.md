@@ -18,12 +18,12 @@
     wx.miniapp.msgDataFormat = @msgDataFormat                  # 消息格式，XML或者JSON.
     # 存储配置redis(可选)
     # 注意: 指定redis.host值后不会使用容器注入的redis连接(JedisPool)
-    wx.miniapp.config-storage.type = jedis                     # 配置类型: memory(默认), jedis, redistemplate
+    wx.miniapp.config-storage.type = Jedis                     # 配置类型: Memory(默认), Jedis, RedisTemplate
     wx.miniapp.config-storage.key-prefix = wa                  # 相关redis前缀配置: wa(默认)
     wx.miniapp.config-storage.redis.host = 127.0.0.1
     wx.miniapp.config-storage.redis.port = 6379
     # http客户端配置
-    wx.miniapp.config-storage.http-client-type=httpclient      # http客户端类型: httpclient(默认)
+    wx.miniapp.config-storage.http-client-type=HttpClient      # http客户端类型: HttpClient(默认), OkHttp, JoddHttp
     wx.miniapp.config-storage.http-proxy-host=
     wx.miniapp.config-storage.http-proxy-port=
     wx.miniapp.config-storage.http-proxy-username=

@@ -1,7 +1,11 @@
 package me.chanjar.weixin.common.api;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import static me.chanjar.weixin.common.error.WxMpErrorMsgEnum.*;
 
 /**
  * 微信开发所使用到的常量类.
@@ -9,6 +13,18 @@ import java.util.Map;
  * @author Daniel Qian & binarywang
  */
 public class WxConsts {
+  /**
+   * access_token 相关错误代码
+   * <pre>
+   * 发生以下情况时尝试刷新access_token
+   * 40001 获取access_token时AppSecret错误，或者access_token无效
+   * 42001 access_token超时
+   * 40014 不合法的access_token，请开发者认真比对access_token的有效性（如是否过期），或查看是否正在为恰当的公众号调用接口
+   * </pre>
+   */
+  public static final List<Integer> ACCESS_TOKEN_ERROR_CODES = Arrays.asList(CODE_40001.getCode(),
+    CODE_40014.getCode(), CODE_42001.getCode());
+
   /**
    * 微信推送过来的消息的类型，和发送给微信xml格式消息的消息类型.
    */
@@ -103,6 +119,31 @@ public class WxConsts {
      * 小程序通知消息.
      */
     public static final String MINIPROGRAM_NOTICE = "miniprogram_notice";
+  }
+
+  /**
+   * 群机器人的消息类型.
+   */
+  public static class GroupRobotMsgType {
+    /**
+     * 文本消息.
+     */
+    public static final String TEXT = "text";
+
+    /**
+     * 图片消息.
+     */
+    public static final String IMAGE = "image";
+
+    /**
+     * markdown消息.
+     */
+    public static final String MARKDOWN = "markdown";
+
+    /**
+     * 图文消息（点击跳转到外链）.
+     */
+    public static final String NEWS = "news";
   }
 
   /**
@@ -394,5 +435,17 @@ public class WxConsts {
     public static final String OPERATORDEFAULT = "DEFAULT";
   }
 
-
+  /**
+   * appId 类型
+   */
+  public static class AppIdType {
+    /**
+     * 公众号appId类型
+     */
+    public static final String MP_TYPE = "mp";
+    /**
+     * 小程序appId类型
+     */
+    public static final String MINI_TYPE = "mini";
+  }
 }

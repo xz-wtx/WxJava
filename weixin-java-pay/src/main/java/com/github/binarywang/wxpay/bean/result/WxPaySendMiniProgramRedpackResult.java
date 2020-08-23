@@ -18,6 +18,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @XStreamAlias("xml")
 public class WxPaySendMiniProgramRedpackResult extends BaseWxPayResult implements Serializable {
+  private static final long serialVersionUID = 5847928569755121611L;
   /**
    * 商户订单号.
    */
@@ -55,12 +56,12 @@ public class WxPaySendMiniProgramRedpackResult extends BaseWxPayResult implement
   private String sendListId;
 
   @Override
-  protected void loadXML(Document d) {
-    mchBillNo = readXMLString(d, "mch_billno");
-    wxAppid = readXMLString(d, "wxappid");
-    reOpenid = readXMLString(d, "re_openid");
-    totalAmount = readXMLInteger(d, "total_amount");
-    packageName = readXMLString(d, "package");
-    sendListId = readXMLString(d, "send_listid");
+  protected void loadXml(Document d) {
+    mchBillNo = readXmlString(d, "mch_billno");
+    wxAppid = readXmlString(d, "wxappid");
+    reOpenid = readXmlString(d, "re_openid");
+    totalAmount = readXmlInteger(d, "total_amount");
+    packageName = readXmlString(d, "package");
+    sendListId = readXmlString(d, "send_listid");
   }
 }

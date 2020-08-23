@@ -6,6 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.w3c.dom.Document;
 
+import java.io.Serializable;
+
 /**
  * <pre>
  * 转换短链接结果对象类
@@ -18,7 +20,8 @@ import org.w3c.dom.Document;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @XStreamAlias("xml")
-public class WxPayShorturlResult extends BaseWxPayResult {
+public class WxPayShorturlResult extends BaseWxPayResult implements Serializable {
+  private static final long serialVersionUID = -2121902492357304418L;
   /**
    * <pre>
    * URL链接
@@ -38,8 +41,8 @@ public class WxPayShorturlResult extends BaseWxPayResult {
    * @param d Document
    */
   @Override
-  protected void loadXML(Document d) {
-    shortUrl = readXMLString(d, "short_url");
+  protected void loadXml(Document d) {
+    shortUrl = readXmlString(d, "short_url");
   }
 
 }

@@ -1,6 +1,5 @@
 package com.github.binarywang.wxpay.bean.profitsharing;
 
-import com.github.binarywang.wxpay.bean.request.BaseWxPayRequest;
 import com.github.binarywang.wxpay.bean.result.BaseWxPayResult;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import lombok.Data;
@@ -25,7 +24,7 @@ public class ProfitSharingReceiverResult extends BaseWxPayResult {
   private String receiver;
 
   @Override
-  protected void loadXML(Document d) {
-    receiver = readXMLString(d, "receiver");
+  protected void loadXml(Document d) {
+    receiver = readXmlString(d, "receiver");
   }
 }

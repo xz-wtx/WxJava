@@ -2,11 +2,11 @@ package me.chanjar.weixin.cp.api.impl;
 
 import com.google.common.base.Joiner;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import me.chanjar.weixin.common.WxType;
+import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.bean.WxAccessToken;
+import me.chanjar.weixin.common.error.WxCpErrorMsgEnum;
 import me.chanjar.weixin.common.error.WxError;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.util.DataUtils;
@@ -15,6 +15,7 @@ import me.chanjar.weixin.common.util.http.RequestExecutor;
 import me.chanjar.weixin.common.util.http.RequestHttp;
 import me.chanjar.weixin.common.util.http.SimpleGetRequestExecutor;
 import me.chanjar.weixin.common.util.http.SimplePostRequestExecutor;
+import me.chanjar.weixin.common.util.json.GsonParser;
 import me.chanjar.weixin.cp.api.WxCpTpService;
 import me.chanjar.weixin.cp.bean.*;
 import me.chanjar.weixin.cp.config.WxCpTpConfigStorage;
@@ -119,7 +120,7 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
     jsonObject.addProperty("auth_code", authCode);
 
     String result = post(configStorage.getApiUrl(GET_PERMANENT_CODE), jsonObject.toString());
-    jsonObject = new JsonParser().parse(result).getAsJsonObject();
+    jsonObject = GsonParser.parse(result);
     WxCpTpCorp wxCpTpCorp = WxCpTpCorp.fromJson(jsonObject.get("auth_corp_info").getAsJsonObject().toString());
     wxCpTpCorp.setPermanentCode(jsonObject.get("permanent_code").getAsString());
     return wxCpTpCorp;
@@ -222,10 +223,11 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
        * 发生以下情况时尝试刷新suite_access_token
        * 42009 suite_access_token已过期
        */
-      if (error.getErrorCode() == 42009) {
+      if (error.getErrorCode() == WxCpErrorMsgEnum.CODE_42009.getCode()) {
         // 强制设置wxCpTpConfigStorage它的suite access token过期了，这样在下一次请求里就会刷新suite access token
         this.configStorage.expireSuiteAccessToken();
         if (this.getWxCpTpConfigStorage().autoRefreshToken()) {
+          log.warn("即将重新获取新的access_token，错误代码：{}，错误信息：{}", error.getErrorCode(), error.getErrorMsg());
           return this.execute(executor, uri, data);
         }
       }

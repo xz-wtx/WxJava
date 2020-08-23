@@ -74,17 +74,17 @@ public class ProfitSharingReturnResult extends BaseWxPayResult {
   private String finishTime;
 
   @Override
-  protected void loadXML(Document d) {
-    orderId = readXMLString(d, "order_id");
-    outOrderNo = readXMLString(d, "out_order_no");
-    outReturnNo = readXMLString(d, "out_return_no");
-    returnNo = readXMLString(d, "return_no");
-    returnAccountType = readXMLString(d, "return_account_type");
-    returnAccount = readXMLString(d, "return_account");
-    returnAmount = readXMLInteger(d, "return_amount");
-    description = readXMLString(d, "description");
-    result = readXMLString(d, "result");
-    failReason = readXMLString(d, "fail_reason");
-    finishTime = readXMLString(d, "finish_time");
+  protected void loadXml(Document d) {
+    orderId = readXmlString(d, "order_id");
+    outOrderNo = readXmlString(d, "out_order_no");
+    outReturnNo = readXmlString(d, "out_return_no");
+    returnNo = readXmlString(d, "return_no");
+    returnAccountType = readXmlString(d, "return_account_type");
+    returnAccount = readXmlString(d, "return_account");
+    returnAmount = readXmlInteger(d, "return_amount");
+    description = readXmlString(d, "description");
+    result = readXmlString(d, "result");
+    failReason = readXmlString(d, "fail_reason");
+    finishTime = readXmlString(d, "finish_time");
   }
 }

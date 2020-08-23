@@ -1,17 +1,17 @@
 package me.chanjar.weixin.mp.config.impl;
 
+import lombok.Data;
+import me.chanjar.weixin.common.bean.WxAccessToken;
+import me.chanjar.weixin.common.enums.TicketType;
+import me.chanjar.weixin.common.util.http.apache.ApacheHttpClientBuilder;
+import me.chanjar.weixin.mp.bean.WxMpHostConfig;
+import me.chanjar.weixin.mp.config.WxMpConfigStorage;
+import me.chanjar.weixin.mp.util.json.WxMpGsonBuilder;
+
 import java.io.File;
 import java.io.Serializable;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
-import lombok.Data;
-import me.chanjar.weixin.common.bean.WxAccessToken;
-import me.chanjar.weixin.common.util.http.apache.ApacheHttpClientBuilder;
-import me.chanjar.weixin.mp.config.WxMpConfigStorage;
-import me.chanjar.weixin.mp.bean.WxMpHostConfig;
-import me.chanjar.weixin.common.enums.TicketType;
-import me.chanjar.weixin.mp.util.json.WxMpGsonBuilder;
 
 /**
  * 基于内存的微信配置provider，在实际生产环境中应该将这些配置持久化.
@@ -46,14 +46,16 @@ public class WxMpDefaultConfigImpl implements WxMpConfigStorage, Serializable {
   protected volatile String cardApiTicket;
   protected volatile long cardApiTicketExpiresTime;
 
-  protected Lock accessTokenLock = new ReentrantLock();
-  protected Lock jsapiTicketLock = new ReentrantLock();
-  protected Lock sdkTicketLock = new ReentrantLock();
-  protected Lock cardApiTicketLock = new ReentrantLock();
+  protected volatile Lock accessTokenLock = new ReentrantLock();
+  protected volatile Lock jsapiTicketLock = new ReentrantLock();
+  protected volatile Lock sdkTicketLock = new ReentrantLock();
+  protected volatile Lock cardApiTicketLock = new ReentrantLock();
 
   protected volatile File tmpDirFile;
 
   protected volatile ApacheHttpClientBuilder apacheHttpClientBuilder;
+
+  private WxMpHostConfig hostConfig = null;
 
   @Override
   public boolean isAccessTokenExpired() {
@@ -183,7 +185,12 @@ public class WxMpDefaultConfigImpl implements WxMpConfigStorage, Serializable {
 
   @Override
   public WxMpHostConfig getHostConfig() {
-    return null;
+    return this.hostConfig;
+  }
+
+  @Override
+  public void setHostConfig(WxMpHostConfig hostConfig) {
+    this.hostConfig = hostConfig;
   }
 
 }

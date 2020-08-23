@@ -23,11 +23,4 @@ public class WxMaPhoneNumberInfo implements Serializable {
     return WxMaGsonBuilder.create().fromJson(json, WxMaPhoneNumberInfo.class);
   }
 
-  @Data
-  public static class Watermark implements Serializable {
-    private static final long serialVersionUID = 2375642809946928650L;
-    
-    private String timestamp;
-    private String appid;
-  }
 }

@@ -21,6 +21,7 @@ public final class WxCpApiPathConsts {
   public static final String BATCH_GET_RESULT = "/cgi-bin/batch/getresult?jobid=";
   public static final String JSCODE_TO_SESSION = "/cgi-bin/miniprogram/jscode2session";
   public static final String GET_TOKEN = "/cgi-bin/gettoken?corpid=%s&corpsecret=%s";
+  public static final String WEBHOOK_SEND = "/cgi-bin/webhook/send?key=";
 
   public static class Agent {
     public static final String AGENT_GET = "/cgi-bin/agent/get?agentid=%d";
@@ -67,10 +68,8 @@ public final class WxCpApiPathConsts {
     public static final String GET_APPROVAL_INFO = "/cgi-bin/oa/getapprovalinfo";
     public static final String GET_APPROVAL_DETAIL = "/cgi-bin/oa/getapprovaldetail";
     public static final String GET_DIAL_RECORD = "/cgi-bin/dial/get_dial_record";
-    @Deprecated
-    public static final String GET_APPROVAL_DATA = "/cgi-bin/corp/getapprovaldata";
     public static final String GET_TEMPLATE_DETAIL = "/cgi-bin/oa/gettemplatedetail";
-    public static final String APPLY_EVENT="/cgi-bin/oa/applyevent";
+    public static final String APPLY_EVENT = "/cgi-bin/oa/applyevent";
   }
 
   public static class Tag {
@@ -117,6 +116,11 @@ public final class WxCpApiPathConsts {
     @Deprecated
     public static final String GET_EXTERNAL_CONTACT = "/cgi-bin/crm/get_external_contact?external_userid=";
 
+    public static final String ADD_CONTACT_WAY = "/cgi-bin/externalcontact/add_contact_way";
+    public static final String GET_CONTACT_WAY = "/cgi-bin/externalcontact/get_contact_way";
+    public static final String UPDATE_CONTACT_WAY = "/cgi-bin/externalcontact/update_contact_way";
+    public static final String DEL_CONTACT_WAY = "/cgi-bin/externalcontact/del_contact_way";
+    public static final String CLOSE_TEMP_CHAT = "/cgi-bin/externalcontact/close_temp_chat";
     public static final String GET_FOLLOW_USER_LIST = "/cgi-bin/externalcontact/get_follow_user_list";
     public static final String GET_CONTACT_DETAIL = "/cgi-bin/externalcontact/get?external_userid=";
     public static final String LIST_EXTERNAL_CONTACT = "/cgi-bin/externalcontact/list?userid=";
@@ -126,5 +130,13 @@ public final class WxCpApiPathConsts {
     public static final String GROUP_CHAT_INFO = "/cgi-bin/externalcontact/groupchat/get";
     public static final String LIST_USER_BEHAVIOR_DATA = "/cgi-bin/externalcontact/get_user_behavior_data";
     public static final String LIST_GROUP_CHAT_DATA = "/cgi-bin/externalcontact/groupchat/statistic";
+    public static final String ADD_MSG_TEMPLATE = "/cgi-bin/externalcontact/add_msg_template";
+    public static final String SEND_WELCOME_MSG = "/cgi-bin/externalcontact/send_welcome_msg";
+
+    public static final String GET_CORP_TAG_LIST = "/cgi-bin/externalcontact/get_corp_tag_list";
+    public static final String ADD_CORP_TAG = "/cgi-bin/externalcontact/add_corp_tag";
+    public static final String EDIT_CORP_TAG = "/cgi-bin/externalcontact/edit_corp_tag";
+    public static final String DEL_CORP_TAG = "/cgi-bin/externalcontact/del_corp_tag";
+    public static final String MARK_TAG = "/cgi-bin/externalcontact/mark_tag";
   }
 }

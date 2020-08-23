@@ -1,10 +1,10 @@
 package com.github.binarywang.wxpay.bean.result;
 
-import java.io.Serializable;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import me.chanjar.weixin.common.util.json.WxGsonBuilder;
+
+import java.io.Serializable;
 
 /**
  * 记账时间:2018-02-01 04:21:23 微信支付业务单号:50000305742018020103387128253 资金流水单号:1900009231201802015884652186 业务名称:退款

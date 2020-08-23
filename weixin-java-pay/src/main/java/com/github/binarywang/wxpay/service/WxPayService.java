@@ -10,6 +10,7 @@ import com.github.binarywang.wxpay.bean.result.*;
 import com.github.binarywang.wxpay.config.WxPayConfig;
 import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
+import org.apache.http.client.methods.HttpPost;
 
 import java.io.File;
 import java.net.URI;
@@ -66,6 +67,28 @@ public interface WxPayService {
   String postV3(String url, String requestStr) throws WxPayException;
 
   /**
+   * 发送post请求，得到响应字符串.
+   *
+   * 部分字段会包含敏感信息，所以在提交前需要在请求头中会包含"Wechatpay-Serial"信息
+   *
+   * @param url        请求地址
+   * @param requestStr 请求信息
+   * @return 返回请求结果字符串 string
+   * @throws WxPayException the wx pay exception
+   */
+  String postV3WithWechatpaySerial(String url, String requestStr) throws WxPayException;
+
+  /**
+   * 发送post请求，得到响应字符串.
+   *
+   * @param url        请求地址
+   * @param httpPost 请求信息
+   * @return 返回请求结果字符串 string
+   * @throws WxPayException the wx pay exception
+   */
+  String postV3(String url, HttpPost httpPost) throws WxPayException;
+
+  /**
    * 发送get V3请求，得到响应字符串.
    *
    * @param url 请求地址
@@ -102,6 +125,12 @@ public interface WxPayService {
    * @return the ent pay service
    */
   PayScoreService getPayScoreService();
+
+  /**
+   * 获取电商收付通服务类
+   * @return
+   */
+  EcommerceService getEcommerceService();
 
   /**
    * 设置企业付款服务类，允许开发者自定义实现类.
@@ -258,6 +287,33 @@ public interface WxPayService {
 
   /**
    * <pre>
+   * 申请退款API（支持单品）.
+   * 详见 https://pay.weixin.qq.com/wiki/doc/api/danpin.php?chapter=9_103&index=3
+   *
+   * 应用场景
+   * 当交易发生之后一段时间内，由于买家或者卖家的原因需要退款时，卖家可以通过退款接口将支付款退还给买家，微信支付将在收到退款请求并且验证成功之后，按照退款规则将支付款按原路退到买家帐号上。
+   *
+   * 注意：
+   * 1、交易时间超过一年的订单无法提交退款；
+   * 2、微信支付退款支持单笔交易分多次退款，多次退款需要提交原支付订单的商户订单号和设置不同的退款单号。申请退款总金额不能超过订单金额。 一笔退款失败后重新提交，请不要更换退款单号，请使用原商户退款单号。
+   * 3、请求频率限制：150qps，即每秒钟正常的申请退款请求次数不超过150次
+   *     错误或无效请求频率限制：6qps，即每秒钟异常或错误的退款申请请求不超过6次
+   * 4、每个支付订单的部分退款次数不能超过50次
+   * 5、本接口支持单品优惠订单全额退款和单品优惠订单部分退款，推荐使用本接口，如果使用不支持单品优惠部分退款的历史接口，请看https://pay.weixin.qq.com/wiki/doc/api/jsapi_sl.php?chapter=9_4
+   *
+   * 接口地址
+   * https://api.mch.weixin.qq.com/secapi/pay/refundv2
+   * https://api2.mch.weixin.qq.com/secapi/pay/refundv2(备用域名)见跨城冗灾方案
+   * </pre>
+   *
+   * @param request 请求对象
+   * @return 退款操作结果 wx pay refund result
+   * @throws WxPayException the wx pay exception
+   */
+  WxPayRefundResult refundV2(WxPayRefundRequest request) throws WxPayException;
+
+  /**
+   * <pre>
    * 微信支付-查询退款.
    * 应用场景：
    *  提交退款申请后，通过调用该接口查询退款状态。退款有一定延时，用零钱支付的退款20分钟内到账，
@@ -294,6 +350,29 @@ public interface WxPayService {
   WxPayRefundQueryResult refundQuery(WxPayRefundQueryRequest request) throws WxPayException;
 
   /**
+   * <pre>
+   * 微信支付-查询退款API（支持单品）.
+   * 应用场景
+   *    提交退款申请后，通过调用该接口查询退款状态。退款有一定延时，用零钱支付的退款20分钟内到账，银行卡支付的退款3个工作日后重新查询退款状态。
+   * 注意：
+   * 1、本接口支持查询单品优惠相关退款信息，且仅支持按微信退款单号或商户退款单号查询，若继续调用老查询退款接口，
+   *    请见https://pay.weixin.qq.com/wiki/doc/api/jsapi_sl.php?chapter=9_5
+   * 2、请求频率限制：300qps，即每秒钟正常的退款查询请求次数不超过300次
+   * 3、错误或无效请求频率限制：6qps，即每秒钟异常或错误的退款查询请求不超过6次
+   *
+   * 接口地址
+   * https://api.mch.weixin.qq.com/pay/refundqueryv2
+   * https://api2.mch.weixin.qq.com/pay/refundqueryv2(备用域名)见跨城冗灾方案
+   * 详见 https://pay.weixin.qq.com/wiki/doc/api/danpin.php?chapter=9_104&index=4
+   * </pre>
+   *
+   * @param request 微信退款单号
+   * @return 退款信息 wx pay refund query result
+   * @throws WxPayException the wx pay exception
+   */
+  WxPayRefundQueryResult refundQueryV2(WxPayRefundQueryRequest request) throws WxPayException;
+
+  /**
    * 解析支付结果通知.
    * 详见https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_7
    *
@@ -302,6 +381,17 @@ public interface WxPayService {
    * @throws WxPayException the wx pay exception
    */
   WxPayOrderNotifyResult parseOrderNotifyResult(String xmlData) throws WxPayException;
+
+  /**
+   * 解析支付结果通知.
+   * 详见https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_7
+   *
+   * @param xmlData  the xml data
+   * @param signType 签名类型
+   * @return the wx pay order notify result
+   * @throws WxPayException the wx pay exception
+   */
+  WxPayOrderNotifyResult parseOrderNotifyResult(String xmlData, String signType) throws WxPayException;
 
   /**
    * 解析退款结果通知
@@ -322,30 +412,6 @@ public interface WxPayService {
    * @throws WxPayException the wx pay exception
    */
   WxScanPayNotifyResult parseScanPayNotifyResult(String xmlData) throws WxPayException;
-
-  /**
-   * @deprecated 建议使用 {@link RedpackService#sendMiniProgramRedpack(WxPaySendMiniProgramRedpackRequest)}
-   */
-  @Deprecated
-  WxPaySendMiniProgramRedpackResult sendMiniProgramRedpack(WxPaySendMiniProgramRedpackRequest request) throws WxPayException;
-
-  /**
-   * @deprecated 建议使用 {@link RedpackService#sendRedpack(WxPaySendRedpackRequest)}
-   */
-  @Deprecated
-  WxPaySendRedpackResult sendRedpack(WxPaySendRedpackRequest request) throws WxPayException;
-
-  /**
-   * @deprecated 建议使用 {@link RedpackService#queryRedpack(String)}
-   */
-  @Deprecated
-  WxPayRedpackQueryResult queryRedpack(String mchBillNo) throws WxPayException;
-
-  /**
-   * @deprecated 建议使用 {@link RedpackService#queryRedpack(WxPayRedpackQueryRequest)}
-   */
-  @Deprecated
-  WxPayRedpackQueryResult queryRedpack(WxPayRedpackQueryRequest request) throws WxPayException;
 
   /**
    * <pre>

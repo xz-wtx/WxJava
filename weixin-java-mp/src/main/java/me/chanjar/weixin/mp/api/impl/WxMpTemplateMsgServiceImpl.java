@@ -1,17 +1,16 @@
 package me.chanjar.weixin.mp.api.impl;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import lombok.RequiredArgsConstructor;
-import me.chanjar.weixin.common.WxType;
+import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.error.WxError;
 import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.common.util.json.GsonParser;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.WxMpTemplateMsgService;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplate;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateIndustry;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
-import me.chanjar.weixin.mp.enums.WxMpApiUrl;
 
 import java.util.List;
 
@@ -26,14 +25,14 @@ import static me.chanjar.weixin.mp.enums.WxMpApiUrl.TemplateMsg.*;
  */
 @RequiredArgsConstructor
 public class WxMpTemplateMsgServiceImpl implements WxMpTemplateMsgService {
-  private static final JsonParser JSON_PARSER = new JsonParser();
+
 
   private final WxMpService wxMpService;
 
   @Override
   public String sendTemplateMsg(WxMpTemplateMessage templateMessage) throws WxErrorException {
     String responseContent = this.wxMpService.post(MESSAGE_TEMPLATE_SEND, templateMessage.toJson());
-    final JsonObject jsonObject = JSON_PARSER.parse(responseContent).getAsJsonObject();
+    final JsonObject jsonObject = GsonParser.parse(responseContent);
     if (jsonObject.get("errcode").getAsInt() == 0) {
       return jsonObject.get("msgid").getAsString();
     }
@@ -62,7 +61,7 @@ public class WxMpTemplateMsgServiceImpl implements WxMpTemplateMsgService {
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("template_id_short", shortTemplateId);
     String responseContent = this.wxMpService.post(TEMPLATE_API_ADD_TEMPLATE, jsonObject.toString());
-    final JsonObject result = JSON_PARSER.parse(responseContent).getAsJsonObject();
+    final JsonObject result = GsonParser.parse(responseContent);
     if (result.get("errcode").getAsInt() == 0) {
       return result.get("template_id").getAsString();
     }

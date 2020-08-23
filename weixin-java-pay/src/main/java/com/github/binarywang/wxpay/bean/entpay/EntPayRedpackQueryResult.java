@@ -132,23 +132,23 @@ public class EntPayRedpackQueryResult extends BaseWxPayResult {
   private Integer senderHeaderMediaId;
 
   @Override
-  protected void loadXML(Document d) {
-    mchBillNo = readXMLString(d, "mch_billno");
-    detailId = readXMLString(d, "detailId");
-    status = readXMLString(d, "status");
-    sendType = readXMLString(d, "send_type");
-    totalAmount = readXMLInteger(d, "total_amount");
-    reason = readXMLInteger(d, "reason");
-    sendTime = readXMLString(d, "send_time");
-    refundTime = readXMLString(d, "refund_time");
-    refundAmount = readXMLInteger(d, "refund_amount");
-    wishing = readXMLString(d, "wishing");
-    remark = readXMLString(d, "remark");
-    actName = readXMLString(d, "act_name");
-    openid = readXMLString(d, "openid");
-    amount = readXMLInteger(d, "amount");
-    rcvTime = readXMLInteger(d, "rcv_time");
-    senderName = readXMLInteger(d, "sender_name");
-    senderHeaderMediaId = readXMLInteger(d, "sender_header_media_id");
+  protected void loadXml(Document d) {
+    mchBillNo = readXmlString(d, "mch_billno");
+    detailId = readXmlString(d, "detailId");
+    status = readXmlString(d, "status");
+    sendType = readXmlString(d, "send_type");
+    totalAmount = readXmlInteger(d, "total_amount");
+    reason = readXmlInteger(d, "reason");
+    sendTime = readXmlString(d, "send_time");
+    refundTime = readXmlString(d, "refund_time");
+    refundAmount = readXmlInteger(d, "refund_amount");
+    wishing = readXmlString(d, "wishing");
+    remark = readXmlString(d, "remark");
+    actName = readXmlString(d, "act_name");
+    openid = readXmlString(d, "openid");
+    amount = readXmlInteger(d, "amount");
+    rcvTime = readXmlInteger(d, "rcv_time");
+    senderName = readXmlInteger(d, "sender_name");
+    senderHeaderMediaId = readXmlInteger(d, "sender_header_media_id");
   }
 }

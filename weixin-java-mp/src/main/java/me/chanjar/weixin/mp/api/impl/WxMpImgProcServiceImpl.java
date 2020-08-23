@@ -2,12 +2,12 @@ package me.chanjar.weixin.mp.api.impl;
 
 import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.error.WxErrorException;
-import me.chanjar.weixin.mp.api.WxMpImgProcService;
+import me.chanjar.weixin.common.api.WxImgProcService;
 import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.bean.imgproc.WxMpImgProcAiCropResult;
-import me.chanjar.weixin.mp.bean.imgproc.WxMpImgProcQrCodeResult;
-import me.chanjar.weixin.mp.bean.imgproc.WxMpImgProcSuperResolutionResult;
-import me.chanjar.weixin.mp.util.requestexecuter.ocr.OcrDiscernRequestExecutor;
+import me.chanjar.weixin.common.bean.imgproc.WxImgProcAiCropResult;
+import me.chanjar.weixin.common.bean.imgproc.WxImgProcQrCodeResult;
+import me.chanjar.weixin.common.bean.imgproc.WxImgProcSuperResolutionResult;
+import me.chanjar.weixin.common.requestexecuter.ocr.OcrDiscernRequestExecutor;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -27,29 +27,31 @@ import static me.chanjar.weixin.mp.enums.WxMpApiUrl.ImgProc.SUPER_RESOLUTION;
  * @author Theo Nie
  */
 @RequiredArgsConstructor
-public class WxMpImgProcServiceImpl implements WxMpImgProcService {
+public class WxMpImgProcServiceImpl implements WxImgProcService {
   private final WxMpService wxMpService;
 
   @Override
-  public WxMpImgProcQrCodeResult qrCode(String imgUrl) throws WxErrorException {
+  public WxImgProcQrCodeResult qrCode(String imgUrl) throws WxErrorException {
     try {
       imgUrl = URLEncoder.encode(imgUrl, StandardCharsets.UTF_8.name());
     } catch (UnsupportedEncodingException e) {
       //ignore
     }
 
-    final String result = this.wxMpService.get(String.format(QRCODE.getUrl(this.wxMpService.getWxMpConfigStorage()), imgUrl), null);
-    return WxMpImgProcQrCodeResult.fromJson(result);
+    String result = this.wxMpService.get(String.format(QRCODE.getUrl(this.wxMpService.getWxMpConfigStorage()), imgUrl),
+      null);
+    return WxImgProcQrCodeResult.fromJson(result);
   }
 
   @Override
-  public WxMpImgProcQrCodeResult qrCode(File imgFile) throws WxErrorException {
-    String result = this.wxMpService.execute(OcrDiscernRequestExecutor.create(this.wxMpService.getRequestHttp()), FILE_QRCODE.getUrl(this.wxMpService.getWxMpConfigStorage()), imgFile);
-    return WxMpImgProcQrCodeResult.fromJson(result);
+  public WxImgProcQrCodeResult qrCode(File imgFile) throws WxErrorException {
+    String result = this.wxMpService.execute(OcrDiscernRequestExecutor.create(this.wxMpService.getRequestHttp()),
+      FILE_QRCODE.getUrl(this.wxMpService.getWxMpConfigStorage()), imgFile);
+    return WxImgProcQrCodeResult.fromJson(result);
   }
 
   @Override
-  public WxMpImgProcSuperResolutionResult superResolution(String imgUrl) throws WxErrorException {
+  public WxImgProcSuperResolutionResult superResolution(String imgUrl) throws WxErrorException {
     try {
       imgUrl = URLEncoder.encode(imgUrl, StandardCharsets.UTF_8.name());
     } catch (UnsupportedEncodingException e) {
@@ -57,22 +59,23 @@ public class WxMpImgProcServiceImpl implements WxMpImgProcService {
     }
 
     final String result = this.wxMpService.get(String.format(SUPER_RESOLUTION.getUrl(this.wxMpService.getWxMpConfigStorage()), imgUrl), null);
-    return WxMpImgProcSuperResolutionResult.fromJson(result);
+    return WxImgProcSuperResolutionResult.fromJson(result);
   }
 
   @Override
-  public WxMpImgProcSuperResolutionResult superResolution(File imgFile) throws WxErrorException {
-    String result = this.wxMpService.execute(OcrDiscernRequestExecutor.create(this.wxMpService.getRequestHttp()), FILE_SUPER_RESOLUTION.getUrl(this.wxMpService.getWxMpConfigStorage()), imgFile);
-    return WxMpImgProcSuperResolutionResult.fromJson(result);
+  public WxImgProcSuperResolutionResult superResolution(File imgFile) throws WxErrorException {
+    String result = this.wxMpService.execute(OcrDiscernRequestExecutor.create(this.wxMpService.getRequestHttp()),
+      FILE_SUPER_RESOLUTION.getUrl(this.wxMpService.getWxMpConfigStorage()), imgFile);
+    return WxImgProcSuperResolutionResult.fromJson(result);
   }
 
   @Override
-  public WxMpImgProcAiCropResult aiCrop(String imgUrl) throws WxErrorException {
+  public WxImgProcAiCropResult aiCrop(String imgUrl) throws WxErrorException {
     return this.aiCrop(imgUrl, "");
   }
 
   @Override
-  public WxMpImgProcAiCropResult aiCrop(String imgUrl, String ratios) throws WxErrorException {
+  public WxImgProcAiCropResult aiCrop(String imgUrl, String ratios) throws WxErrorException {
     try {
       imgUrl = URLEncoder.encode(imgUrl, StandardCharsets.UTF_8.name());
     } catch (UnsupportedEncodingException e) {
@@ -83,22 +86,24 @@ public class WxMpImgProcServiceImpl implements WxMpImgProcService {
       ratios = "";
     }
 
-    final String result = this.wxMpService.get(String.format(AI_CROP.getUrl(this.wxMpService.getWxMpConfigStorage()), imgUrl, ratios), null);
-    return WxMpImgProcAiCropResult.fromJson(result);
+    final String result = this.wxMpService.get(String.format(AI_CROP.getUrl(this.wxMpService.getWxMpConfigStorage()),
+      imgUrl, ratios), null);
+    return WxImgProcAiCropResult.fromJson(result);
   }
 
   @Override
-  public WxMpImgProcAiCropResult aiCrop(File imgFile) throws WxErrorException {
+  public WxImgProcAiCropResult aiCrop(File imgFile) throws WxErrorException {
     return this.aiCrop(imgFile, "");
   }
 
   @Override
-  public WxMpImgProcAiCropResult aiCrop(File imgFile, String ratios) throws WxErrorException {
+  public WxImgProcAiCropResult aiCrop(File imgFile, String ratios) throws WxErrorException {
     if (StringUtils.isEmpty(ratios)) {
       ratios = "";
     }
 
-    String result = this.wxMpService.execute(OcrDiscernRequestExecutor.create(this.wxMpService.getRequestHttp()), String.format(FILE_AI_CROP.getUrl(this.wxMpService.getWxMpConfigStorage()), ratios), imgFile);
-    return WxMpImgProcAiCropResult.fromJson(result);
+    String result = this.wxMpService.execute(OcrDiscernRequestExecutor.create(this.wxMpService.getRequestHttp()),
+      String.format(FILE_AI_CROP.getUrl(this.wxMpService.getWxMpConfigStorage()), ratios), imgFile);
+    return WxImgProcAiCropResult.fromJson(result);
   }
 }

@@ -2,11 +2,15 @@ package cn.binarywang.wx.miniapp.api;
 
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.config.WxMaConfig;
+import me.chanjar.weixin.common.api.WxImgProcService;
+import me.chanjar.weixin.common.api.WxOcrService;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.service.WxService;
 import me.chanjar.weixin.common.util.http.MediaUploadRequestExecutor;
 import me.chanjar.weixin.common.util.http.RequestExecutor;
 import me.chanjar.weixin.common.util.http.RequestHttp;
+
+import java.util.Map;
 
 /**
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
@@ -146,9 +150,56 @@ public interface WxMaService extends WxService {
   /**
    * 注入 {@link WxMaConfig} 的实现.
    *
-   * @param wxConfigProvider config
+   * @param maConfig config
    */
-  void setWxMaConfig(WxMaConfig wxConfigProvider);
+  void setWxMaConfig(WxMaConfig maConfig);
+
+  /**
+   * Map里 加入新的 {@link WxMaConfig}，适用于动态添加新的微信公众号配置.
+   *
+   * @param miniappId     小程序标识
+   * @param configStorage 新的微信配置
+   */
+  void addConfig(String miniappId, WxMaConfig configStorage);
+
+  /**
+   * 从 Map中 移除 {@link String miniappId} 所对应的 {@link WxMaConfig}，适用于动态移除小程序配置.
+   *
+   * @param miniappId 对应小程序的标识
+   */
+  void removeConfig(String miniappId);
+
+  /**
+   * 注入多个 {@link WxMaConfig} 的实现. 并为每个 {@link WxMaConfig} 赋予不同的 {@link String mpId} 值
+   * 随机采用一个{@link String mpId}进行Http初始化操作
+   *
+   * @param configs WxMaConfig map
+   */
+  void setMultiConfigs(Map<String, WxMaConfig> configs);
+
+  /**
+   * 注入多个 {@link WxMaConfig} 的实现. 并为每个 {@link WxMaConfig} 赋予不同的 {@link String label} 值
+   *
+   * @param configs          WxMaConfig map
+   * @param defaultMiniappId 设置一个{@link WxMaConfig} 所对应的{@link String defaultMiniappId}进行Http初始化
+   */
+  void setMultiConfigs(Map<String, WxMaConfig> configs, String defaultMiniappId);
+
+  /**
+   * 进行相应的公众号切换.
+   *
+   * @param mpId 公众号标识
+   * @return 切换是否成功
+   */
+  boolean switchover(String mpId);
+
+  /**
+   * 进行相应的公众号切换.
+   *
+   * @param miniappId 小程序标识
+   * @return 切换成功，则返回当前对象，方便链式调用，否则抛出异常
+   */
+  WxMaService switchoverTo(String miniappId);
 
   /**
    * 返回消息（客服消息和模版消息）发送接口方法实现类，以方便调用其各个接口.
@@ -177,13 +228,6 @@ public interface WxMaService extends WxService {
    * @return WxMaQrcodeService
    */
   WxMaQrcodeService getQrcodeService();
-
-  /**
-   * 返回模板配置相关接口方法的实现类对象, 以方便调用其各个接口.
-   *
-   * @return WxMaTemplateService
-   */
-  WxMaTemplateService getTemplateService();
 
   /**
    * 返回订阅消息配置相关接口方法的实现类对象, 以方便调用其各个接口.
@@ -280,4 +324,26 @@ public interface WxMaService extends WxService {
    * @return .
    */
   WxMaLiveService getLiveService();
+
+  /**
+   * 获取直播间商品服务对象
+   *
+   * @return .
+   */
+  WxMaLiveGoodsService getLiveGoodsService();
+
+  /**
+   * 获取ocr实现接口服务对象
+   *
+   * @return 。
+   */
+  WxOcrService getOcrService();
+
+  /**
+   * 返回图像处理接口的实现类对象，以方便调用其各个接口.
+   *
+   * @return WxImgProcService
+   */
+  WxImgProcService getImgProcService();
+
 }

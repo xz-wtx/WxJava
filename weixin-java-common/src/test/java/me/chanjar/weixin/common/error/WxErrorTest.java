@@ -1,6 +1,6 @@
 package me.chanjar.weixin.common.error;
 
-import me.chanjar.weixin.common.WxType;
+import me.chanjar.weixin.common.enums.WxType;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;

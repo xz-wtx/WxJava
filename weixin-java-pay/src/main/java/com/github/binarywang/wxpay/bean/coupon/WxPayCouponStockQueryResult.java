@@ -193,19 +193,19 @@ public class WxPayCouponStockQueryResult extends BaseWxPayResult {
   private Integer couponBudget;
 
   @Override
-  protected void loadXML(Document d) {
-    deviceInfo = readXMLString(d, "device_info");
-    couponStockId = readXMLString(d, "coupon_stock_id");
-    couponName = readXMLString(d, "coupon_name");
-    couponValue = readXMLInteger(d, "coupon_value");
-    couponMinimum = readXMLInteger(d, "coupon_mininumn");
-    couponStockStatus = readXMLInteger(d, "coupon_stock_status");
-    couponTotal = readXMLInteger(d, "coupon_total");
-    maxQuota = readXMLInteger(d, "max_quota");
-    isSendNum = readXMLInteger(d, "is_send_num");
-    beginTime = readXMLString(d, "begin_time");
-    endTime = readXMLString(d, "end_time");
-    createTime = readXMLString(d, "create_time");
-    couponBudget = readXMLInteger(d, "coupon_budget");
+  protected void loadXml(Document d) {
+    deviceInfo = readXmlString(d, "device_info");
+    couponStockId = readXmlString(d, "coupon_stock_id");
+    couponName = readXmlString(d, "coupon_name");
+    couponValue = readXmlInteger(d, "coupon_value");
+    couponMinimum = readXmlInteger(d, "coupon_mininumn");
+    couponStockStatus = readXmlInteger(d, "coupon_stock_status");
+    couponTotal = readXmlInteger(d, "coupon_total");
+    maxQuota = readXmlInteger(d, "max_quota");
+    isSendNum = readXmlInteger(d, "is_send_num");
+    beginTime = readXmlString(d, "begin_time");
+    endTime = readXmlString(d, "end_time");
+    createTime = readXmlString(d, "create_time");
+    couponBudget = readXmlInteger(d, "coupon_budget");
   }
 }

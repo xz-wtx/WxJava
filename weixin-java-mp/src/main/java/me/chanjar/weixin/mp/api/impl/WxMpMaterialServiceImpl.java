@@ -1,7 +1,7 @@
 package me.chanjar.weixin.mp.api.impl;
 
 import lombok.RequiredArgsConstructor;
-import me.chanjar.weixin.common.WxType;
+import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.bean.result.WxMediaUploadResult;
 import me.chanjar.weixin.common.error.WxError;
@@ -13,7 +13,6 @@ import me.chanjar.weixin.common.util.json.WxGsonBuilder;
 import me.chanjar.weixin.mp.api.WxMpMaterialService;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.material.*;
-import me.chanjar.weixin.mp.enums.WxMpApiUrl;
 import me.chanjar.weixin.mp.util.json.WxMpGsonBuilder;
 import me.chanjar.weixin.mp.util.requestexecuter.material.*;
 import me.chanjar.weixin.mp.util.requestexecuter.media.MediaImgUploadRequestExecutor;

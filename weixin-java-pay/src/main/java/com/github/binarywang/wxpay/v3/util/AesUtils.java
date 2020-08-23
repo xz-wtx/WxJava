@@ -1,5 +1,7 @@
 package com.github.binarywang.wxpay.v3.util;
 
+import com.google.common.base.CharMatcher;
+import com.google.common.io.BaseEncoding;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
@@ -41,7 +43,7 @@ public class AesUtils {
       cipher.init(Cipher.DECRYPT_MODE, key, spec);
       cipher.updateAAD(associatedData);
 
-      return new String(cipher.doFinal(Base64.getDecoder().decode(ciphertext)), "utf-8");
+      return new String(cipher.doFinal(BaseEncoding.base64().decode(CharMatcher.whitespace().removeFrom(ciphertext))), "utf-8");
     } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
       throw new IllegalStateException(e);
     } catch (InvalidKeyException | InvalidAlgorithmParameterException e) {

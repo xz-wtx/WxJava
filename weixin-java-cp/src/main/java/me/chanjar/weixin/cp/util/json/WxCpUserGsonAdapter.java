@@ -54,6 +54,16 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
       user.setOrders(orders);
     }
 
+    if (o.get("positions") != null) {
+      JsonArray positionJsonArray = o.get("positions").getAsJsonArray();
+      String[] positions = new String[positionJsonArray.size()];
+      int i = 0;
+      for (JsonElement jsonElement : positionJsonArray) {
+        positions[i++] = jsonElement.getAsString();
+      }
+      user.setPositions(positions);
+    }
+
     user.setUserId(GsonHelper.getString(o, "userid"));
     user.setName(GsonHelper.getString(o, "name"));
     user.setPosition(GsonHelper.getString(o, "position"));
@@ -74,6 +84,7 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
     user.setTelephone(GsonHelper.getString(o, "telephone"));
     user.setQrCode(GsonHelper.getString(o, "qr_code"));
     user.setToInvite(GsonHelper.getBoolean(o, "to_invite"));
+    user.setMainDepartment(GsonHelper.getString(o, "main_department"));
 
     if (GsonHelper.isNotNull(o.get(EXTRA_ATTR))) {
       this.buildExtraAttrs(o, user);
@@ -97,6 +108,11 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
         .setName(GsonHelper.getString(attrJsonElement.getAsJsonObject(), "name"));
       user.getExtAttrs().add(attr);
 
+      if (type == null) {
+        attr.setTextValue(GsonHelper.getString(attrJsonElement.getAsJsonObject(), "value"));
+        continue;
+      }
+
       switch (type) {
         case 0: {
           attr.setTextValue(GsonHelper.getString(attrJsonElement.getAsJsonObject().get("text").getAsJsonObject(), "value"));
@@ -118,6 +134,10 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
     for (JsonElement element : attrJsonElements) {
       final Integer type = GsonHelper.getInteger(element.getAsJsonObject(), "type");
       final String name = GsonHelper.getString(element.getAsJsonObject(), "name");
+
+      if (type == null) {
+        continue;
+      }
 
       switch (type) {
         case 0: {
@@ -188,6 +208,15 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
     if (user.getPosition() != null) {
       o.addProperty("position", user.getPosition());
     }
+
+    if (user.getPositions() != null) {
+      JsonArray jsonArray = new JsonArray();
+      for (String position : user.getPositions()) {
+        jsonArray.add(new JsonPrimitive(position));
+      }
+      o.add("positions", jsonArray);
+    }
+
     if (user.getMobile() != null) {
       o.addProperty("mobile", user.getMobile());
     }
@@ -243,11 +272,22 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
     if (user.getToInvite() != null) {
       o.addProperty("to_invite", user.getToInvite());
     }
+    if (user.getMainDepartment() != null) {
+      o.addProperty("main_department", user.getMainDepartment());
+    }
 
     if (user.getExtAttrs().size() > 0) {
       JsonArray attrsJsonArray = new JsonArray();
       for (WxCpUser.Attr attr : user.getExtAttrs()) {
         JsonObject attrJson = new JsonObject();
+
+        attrsJsonArray.add(attrJson);
+
+        if (attr.getType() == null) {
+          attrJson.addProperty("name", attr.getName());
+          attrJson.addProperty("value", attr.getTextValue());
+          continue;
+        }
 
         switch (attr.getType()) {
           case 0: {
@@ -265,7 +305,6 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
           }
           default: //ignored
         }
-        attrsJsonArray.add(attrJson);
       }
       JsonObject attrsJson = new JsonObject();
       attrsJson.add("attrs", attrsJsonArray);
@@ -289,6 +328,13 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
         JsonObject attrJson = new JsonObject();
         attrJson.addProperty("type", attr.getType());
         attrJson.addProperty("name", attr.getName());
+
+        attrsJsonArray.add(attrJson);
+
+        if (attr.getType() == null) {
+          continue;
+        }
+
         switch (attr.getType()) {
           case 0: {
             JsonObject text = new JsonObject();
@@ -313,7 +359,6 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
           }
           default://忽略
         }
-        attrsJsonArray.add(attrJson);
       }
 
       attrsJson.add(EXTERNAL_ATTR, attrsJsonArray);

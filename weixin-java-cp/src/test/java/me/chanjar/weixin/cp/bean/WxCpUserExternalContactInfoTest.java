@@ -2,6 +2,7 @@ package me.chanjar.weixin.cp.bean;
 
 import java.util.List;
 
+import me.chanjar.weixin.cp.bean.external.WxCpUserExternalContactInfo;
 import org.testng.annotations.*;
 
 import static org.assertj.core.api.Assertions.assertThat;

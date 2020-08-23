@@ -142,7 +142,7 @@ public class WxOpenInMemoryConfigStorage implements WxOpenConfigStorage {
       map.put(key, token);
     }
     token.token = tokenString;
-    if (expiresInSeconds != null) {
+    if (expiresInSeconds != null && expiresInSeconds != -1) {
       token.expiresTime = System.currentTimeMillis() + (expiresInSeconds - 200) * 1000L;
     }
   }
@@ -155,6 +155,11 @@ public class WxOpenInMemoryConfigStorage implements WxOpenConfigStorage {
   @Override
   public void setAuthorizerRefreshToken(String appId, String authorizerRefreshToken) {
     updateToken(authorizerRefreshTokens, appId, authorizerRefreshToken, null);
+  }
+
+  @Override
+  public void updateAuthorizerRefreshToken(String appId, String authorizerRefreshToken) {
+    this.setAuthorizerRefreshToken(appId, authorizerRefreshToken);
   }
 
   @Override
@@ -230,8 +235,10 @@ public class WxOpenInMemoryConfigStorage implements WxOpenConfigStorage {
   }
 
   private static class WxOpenInnerConfigStorage implements WxMpConfigStorage, WxMaConfig {
-    private WxOpenConfigStorage wxOpenConfigStorage;
-    private String appId;
+    private final WxOpenConfigStorage wxOpenConfigStorage;
+    private final String appId;
+    private WxMpHostConfig hostConfig;
+
     /**
      * 小程序原始ID
      */
@@ -522,7 +529,12 @@ public class WxOpenInMemoryConfigStorage implements WxOpenConfigStorage {
 
     @Override
     public WxMpHostConfig getHostConfig() {
-      return null;
+      return this.hostConfig;
+    }
+
+    @Override
+    public void setHostConfig(WxMpHostConfig hostConfig) {
+      this.hostConfig = hostConfig;
     }
   }
 }
