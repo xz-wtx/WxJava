@@ -1,9 +1,12 @@
-package me.chanjar.weixin.cp.api;
+package me.chanjar.weixin.cp.api.impl;
 
 import com.google.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.util.fs.FileUtils;
+import me.chanjar.weixin.cp.api.ApiTestModule;
+import me.chanjar.weixin.cp.api.WxCpGroupRobotService;
+import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.article.NewArticle;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Guice;
@@ -23,8 +26,7 @@ import static org.testng.Assert.*;
  */
 @Slf4j
 @Guice(modules = ApiTestModule.class)
-public class WxCpGroupRobotServiceTest {
-
+public class WxCpGroupRobotServiceImplTest {
   @Inject
   protected WxCpService wxService;
 
