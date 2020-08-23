@@ -10,6 +10,7 @@ import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import lombok.extern.slf4j.Slf4j;
+import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.api.WxImgProcService;
 import me.chanjar.weixin.common.api.WxOcrService;
 import me.chanjar.weixin.common.bean.WxAccessToken;
@@ -31,8 +32,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
-
-import static cn.binarywang.wx.miniapp.constant.WxMaConstants.ErrorCode.*;
 
 /**
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
@@ -169,8 +168,8 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
   /**
    * 通过网络请求获取AccessToken
    *
-   * @return
-   * @throws IOException
+   * @return .
+   * @throws IOException .
    */
   protected abstract String doGetAccessTokenRequest() throws IOException;
 
@@ -244,12 +243,7 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
       return result;
     } catch (WxErrorException e) {
       WxError error = e.getError();
-      /*
-       * 发生以下情况时尝试刷新access_token
-       */
-      if (error.getErrorCode() == ERR_40001
-        || error.getErrorCode() == ERR_42001
-        || error.getErrorCode() == ERR_40014) {
+      if (WxConsts.ACCESS_TOKEN_ERROR_CODES.contains(error.getErrorCode())) {
         // 强制设置WxMaConfig的access token过期了，这样在下一次请求里就会刷新access token
         Lock lock = this.getWxMaConfig().getAccessTokenLock();
         lock.lock();
