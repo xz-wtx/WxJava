@@ -1,8 +1,6 @@
 package com.github.binarywang.wxpay.service.impl;
 
-import com.github.binarywang.wxpay.bean.ecommerce.ApplymentsRequest;
-import com.github.binarywang.wxpay.bean.ecommerce.ApplymentsResult;
-import com.github.binarywang.wxpay.bean.ecommerce.ApplymentsStatusResult;
+import com.github.binarywang.wxpay.bean.ecommerce.*;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.EcommerceService;
 import com.github.binarywang.wxpay.service.WxPayService;
@@ -39,6 +37,13 @@ public class EcommerceServiceImpl implements EcommerceService {
     String url = String.format("%s/v3/ecommerce/applyments/out-request-no/%s", this.payService.getPayBaseUrl(), outRequestNo);
     String result = this.payService.getV3(URI.create(url));
     return GSON.fromJson(result, ApplymentsStatusResult.class);
+  }
+
+  @Override
+  public CombineTransactionsJsResult combineTransactions(CombineTransactionsJsRequest request) throws WxPayException {
+    String url = String.format("%s/v3/combine-transactions/jsapi", this.payService.getPayBaseUrl());
+    String response = this.payService.postV3(url, GSON.toJson(request));
+    return GSON.fromJson(response, CombineTransactionsJsResult.class);
   }
 
 
