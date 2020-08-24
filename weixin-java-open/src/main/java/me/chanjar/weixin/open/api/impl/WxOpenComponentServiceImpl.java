@@ -146,14 +146,8 @@ public class WxOpenComponentServiceImpl implements WxOpenComponentService {
       return getWxOpenService().post(uriWithComponentAccessToken, postData);
     } catch (WxErrorException e) {
       WxError error = e.getError();
-      /*
-       * 发生以下情况时尝试刷新access_token
-       * 40001 获取access_token时AppSecret错误，或者access_token无效
-       * 42001 access_token超时
-       * 40014 不合法的access_token，请开发者认真比对access_token的有效性（如是否过期），或查看是否正在为恰当的公众号调用接口
-       */
-      if (error.getErrorCode() == 42001 || error.getErrorCode() == 40001 || error.getErrorCode() == 40014) {
-        // 强制设置wxMpConfigStorage它的access token过期了，这样在下一次请求里就会刷新access token
+      if (WxConsts.ACCESS_TOKEN_ERROR_CODES.contains(error.getErrorCode())) {
+        // 强制设置access token过期，这样在下一次请求里就会刷新access token
         Lock lock = this.getWxOpenConfigStorage().getComponentAccessTokenLock();
         lock.lock();
         try {
@@ -167,6 +161,7 @@ public class WxOpenComponentServiceImpl implements WxOpenComponentService {
         }
 
         if (this.getWxOpenConfigStorage().autoRefreshToken()) {
+          log.warn("即将重新获取新的access_token，错误代码：{}，错误信息：{}", error.getErrorCode(), error.getErrorMsg());
           return this.post(uri, postData, accessTokenKey);
         }
       }
@@ -190,13 +185,7 @@ public class WxOpenComponentServiceImpl implements WxOpenComponentService {
       return getWxOpenService().get(uriWithComponentAccessToken, null);
     } catch (WxErrorException e) {
       WxError error = e.getError();
-      /*
-       * 发生以下情况时尝试刷新access_token
-       * 40001 获取access_token时AppSecret错误，或者access_token无效
-       * 42001 access_token超时
-       * 40014 不合法的access_token，请开发者认真比对access_token的有效性（如是否过期），或查看是否正在为恰当的公众号调用接口
-       */
-      if (error.getErrorCode() == 42001 || error.getErrorCode() == 40001 || error.getErrorCode() == 40014) {
+      if (WxConsts.ACCESS_TOKEN_ERROR_CODES.contains(error.getErrorCode())) {
         // 强制设置wxMpConfigStorage它的access token过期了，这样在下一次请求里就会刷新access token
         Lock lock = this.getWxOpenConfigStorage().getComponentAccessTokenLock();
         lock.lock();
@@ -210,6 +199,7 @@ public class WxOpenComponentServiceImpl implements WxOpenComponentService {
           lock.unlock();
         }
         if (this.getWxOpenConfigStorage().autoRefreshToken()) {
+          log.warn("即将重新获取新的access_token，错误代码：{}，错误信息：{}", error.getErrorCode(), error.getErrorMsg());
           return this.get(uri, accessTokenKey);
         }
       }

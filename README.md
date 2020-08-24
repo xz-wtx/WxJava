@@ -1,4 +1,4 @@
-## WxJava - 微信开发 Java SDK（开发工具包） [![LICENSE](https://img.shields.io/badge/License-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE) [![Badge](https://img.shields.io/badge/Link-996.icu-red.svg)](https://996.icu/#/zh_CN) [![Badge](https://img.shields.io/badge/Link-专属福利-red.svg)](https://mp.weixin.qq.com/s/dfwatgMgARaBjh421Todyg)
+## WxJava - 微信开发 Java SDK（开发工具包） [![LICENSE](https://img.shields.io/badge/License-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE) [![Badge](https://img.shields.io/badge/Link-996.icu-red.svg)](https://996.icu/#/zh_CN) 
 
 [![码云Gitee](https://gitee.com/binary/weixin-java-tools/badge/star.svg?theme=blue)](https://gitee.com/binary/weixin-java-tools)
 [![Github](http://github-svg-buttons.herokuapp.com/star.svg?user=Wechat-Group&repo=WxJava&style=flat&background=1081C1)](https://github.com/Wechat-Group/WxJava)
@@ -23,11 +23,6 @@
 					<img height="120" src="https://gitee.com/binary/weixin-java-tools/raw/master/images/banners/tcloud.jpg">
 				</a>
 			</td>
-			<td align="right" valign="middle">
-				<a href="https://mp.weixin.qq.com/s/R30CNEpkELJg4SRkX0mTDA" target="_blank">
-					<img height="120" src="https://gitee.com/binary/weixin-java-tools/raw/master/images/banners/planB.jpg">
-				</a>
-			</td>
 			<td align="center" valign="middle">
 				<a href="https://www.vultr.com/?ref=7888900-4F" target="_blank">
 					<img height="120" src="https://gitee.com/binary/weixin-java-tools/raw/master/images/banners/vultr.jpg">
@@ -43,11 +38,11 @@
 </table>
 
 ### 重要信息
-1. **2020-05-24 发布 [【3.8.0正式版】](https://mp.weixin.qq.com/s/1YvMLcSOzhDHhIeX1bLRuQ)**！
+1. **2020-08-24 发布 [【3.9.0正式版】](https://mp.weixin.qq.com/s/1YvMLcSOzhDHhIeX1bLRuQ)**！
 1. 新手重要提示：本项目仅是一个SDK开发工具包，未提供Web实现，建议使用 `maven` 或 `gradle` 引用本项目即可使用本SDK提供的各种功能，详情可参考 **[【Demo项目】](demo.md)** 或本项目中的部分单元测试代码；另外微信开发新手请务必阅读[【开发文档 Wiki 首页】](https://github.com/Wechat-Group/WxJava/wiki)的常见问题部分，可以少走很多弯路，节省不少时间。
 1. 技术交流群：想获得QQ群/微信群/钉钉企业群等信息的同学，请使用微信扫描上面的微信公众号二维码关注 `WxJava` 后点击相关菜单即可获取加入方式，同时也可以在微信中搜索 `weixin-java-tools` 或 `WxJava` 后选择正确的公众号进行关注，该公众号会及时通知SDK相关更新信息，并不定期分享微信Java开发相关技术知识；
 1. 付费QQ群：（**注意：刚入群会有5分钟禁言，稍等片刻即可正常发言**） [![加入QQ群](https://img.shields.io/badge/QQ群-343954419-blue.svg)](http://shang.qq.com/wpa/qunwpa?idkey=731dc3e7ea31ebe25376cc1a791445468612c63fd0e9e05399b088ec81fd9e15) 或 [![加入QQ群](https://img.shields.io/badge/QQ群-343954419-blue.svg)](http://jq.qq.com/?_wv=1027&k=40lRskK)，或者请自行搜索群号`343954419`进行添加；当然由于某种原因无法入群的，可关注公众号后获取其他群的加入方式；
-1. 钉钉技术交流群： `30294972`。
+1. 钉钉技术交流群： `30294972`（技术交流群），`35724728`（通知群，实时通知Github项目变更记录）。
 1. 微信开发新手或者Java开发新手在群内提问或新开Issue提问前，请先阅读[【提问的智慧】](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md)，并确保已查阅过 [【开发文档Wiki】](https://github.com/wechat-group/WxJava/wiki) ，避免浪费大家的宝贵时间；
 1. 寻求帮助时需贴代码或大长串异常信息的，请利用 http://paste.ubuntu.com 
 
@@ -56,7 +51,7 @@
 1. **阅读源码的同学请注意，本SDK为简化代码编译时加入了`lombok`支持，如果不了解`lombok`的话，请先学习下相关知识，比如可以阅读[此文章](https://mp.weixin.qq.com/s/cUc-bUcprycADfNepnSwZQ)；**
 1. 如有新功能需求，发现BUG，或者由于微信官方接口调整导致的代码问题，可以直接在[【Issues】](https://github.com/Wechat-Group/WxJava/issues)页提出issue，便于讨论追踪问题；
 1. 如果需要贡献代码，请务必在提交PR之前先仔细阅读[【代码贡献指南】](CONTRIBUTING.md)，谢谢理解配合；
-1. 本SDK要求的最低JDK版本是1.7，还在使用JDK6的用户请参考[【此项目】]( https://github.com/binarywang/weixin-java-tools-for-jdk6) ，而其他更早的JDK版本则需要自己改造实现。
+1. 目前本`SDK`最新版本要求的`JDK`最低版本是`8`，使用`7`的同学可以使用`WxJava` `3.8.0`及以前版本，而还在使用`JDK`6的用户请参考[【此项目】]( https://github.com/binarywang/weixin-java-tools-for-jdk6) ，而其他更早的JDK版本则需要自己改造实现。
 1. [开源中国本项目的首页](https://www.oschina.net/p/weixin-java-tools-new)，欢迎大家积极留言评分 🙂
 1. SDK开发文档请查阅 [【开发文档Wiki】](https://github.com/wechat-group/WxJava/wiki)，部分文档可能未能及时更新，如有发现，可以及时上报或者自行修改。
 1. **如果本开发工具包对您有所帮助，欢迎对我们的努力进行肯定，可以直接前往[【托管于码云的项目首页】](http://gitee.com/binary/weixin-java-tools)，在页尾部分找到“捐助”按钮进行打赏，多多益善 😄。非常感谢各位打赏和捐助的同学！**
@@ -73,7 +68,7 @@
 <dependency>
   <groupId>com.github.binarywang</groupId>
   <artifactId>（不同模块参考下文）</artifactId>
-  <version>3.8.0</version>
+  <version>3.9.0</version>
 </dependency>
 ```
 
@@ -123,6 +118,11 @@
 - 民医台
 - 来一团商家版
 - 史必达（史丹利）
+- 嘀嗒云印
+- 维沃吼吼
+- 王朝社区（比亚迪新能源社区）
+- 极吼吼手机上门回收换新
+
 
 #### 公众号：
 - 中国电信上海网厅（sh_189）
@@ -134,21 +134,19 @@
 - 光环云社群
 - 手机排队
 - [全民约跑健身便利店](http://www.oneminsport.com/)
-- [洽洽食品](https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQFM8TwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAycDRPOXBZbVZib2UxMDAwME0wN2gAAgRIu4RbAwQAAAAA)、[洽洽合伙人](https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQFP8jwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyOUpJaU5VcXBlWTAxMDAwME0wN1oAAgSau4RbAwQAAAAA)
 - 民医台
 - YshopMall
 - 好行景区直通车以及全国40多个公众号
 - 我奥篮球公众号
 
 #### 企业号/企业微信：
-- 洽洽企业号
 - HTC企业微信
 - 掌上史丹利
 
 #### 其他：
 - 高善人力资源
-- [小猪餐餐](http://www.xzcancan.com/)
-- [餐饮系统](http://canyin.daydao.com)
+- 小猪餐餐
+- 餐饮系统
 - 微信公众号管理系统：http://demo.joolun.com
 - 锐捷网络：Saleslink
 

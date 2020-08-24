@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-
-<suite name="Weixin-java-tool-suite" verbose="1">
+<!-- 不再维护 -->
+<suite name="WxJava-suite" verbose="1">
   <test name="API_Test">
     <classes>
       <class name="me.chanjar.weixin.cp.api.WxCpBusyRetryTest"/>

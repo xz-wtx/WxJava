@@ -40,13 +40,6 @@ public class WxCpTagServiceImpl implements WxCpTagService {
     return this.create(o);
   }
 
-  @Override
-  public String create(String tagName) throws WxErrorException {
-    JsonObject o = new JsonObject();
-    o.addProperty("tagname", tagName);
-    return this.create(o);
-  }
-
   private String create(JsonObject param) throws WxErrorException {
     String url = this.mainService.getWxCpConfigStorage().getApiUrl(TAG_CREATE);
     String responseContent = this.mainService.post(url, param.toString());

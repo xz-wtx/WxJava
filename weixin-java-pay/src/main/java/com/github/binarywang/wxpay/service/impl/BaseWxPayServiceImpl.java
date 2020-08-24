@@ -251,27 +251,6 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
   }
 
   @Override
-  public WxPaySendMiniProgramRedpackResult sendMiniProgramRedpack(WxPaySendMiniProgramRedpackRequest request)
-    throws WxPayException {
-    return this.redpackService.sendMiniProgramRedpack(request);
-  }
-
-  @Override
-  public WxPaySendRedpackResult sendRedpack(WxPaySendRedpackRequest request) throws WxPayException {
-    return this.redpackService.sendRedpack(request);
-  }
-
-  @Override
-  public WxPayRedpackQueryResult queryRedpack(String mchBillNo) throws WxPayException {
-    return this.redpackService.queryRedpack(mchBillNo);
-  }
-
-  @Override
-  public WxPayRedpackQueryResult queryRedpack(WxPayRedpackQueryRequest request) throws WxPayException {
-    return this.redpackService.queryRedpack(request);
-  }
-
-  @Override
   public WxPayOrderQueryResult queryOrder(String transactionId, String outTradeNo) throws WxPayException {
     WxPayOrderQueryRequest request = new WxPayOrderQueryRequest();
     request.setOutTradeNo(StringUtils.trimToNull(outTradeNo));

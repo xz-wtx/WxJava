@@ -165,20 +165,6 @@ public class WxCpOaServiceImpl implements WxCpOaService {
   }
 
   @Override
-  public WxCpApprovalDataResult getApprovalData(Date startTime, Date endTime, Long nextSpnum) throws WxErrorException {
-    JsonObject jsonObject = new JsonObject();
-    jsonObject.addProperty("starttime", startTime.getTime() / 1000L);
-    jsonObject.addProperty("endtime", endTime.getTime() / 1000L);
-    if (nextSpnum != null) {
-      jsonObject.addProperty("next_spnum", nextSpnum);
-    }
-
-    final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GET_APPROVAL_DATA);
-    String responseContent = this.mainService.post(url, jsonObject.toString());
-    return WxCpGsonBuilder.create().fromJson(responseContent, WxCpApprovalDataResult.class);
-  }
-
-  @Override
   public List<WxCpDialRecord> getDialRecord(Date startTime, Date endTime, Integer offset, Integer limit)
     throws WxErrorException {
     JsonObject jsonObject = new JsonObject();

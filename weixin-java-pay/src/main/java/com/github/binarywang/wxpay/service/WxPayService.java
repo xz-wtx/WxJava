@@ -414,30 +414,6 @@ public interface WxPayService {
   WxScanPayNotifyResult parseScanPayNotifyResult(String xmlData) throws WxPayException;
 
   /**
-   * @deprecated 建议使用 {@link RedpackService#sendMiniProgramRedpack(WxPaySendMiniProgramRedpackRequest)}
-   */
-  @Deprecated
-  WxPaySendMiniProgramRedpackResult sendMiniProgramRedpack(WxPaySendMiniProgramRedpackRequest request) throws WxPayException;
-
-  /**
-   * @deprecated 建议使用 {@link RedpackService#sendRedpack(WxPaySendRedpackRequest)}
-   */
-  @Deprecated
-  WxPaySendRedpackResult sendRedpack(WxPaySendRedpackRequest request) throws WxPayException;
-
-  /**
-   * @deprecated 建议使用 {@link RedpackService#queryRedpack(String)}
-   */
-  @Deprecated
-  WxPayRedpackQueryResult queryRedpack(String mchBillNo) throws WxPayException;
-
-  /**
-   * @deprecated 建议使用 {@link RedpackService#queryRedpack(WxPayRedpackQueryRequest)}
-   */
-  @Deprecated
-  WxPayRedpackQueryResult queryRedpack(WxPayRedpackQueryRequest request) throws WxPayException;
-
-  /**
    * <pre>
    * 扫码支付模式一生成二维码的方法。
    * 二维码中的内容为链接，形式为：

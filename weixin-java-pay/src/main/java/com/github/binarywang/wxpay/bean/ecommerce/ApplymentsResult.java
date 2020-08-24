@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 public class ApplymentsResult implements Serializable {
-
+  private static final long serialVersionUID = -4549193755252593150L;
   /**
    * <pre>
    * 字段名：微信支付申请单号

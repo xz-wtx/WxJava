@@ -9,21 +9,14 @@ import com.github.binarywang.wxpay.service.WxPayService;
 import com.github.binarywang.wxpay.v3.util.RsaCryptoUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import lombok.RequiredArgsConstructor;
 
 import java.net.URI;
 
+@RequiredArgsConstructor
 public class EcommerceServiceImpl implements EcommerceService {
-
   private static final Gson GSON = new GsonBuilder().create();
-  private WxPayService payService;
-
-  /**
-   *
-   * @param payService
-   */
-  public EcommerceServiceImpl(WxPayService payService) {
-    this.payService = payService;
-  }
+  private final WxPayService payService;
 
   @Override
   public ApplymentsResult createApply(ApplymentsRequest request) throws WxPayException {

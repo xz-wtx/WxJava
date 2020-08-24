@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.api.WxImgProcService;
 import me.chanjar.weixin.common.api.WxOcrService;
 import me.chanjar.weixin.common.bean.WxAccessToken;
@@ -221,45 +222,9 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
   }
 
   @Override
-  public String oauth2buildAuthorizationUrl(String redirectURI, String scope, String state) {
-    return String.format(CONNECT_OAUTH2_AUTHORIZE_URL.getUrl(this.getWxMpConfigStorage()),
-      this.getWxMpConfigStorage().getAppId(), URIUtil.encodeURIComponent(redirectURI), scope, StringUtils.trimToEmpty(state));
-  }
-
-  @Override
   public String buildQrConnectUrl(String redirectUri, String scope, String state) {
     return String.format(QRCONNECT_URL.getUrl(this.getWxMpConfigStorage()), this.getWxMpConfigStorage().getAppId(),
       URIUtil.encodeURIComponent(redirectUri), scope, StringUtils.trimToEmpty(state));
-  }
-
-  private WxMpOAuth2AccessToken getOAuth2AccessToken(String url) throws WxErrorException {
-    try {
-      RequestExecutor<String, String> executor = SimpleGetRequestExecutor.create(this);
-      String responseText = executor.execute(url, null, WxType.MP);
-      return WxMpOAuth2AccessToken.fromJson(responseText);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-  }
-
-  @Override
-  public WxMpOAuth2AccessToken oauth2getAccessToken(String code) throws WxErrorException {
-    return this.oAuth2Service.getAccessToken(code);
-  }
-
-  @Override
-  public WxMpOAuth2AccessToken oauth2refreshAccessToken(String refreshToken) throws WxErrorException {
-    return this.oAuth2Service.refreshAccessToken(refreshToken);
-  }
-
-  @Override
-  public WxMpUser oauth2getUserInfo(WxMpOAuth2AccessToken token, String lang) throws WxErrorException {
-      return this.oAuth2Service.getUserInfo(token,lang);
-  }
-
-  @Override
-  public boolean oauth2validateAccessToken(WxMpOAuth2AccessToken token) {
-    return this.oAuth2Service.validateAccessToken(token);
   }
 
   @Override
@@ -377,13 +342,7 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
       return result;
     } catch (WxErrorException e) {
       WxError error = e.getError();
-      /*
-       * 发生以下情况时尝试刷新access_token
-       * 40001 获取 access_token 时 AppSecret 错误，或者 access_token 无效。请开发者认真比对 AppSecret 的正确性，或查看是否正在为恰当的公众号调用接口
-       * 42001 access_token 超时，请检查 access_token 的有效期，请参考基础支持 - 获取 access_token 中，对 access_token 的详细机制说明
-       * 40014 不合法的 access_token ，请开发者认真比对 access_token 的有效性（如是否过期），或查看是否正在为恰当的公众号调用接口
-       */
-      if (error.getErrorCode() == 42001 || error.getErrorCode() == 40001 || error.getErrorCode() == 40014) {
+      if (WxConsts.ACCESS_TOKEN_ERROR_CODES.contains(error.getErrorCode())) {
         // 强制设置wxMpConfigStorage它的access token过期了，这样在下一次请求里就会刷新access token
         Lock lock = this.getWxMpConfigStorage().getAccessTokenLock();
         lock.lock();
@@ -397,6 +356,7 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
           lock.unlock();
         }
         if (this.getWxMpConfigStorage().autoRefreshToken()) {
+          log.warn("即将重新获取新的access_token，错误代码：{}，错误信息：{}", error.getErrorCode(), error.getErrorMsg());
           return this.execute(executor, uri, data);
         }
       }

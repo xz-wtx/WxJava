@@ -27,7 +27,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import javax.net.ssl.SSLContext;
-import java.math.BigInteger;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
@@ -129,10 +128,10 @@ public class WxPayServiceApacheHttpImpl extends BaseWxPayServiceImpl {
     try (CloseableHttpResponse response = httpClient.execute(httpPost)) {
       //v3已经改为通过状态码判断200 204 成功
       int statusCode = response.getStatusLine().getStatusCode();
-      String responseString="{}";
+      String responseString = "{}";
       HttpEntity entity = response.getEntity();
-      if(entity!=null){
-        responseString= EntityUtils.toString(entity, StandardCharsets.UTF_8);
+      if (entity != null) {
+        responseString = EntityUtils.toString(entity, StandardCharsets.UTF_8);
       }
 
       if (HttpStatus.SC_OK == statusCode || HttpStatus.SC_NO_CONTENT == statusCode) {
@@ -262,7 +261,7 @@ public class WxPayServiceApacheHttpImpl extends BaseWxPayServiceImpl {
     }
 
     SSLConnectionSocketFactory connectionSocketFactory = new SSLConnectionSocketFactory(sslContext,
-      new String[]{"TLSv1"}, null, new DefaultHostnameVerifier());
+      new DefaultHostnameVerifier());
     httpClientBuilder.setSSLSocketFactory(connectionSocketFactory);
   }
 

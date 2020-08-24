@@ -31,15 +31,15 @@ public class WxMpOAuth2Servlet extends HttpServlet {
       response.getWriter().println("<h1>code</h1>");
       response.getWriter().println(code);
 
-      WxMpOAuth2AccessToken wxMpOAuth2AccessToken = this.wxMpService.oauth2getAccessToken(code);
+      WxMpOAuth2AccessToken wxMpOAuth2AccessToken = this.wxMpService.getOAuth2Service().getAccessToken(code);
       response.getWriter().println("<h1>access token</h1>");
       response.getWriter().println(wxMpOAuth2AccessToken.toString());
 
-      WxMpUser wxMpUser = this.wxMpService.oauth2getUserInfo(wxMpOAuth2AccessToken, null);
+      WxMpUser wxMpUser = this.wxMpService.getOAuth2Service().getUserInfo(wxMpOAuth2AccessToken, null);
       response.getWriter().println("<h1>user info</h1>");
       response.getWriter().println(wxMpUser.toString());
 
-      wxMpOAuth2AccessToken = this.wxMpService.oauth2refreshAccessToken(wxMpOAuth2AccessToken.getRefreshToken());
+      wxMpOAuth2AccessToken = this.wxMpService.getOAuth2Service().refreshAccessToken(wxMpOAuth2AccessToken.getRefreshToken());
       response.getWriter().println("<h1>after refresh</h1>");
       response.getWriter().println(wxMpOAuth2AccessToken.toString());
 

@@ -144,7 +144,8 @@ public class ApplymentsStatusResult implements Serializable {
 
   @Data
   @NoArgsConstructor
-  public static class AccountValidation implements Serializable{
+  public static class AccountValidation implements Serializable {
+    private static final long serialVersionUID = 4379880030965808588L;
     /**
      * <pre>
      * 字段名：付款户名
@@ -275,7 +276,8 @@ public class ApplymentsStatusResult implements Serializable {
 
   @Data
   @NoArgsConstructor
-  public static class AuditDetail implements Serializable{
+  public static class AuditDetail implements Serializable {
+    private static final long serialVersionUID = 5446130564359386809L;
     /**
      * <pre>
      * 字段名：参数名称
