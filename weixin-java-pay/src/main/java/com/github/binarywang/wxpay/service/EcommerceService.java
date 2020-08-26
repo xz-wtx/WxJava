@@ -1,6 +1,7 @@
 package com.github.binarywang.wxpay.service;
 
 import com.github.binarywang.wxpay.bean.ecommerce.*;
+import com.github.binarywang.wxpay.bean.ecommerce.enums.TradeTypeEnum;
 import com.github.binarywang.wxpay.exception.WxPayException;
 
 /**
@@ -63,5 +64,6 @@ public interface EcommerceService {
    * @param request 请求对象
    * @return 预支付交易会话标识, 数字和字母。微信生成的预支付会话标识，用于后续接口调用使用。
    */
-  CombineTransactionsJsResult combineTransactions(CombineTransactionsJsRequest request) throws WxPayException;
+  <T> T combineTransactions(TradeTypeEnum tradeType, CombineTransactionsRequest request) throws WxPayException;
+
 }

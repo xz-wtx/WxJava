@@ -1,6 +1,7 @@
 package com.github.binarywang.wxpay.service.impl;
 
 import com.github.binarywang.wxpay.bean.ecommerce.*;
+import com.github.binarywang.wxpay.bean.ecommerce.enums.TradeTypeEnum;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.EcommerceService;
 import com.github.binarywang.wxpay.service.WxPayService;
@@ -8,6 +9,7 @@ import com.github.binarywang.wxpay.v3.util.RsaCryptoUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 
 import java.net.URI;
 
@@ -40,10 +42,12 @@ public class EcommerceServiceImpl implements EcommerceService {
   }
 
   @Override
-  public CombineTransactionsJsResult combineTransactions(CombineTransactionsJsRequest request) throws WxPayException {
-    String url = String.format("%s/v3/combine-transactions/jsapi", this.payService.getPayBaseUrl());
+  public <T> T combineTransactions(TradeTypeEnum tradeType, CombineTransactionsRequest request) throws WxPayException {
+    String url = this.payService.getPayBaseUrl() + tradeType.getCombineUrl();
     String response = this.payService.postV3(url, GSON.toJson(request));
-    return GSON.fromJson(response, CombineTransactionsJsResult.class);
+    CombineTransactionsResult result = GSON.fromJson(response, CombineTransactionsResult.class);
+    return result.getPayInfo(tradeType, request.getCombineAppid(),
+      request.getCombineMchid(), payService.getConfig().getPrivateKey());
   }
 
 

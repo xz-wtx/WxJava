@@ -8,11 +8,11 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 合单支付 JSAPI支付
+ * 合单支付 对象
  */
 @Data
 @NoArgsConstructor
-public class CombineTransactionsJsRequest implements Serializable {
+public class CombineTransactionsRequest implements Serializable {
   /**
    * <pre>
    * 字段名：合单商户appid
@@ -85,7 +85,7 @@ public class CombineTransactionsJsRequest implements Serializable {
    * <pre>
    * 字段名：+支付者
    * 变量名：combine_payer_info
-   * 是否必填：是
+   * 是否必填：否(JSAPI必填)
    * 类型：object
    * 描述：支付者信息
    * </pre>
@@ -136,25 +136,10 @@ public class CombineTransactionsJsRequest implements Serializable {
   @SerializedName(value = "notify_url")
   private String notifyUrl;
 
-  /**
-   * <pre>
-   * 字段名：指定支付方式
-   * 变量名：limit_pay
-   * 是否必填：否
-   * 类型：array
-   * 描述：
-   *  指定支付方式
-   *  no_credit：指定不能使用信用卡支付
-   *  特殊规则：长度最大限制32个字节
-   *  示例值：no_credit
-   * </pre>
-   */
-  @SerializedName(value = "limit_pay")
-  private List<String> limitPay;
 
   @Data
   @NoArgsConstructor
-  public static class SceneInfo implements Serializable{
+  public static class SceneInfo implements Serializable {
     /**
      * <pre>
      * 字段名：商户端设备号
@@ -185,11 +170,23 @@ public class CombineTransactionsJsRequest implements Serializable {
     @SerializedName(value = "payer_client_ip")
     private String payerClientIp;
 
+    /**
+     * <pre>
+     * 字段名：H5场景信息
+     * 变量名：h5_info
+     * 是否必填：否(H5支付必填)
+     * 类型：object
+     * 描述：
+     *  H5场景信息
+     * </pre>
+     */
+    @SerializedName(value = "h5_info")
+    private H5Info h5Info;
   }
 
   @Data
   @NoArgsConstructor
-  public static class SubOrders implements Serializable{
+  public static class SubOrders implements Serializable {
     /**
      * <pre>
      * 字段名：子单商户号
@@ -263,34 +260,6 @@ public class CombineTransactionsJsRequest implements Serializable {
 
     /**
      * <pre>
-     * 字段名：商品详情
-     * 变量名：detail
-     * 是否必填：否
-     * 类型：string(6000)
-     * 描述：商品详细描述（商品列表)
-     * </pre>
-     */
-    @SerializedName(value = "detail")
-    private String detail;
-
-    /**
-     * <pre>
-     * 字段名：是否指定分账
-     * 变量名：profit_sharing
-     * 是否必填：是
-     * 类型：bool
-     * 描述：
-     *  是否指定分账
-     *  true：是
-     *  false：否
-     *  示例值：true
-     * </pre>
-     */
-    @SerializedName(value = "profit_sharing")
-    private Boolean profitSharing;
-
-    /**
-     * <pre>
      * 字段名：商品描述
      * 变量名：description
      * 是否必填：是
@@ -319,7 +288,7 @@ public class CombineTransactionsJsRequest implements Serializable {
 
   @Data
   @NoArgsConstructor
-  public static class CombinePayerInfo implements Serializable{
+  public static class CombinePayerInfo implements Serializable {
     /**
      * <pre>
      * 字段名：用户标识
@@ -401,6 +370,85 @@ public class CombineTransactionsJsRequest implements Serializable {
      */
     @SerializedName(value = "subsidy_amount")
     private Integer subsidyAmount;
+
+  }
+
+  @Data
+  @NoArgsConstructor
+  public static class H5Info implements Serializable {
+
+    /**
+     * <pre>
+     * 字段名：场景类型
+     * 变量名：type
+     * 是否必填：是
+     * 类型：string(32)
+     * 描述：
+     *  场景类型，枚举值：
+     *  iOS：IOS移动应用；
+     *  Android：安卓移动应用；
+     *  Wap：WAP网站应用；
+     *  示例值：iOS
+     * </pre>
+     */
+    @SerializedName(value = "type")
+    private String type;
+
+    /**
+     * <pre>
+     * 字段名：应用名称
+     * 变量名：app_name
+     * 是否必填：否
+     * 类型：string(64)
+     * 描述：
+     *  应用名称
+     *  示例值：王者荣耀
+     * </pre>
+     */
+    @SerializedName(value = "app_name")
+    private String appName;
+
+    /**
+     * <pre>
+     * 字段名：网站URL
+     * 变量名：app_url
+     * 是否必填：否
+     * 类型：string(128)
+     * 描述：
+     *  网站URL
+     *  示例值：https://pay.qq.com
+     * </pre>
+     */
+    @SerializedName(value = "app_url")
+    private String appUrl;
+
+    /**
+     * <pre>
+     * 字段名：iOS平台BundleID
+     * 变量名：bundle_id
+     * 是否必填：否
+     * 类型：string(128)
+     * 描述：
+     *  iOS平台BundleID
+     *  示例值：com.tencent.wzryiOS
+     * </pre>
+     */
+    @SerializedName(value = "bundle_id")
+    private String bundleId;
+
+    /**
+     * <pre>
+     * 字段名：Android平台PackageName
+     * 变量名：package_name
+     * 是否必填：否
+     * 类型：string(128)
+     * 描述：
+     *  Android平台PackageName
+     *  示例值：com.tencent.tmgp.sgame
+     * </pre>
+     */
+    @SerializedName(value = "package_name")
+    private String packageName;
 
   }
 
