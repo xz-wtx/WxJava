@@ -1,8 +1,7 @@
 package com.github.binarywang.wxpay.service;
 
-import com.github.binarywang.wxpay.bean.ecommerce.ApplymentsRequest;
-import com.github.binarywang.wxpay.bean.ecommerce.ApplymentsResult;
-import com.github.binarywang.wxpay.bean.ecommerce.ApplymentsStatusResult;
+import com.github.binarywang.wxpay.bean.ecommerce.*;
+import com.github.binarywang.wxpay.bean.ecommerce.enums.TradeTypeEnum;
 import com.github.binarywang.wxpay.exception.WxPayException;
 
 /**
@@ -54,5 +53,17 @@ public interface EcommerceService {
    * @throws WxPayException the wx pay exception
    */
   ApplymentsStatusResult queryApplyStatusByOutRequestNo(String outRequestNo) throws WxPayException;
+
+  /**
+   * <pre>
+   * 合单下单-JS支付API.
+   * 请求URL：https://api.mch.weixin.qq.com/v3/combine-transactions/jsapi
+   * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/combine/chapter3_2.shtml
+   * </pre>
+   *
+   * @param request 请求对象
+   * @return 预支付交易会话标识, 数字和字母。微信生成的预支付会话标识，用于后续接口调用使用。
+   */
+  <T> T combineTransactions(TradeTypeEnum tradeType, CombineTransactionsRequest request) throws WxPayException;
 
 }

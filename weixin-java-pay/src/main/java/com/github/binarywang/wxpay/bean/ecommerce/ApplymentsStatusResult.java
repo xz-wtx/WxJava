@@ -7,6 +7,10 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * 二级商户进件 查询申请状态结果响应
+ *
+ */
 @Data
 @NoArgsConstructor
 public class ApplymentsStatusResult implements Serializable {
