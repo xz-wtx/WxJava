@@ -22,8 +22,6 @@ import me.chanjar.weixin.common.util.http.SimplePostRequestExecutor;
 import me.chanjar.weixin.common.util.json.GsonParser;
 import me.chanjar.weixin.cp.api.*;
 import me.chanjar.weixin.cp.bean.WxCpMaJsCode2SessionResult;
-import me.chanjar.weixin.cp.bean.WxCpMessage;
-import me.chanjar.weixin.cp.bean.WxCpMessageSendResult;
 import me.chanjar.weixin.cp.bean.WxCpProviderToken;
 import me.chanjar.weixin.cp.config.WxCpConfigStorage;
 
@@ -53,6 +51,7 @@ public abstract class BaseWxCpServiceImpl<H, P> implements WxCpService, RequestH
   private WxCpTaskCardService taskCardService = new WxCpTaskCardServiceImpl(this);
   private WxCpExternalContactService externalContactService = new WxCpExternalContactServiceImpl(this);
   private WxCpGroupRobotService groupRobotService = new WxCpGroupRobotServiceImpl(this);
+  private WxCpMessageService messageService = new WxCpMessageServiceImpl(this);
 
   /**
    * 全局的是否正在刷新access token的锁.
@@ -167,16 +166,6 @@ public abstract class BaseWxCpServiceImpl<H, P> implements WxCpService, RequestH
     jsapiSignature.setAppId(this.configStorage.getCorpId());
 
     return jsapiSignature;
-  }
-
-  @Override
-  public WxCpMessageSendResult messageSend(WxCpMessage message) throws WxErrorException {
-    Integer agentId = message.getAgentId();
-    if (null == agentId) {
-      message.setAgentId(this.getWxCpConfigStorage().getAgentId());
-    }
-
-    return WxCpMessageSendResult.fromJson(this.post(this.configStorage.getApiUrl(MESSAGE_SEND), message.toJson()));
   }
 
   @Override
@@ -484,6 +473,11 @@ public abstract class BaseWxCpServiceImpl<H, P> implements WxCpService, RequestH
   @Override
   public WxCpAgentService getAgentService() {
     return agentService;
+  }
+
+  @Override
+  public WxCpMessageService getMessageService() {
+    return this.messageService;
   }
 
   public void setAgentService(WxCpAgentService agentService) {

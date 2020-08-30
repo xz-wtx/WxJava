@@ -7,8 +7,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.io.Serializable;
 
-import static com.binarywang.spring.starter.wxjava.mp.properties.WxMpProperties.PREFIX;
 import static com.binarywang.spring.starter.wxjava.mp.enums.StorageType.Memory;
+import static com.binarywang.spring.starter.wxjava.mp.properties.WxMpProperties.PREFIX;
 
 
 /**
@@ -68,7 +68,7 @@ public class WxMpProperties {
     /**
      * http客户端类型.
      */
-    private HttpClientType httpClientType = HttpClientType.httpclient;
+    private HttpClientType httpClientType = HttpClientType.HttpClient;
 
     /**
      * http代理主机.

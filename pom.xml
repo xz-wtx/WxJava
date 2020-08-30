@@ -182,7 +182,7 @@
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
-        <version>29.0-android</version>
+        <version>29.0-jre</version>
       </dependency>
       <dependency>
         <groupId>com.google.code.gson</groupId>
@@ -237,6 +237,12 @@
         <groupId>org.assertj</groupId>
         <artifactId>assertj-guava</artifactId>
         <version>3.0.0</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.github.dreamhead</groupId>
+        <artifactId>moco-runner</artifactId>
+        <version>1.1.0</version>
         <scope>test</scope>
       </dependency>
 

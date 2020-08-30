@@ -49,7 +49,7 @@ public class WxCpTaskCardServiceImplTest {
       .buttons(Arrays.asList(btn1, btn2))
       .build();
 
-    WxCpMessageSendResult messageSendResult = this.wxCpService.messageSend(message);
+    WxCpMessageSendResult messageSendResult = this.wxCpService.getMessageService().messageSend(message);
     assertNotNull(messageSendResult);
     System.out.println(messageSendResult);
     System.out.println(messageSendResult.getInvalidPartyList());

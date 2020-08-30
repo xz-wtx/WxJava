@@ -83,6 +83,11 @@
       <artifactId>assertj-guava</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.github.dreamhead</groupId>
+      <artifactId>moco-runner</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
