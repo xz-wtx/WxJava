@@ -1,4 +1,4 @@
-package me.chanjar.weixin.cp.bean;
+package me.chanjar.weixin.cp.bean.message;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
@@ -10,15 +10,15 @@ import me.chanjar.weixin.common.util.xml.XStreamMediaIdConverter;
 @XStreamAlias("xml")
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class WxCpXmlOutVoiceMessage extends WxCpXmlOutMessage {
-  private static final long serialVersionUID = -7947384031546099340L;
+public class WxCpXmlOutImageMessage extends WxCpXmlOutMessage {
+  private static final long serialVersionUID = -1099446240667237313L;
 
-  @XStreamAlias("Voice")
+  @XStreamAlias("Image")
   @XStreamConverter(value = XStreamMediaIdConverter.class)
   private String mediaId;
 
-  public WxCpXmlOutVoiceMessage() {
-    this.msgType = WxConsts.XmlMsgType.VOICE;
+  public WxCpXmlOutImageMessage() {
+    this.msgType = WxConsts.XmlMsgType.IMAGE;
   }
 
 }

@@ -1,16 +1,18 @@
 package me.chanjar.weixin.cp.api.impl;
 
 import lombok.RequiredArgsConstructor;
-import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.api.WxCpGroupRobotService;
 import me.chanjar.weixin.cp.api.WxCpService;
-import me.chanjar.weixin.cp.bean.WxCpGroupRobotMessage;
 import me.chanjar.weixin.cp.bean.article.NewArticle;
+import me.chanjar.weixin.cp.bean.message.WxCpGroupRobotMessage;
 import me.chanjar.weixin.cp.config.WxCpConfigStorage;
 import me.chanjar.weixin.cp.constant.WxCpApiPathConsts;
 
 import java.util.List;
+
+import static me.chanjar.weixin.cp.constant.WxCpConsts.GroupRobotMsgType;
+import static me.chanjar.weixin.cp.constant.WxCpConsts.GroupRobotMsgType.*;
 
 /**
  * 微信群机器人消息发送api 实现
@@ -30,7 +32,7 @@ public class WxCpGroupRobotServiceImpl implements WxCpGroupRobotService {
   @Override
   public void sendText(String content, List<String> mentionedList, List<String> mobileList) throws WxErrorException {
     WxCpGroupRobotMessage message = new WxCpGroupRobotMessage()
-      .setMsgType(WxConsts.GroupRobotMsgType.TEXT)
+      .setMsgType(TEXT)
       .setContent(content)
       .setMentionedList(mentionedList)
       .setMentionedMobileList(mobileList);
@@ -40,7 +42,7 @@ public class WxCpGroupRobotServiceImpl implements WxCpGroupRobotService {
   @Override
   public void sendMarkDown(String content) throws WxErrorException {
     WxCpGroupRobotMessage message = new WxCpGroupRobotMessage()
-      .setMsgType(WxConsts.GroupRobotMsgType.MARKDOWN)
+      .setMsgType(MARKDOWN)
       .setContent(content);
     cpService.postWithoutToken(this.getApiUrl(), message.toJson());
   }
@@ -48,7 +50,7 @@ public class WxCpGroupRobotServiceImpl implements WxCpGroupRobotService {
   @Override
   public void sendImage(String base64, String md5) throws WxErrorException {
     WxCpGroupRobotMessage message = new WxCpGroupRobotMessage()
-      .setMsgType(WxConsts.GroupRobotMsgType.IMAGE)
+      .setMsgType(GroupRobotMsgType.IMAGE)
       .setBase64(base64)
       .setMd5(md5);
     cpService.postWithoutToken(this.getApiUrl(), message.toJson());
@@ -57,7 +59,7 @@ public class WxCpGroupRobotServiceImpl implements WxCpGroupRobotService {
   @Override
   public void sendNews(List<NewArticle> articleList) throws WxErrorException {
     WxCpGroupRobotMessage message = new WxCpGroupRobotMessage()
-      .setMsgType(WxConsts.GroupRobotMsgType.NEWS)
+      .setMsgType(GroupRobotMsgType.NEWS)
       .setArticles(articleList);
     cpService.postWithoutToken(this.getApiUrl(), message.toJson());
   }

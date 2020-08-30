@@ -1,4 +1,4 @@
-package me.chanjar.weixin.cp.bean;
+package me.chanjar.weixin.cp.bean.message;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;

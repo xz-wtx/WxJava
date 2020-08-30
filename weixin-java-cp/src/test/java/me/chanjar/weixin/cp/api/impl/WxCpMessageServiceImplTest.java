@@ -9,8 +9,9 @@ import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.api.ApiTestModule;
 import me.chanjar.weixin.cp.api.ApiTestModuleWithMockServer;
 import me.chanjar.weixin.cp.api.WxCpService;
-import me.chanjar.weixin.cp.bean.WxCpMessage;
-import me.chanjar.weixin.cp.bean.WxCpMessageSendResult;
+import me.chanjar.weixin.cp.bean.message.WxCpLinkedCorpMessage;
+import me.chanjar.weixin.cp.bean.message.WxCpMessage;
+import me.chanjar.weixin.cp.bean.message.WxCpMessageSendResult;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Guice;
@@ -57,7 +58,7 @@ public class WxCpMessageServiceImplTest {
     message.setToUser(configStorage.getUserId());
     message.setContent("欢迎欢迎，热烈欢迎\n换行测试\n超链接:<a href=\"http://www.baidu.com\">Hello World</a>");
 
-    WxCpMessageSendResult messageSendResult = this.wxService.getMessageService().messageSend(message);
+    WxCpMessageSendResult messageSendResult = this.wxService.getMessageService().send(message);
     assertNotNull(messageSendResult);
     System.out.println(messageSendResult);
     System.out.println(messageSendResult.getInvalidPartyList());
@@ -74,7 +75,7 @@ public class WxCpMessageServiceImplTest {
       .content("欢迎欢迎，热烈欢迎\n换行测试\n超链接:<a href=\"http://www.baidu.com\">Hello World</a>")
       .build();
 
-    WxCpMessageSendResult messageSendResult = this.wxService.getMessageService().messageSend(message);
+    WxCpMessageSendResult messageSendResult = this.wxService.getMessageService().send(message);
     assertNotNull(messageSendResult);
     System.out.println(messageSendResult);
     System.out.println(messageSendResult.getInvalidPartyList());
@@ -102,7 +103,7 @@ public class WxCpMessageServiceImplTest {
         "                >如需修改会议信息，请点击：[修改会议信息](https://work.weixin.qq.com)")
       .build();
 
-    WxCpMessageSendResult messageSendResult = this.wxService.getMessageService().messageSend(message);
+    WxCpMessageSendResult messageSendResult = this.wxService.getMessageService().send(message);
     assertNotNull(messageSendResult);
     System.out.println(messageSendResult);
     System.out.println(messageSendResult.getInvalidPartyList());
@@ -121,7 +122,7 @@ public class WxCpMessageServiceImplTest {
       .title("领奖通知")
       .build();
 
-    WxCpMessageSendResult messageSendResult = this.wxService.getMessageService().messageSend(message);
+    WxCpMessageSendResult messageSendResult = this.wxService.getMessageService().send(message);
     assertNotNull(messageSendResult);
     System.out.println(messageSendResult);
     System.out.println(messageSendResult.getInvalidPartyList());
@@ -144,11 +145,20 @@ public class WxCpMessageServiceImplTest {
         "会议时间", "2018年8月1日 09:00-09:30"))
       .build();
 
-    WxCpMessageSendResult messageSendResult = this.wxService.getMessageService().messageSend(message);
+    WxCpMessageSendResult messageSendResult = this.wxService.getMessageService().send(message);
     assertNotNull(messageSendResult);
     System.out.println(messageSendResult);
     System.out.println(messageSendResult.getInvalidPartyList());
     System.out.println(messageSendResult.getInvalidUserList());
     System.out.println(messageSendResult.getInvalidTagList());
+  }
+
+  @Test
+  public void testLinkedCorpMessageSend() throws WxErrorException {
+    this.wxService.getMessageService().sendLinkedCorpMessage(WxCpLinkedCorpMessage.builder()
+      .msgType(WxConsts.KefuMsgType.TEXT)
+      .toUsers(new String[]{configStorage.getUserId()})
+      .content("欢迎欢迎，热烈欢迎\n换行测试\n超链接:<a href=\"http://www.baidu.com\">Hello World</a>")
+      .build());
   }
 }

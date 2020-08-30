@@ -14,5 +14,13 @@
     "response": {
       "text": "{\"errcode\":0,\"errmsg\":\"ok\",\"invaliduser\":\"\"}"
     }
+  },
+  {
+    "request": {
+      "uri": "/cgi-bin/linkedcorp/message/send"
+    },
+    "response": {
+      "text": "{\"errcode\":0,\"errmsg\":\"ok\",\"invaliduser\":\"\"}"
+    }
   }
 ]

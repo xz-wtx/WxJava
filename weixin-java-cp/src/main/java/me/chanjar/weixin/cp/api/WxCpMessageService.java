@@ -1,8 +1,9 @@
 package me.chanjar.weixin.cp.api;
 
 import me.chanjar.weixin.common.error.WxErrorException;
-import me.chanjar.weixin.cp.bean.WxCpMessage;
-import me.chanjar.weixin.cp.bean.WxCpMessageSendResult;
+import me.chanjar.weixin.cp.bean.message.WxCpLinkedCorpMessage;
+import me.chanjar.weixin.cp.bean.message.WxCpMessage;
+import me.chanjar.weixin.cp.bean.message.WxCpMessageSendResult;
 
 /**
  * 消息推送接口.
@@ -14,12 +15,26 @@ public interface WxCpMessageService {
   /**
    * <pre>
    * 发送消息
-   * 详情请见: http://qydev.weixin.qq.com/wiki/index.php?title=%E5%8F%91%E9%80%81%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E
+   * 详情请见: https://work.weixin.qq.com/api/doc/90000/90135/90236
    * </pre>
    *
    * @param message 要发送的消息对象
    * @return the wx cp message send result
    * @throws WxErrorException the wx error exception
    */
-  WxCpMessageSendResult messageSend(WxCpMessage message) throws WxErrorException;
+  WxCpMessageSendResult send(WxCpMessage message) throws WxErrorException;
+
+  /**
+   * <pre>
+   * 互联企业的应用支持推送文本、图片、视频、文件、图文等类型。
+   *
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/linkedcorp/message/send?access_token=ACCESS_TOKEN
+   * 文章地址：https://work.weixin.qq.com/api/doc/90000/90135/90250
+   * </pre>
+   *
+   * @param message 要发送的消息对象
+   * @return the wx cp message send result
+   * @throws WxErrorException the wx error exception
+   */
+  WxCpMessageSendResult sendLinkedCorpMessage(WxCpLinkedCorpMessage message) throws WxErrorException;
 }
