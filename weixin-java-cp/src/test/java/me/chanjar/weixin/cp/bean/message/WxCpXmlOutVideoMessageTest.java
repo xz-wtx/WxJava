@@ -1,5 +1,7 @@
-package me.chanjar.weixin.cp.bean;
+package me.chanjar.weixin.cp.bean.message;
 
+import me.chanjar.weixin.cp.bean.message.WxCpXmlOutMessage;
+import me.chanjar.weixin.cp.bean.message.WxCpXmlOutVideoMessage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

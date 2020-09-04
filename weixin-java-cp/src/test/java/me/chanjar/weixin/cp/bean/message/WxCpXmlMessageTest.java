@@ -1,6 +1,7 @@
-package me.chanjar.weixin.cp.bean;
+package me.chanjar.weixin.cp.bean.message;
 
 import me.chanjar.weixin.common.api.WxConsts;
+import me.chanjar.weixin.cp.bean.message.WxCpXmlMessage;
 import me.chanjar.weixin.cp.constant.WxCpConsts;
 import me.chanjar.weixin.cp.util.xml.XStreamTransformer;
 import org.testng.annotations.Test;

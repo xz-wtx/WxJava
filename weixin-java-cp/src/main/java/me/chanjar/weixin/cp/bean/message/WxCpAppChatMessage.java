@@ -1,4 +1,4 @@
-package me.chanjar.weixin.cp.bean;
+package me.chanjar.weixin.cp.bean.message;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

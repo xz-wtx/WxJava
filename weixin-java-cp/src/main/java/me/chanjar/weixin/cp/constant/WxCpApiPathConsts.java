@@ -14,7 +14,6 @@ public final class WxCpApiPathConsts {
 
   public static final String GET_JSAPI_TICKET = "/cgi-bin/get_jsapi_ticket";
   public static final String GET_AGENT_CONFIG_TICKET = "/cgi-bin/ticket/get?&type=agent_config";
-  public static final String MESSAGE_SEND = "/cgi-bin/message/send";
   public static final String GET_CALLBACK_IP = "/cgi-bin/getcallbackip";
   public static final String BATCH_REPLACE_PARTY = "/cgi-bin/batch/replaceparty";
   public static final String BATCH_REPLACE_USER = "/cgi-bin/batch/replaceuser";
@@ -22,6 +21,22 @@ public final class WxCpApiPathConsts {
   public static final String JSCODE_TO_SESSION = "/cgi-bin/miniprogram/jscode2session";
   public static final String GET_TOKEN = "/cgi-bin/gettoken?corpid=%s&corpsecret=%s";
   public static final String WEBHOOK_SEND = "/cgi-bin/webhook/send?key=";
+
+  /**
+   * 消息推送相关接口
+   * https://work.weixin.qq.com/api/doc/90000/90135/90235
+   */
+  public static class Message {
+    /**
+     * 发送应用消息
+     */
+    public static final String MESSAGE_SEND = "/cgi-bin/message/send";
+
+    /**
+     * 互联企业发送应用消息
+     */
+    public static final String LINKEDCORP_MESSAGE_SEND = "/cgi-bin/linkedcorp/message/send";
+  }
 
   public static class Agent {
     public static final String AGENT_GET = "/cgi-bin/agent/get?agentid=%d";

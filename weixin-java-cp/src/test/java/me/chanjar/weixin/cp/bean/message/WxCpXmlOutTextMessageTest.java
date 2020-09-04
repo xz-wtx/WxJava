@@ -1,14 +1,16 @@
-package me.chanjar.weixin.cp.bean;
+package me.chanjar.weixin.cp.bean.message;
 
+import me.chanjar.weixin.cp.bean.message.WxCpXmlOutMessage;
+import me.chanjar.weixin.cp.bean.message.WxCpXmlOutTextMessage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Test
-public class WxCpXmlOutVoiceMessageTest {
+public class WxCpXmlOutTextMessageTest {
 
   public void test() {
-    WxCpXmlOutVoiceMessage m = new WxCpXmlOutVoiceMessage();
-    m.setMediaId("ddfefesfsdfef");
+    WxCpXmlOutTextMessage m = new WxCpXmlOutTextMessage();
+    m.setContent("content");
     m.setCreateTime(1122L);
     m.setFromUserName("from");
     m.setToUserName("to");
@@ -17,21 +19,21 @@ public class WxCpXmlOutVoiceMessageTest {
       + "<ToUserName><![CDATA[to]]></ToUserName>"
       + "<FromUserName><![CDATA[from]]></FromUserName>"
       + "<CreateTime>1122</CreateTime>"
-      + "<MsgType><![CDATA[voice]]></MsgType>"
-      + "<Voice><MediaId><![CDATA[ddfefesfsdfef]]></MediaId></Voice>"
+      + "<MsgType><![CDATA[text]]></MsgType>"
+      + "<Content><![CDATA[content]]></Content>"
       + "</xml>";
     System.out.println(m.toXml());
     Assert.assertEquals(m.toXml().replaceAll("\\s", ""), expected.replaceAll("\\s", ""));
   }
 
   public void testBuild() {
-    WxCpXmlOutVoiceMessage m = WxCpXmlOutMessage.VOICE().mediaId("ddfefesfsdfef").fromUser("from").toUser("to").build();
+    WxCpXmlOutTextMessage m = WxCpXmlOutMessage.TEXT().content("content").fromUser("from").toUser("to").build();
     String expected = "<xml>"
       + "<ToUserName><![CDATA[to]]></ToUserName>"
       + "<FromUserName><![CDATA[from]]></FromUserName>"
       + "<CreateTime>1122</CreateTime>"
-      + "<MsgType><![CDATA[voice]]></MsgType>"
-      + "<Voice><MediaId><![CDATA[ddfefesfsdfef]]></MediaId></Voice>"
+      + "<MsgType><![CDATA[text]]></MsgType>"
+      + "<Content><![CDATA[content]]></Content>"
       + "</xml>";
     System.out.println(m.toXml());
     Assert.assertEquals(
@@ -43,6 +45,8 @@ public class WxCpXmlOutVoiceMessageTest {
         .replaceAll("\\s", "")
         .replaceAll("<CreateTime>.*?</CreateTime>", "")
     );
+
   }
+
 
 }

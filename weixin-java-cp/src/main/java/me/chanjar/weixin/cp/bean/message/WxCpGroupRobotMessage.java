@@ -1,4 +1,4 @@
-package me.chanjar.weixin.cp.bean;
+package me.chanjar.weixin.cp.bean.message;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -10,7 +10,7 @@ import me.chanjar.weixin.cp.bean.article.NewArticle;
 
 import java.util.List;
 
-import static me.chanjar.weixin.common.api.WxConsts.GroupRobotMsgType.*;
+import static me.chanjar.weixin.cp.constant.WxCpConsts.GroupRobotMsgType.*;
 
 /**
  * 微信群机器人消息

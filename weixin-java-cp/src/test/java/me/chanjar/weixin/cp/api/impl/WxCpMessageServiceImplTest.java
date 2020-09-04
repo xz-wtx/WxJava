@@ -1,33 +1,54 @@
-package me.chanjar.weixin.cp.api;
+package me.chanjar.weixin.cp.api.impl;
 
+import com.github.dreamhead.moco.HttpServer;
+import com.github.dreamhead.moco.Runner;
 import com.google.common.collect.ImmutableMap;
-import org.testng.annotations.*;
-
 import com.google.inject.Inject;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.error.WxErrorException;
-import me.chanjar.weixin.cp.bean.WxCpMessage;
-import me.chanjar.weixin.cp.bean.WxCpMessageSendResult;
+import me.chanjar.weixin.cp.api.ApiTestModule;
+import me.chanjar.weixin.cp.api.ApiTestModuleWithMockServer;
+import me.chanjar.weixin.cp.api.WxCpService;
+import me.chanjar.weixin.cp.bean.message.WxCpLinkedCorpMessage;
+import me.chanjar.weixin.cp.bean.message.WxCpMessage;
+import me.chanjar.weixin.cp.bean.message.WxCpMessageSendResult;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Guice;
+import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import static com.github.dreamhead.moco.Moco.file;
+import static com.github.dreamhead.moco.MocoJsonRunner.jsonHttpServer;
+import static me.chanjar.weixin.cp.api.ApiTestModuleWithMockServer.mockServerPort;
+import static org.testng.Assert.assertNotNull;
 
-/***
- * 测试发送消息
- * @author Daniel Qian
+/**
+ * 测试类.
  *
+ * @author <a href="https://github.com/binarywang">Binary Wang</a>
+ * @date 2020-08-30
  */
 @Test
-@Guice(modules = ApiTestModule.class)
-public class WxCpMessageAPITest {
-
+@Guice(modules = ApiTestModuleWithMockServer.class)
+//@Guice(modules = ApiTestModule.class)
+public class WxCpMessageServiceImplTest {
   @Inject
   protected WxCpService wxService;
 
+  private Runner mockRunner;
   private ApiTestModule.WxXmlCpInMemoryConfigStorage configStorage;
 
   @BeforeTest
   public void setup() {
-    configStorage = (ApiTestModule.WxXmlCpInMemoryConfigStorage) this.wxService.getWxCpConfigStorage();
+    HttpServer mockServer = jsonHttpServer(mockServerPort, file("src/test/resources/moco/message.json"));
+    this.mockRunner = Runner.runner(mockServer);
+    this.mockRunner.start();
+    this.configStorage = (ApiTestModule.WxXmlCpInMemoryConfigStorage) this.wxService.getWxCpConfigStorage();
+  }
+
+  @AfterTest
+  public void stopMockServer() {
+    this.mockRunner.stop();
   }
 
   public void testSendMessage() throws WxErrorException {
@@ -37,7 +58,7 @@ public class WxCpMessageAPITest {
     message.setToUser(configStorage.getUserId());
     message.setContent("欢迎欢迎，热烈欢迎\n换行测试\n超链接:<a href=\"http://www.baidu.com\">Hello World</a>");
 
-    WxCpMessageSendResult messageSendResult = this.wxService.messageSend(message);
+    WxCpMessageSendResult messageSendResult = this.wxService.getMessageService().send(message);
     assertNotNull(messageSendResult);
     System.out.println(messageSendResult);
     System.out.println(messageSendResult.getInvalidPartyList());
@@ -54,7 +75,7 @@ public class WxCpMessageAPITest {
       .content("欢迎欢迎，热烈欢迎\n换行测试\n超链接:<a href=\"http://www.baidu.com\">Hello World</a>")
       .build();
 
-    WxCpMessageSendResult messageSendResult = this.wxService.messageSend(message);
+    WxCpMessageSendResult messageSendResult = this.wxService.getMessageService().send(message);
     assertNotNull(messageSendResult);
     System.out.println(messageSendResult);
     System.out.println(messageSendResult.getInvalidPartyList());
@@ -82,7 +103,7 @@ public class WxCpMessageAPITest {
         "                >如需修改会议信息，请点击：[修改会议信息](https://work.weixin.qq.com)")
       .build();
 
-    WxCpMessageSendResult messageSendResult = this.wxService.messageSend(message);
+    WxCpMessageSendResult messageSendResult = this.wxService.getMessageService().send(message);
     assertNotNull(messageSendResult);
     System.out.println(messageSendResult);
     System.out.println(messageSendResult.getInvalidPartyList());
@@ -96,12 +117,12 @@ public class WxCpMessageAPITest {
       .TEXTCARD()
       .toUser(configStorage.getUserId())
       .btnTxt("更多")
-      .description( "<div class=\"gray\">2016年9月26日</div> <div class=\"normal\">恭喜你抽中iPhone 7一台，领奖码：xxxx</div><div class=\"highlight\">请于2016年10月10日前联系行政同事领取</div>")
+      .description("<div class=\"gray\">2016年9月26日</div> <div class=\"normal\">恭喜你抽中iPhone 7一台，领奖码：xxxx</div><div class=\"highlight\">请于2016年10月10日前联系行政同事领取</div>")
       .url("URL")
       .title("领奖通知")
       .build();
 
-    WxCpMessageSendResult messageSendResult = this.wxService.messageSend(message);
+    WxCpMessageSendResult messageSendResult = this.wxService.getMessageService().send(message);
     assertNotNull(messageSendResult);
     System.out.println(messageSendResult);
     System.out.println(messageSendResult.getInvalidPartyList());
@@ -110,7 +131,7 @@ public class WxCpMessageAPITest {
   }
 
   @Test
-  public void testSendMessage_miniprogram_notice() throws WxErrorException {
+  public void testSendMessage_miniProgram_notice() throws WxErrorException {
     WxCpMessage message = WxCpMessage
       .newMiniProgramNoticeBuilder()
       .toUser(configStorage.getUserId())
@@ -119,16 +140,25 @@ public class WxCpMessageAPITest {
       .title("会议室预订成功通知")
       .description("4月27日 16:16")
       .emphasisFirstItem(true)
-      .contentItems(ImmutableMap.of("会议室","402",
-        "会议地点","广州TIT-402会议室",
-        "会议时间","2018年8月1日 09:00-09:30"))
+      .contentItems(ImmutableMap.of("会议室", "402",
+        "会议地点", "广州TIT-402会议室",
+        "会议时间", "2018年8月1日 09:00-09:30"))
       .build();
 
-    WxCpMessageSendResult messageSendResult = this.wxService.messageSend(message);
+    WxCpMessageSendResult messageSendResult = this.wxService.getMessageService().send(message);
     assertNotNull(messageSendResult);
     System.out.println(messageSendResult);
     System.out.println(messageSendResult.getInvalidPartyList());
     System.out.println(messageSendResult.getInvalidUserList());
     System.out.println(messageSendResult.getInvalidTagList());
+  }
+
+  @Test
+  public void testLinkedCorpMessageSend() throws WxErrorException {
+    this.wxService.getMessageService().sendLinkedCorpMessage(WxCpLinkedCorpMessage.builder()
+      .msgType(WxConsts.KefuMsgType.TEXT)
+      .toUsers(new String[]{configStorage.getUserId()})
+      .content("欢迎欢迎，热烈欢迎\n换行测试\n超链接:<a href=\"http://www.baidu.com\">Hello World</a>")
+      .build());
   }
 }

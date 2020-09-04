@@ -167,6 +167,75 @@ public class WxCpConsts {
   }
 
   /**
+   * 互联企业发送应用消息的消息类型.
+   */
+  public static class LinkedCorpMsgType {
+    /**
+     * 文本消息.
+     */
+    public static final String TEXT = "text";
+    /**
+     * 图片消息.
+     */
+    public static final String IMAGE = "image";
+    /**
+     * 视频消息.
+     */
+    public static final String VIDEO = "video";
+    /**
+     * 图文消息（点击跳转到外链）.
+     */
+    public static final String NEWS = "news";
+    /**
+     * 图文消息（点击跳转到图文消息页面）.
+     */
+    public static final String MPNEWS = "mpnews";
+    /**
+     * markdown消息.
+     * （目前仅支持markdown语法的子集，微工作台（原企业号）不支持展示markdown消息）
+     */
+    public static final String MARKDOWN = "markdown";
+    /**
+     * 发送文件.
+     */
+    public static final String FILE = "file";
+    /**
+     * 文本卡片消息.
+     */
+    public static final String TEXTCARD = "textcard";
+
+    /**
+     * 小程序通知消息.
+     */
+    public static final String MINIPROGRAM_NOTICE = "miniprogram_notice";
+  }
+
+  /**
+   * 群机器人的消息类型.
+   */
+  public static class GroupRobotMsgType {
+    /**
+     * 文本消息.
+     */
+    public static final String TEXT = "text";
+
+    /**
+     * 图片消息.
+     */
+    public static final String IMAGE = "image";
+
+    /**
+     * markdown消息.
+     */
+    public static final String MARKDOWN = "markdown";
+
+    /**
+     * 图文消息（点击跳转到外链）.
+     */
+    public static final String NEWS = "news";
+  }
+
+  /**
    * 应用推送消息的消息类型.
    */
   public static class AppChatMsgType {
