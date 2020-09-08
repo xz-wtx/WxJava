@@ -19,9 +19,9 @@ public enum TradeTypeEnum {
   /**
    * 合单url
    */
-  private String combineUrl;
+  private final String combineUrl;
   /**
    * 单独下单url
    */
-  private String partnerUrl;
+  private final String partnerUrl;
 }

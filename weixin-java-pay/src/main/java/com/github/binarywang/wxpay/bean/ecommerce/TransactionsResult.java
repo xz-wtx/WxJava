@@ -1,7 +1,6 @@
 package com.github.binarywang.wxpay.bean.ecommerce;
 
 import com.github.binarywang.wxpay.bean.ecommerce.enums.TradeTypeEnum;
-import com.github.binarywang.wxpay.v3.util.AesUtils;
 import com.github.binarywang.wxpay.v3.util.SignUtils;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
@@ -10,17 +9,13 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.security.PrivateKey;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
 
 /**
  * 合单支付 JSAPI支付结果响应
  */
 @Data
 @NoArgsConstructor
-public class CombineTransactionsResult implements Serializable {
+public class TransactionsResult implements Serializable {
 
   /**
    * <pre>

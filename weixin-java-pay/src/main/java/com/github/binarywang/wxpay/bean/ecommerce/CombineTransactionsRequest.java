@@ -8,7 +8,10 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 合单支付 对象
+ * 合单支付API
+ * <pre>
+ * 文档地址:https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pages/e-combine.shtml
+ * </pre>
  */
 @Data
 @NoArgsConstructor
