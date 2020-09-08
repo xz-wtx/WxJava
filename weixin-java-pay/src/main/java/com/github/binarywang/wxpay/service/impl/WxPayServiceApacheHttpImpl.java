@@ -3,7 +3,6 @@ package com.github.binarywang.wxpay.service.impl;
 import com.github.binarywang.wxpay.bean.WxPayApiData;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.google.gson.JsonObject;
-import jodd.util.Base64;
 import me.chanjar.weixin.common.util.json.GsonParser;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
@@ -29,6 +28,7 @@ import org.apache.http.util.EntityUtils;
 import javax.net.ssl.SSLContext;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 /**
  * <pre>
@@ -48,7 +48,7 @@ public class WxPayServiceApacheHttpImpl extends BaseWxPayServiceImpl {
       try (CloseableHttpClient httpClient = httpClientBuilder.build()) {
         try (CloseableHttpResponse response = httpClient.execute(httpPost)) {
           final byte[] bytes = EntityUtils.toByteArray(response.getEntity());
-          final String responseData = Base64.encodeToString(bytes);
+          final String responseData = Base64.getEncoder().encodeToString(bytes);
           this.log.info("\n【请求地址】：{}\n【请求数据】：{}\n【响应数据(Base64编码后)】：{}", url, requestStr, responseData);
           wxApiData.set(new WxPayApiData(url, requestStr, responseData, null));
           return bytes;

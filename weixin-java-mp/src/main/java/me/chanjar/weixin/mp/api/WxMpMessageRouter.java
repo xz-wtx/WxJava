@@ -1,18 +1,5 @@
 package me.chanjar.weixin.mp.api;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import me.chanjar.weixin.common.api.WxErrorExceptionHandler;
 import me.chanjar.weixin.common.api.WxMessageDuplicateChecker;
 import me.chanjar.weixin.common.api.WxMessageInMemoryDuplicateChecker;
@@ -23,6 +10,18 @@ import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.common.util.LogExceptionHandler;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * <pre>
@@ -183,7 +182,7 @@ public class WxMpMessageRouter {
       }
     }
 
-    if (matchRules.size() == 0) {
+    if (matchRules.isEmpty()) {
       return null;
     }
 
@@ -193,11 +192,8 @@ public class WxMpMessageRouter {
       // 返回最后一个非异步的rule的执行结果
       if (rule.isAsync()) {
         futures.add(
-          this.executorService.submit(new Runnable() {
-            @Override
-            public void run() {
-              rule.service(wxMessage, context, mpService, WxMpMessageRouter.this.sessionManager, WxMpMessageRouter.this.exceptionHandler);
-            }
+          this.executorService.submit(() -> {
+            rule.service(wxMessage, context, mpService, WxMpMessageRouter.this.sessionManager, WxMpMessageRouter.this.exceptionHandler);
           })
         );
       } else {
@@ -208,35 +204,34 @@ public class WxMpMessageRouter {
       }
     }
 
-    if (futures.size() > 0) {
-      this.executorService.submit(new Runnable() {
-        @Override
-        public void run() {
-          for (Future<?> future : futures) {
-            try {
-              future.get();
-              WxMpMessageRouter.this.log.debug("End session access: async=true, sessionId={}", wxMessage.getFromUser());
-              // 异步操作结束，session访问结束
-              sessionEndAccess(wxMessage);
-            } catch (InterruptedException e) {
-              WxMpMessageRouter.this.log.error("Error happened when wait task finish", e);
-              Thread.currentThread().interrupt();
-            } catch (ExecutionException e) {
-              WxMpMessageRouter.this.log.error("Error happened when wait task finish", e);
-            }
-          }
-        }
-      });
+    if (futures.isEmpty()) {
+      return res;
     }
+
+    this.executorService.submit(() -> {
+      for (Future<?> future : futures) {
+        try {
+          future.get();
+          WxMpMessageRouter.this.log.debug("End session access: async=true, sessionId={}", wxMessage.getFromUser());
+          // 异步操作结束，session访问结束
+          sessionEndAccess(wxMessage);
+        } catch (InterruptedException e) {
+          WxMpMessageRouter.this.log.error("Error happened when wait task finish", e);
+          Thread.currentThread().interrupt();
+        } catch (ExecutionException e) {
+          WxMpMessageRouter.this.log.error("Error happened when wait task finish", e);
+        }
+      }
+    });
     return res;
   }
 
   public WxMpXmlOutMessage route(final WxMpXmlMessage wxMessage) {
-    return this.route(wxMessage, new HashMap<String, Object>(2));
+    return this.route(wxMessage, new HashMap<>(2));
   }
 
   public WxMpXmlOutMessage route(String appid, final WxMpXmlMessage wxMessage) {
-    return this.route(appid, wxMessage, new HashMap<String, Object>(2));
+    return this.route(appid, wxMessage, new HashMap<>(2));
   }
 
   private boolean isMsgDuplicated(WxMpXmlMessage wxMessage) {

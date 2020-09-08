@@ -276,11 +276,11 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
       o.addProperty("main_department", user.getMainDepartment());
     }
 
-    if (user.getExtAttrs().size() > 0) {
+    if (!user.getExtAttrs().isEmpty()) {
       JsonArray attrsJsonArray = new JsonArray();
       for (WxCpUser.Attr attr : user.getExtAttrs()) {
-        JsonObject attrJson = new JsonObject();
-
+        JsonObject attrJson = GsonHelper.buildJsonObject("type", attr.getType(),
+          "name", attr.getName());
         attrsJsonArray.add(attrJson);
 
         if (attr.getType() == null) {
@@ -290,19 +290,12 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
         }
 
         switch (attr.getType()) {
-          case 0: {
-            JsonObject text = new JsonObject();
-            text.addProperty("value", attr.getTextValue());
-            attrJson.add("text", text);
+          case 0:
+            attrJson.add("text", GsonHelper.buildJsonObject("value", attr.getTextValue()));
             break;
-          }
-          case 1: {
-            JsonObject web = new JsonObject();
-            web.addProperty("url", attr.getWebUrl());
-            web.addProperty("title", attr.getWebTitle());
-            attrJson.add("web", web);
+          case 1:
+            attrJson.add("web", GsonHelper.buildJsonObject("url", attr.getWebUrl(), "title", attr.getWebTitle()));
             break;
-          }
           default: //ignored
         }
       }
@@ -322,12 +315,11 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
       attrsJson.addProperty(EXTERNAL_CORP_NAME, user.getExternalCorpName());
     }
 
-    if (user.getExternalAttrs().size() > 0) {
+    if (!user.getExternalAttrs().isEmpty()) {
       JsonArray attrsJsonArray = new JsonArray();
       for (WxCpUser.ExternalAttribute attr : user.getExternalAttrs()) {
-        JsonObject attrJson = new JsonObject();
-        attrJson.addProperty("type", attr.getType());
-        attrJson.addProperty("name", attr.getName());
+        JsonObject attrJson = GsonHelper.buildJsonObject("type", attr.getType(),
+          "name", attr.getName());
 
         attrsJsonArray.add(attrJson);
 
@@ -336,27 +328,16 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
         }
 
         switch (attr.getType()) {
-          case 0: {
-            JsonObject text = new JsonObject();
-            text.addProperty("value", attr.getValue());
-            attrJson.add("text", text);
+          case 0:
+            attrJson.add("text", GsonHelper.buildJsonObject("value", attr.getValue()));
             break;
-          }
-          case 1: {
-            JsonObject web = new JsonObject();
-            web.addProperty("url", attr.getUrl());
-            web.addProperty("title", attr.getTitle());
-            attrJson.add("web", web);
+          case 1:
+            attrJson.add("web", GsonHelper.buildJsonObject("url", attr.getUrl(), "title", attr.getTitle()));
             break;
-          }
-          case 2: {
-            JsonObject miniprogram = new JsonObject();
-            miniprogram.addProperty("appid", attr.getAppid());
-            miniprogram.addProperty("pagepath", attr.getPagePath());
-            miniprogram.addProperty("title", attr.getTitle());
-            attrJson.add("miniprogram", miniprogram);
+          case 2:
+            attrJson.add("miniprogram", GsonHelper.buildJsonObject("appid", attr.getAppid(),
+              "pagepath", attr.getPagePath(), "title", attr.getTitle()));
             break;
-          }
           default://忽略
         }
       }
