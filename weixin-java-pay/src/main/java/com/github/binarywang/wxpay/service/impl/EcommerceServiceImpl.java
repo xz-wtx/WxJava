@@ -9,7 +9,6 @@ import com.github.binarywang.wxpay.v3.util.RsaCryptoUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 
 import java.net.URI;
 
@@ -45,10 +44,17 @@ public class EcommerceServiceImpl implements EcommerceService {
   public <T> T combineTransactions(TradeTypeEnum tradeType, CombineTransactionsRequest request) throws WxPayException {
     String url = this.payService.getPayBaseUrl() + tradeType.getCombineUrl();
     String response = this.payService.postV3(url, GSON.toJson(request));
-    CombineTransactionsResult result = GSON.fromJson(response, CombineTransactionsResult.class);
+    TransactionsResult result = GSON.fromJson(response, TransactionsResult.class);
     return result.getPayInfo(tradeType, request.getCombineAppid(),
       request.getCombineMchid(), payService.getConfig().getPrivateKey());
   }
 
-
+  @Override
+  public <T> T partnerTransactions(TradeTypeEnum tradeType, PartnerTransactionsRequest request) throws WxPayException {
+    String url = this.payService.getPayBaseUrl() + tradeType.getPartnerUrl();
+    String response = this.payService.postV3(url, GSON.toJson(request));
+    TransactionsResult result = GSON.fromJson(response, TransactionsResult.class);
+    return result.getPayInfo(tradeType, request.getSpAppid(),
+      request.getSpMchid(), payService.getConfig().getPrivateKey());
+  }
 }

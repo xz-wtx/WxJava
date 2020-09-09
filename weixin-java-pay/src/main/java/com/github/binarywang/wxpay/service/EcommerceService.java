@@ -56,14 +56,26 @@ public interface EcommerceService {
 
   /**
    * <pre>
-   * 合单下单-JS支付API.
+   * 合单支付API(APP支付、JSAPI支付、H5支付、NATIVE支付).
    * 请求URL：https://api.mch.weixin.qq.com/v3/combine-transactions/jsapi
-   * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/combine/chapter3_2.shtml
+   * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pages/e-combine.shtml
    * </pre>
    *
+   * @param tradeType 支付方式
    * @param request 请求对象
-   * @return 预支付交易会话标识, 数字和字母。微信生成的预支付会话标识，用于后续接口调用使用。
+   * @return 调起支付需要的参数
    */
   <T> T combineTransactions(TradeTypeEnum tradeType, CombineTransactionsRequest request) throws WxPayException;
 
+  /**
+   *  <pre>
+   *  服务商模式普通支付API(APP支付、JSAPI支付、H5支付、NATIVE支付).
+   *  请求URL：https://api.mch.weixin.qq.com/v3/pay/partner/transactions/jsapi
+   *  文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pages/transactions_sl.shtml
+   *  </pre>
+   * @param tradeType 支付方式
+   * @param request 请求对象
+   * @return 调起支付需要的参数
+   */
+  <T> T partnerTransactions(TradeTypeEnum tradeType, PartnerTransactionsRequest request) throws WxPayException;
 }
