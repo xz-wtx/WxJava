@@ -97,7 +97,7 @@ public class TransactionsResult implements Serializable {
           //签名类型，默认为RSA，仅支持RSA。
           .setSignType("RSA").setPaySign(SignUtils.sign(jsapiResult.getSignStr(), privateKey));
         return (T) jsapiResult;
-      case H5:
+      case MWEB:
         return (T) this.h5Url;
       case APP:
         AppResult appResult = new AppResult();
