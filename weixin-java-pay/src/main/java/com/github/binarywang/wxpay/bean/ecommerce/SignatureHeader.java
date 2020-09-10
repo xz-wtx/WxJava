@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 public class SignatureHeader implements Serializable {
-
+  private static final long serialVersionUID = -6958015499416059949L;
   /**
    * 时间戳
    */

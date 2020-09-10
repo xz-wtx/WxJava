@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class PartnerTransactionsNotifyResult implements Serializable {
-
+  private static final long serialVersionUID = -6602962275015706689L;
   /**
    * 源数据
    */

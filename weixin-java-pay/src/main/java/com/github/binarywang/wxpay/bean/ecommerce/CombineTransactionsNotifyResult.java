@@ -17,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class CombineTransactionsNotifyResult implements Serializable {
 
+  private static final long serialVersionUID = -4710926828683593250L;
   /**
    * 源数据
    */

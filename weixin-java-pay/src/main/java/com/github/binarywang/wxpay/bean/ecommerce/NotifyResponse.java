@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 public class NotifyResponse implements Serializable {
-
+  private static final long serialVersionUID = 341873114458149365L;
   @SerializedName(value = "id")
   private String id;
 

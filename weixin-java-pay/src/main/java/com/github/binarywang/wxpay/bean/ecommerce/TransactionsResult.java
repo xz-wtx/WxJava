@@ -16,7 +16,7 @@ import java.security.PrivateKey;
 @Data
 @NoArgsConstructor
 public class TransactionsResult implements Serializable {
-
+  private static final long serialVersionUID = 1760592667519950149L;
   /**
    * <pre>
    * 字段名：预支付交易会话标识 （APP支付、JSAPI支付 会返回）
