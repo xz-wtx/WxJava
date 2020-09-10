@@ -68,6 +68,18 @@ public interface EcommerceService {
   <T> T combineTransactions(TradeTypeEnum tradeType, CombineTransactionsRequest request) throws WxPayException;
 
   /**
+   * <pre>
+   * 合单支付通知回调数据处理
+   * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pages/e-combine.shtml
+   * </pre>
+   *
+   * @param notifyData 通知数据
+   * @param header 通知头部数据，不传则表示不校验头
+   * @return 解密后通知数据
+   */
+  CombineTransactionsNotifyResult parseCombineNotifyResult(String notifyData, SignatureHeader header) throws WxPayException;
+
+  /**
    *  <pre>
    *  服务商模式普通支付API(APP支付、JSAPI支付、H5支付、NATIVE支付).
    *  请求URL：https://api.mch.weixin.qq.com/v3/pay/partner/transactions/jsapi
@@ -78,4 +90,16 @@ public interface EcommerceService {
    * @return 调起支付需要的参数
    */
   <T> T partnerTransactions(TradeTypeEnum tradeType, PartnerTransactionsRequest request) throws WxPayException;
+
+  /**
+   * <pre>
+   * 普通支付通知回调数据处理
+   * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pages/e_transactions.shtml
+   * </pre>
+   *
+   * @param notifyData 通知数据
+   * @param header 通知头部数据，不传则表示不校验头
+   * @return 解密后通知数据
+   */
+  PartnerTransactionsNotifyResult parsePartnerNotifyResult(String notifyData, SignatureHeader header) throws WxPayException;
 }
