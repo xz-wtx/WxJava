@@ -63,6 +63,19 @@ public interface EcommerceService {
    *
    * @param tradeType 支付方式
    * @param request 请求对象
+   * @return 微信合单支付返回
+   */
+  TransactionsResult combine(TradeTypeEnum tradeType, CombineTransactionsRequest request) throws WxPayException;
+
+  /**
+   * <pre>
+   * 合单支付API(APP支付、JSAPI支付、H5支付、NATIVE支付).
+   * 请求URL：https://api.mch.weixin.qq.com/v3/combine-transactions/jsapi
+   * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pages/e-combine.shtml
+   * </pre>
+   *
+   * @param tradeType 支付方式
+   * @param request 请求对象
    * @return 调起支付需要的参数
    */
   <T> T combineTransactions(TradeTypeEnum tradeType, CombineTransactionsRequest request) throws WxPayException;
@@ -78,6 +91,18 @@ public interface EcommerceService {
    * @return 解密后通知数据
    */
   CombineTransactionsNotifyResult parseCombineNotifyResult(String notifyData, SignatureHeader header) throws WxPayException;
+
+  /**
+   *  <pre>
+   *  服务商模式普通支付API(APP支付、JSAPI支付、H5支付、NATIVE支付).
+   *  请求URL：https://api.mch.weixin.qq.com/v3/pay/partner/transactions/jsapi
+   *  文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pages/transactions_sl.shtml
+   *  </pre>
+   * @param tradeType 支付方式
+   * @param request 请求对象
+   * @return 调起支付需要的参数
+   */
+  TransactionsResult partner(TradeTypeEnum tradeType, PartnerTransactionsRequest request) throws WxPayException;
 
   /**
    *  <pre>
