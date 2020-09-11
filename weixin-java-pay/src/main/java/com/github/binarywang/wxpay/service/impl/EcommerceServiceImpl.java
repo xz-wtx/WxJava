@@ -46,10 +46,15 @@ public class EcommerceServiceImpl implements EcommerceService {
   }
 
   @Override
-  public <T> T combineTransactions(TradeTypeEnum tradeType, CombineTransactionsRequest request) throws WxPayException {
+  public TransactionsResult combine(TradeTypeEnum tradeType, CombineTransactionsRequest request) throws WxPayException {
     String url = this.payService.getPayBaseUrl() + tradeType.getCombineUrl();
     String response = this.payService.postV3(url, GSON.toJson(request));
-    TransactionsResult result = GSON.fromJson(response, TransactionsResult.class);
+    return GSON.fromJson(response, TransactionsResult.class);
+  }
+
+  @Override
+  public <T> T combineTransactions(TradeTypeEnum tradeType, CombineTransactionsRequest request) throws WxPayException {
+    TransactionsResult result = this.combine(tradeType, request);
     return result.getPayInfo(tradeType, request.getCombineAppid(),
       request.getCombineMchid(), payService.getConfig().getPrivateKey());
   }
@@ -76,10 +81,15 @@ public class EcommerceServiceImpl implements EcommerceService {
   }
 
   @Override
-  public <T> T partnerTransactions(TradeTypeEnum tradeType, PartnerTransactionsRequest request) throws WxPayException {
+  public TransactionsResult partner(TradeTypeEnum tradeType, PartnerTransactionsRequest request) throws WxPayException {
     String url = this.payService.getPayBaseUrl() + tradeType.getPartnerUrl();
     String response = this.payService.postV3(url, GSON.toJson(request));
-    TransactionsResult result = GSON.fromJson(response, TransactionsResult.class);
+    return GSON.fromJson(response, TransactionsResult.class);
+  }
+
+  @Override
+  public <T> T partnerTransactions(TradeTypeEnum tradeType, PartnerTransactionsRequest request) throws WxPayException {
+    TransactionsResult result = this.partner(tradeType, request);
     return result.getPayInfo(tradeType, request.getSpAppid(),
       request.getSpMchid(), payService.getConfig().getPrivateKey());
   }
