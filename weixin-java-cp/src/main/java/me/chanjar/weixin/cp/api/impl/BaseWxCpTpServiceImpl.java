@@ -4,8 +4,8 @@ import com.google.common.base.Joiner;
 import com.google.gson.JsonObject;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.bean.WxAccessToken;
+import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.error.WxCpErrorMsgEnum;
 import me.chanjar.weixin.common.error.WxError;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -127,7 +127,7 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
   }
 
   @Override
-  public WxCpTpPermanentCodeInfo getPermanentCodeInfo(String authCode) throws WxErrorException{
+  public WxCpTpPermanentCodeInfo getPermanentCodeInfo(String authCode) throws WxErrorException {
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("auth_code", authCode);
     String result = post(configStorage.getApiUrl(GET_PERMANENT_CODE), jsonObject.toString());
@@ -136,18 +136,19 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
 
   @Override
   @SneakyThrows
-  public String getPreAuthUrl(String redirectUri,String state) throws WxErrorException{
-    String result = get(configStorage.getApiUrl(GET_PREAUTH_CODE),null);
-    WxCpTpPreauthCode preauthCode = WxCpTpPreauthCode.fromJson(result);
-    String preAuthUrl = "https://open.work.weixin.qq.com/3rdapp/install?suite_id="+configStorage.getSuiteId()+
-      "&pre_auth_code="+preauthCode.getPreAuthCode()+"&redirect_uri="+ URLEncoder.encode(redirectUri,"utf-8");
-    if(StringUtils.isNotBlank(state))
-      preAuthUrl += "&state="+state;
+  public String getPreAuthUrl(String redirectUri, String state) throws WxErrorException {
+    String result = get(configStorage.getApiUrl(GET_PREAUTH_CODE), null);
+    WxCpTpPreauthCode preAuthCode = WxCpTpPreauthCode.fromJson(result);
+    String preAuthUrl = "https://open.work.weixin.qq.com/3rdapp/install?suite_id=" + configStorage.getSuiteId() +
+      "&pre_auth_code=" + preAuthCode.getPreAuthCode() + "&redirect_uri=" + URLEncoder.encode(redirectUri, "utf-8");
+    if (StringUtils.isNotBlank(state)) {
+      preAuthUrl += "&state=" + state;
+    }
     return preAuthUrl;
   }
 
   @Override
-  public WxCpTpAuthInfo getAuthInfo(String authCorpId, String permanentCode) throws WxErrorException{
+  public WxCpTpAuthInfo getAuthInfo(String authCorpId, String permanentCode) throws WxErrorException {
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("auth_corpid", authCorpId);
     jsonObject.addProperty("permanent_code", permanentCode);
