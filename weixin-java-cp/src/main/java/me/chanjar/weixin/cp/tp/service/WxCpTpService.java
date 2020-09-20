@@ -1,7 +1,8 @@
-package me.chanjar.weixin.cp.api;
+package me.chanjar.weixin.cp.tp.service;
 
 import me.chanjar.weixin.common.bean.WxAccessToken;
 import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.common.util.http.MediaUploadRequestExecutor;
 import me.chanjar.weixin.common.util.http.RequestExecutor;
 import me.chanjar.weixin.common.util.http.RequestHttp;
@@ -12,7 +13,7 @@ import me.chanjar.weixin.cp.bean.WxCpTpPermanentCodeInfo;
 import me.chanjar.weixin.cp.config.WxCpTpConfigStorage;
 
 /**
- * 微信第三方应用API的Service.
+ * 企业微信第三方应用API的Service.
  *
  * @author zhenjun cai
  */
@@ -226,4 +227,10 @@ public interface WxCpTpService {
    */
   RequestHttp<?, ?> getRequestHttp();
 
+  /**
+   * 获取WxSessionManager 对象
+   *
+   * @return WxSessionManager session manager
+   */
+  WxSessionManager getSessionManager();
 }

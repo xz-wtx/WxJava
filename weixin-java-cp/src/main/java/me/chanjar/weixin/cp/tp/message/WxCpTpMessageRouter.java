@@ -1,4 +1,4 @@
-package me.chanjar.weixin.cp.message;
+package me.chanjar.weixin.cp.tp.message;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import lombok.extern.slf4j.Slf4j;
@@ -9,9 +9,10 @@ import me.chanjar.weixin.common.session.InternalSession;
 import me.chanjar.weixin.common.session.InternalSessionManager;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.common.util.LogExceptionHandler;
-import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.message.WxCpXmlMessage;
 import me.chanjar.weixin.cp.bean.message.WxCpXmlOutMessage;
+import me.chanjar.weixin.cp.message.WxCpMessageRouterRule;
+import me.chanjar.weixin.cp.tp.service.WxCpTpService;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -49,11 +50,11 @@ import java.util.concurrent.*;
  * @author Daniel Qian
  */
 @Slf4j
-public class WxCpMessageRouter {
+public class WxCpTpMessageRouter {
   private static final int DEFAULT_THREAD_POOL_SIZE = 100;
-  private final List<WxCpMessageRouterRule> rules = new ArrayList<>();
+  private final List<WxCpTpMessageRouterRule> rules = new ArrayList<>();
 
-  private final WxCpService wxCpService;
+  private final WxCpTpService wxCpService;
 
   private ExecutorService executorService;
 
@@ -66,9 +67,9 @@ public class WxCpMessageRouter {
   /**
    * 构造方法.
    */
-  public WxCpMessageRouter(WxCpService wxCpService) {
+  public WxCpTpMessageRouter(WxCpTpService wxCpService) {
     this.wxCpService = wxCpService;
-    ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("WxCpMessageRouter-pool-%d").build();
+    ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("WxCpTpMessageRouter-pool-%d").build();
     this.executorService = new ThreadPoolExecutor(DEFAULT_THREAD_POOL_SIZE, DEFAULT_THREAD_POOL_SIZE,
       0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(), namedThreadFactory);
     this.messageDuplicateChecker = new WxMessageInMemoryDuplicateChecker();
@@ -88,8 +89,8 @@ public class WxCpMessageRouter {
 
   /**
    * <pre>
-   * 设置自定义的 {@link me.chanjar.weixin.common.api.WxMessageDuplicateChecker}
-   * 如果不调用该方法，默认使用 {@link me.chanjar.weixin.common.api.WxMessageInMemoryDuplicateChecker}
+   * 设置自定义的 {@link WxMessageDuplicateChecker}
+   * 如果不调用该方法，默认使用 {@link WxMessageInMemoryDuplicateChecker}
    * </pre>
    */
   public void setMessageDuplicateChecker(WxMessageDuplicateChecker messageDuplicateChecker) {
@@ -98,7 +99,7 @@ public class WxCpMessageRouter {
 
   /**
    * <pre>
-   * 设置自定义的{@link me.chanjar.weixin.common.session.WxSessionManager}
+   * 设置自定义的{@link WxSessionManager}
    * 如果不调用该方法，默认使用 {@link me.chanjar.weixin.common.session.StandardSessionManager}
    * </pre>
    */
@@ -108,23 +109,23 @@ public class WxCpMessageRouter {
 
   /**
    * <pre>
-   * 设置自定义的{@link me.chanjar.weixin.common.api.WxErrorExceptionHandler}
-   * 如果不调用该方法，默认使用 {@link me.chanjar.weixin.common.util.LogExceptionHandler}
+   * 设置自定义的{@link WxErrorExceptionHandler}
+   * 如果不调用该方法，默认使用 {@link LogExceptionHandler}
    * </pre>
    */
   public void setExceptionHandler(WxErrorExceptionHandler exceptionHandler) {
     this.exceptionHandler = exceptionHandler;
   }
 
-  List<WxCpMessageRouterRule> getRules() {
+  List<WxCpTpMessageRouterRule> getRules() {
     return this.rules;
   }
 
   /**
    * 开始一个新的Route规则.
    */
-  public WxCpMessageRouterRule rule() {
-    return new WxCpMessageRouterRule(this);
+  public WxCpTpMessageRouterRule rule() {
+    return new WxCpTpMessageRouterRule(this);
   }
 
   /**
@@ -136,9 +137,9 @@ public class WxCpMessageRouter {
       return null;
     }
 
-    final List<WxCpMessageRouterRule> matchRules = new ArrayList<>();
+    final List<WxCpTpMessageRouterRule> matchRules = new ArrayList<>();
     // 收集匹配的规则
-    for (final WxCpMessageRouterRule rule : this.rules) {
+    for (final WxCpTpMessageRouterRule rule : this.rules) {
       if (rule.test(wxMessage)) {
         matchRules.add(rule);
         if (!rule.isReEnter()) {
@@ -153,12 +154,12 @@ public class WxCpMessageRouter {
 
     WxCpXmlOutMessage res = null;
     final List<Future> futures = new ArrayList<>();
-    for (final WxCpMessageRouterRule rule : matchRules) {
+    for (final WxCpTpMessageRouterRule rule : matchRules) {
       // 返回最后一个非异步的rule的执行结果
       if (rule.isAsync()) {
         futures.add(
           this.executorService.submit(() -> {
-            rule.service(wxMessage, context, WxCpMessageRouter.this.wxCpService, WxCpMessageRouter.this.sessionManager, WxCpMessageRouter.this.exceptionHandler);
+            rule.service(wxMessage, context, WxCpTpMessageRouter.this.wxCpService, WxCpTpMessageRouter.this.sessionManager, WxCpTpMessageRouter.this.exceptionHandler);
           })
         );
       } else {

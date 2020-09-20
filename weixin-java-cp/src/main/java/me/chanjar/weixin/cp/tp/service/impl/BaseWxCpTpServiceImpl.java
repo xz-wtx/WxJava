@@ -1,4 +1,4 @@
-package me.chanjar.weixin.cp.api.impl;
+package me.chanjar.weixin.cp.tp.service.impl;
 
 import com.google.common.base.Joiner;
 import com.google.gson.JsonObject;
@@ -9,6 +9,8 @@ import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.error.WxCpErrorMsgEnum;
 import me.chanjar.weixin.common.error.WxError;
 import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.common.session.StandardSessionManager;
+import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.common.util.DataUtils;
 import me.chanjar.weixin.common.util.crypto.SHA1;
 import me.chanjar.weixin.common.util.http.RequestExecutor;
@@ -16,9 +18,9 @@ import me.chanjar.weixin.common.util.http.RequestHttp;
 import me.chanjar.weixin.common.util.http.SimpleGetRequestExecutor;
 import me.chanjar.weixin.common.util.http.SimplePostRequestExecutor;
 import me.chanjar.weixin.common.util.json.GsonParser;
-import me.chanjar.weixin.cp.api.WxCpTpService;
 import me.chanjar.weixin.cp.bean.*;
 import me.chanjar.weixin.cp.config.WxCpTpConfigStorage;
+import me.chanjar.weixin.cp.tp.service.WxCpTpService;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -48,6 +50,8 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
   protected final Object globalSuiteTicketRefreshLock = new Object();
 
   protected WxCpTpConfigStorage configStorage;
+
+  private WxSessionManager sessionManager = new StandardSessionManager();
 
   /**
    * 临时文件目录.
@@ -272,6 +276,11 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
   @Override
   public RequestHttp<?, ?> getRequestHttp() {
     return this;
+  }
+
+  @Override
+  public WxSessionManager getSessionManager() {
+    return this.sessionManager;
   }
 
 }
