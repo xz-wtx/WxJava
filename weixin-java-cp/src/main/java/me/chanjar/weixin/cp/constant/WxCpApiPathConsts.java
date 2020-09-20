@@ -101,6 +101,11 @@ public final class WxCpApiPathConsts {
     public static final String GET_DIAL_RECORD = "/cgi-bin/dial/get_dial_record";
     public static final String GET_TEMPLATE_DETAIL = "/cgi-bin/oa/gettemplatedetail";
     public static final String APPLY_EVENT = "/cgi-bin/oa/applyevent";
+
+    public static final String CALENDAR_ADD = "/cgi-bin/oa/calendar/add";
+    public static final String CALENDAR_UPDATE = "/cgi-bin/oa/calendar/update";
+    public static final String CALENDAR_GET = "/cgi-bin/oa/calendar/get";
+    public static final String CALENDAR_DEL = "/cgi-bin/oa/calendar/del";
   }
 
   @UtilityClass
