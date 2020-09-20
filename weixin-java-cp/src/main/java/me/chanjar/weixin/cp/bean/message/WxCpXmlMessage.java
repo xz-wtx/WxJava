@@ -295,6 +295,20 @@ public class WxCpXmlMessage implements Serializable {
   private String address;
 
   /**
+   * 日程ID.
+   */
+  @XStreamAlias("ScheduleId")
+  @XStreamConverter(value = XStreamCDataConverter.class)
+  private String scheduleId;
+
+  /**
+   * 日历ID.
+   */
+  @XStreamAlias("CalId")
+  @XStreamConverter(value = XStreamCDataConverter.class)
+  private String calId;
+
+  /**
    * 扩展属性.
    */
   @XStreamAlias("ExtAttr")
