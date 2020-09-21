@@ -20,6 +20,7 @@ import java.util.Objects;
 
 @RequiredArgsConstructor
 public class EcommerceServiceImpl implements EcommerceService {
+
   private static final Gson GSON = new GsonBuilder().create();
   private final WxPayService payService;
 
@@ -201,6 +202,26 @@ public class EcommerceServiceImpl implements EcommerceService {
     return GSON.fromJson(response, RefundsResult.class);
   }
 
+  @Override
+  public EcommerceWithdrawResult withdraw(EcommerceWithdrawRequest request) throws WxPayException {
+    String url = String.format("%s/v3/ecommerce/fund/withdraw", this.payService.getPayBaseUrl());
+    String response = this.payService.postV3(url, GSON.toJson(request));
+    return GSON.fromJson(response, EcommerceWithdrawResult.class);
+  }
+
+  @Override
+  public MerchantWithdrawResult withdraw(MerchantWithdrawRequest request) throws WxPayException {
+    String url = String.format("%s/v3/merchant/fund/withdraw", this.payService.getPayBaseUrl());
+    String response = this.payService.postV3(url, GSON.toJson(request));
+    return GSON.fromJson(response, MerchantWithdrawResult.class);
+  }
+
+  /**
+   * 校验通知签名
+   * @param header 通知头信息
+   * @param data 通知数据
+   * @return true:校验通过 false:校验不通过
+   */
   private boolean verifyNotifySign(SignatureHeader header, String data) {
     String beforeSign = String.format("%s\n%s\n%s\n",
       header.getTimeStamp(),

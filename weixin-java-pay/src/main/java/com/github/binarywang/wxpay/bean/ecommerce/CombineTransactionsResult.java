@@ -69,7 +69,7 @@ public class CombineTransactionsResult implements Serializable {
    * </pre>
    */
   @SerializedName(value = "scene_info")
-  private CombineTransactionsNotifyResult.SceneInfo sceneInfo;
+  private CombineTransactionsResult.SceneInfo sceneInfo;
 
   /**
    * <pre>
@@ -83,7 +83,7 @@ public class CombineTransactionsResult implements Serializable {
    * </pre>
    */
   @SerializedName(value = "sub_orders")
-  private List<CombineTransactionsNotifyResult.SubOrders> subOrders;
+  private List<CombineTransactionsResult.SubOrders> subOrders;
 
   /**
    * <pre>
@@ -95,7 +95,7 @@ public class CombineTransactionsResult implements Serializable {
    * </pre>
    */
   @SerializedName(value = "combine_payer_info")
-  private CombineTransactionsNotifyResult.CombinePayerInfo combinePayerInfo;
+  private CombineTransactionsResult.CombinePayerInfo combinePayerInfo;
 
   @Data
   @NoArgsConstructor
@@ -248,7 +248,7 @@ public class CombineTransactionsResult implements Serializable {
      * </pre>
      */
     @SerializedName(value = "amount")
-    private CombineTransactionsNotifyResult.Amount amount;
+    private CombineTransactionsResult.Amount amount;
 
   }
 

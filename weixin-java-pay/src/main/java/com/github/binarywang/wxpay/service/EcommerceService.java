@@ -261,4 +261,27 @@ public interface EcommerceService {
    */
   RefundsResult refunds(RefundsRequest request) throws WxPayException;
 
+  /**
+   * <pre>
+   * 二级商户账户余额提现API
+   * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/ecommerce/fund/chapter3_2.shtml
+   * </pre>
+   *
+   * @param request 提现请求
+   * @return 返回数据 return withdraw result
+   * @throws WxPayException the wx pay exception
+   */
+  EcommerceWithdrawResult withdraw(EcommerceWithdrawRequest request) throws WxPayException;
+
+  /**
+   * <pre>
+   * 电商平台提现API
+   * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/ecommerce/fund/chapter3_5.shtml
+   * </pre>
+   *
+   * @param request 提现请求
+   * @return 返回数据 return withdraw result
+   * @throws WxPayException the wx pay exception
+   */
+  MerchantWithdrawResult withdraw(MerchantWithdrawRequest request) throws WxPayException;
 }
