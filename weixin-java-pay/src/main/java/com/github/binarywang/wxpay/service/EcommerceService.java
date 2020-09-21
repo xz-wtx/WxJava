@@ -99,6 +99,18 @@ public interface EcommerceService {
 
   /**
    * <pre>
+   * 合单查询订单API
+   * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/combine/chapter3_3.shtml
+   * </pre>
+   *
+   * @param outTradeNo 合单商户订单号
+   * @return 支付订单信息
+   * @throws WxPayException the wx pay exception
+   */
+  CombineTransactionsResult queryCombineTransactions(String outTradeNo) throws WxPayException;
+
+  /**
+   * <pre>
    *  服务商模式普通支付API(APP支付、JSAPI支付、H5支付、NATIVE支付).
    *  请求URL：https://api.mch.weixin.qq.com/v3/pay/partner/transactions/jsapi
    *  文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pages/transactions_sl.shtml
@@ -138,6 +150,18 @@ public interface EcommerceService {
    * @throws WxPayException the wx pay exception
    */
   PartnerTransactionsNotifyResult parsePartnerNotifyResult(String notifyData, SignatureHeader header) throws WxPayException;
+
+  /**
+   * <pre>
+   * 普通查询订单API
+   * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/ecommerce/e_transactions/chapter3_5.shtml
+   * </pre>
+   *
+   * @param request 商户订单信息
+   * @return 支付订单信息
+   * @throws WxPayException the wx pay exception
+   */
+  PartnerTransactionsResult queryPartnerTransactions(PartnerTransactionsQueryRequest request) throws WxPayException;
 
   /**
    * <pre>

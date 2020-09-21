@@ -1,6 +1,9 @@
 package com.github.binarywang.wxpay.service.impl;
 
+import com.github.binarywang.wxpay.bean.ecommerce.PartnerTransactionsQueryRequest;
+import com.github.binarywang.wxpay.bean.ecommerce.PartnerTransactionsResult;
 import com.github.binarywang.wxpay.bean.ecommerce.SignatureHeader;
+import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.github.binarywang.wxpay.testbase.ApiTestModule;
 import com.google.inject.Inject;
@@ -44,5 +47,20 @@ public class EcommerceServiceImplTest {
     boolean signResult = wxPayService.getConfig().getVerifier().verify(header.getSerialNo(),
       beforeSign.getBytes(StandardCharsets.UTF_8), header.getSigned());
     log.info("签名结果:{} \nheader:{} \ndata:{}", signResult, header, notifyData);
+  }
+
+  @Test
+  public void testQueryPartnerTransactions() throws WxPayException {
+    PartnerTransactionsQueryRequest request = new PartnerTransactionsQueryRequest();
+    //服务商商户号
+    request.setSpMchid("");
+    //二级商户号
+    request.setSubMchid("");
+    //商户订单号
+    request.setOutTradeNo("");
+    //微信订单号
+    request.setTransactionId("4200000703202009180239466769");
+    PartnerTransactionsResult result = wxPayService.getEcommerceService().queryPartnerTransactions(request);
+
   }
 }

@@ -73,12 +73,22 @@ public class EcommerceServiceImpl implements EcommerceService {
     String apiV3Key = this.payService.getConfig().getApiV3Key();
     try {
       String result = AesUtils.decryptToString(associatedData, nonce,cipherText, apiV3Key);
-      CombineTransactionsNotifyResult notifyResult = GSON.fromJson(result, CombineTransactionsNotifyResult.class);
+      CombineTransactionsResult transactionsResult = GSON.fromJson(result, CombineTransactionsResult.class);
+
+      CombineTransactionsNotifyResult notifyResult = new CombineTransactionsNotifyResult();
       notifyResult.setRawData(response);
+      notifyResult.setResult(transactionsResult);
       return notifyResult;
     } catch (GeneralSecurityException | IOException e) {
       throw new WxPayException("解析报文异常！", e);
     }
+  }
+
+  @Override
+  public CombineTransactionsResult queryCombineTransactions(String outTradeNo) throws WxPayException {
+    String url = String.format("%s/v3/combine-transactions/out-trade-no/%s", this.payService.getPayBaseUrl(), outTradeNo);
+    String response = this.payService.getV3(URI.create(url));
+    return GSON.fromJson(response, CombineTransactionsResult.class);
   }
 
   @Override
@@ -108,12 +118,27 @@ public class EcommerceServiceImpl implements EcommerceService {
     String apiV3Key = this.payService.getConfig().getApiV3Key();
     try {
       String result = AesUtils.decryptToString(associatedData, nonce,cipherText, apiV3Key);
-      PartnerTransactionsNotifyResult notifyResult = GSON.fromJson(result, PartnerTransactionsNotifyResult.class);
+      PartnerTransactionsResult transactionsResult = GSON.fromJson(result, PartnerTransactionsResult.class);
+
+      PartnerTransactionsNotifyResult notifyResult = new PartnerTransactionsNotifyResult();
       notifyResult.setRawData(response);
+      notifyResult.setResult(transactionsResult);
       return notifyResult;
     } catch (GeneralSecurityException | IOException e) {
       throw new WxPayException("解析报文异常！", e);
     }
+  }
+
+  @Override
+  public PartnerTransactionsResult queryPartnerTransactions(PartnerTransactionsQueryRequest request) throws WxPayException {
+    String url = String.format("%s/v3/pay/partner/transactions/out-trade-no/%s", this.payService.getPayBaseUrl(), request.getOutTradeNo());
+    if (Objects.isNull(request.getOutTradeNo())) {
+      url = String.format("%s/v3/pay/partner/transactions/id/%s", this.payService.getPayBaseUrl(), request.getTransactionId());
+    }
+    String query = String.format("?sp_mchid=%s&sub_mchid=%s", request.getSpMchid(), request.getSubMchid());
+    URI uri = URI.create(url + query);
+    String response = this.payService.getV3(uri);
+    return GSON.fromJson(response, PartnerTransactionsResult.class);
   }
 
   @Override
