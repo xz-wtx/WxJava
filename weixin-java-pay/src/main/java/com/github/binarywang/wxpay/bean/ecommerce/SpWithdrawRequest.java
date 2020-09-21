@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 @Data
 @NoArgsConstructor
-public class MerchantWithdrawRequest implements Serializable {
+public class SpWithdrawRequest implements Serializable {
   /**
    * <pre>
    * 字段名：商户提现单号

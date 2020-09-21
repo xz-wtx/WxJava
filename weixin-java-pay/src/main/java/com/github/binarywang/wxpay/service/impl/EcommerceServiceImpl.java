@@ -203,17 +203,17 @@ public class EcommerceServiceImpl implements EcommerceService {
   }
 
   @Override
-  public EcommerceWithdrawResult withdraw(EcommerceWithdrawRequest request) throws WxPayException {
+  public SubWithdrawResult subWithdraw(SubWithdrawRequest request) throws WxPayException {
     String url = String.format("%s/v3/ecommerce/fund/withdraw", this.payService.getPayBaseUrl());
     String response = this.payService.postV3(url, GSON.toJson(request));
-    return GSON.fromJson(response, EcommerceWithdrawResult.class);
+    return GSON.fromJson(response, SubWithdrawResult.class);
   }
 
   @Override
-  public MerchantWithdrawResult withdraw(MerchantWithdrawRequest request) throws WxPayException {
+  public SpWithdrawResult spWithdraw(SpWithdrawRequest request) throws WxPayException {
     String url = String.format("%s/v3/merchant/fund/withdraw", this.payService.getPayBaseUrl());
     String response = this.payService.postV3(url, GSON.toJson(request));
-    return GSON.fromJson(response, MerchantWithdrawResult.class);
+    return GSON.fromJson(response, SpWithdrawResult.class);
   }
 
   /**

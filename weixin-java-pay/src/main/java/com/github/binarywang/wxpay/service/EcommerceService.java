@@ -271,7 +271,7 @@ public interface EcommerceService {
    * @return 返回数据 return withdraw result
    * @throws WxPayException the wx pay exception
    */
-  EcommerceWithdrawResult withdraw(EcommerceWithdrawRequest request) throws WxPayException;
+  SubWithdrawResult subWithdraw(SubWithdrawRequest request) throws WxPayException;
 
   /**
    * <pre>
@@ -283,5 +283,5 @@ public interface EcommerceService {
    * @return 返回数据 return withdraw result
    * @throws WxPayException the wx pay exception
    */
-  MerchantWithdrawResult withdraw(MerchantWithdrawRequest request) throws WxPayException;
+  SpWithdrawResult spWithdraw(SpWithdrawRequest request) throws WxPayException;
 }

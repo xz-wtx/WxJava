@@ -59,8 +59,20 @@ public class EcommerceServiceImplTest {
     //商户订单号
     request.setOutTradeNo("");
     //微信订单号
-    request.setTransactionId("4200000703202009180239466769");
-    PartnerTransactionsResult result = wxPayService.getEcommerceService().queryPartnerTransactions(request);
+    request.setTransactionId("");
+    wxPayService.getEcommerceService().queryPartnerTransactions(request);
+  }
 
+  @Test
+  public void testSubNowBalance() throws WxPayException {
+    String subMchid = "";
+    wxPayService.getEcommerceService().subNowBalance(subMchid);
+  }
+
+  @Test
+  public void testSubDayEndBalance() throws WxPayException {
+    String subMchid = "";
+    String date = "";
+    wxPayService.getEcommerceService().subDayEndBalance(subMchid,date);
   }
 }

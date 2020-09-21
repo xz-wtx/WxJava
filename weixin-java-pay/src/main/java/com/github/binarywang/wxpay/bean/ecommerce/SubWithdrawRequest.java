@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 @Data
 @NoArgsConstructor
-public class EcommerceWithdrawRequest implements Serializable {
+public class SubWithdrawRequest implements Serializable {
 
   /**
    * <pre>

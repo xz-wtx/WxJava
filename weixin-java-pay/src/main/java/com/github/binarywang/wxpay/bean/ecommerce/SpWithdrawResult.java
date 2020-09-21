@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 @Data
 @NoArgsConstructor
-public class MerchantWithdrawResult implements Serializable {
+public class SpWithdrawResult implements Serializable {
 
   /**
    * <pre>
