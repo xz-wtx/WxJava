@@ -227,6 +227,18 @@ public interface EcommerceService {
 
   /**
    * <pre>
+   * 查询分账结果API
+   * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/ecommerce/profitsharing/chapter3_2.shtml
+   * </pre>
+   *
+   * @param request 查询分账请求
+   * @return 返回数据 profit sharing result
+   * @throws WxPayException the wx pay exception
+   */
+  ProfitSharingResult queryProfitSharing(ProfitSharingQueryRequest request) throws WxPayException;
+
+  /**
+   * <pre>
    * 请求分账回退API
    * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/ecommerce/profitsharing/chapter3_3.shtml
    * </pre>
@@ -260,6 +272,19 @@ public interface EcommerceService {
    * @throws WxPayException the wx pay exception
    */
   RefundsResult refunds(RefundsRequest request) throws WxPayException;
+
+  /**
+   * <pre>
+   * 退款通知回调数据处理
+   * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/ecommerce/refunds/chapter3_3.shtml
+   * </pre>
+   *
+   * @param notifyData 通知数据
+   * @param header     通知头部数据，不传则表示不校验头
+   * @return 解密后通知数据 partner refund notify result
+   * @throws WxPayException the wx pay exception
+   */
+  RefundNotifyResult parseRefundNotifyResult(String notifyData, SignatureHeader header) throws WxPayException;
 
   /**
    * <pre>

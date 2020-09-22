@@ -182,6 +182,14 @@ public class EcommerceServiceImpl implements EcommerceService {
   }
 
   @Override
+  public ProfitSharingResult queryProfitSharing(ProfitSharingQueryRequest request) throws WxPayException {
+    String url = String.format("%s/v3/ecommerce/profitsharing/orders?sub_mchid=%s&transaction_id=%s&out_order_no=%s",
+      this.payService.getPayBaseUrl(), request.getSubMchid(), request.getTransactionId(), request.getOutOrderNo());
+    String response = this.payService.getV3(URI.create(url));
+    return GSON.fromJson(response, ProfitSharingResult.class);
+  }
+
+  @Override
   public ReturnOrdersResult returnOrders(ReturnOrdersRequest request) throws WxPayException {
     String url = String.format("%s/v3/ecommerce/profitsharing/returnorders", this.payService.getPayBaseUrl());
     String response = this.payService.postV3(url, GSON.toJson(request));
@@ -200,6 +208,27 @@ public class EcommerceServiceImpl implements EcommerceService {
     String url = String.format("%s/v3/ecommerce/refunds/apply", this.payService.getPayBaseUrl());
     String response = this.payService.postV3(url, GSON.toJson(request));
     return GSON.fromJson(response, RefundsResult.class);
+  }
+
+  @Override
+  public RefundNotifyResult parseRefundNotifyResult(String notifyData, SignatureHeader header) throws WxPayException {
+    if(Objects.nonNull(header) && !this.verifyNotifySign(header, notifyData)){
+      throw new WxPayException("非法请求，头部信息验证失败");
+    }
+    NotifyResponse response = GSON.fromJson(notifyData, NotifyResponse.class);
+    NotifyResponse.Resource resource = response.getResource();
+    String cipherText = resource.getCiphertext();
+    String associatedData = resource.getAssociatedData();
+    String nonce = resource.getNonce();
+    String apiV3Key = this.payService.getConfig().getApiV3Key();
+    try {
+      String result = AesUtils.decryptToString(associatedData, nonce,cipherText, apiV3Key);
+      RefundNotifyResult notifyResult = GSON.fromJson(result, RefundNotifyResult.class);
+      notifyResult.setRawData(response);
+      return notifyResult;
+    } catch (GeneralSecurityException | IOException e) {
+      throw new WxPayException("解析报文异常！", e);
+    }
   }
 
   @Override
