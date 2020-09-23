@@ -218,7 +218,7 @@ public class RefundNotifyResult implements Serializable {
     /**
      * <pre>
      * 字段名：用户退款金额
-     * 变量名：payer_currency
+     * 变量名：payer_refund
      * 是否必填：是
      * 类型：int
      * 描述：

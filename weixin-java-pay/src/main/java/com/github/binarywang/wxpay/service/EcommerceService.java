@@ -275,6 +275,32 @@ public interface EcommerceService {
 
   /**
    * <pre>
+   * 查询退款API
+   * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/ecommerce/refunds/chapter3_2.shtml
+   * </pre>
+   *
+   * @param subMchid 二级商户号
+   * @param refundId 微信退款单号
+   * @return 返回数据 return refunds result
+   * @throws WxPayException the wx pay exception
+   */
+  RefundQueryResult queryRefundByRefundId(String subMchid, String refundId) throws WxPayException;
+
+  /**
+   * <pre>
+   * 查询退款API
+   * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/ecommerce/refunds/chapter3_2.shtml
+   * </pre>
+   *
+   * @param subMchid 二级商户号
+   * @param outRefundNo 商户退款单号
+   * @return 返回数据 return refunds result
+   * @throws WxPayException the wx pay exception
+   */
+  RefundQueryResult queryRefundByOutRefundNo(String subMchid, String outRefundNo) throws WxPayException;
+
+  /**
+   * <pre>
    * 退款通知回调数据处理
    * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/ecommerce/refunds/chapter3_3.shtml
    * </pre>
@@ -309,4 +335,29 @@ public interface EcommerceService {
    * @throws WxPayException the wx pay exception
    */
   SpWithdrawResult spWithdraw(SpWithdrawRequest request) throws WxPayException;
+
+  /**
+   * <pre>
+   * 修改结算帐号API
+   * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/ecommerce/applyments/chapter3_4.shtml
+   * </pre>
+   *
+   * @param subMchid 二级商户号。
+   * @param request 结算帐号
+   * @throws WxPayException the wx pay exception
+   */
+  void modifySettlement(String subMchid, SettlementRequest request) throws WxPayException;
+
+  /**
+   * <pre>
+   * 查询结算账户API
+   * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/ecommerce/applyments/chapter3_5.shtml
+   * </pre>
+   *
+   * @param subMchid 二级商户号。
+   * @return 返回数据 return settlement result
+   * @throws WxPayException the wx pay exception
+   */
+  SettlementResult querySettlement(String subMchid) throws WxPayException;
+
 }

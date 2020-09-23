@@ -203,7 +203,7 @@ public class PartnerTransactionsResult implements Serializable {
    * </pre>
    */
   @SerializedName(value = "combine_payer_info")
-  private PartnerTransactionsResult.CombinePayerInfo combinePayerInfo;
+  private CombinePayerInfo combinePayerInfo;
 
   /**
    * <pre>
@@ -215,7 +215,7 @@ public class PartnerTransactionsResult implements Serializable {
    * </pre>
    */
   @SerializedName(value = "amount")
-  private PartnerTransactionsResult.Amount amount;
+  private Amount amount;
 
   /**
    * <pre>
@@ -227,7 +227,7 @@ public class PartnerTransactionsResult implements Serializable {
    * </pre>
    */
   @SerializedName(value = "scene_info")
-  private PartnerTransactionsResult.SceneInfo sceneInfo;
+  private SceneInfo sceneInfo;
 
   /**
    * <pre>
@@ -239,7 +239,7 @@ public class PartnerTransactionsResult implements Serializable {
    * </pre>
    */
   @SerializedName(value = "promotion_detail")
-  private List<PartnerTransactionsResult.PromotionDetail> promotionDetails;
+  private List<PromotionDetail> promotionDetails;
 
   @Data
   @NoArgsConstructor
@@ -507,7 +507,7 @@ public class PartnerTransactionsResult implements Serializable {
      * </pre>
      */
     @SerializedName(value = "goods_detail")
-    private List<PartnerTransactionsResult.GoodsDetail> goodsDetails;
+    private List<GoodsDetail> goodsDetails;
 
 
   }

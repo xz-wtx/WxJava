@@ -211,6 +211,20 @@ public class EcommerceServiceImpl implements EcommerceService {
   }
 
   @Override
+  public RefundQueryResult queryRefundByRefundId(String subMchid, String refundId) throws WxPayException {
+    String url = String.format("%s/v3/ecommerce/refunds/id/%s?sub_mchid=%s", this.payService.getPayBaseUrl(), refundId, subMchid);
+    String response = this.payService.getV3(URI.create(url));
+    return GSON.fromJson(response, RefundQueryResult.class);
+  }
+
+  @Override
+  public RefundQueryResult queryRefundByOutRefundNo(String subMchid, String outRefundNo) throws WxPayException {
+    String url = String.format("%s/v3/ecommerce/applyments/out-request-no/%s?sub_mchid=%s", this.payService.getPayBaseUrl(), outRefundNo, subMchid);
+    String response = this.payService.getV3(URI.create(url));
+    return GSON.fromJson(response, RefundQueryResult.class);
+  }
+
+  @Override
   public RefundNotifyResult parseRefundNotifyResult(String notifyData, SignatureHeader header) throws WxPayException {
     if(Objects.nonNull(header) && !this.verifyNotifySign(header, notifyData)){
       throw new WxPayException("非法请求，头部信息验证失败");
@@ -243,6 +257,20 @@ public class EcommerceServiceImpl implements EcommerceService {
     String url = String.format("%s/v3/merchant/fund/withdraw", this.payService.getPayBaseUrl());
     String response = this.payService.postV3(url, GSON.toJson(request));
     return GSON.fromJson(response, SpWithdrawResult.class);
+  }
+
+  @Override
+  public void modifySettlement(String subMchid, SettlementRequest request) throws WxPayException {
+    String url = String.format("%s/v3/apply4sub/sub_merchants/%s/modify-settlement", this.payService.getPayBaseUrl(), subMchid);
+    RsaCryptoUtil.encryptFields(request, this.payService.getConfig().getVerifier().getValidCertificate());
+    this.payService.postV3WithWechatpaySerial(url, GSON.toJson(request));
+  }
+
+  @Override
+  public SettlementResult querySettlement(String subMchid) throws WxPayException {
+    String url = String.format("%s/v3/apply4sub/sub_merchants/%s/settlement", this.payService.getPayBaseUrl(), subMchid);
+    String response = this.payService.getV3(URI.create(url));
+    return GSON.fromJson(response, SettlementResult.class);
   }
 
   /**
