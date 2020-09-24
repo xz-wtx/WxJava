@@ -1,6 +1,7 @@
 package me.chanjar.weixin.mp.api;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import lombok.AllArgsConstructor;
 import me.chanjar.weixin.common.api.WxErrorExceptionHandler;
 import me.chanjar.weixin.common.api.WxMessageDuplicateChecker;
 import me.chanjar.weixin.common.api.WxMessageInMemoryDuplicateChecker;
@@ -49,6 +50,7 @@ import java.util.concurrent.*;
  *
  * @author Daniel Qian
  */
+@AllArgsConstructor
 public class WxMpMessageRouter {
   private static final int DEFAULT_THREAD_POOL_SIZE = 100;
   protected final Logger log = LoggerFactory.getLogger(WxMpMessageRouter.class);
