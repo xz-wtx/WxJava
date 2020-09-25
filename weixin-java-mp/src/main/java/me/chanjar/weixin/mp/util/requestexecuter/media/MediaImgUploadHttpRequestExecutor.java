@@ -14,6 +14,7 @@ import me.chanjar.weixin.mp.bean.material.WxMediaImgUploadResult;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by ecoolper on 2017/5/5.
@@ -39,7 +40,7 @@ public class MediaImgUploadHttpRequestExecutor extends MediaImgUploadRequestExec
 
     request.form("media", data);
     HttpResponse response = request.send();
-    response.charset(StringPool.UTF_8);
+    response.charset(StandardCharsets.UTF_8.name());
     String responseContent = response.bodyText();
     WxError error = WxError.fromJson(responseContent, WxType.MP);
     if (error.getErrorCode() != 0) {
