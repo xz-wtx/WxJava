@@ -99,9 +99,14 @@ public class WxCpConsts {
     public static final String CHANGE_EXTERNAL_CONTACT = "change_external_contact";
 
     /**
-     * 企业微信审批事件推送
+     * 企业微信审批事件推送（自建应用审批）
      */
     public static final String OPEN_APPROVAL_CHANGE = "open_approval_change";
+
+    /**
+     * 企业微信审批事件推送（系统审批）
+     */
+    public static final String SYS_APPROVAL_CHANGE = "sys_approval_change";
 
     /**
      * 修改日历事件

@@ -3,6 +3,8 @@ package me.chanjar.weixin.common.util;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.common.error.WxRuntimeException;
 import org.dom4j.*;
 import org.dom4j.io.SAXReader;
 import org.dom4j.tree.DefaultText;
@@ -40,7 +42,7 @@ public class XmlUtils {
         map.put(element.getName(), element2MapOrString(element));
       }
     } catch (DocumentException | SAXException e) {
-      throw new RuntimeException(e);
+      throw new WxRuntimeException(e);
     }
 
     return map;

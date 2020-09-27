@@ -31,7 +31,7 @@ public class WxCpGroupRobotServiceImpl implements WxCpGroupRobotService {
     WxCpConfigStorage wxCpConfigStorage = this.cpService.getWxCpConfigStorage();
     final String webhookKey = wxCpConfigStorage.getWebhookKey();
     if (StringUtils.isEmpty(webhookKey)) {
-      throw new WxErrorException(WxError.builder().errorCode(-1).errorMsg("请先设置WebhookKey").build());
+      throw new WxErrorException("请先设置WebhookKey");
     }
     return wxCpConfigStorage.getApiUrl(WxCpApiPathConsts.WEBHOOK_SEND) + webhookKey;
   }

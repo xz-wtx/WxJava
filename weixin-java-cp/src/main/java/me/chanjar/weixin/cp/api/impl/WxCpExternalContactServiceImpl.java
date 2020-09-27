@@ -6,6 +6,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.error.WxCpErrorMsgEnum;
 import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.common.error.WxRuntimeException;
 import me.chanjar.weixin.cp.api.WxCpExternalContactService;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.WxCpBaseResp;
@@ -30,7 +31,7 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
   public WxCpContactWayResult addContactWay(@NonNull WxCpContactWayInfo info) throws WxErrorException {
 
     if (info.getContactWay().getUsers() != null && info.getContactWay().getUsers().size() > 100) {
-      throw new RuntimeException("「联系我」使用人数默认限制不超过100人(包括部门展开后的人数)");
+      throw new WxRuntimeException("「联系我」使用人数默认限制不超过100人(包括部门展开后的人数)");
     }
 
     final String url = this.mainService.getWxCpConfigStorage().getApiUrl(ADD_CONTACT_WAY);
@@ -52,10 +53,10 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
   @Override
   public WxCpBaseResp updateContactWay(@NonNull WxCpContactWayInfo info) throws WxErrorException {
     if (StringUtils.isBlank(info.getContactWay().getConfigId())) {
-      throw new RuntimeException("更新「联系我」方式需要指定configId");
+      throw new WxRuntimeException("更新「联系我」方式需要指定configId");
     }
     if (info.getContactWay().getUsers() != null && info.getContactWay().getUsers().size() > 100) {
-      throw new RuntimeException("「联系我」使用人数默认限制不超过100人(包括部门展开后的人数)");
+      throw new WxRuntimeException("「联系我」使用人数默认限制不超过100人(包括部门展开后的人数)");
     }
 
     final String url = this.mainService.getWxCpConfigStorage().getApiUrl(UPDATE_CONTACT_WAY);
