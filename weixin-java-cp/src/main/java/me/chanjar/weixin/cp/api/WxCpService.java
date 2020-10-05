@@ -1,5 +1,7 @@
 package me.chanjar.weixin.cp.api;
 
+import com.google.gson.JsonObject;
+import me.chanjar.weixin.common.bean.ToJson;
 import me.chanjar.weixin.common.bean.WxJsapiSignature;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.session.WxSession;
@@ -178,6 +180,26 @@ public interface WxCpService {
    * @throws WxErrorException the wx error exception
    */
   String post(String url, String postData) throws WxErrorException;
+
+  /**
+   * 内部使用.
+   *
+   * @param url        接口地址
+   * @param jsonObject 请求body的json对象
+   * @return the string
+   * @throws WxErrorException the wx error exception
+   */
+  String post(String url, JsonObject jsonObject) throws WxErrorException;
+
+  /**
+   * 内部使用.
+   *
+   * @param url 接口地址
+   * @param obj 请求body的对象，实现了ToJson接口
+   * @return the string
+   * @throws WxErrorException the wx error exception
+   */
+  String post(String url, ToJson obj) throws WxErrorException;
 
   /**
    * 当不需要自动带accessToken的时候，可以用这个发起post请求
@@ -403,11 +425,12 @@ public interface WxCpService {
    * @return 群机器人消息推送服务 group robot service
    */
   WxCpGroupRobotService getGroupRobotService();
+
   /*
-  * 获取工作台服务
-  *
-  * @return the workbench service
-  * */
+   * 获取工作台服务
+   *
+   * @return the workbench service
+   * */
   WxCpAgentWorkBenchService getWorkBenchService();
 
   /**
