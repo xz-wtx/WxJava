@@ -1156,4 +1156,31 @@ public interface WxMpApiUrl {
       return buildUrl(config.getHostConfig(), prefix, path);
     }
   }
+
+  /**
+   * 对话能力
+   */
+  @AllArgsConstructor
+  enum Guide implements WxMpApiUrl {
+    /**
+     * 添加顾问
+     */
+    ADD_GUIDE(API_DEFAULT_HOST_URL, "/cgi-bin/guide/addguideacct"),
+
+    /**
+     * 获取顾问信息
+     */
+    GET_GUIDE(API_DEFAULT_HOST_URL, "/cgi-bin/guide/getguideacct");
+    private final String prefix;
+    private final String path;
+
+    @Override
+    public String getUrl(WxMpConfigStorage config) {
+      if (null == config) {
+        return buildUrl(null, prefix, path);
+      }
+
+      return buildUrl(config.getHostConfig(), prefix, path);
+    }
+  }
 }

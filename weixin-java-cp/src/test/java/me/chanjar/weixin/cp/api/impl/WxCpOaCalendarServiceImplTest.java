@@ -58,8 +58,7 @@ public class WxCpOaCalendarServiceImplTest {
 
   @Test
   public void testGet() throws WxErrorException {
-    final List<WxCpOaCalendar> calendars = this.wxService.getOaCalendarService()
-      .get(Arrays.asList(calId));
+    final List<WxCpOaCalendar> calendars = this.wxService.getOaCalendarService().get(Arrays.asList(calId));
     assertThat(calendars).isNotEmpty();
   }
 
