@@ -6,6 +6,7 @@ import me.chanjar.weixin.common.util.json.GsonHelper;
 import me.chanjar.weixin.mp.api.WxMpGuideService;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.guide.WxMpGuideInfo;
+import me.chanjar.weixin.mp.bean.guide.WxMpGuideList;
 import me.chanjar.weixin.mp.enums.WxMpApiUrl;
 
 /**
@@ -36,8 +37,30 @@ public class WxMpGuideServiceImpl implements WxMpGuideService {
   }
 
   @Override
+  public void updateGuide(WxMpGuideInfo guideInfo) throws WxErrorException {
+    this.mpService.post(WxMpApiUrl.Guide.UPDATE_GUIDE,
+      GsonHelper.buildJsonObject(ACCOUNT, guideInfo.getAccount(),
+        "guide_headimgurl", guideInfo.getHeadImgUrl(),
+        "guide_nickname", guideInfo.getNickName(),
+        OPENID, guideInfo.getOpenid()));
+
+  }
+
+  @Override
   public WxMpGuideInfo getGuide(String account, String openid) throws WxErrorException {
     return WxMpGuideInfo.fromJson(this.mpService.post(WxMpApiUrl.Guide.GET_GUIDE,
       GsonHelper.buildJsonObject(ACCOUNT, account, OPENID, openid)));
+  }
+
+  @Override
+  public void delGuide(String account, String openid) throws WxErrorException {
+    this.mpService.post(WxMpApiUrl.Guide.DEL_GUIDE,
+      GsonHelper.buildJsonObject(ACCOUNT, account, OPENID, openid));
+  }
+
+  @Override
+  public WxMpGuideList listGuide(int page, int num) throws WxErrorException {
+    return WxMpGuideList.fromJson(this.mpService.post(WxMpApiUrl.Guide.LIST_GUIDE,
+      GsonHelper.buildJsonObject("page", page, "num", num)));
   }
 }

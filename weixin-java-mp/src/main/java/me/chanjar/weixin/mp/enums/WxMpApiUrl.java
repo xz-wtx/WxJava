@@ -1166,11 +1166,22 @@ public interface WxMpApiUrl {
      * 添加顾问
      */
     ADD_GUIDE(API_DEFAULT_HOST_URL, "/cgi-bin/guide/addguideacct"),
-
+    /**
+     * 修改顾问
+     */
+    UPDATE_GUIDE(API_DEFAULT_HOST_URL, "/cgi-bin/guide/updateguideacct"),
     /**
      * 获取顾问信息
      */
-    GET_GUIDE(API_DEFAULT_HOST_URL, "/cgi-bin/guide/getguideacct");
+    GET_GUIDE(API_DEFAULT_HOST_URL, "/cgi-bin/guide/getguideacct"),
+    /**
+     * 删除顾问
+     */
+    DEL_GUIDE(API_DEFAULT_HOST_URL, "/cgi-bin/guide/delguideacct"),
+    /**
+     * 获取服务号顾问列表
+     */
+    LIST_GUIDE(API_DEFAULT_HOST_URL, "/cgi-bin/guide/getguideacctlist");
     private final String prefix;
     private final String path;
 
