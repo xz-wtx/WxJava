@@ -126,7 +126,7 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
 
   @Getter
   @Setter
-  private WxOAuth2Service oAuth2Service = new WxOAuth2ServiceImpl(this);
+  private WxOAuth2Service oAuth2Service = new WxMpOAuth2ServiceImpl(this);
 
   private Map<String, WxMpConfigStorage> configStorageMap;
 

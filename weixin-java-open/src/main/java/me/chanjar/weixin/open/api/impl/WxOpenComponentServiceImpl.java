@@ -14,7 +14,7 @@ import me.chanjar.weixin.common.util.http.URIUtil;
 import me.chanjar.weixin.common.util.json.GsonParser;
 import me.chanjar.weixin.common.util.json.WxGsonBuilder;
 import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
+import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
 import me.chanjar.weixin.open.api.*;
 import me.chanjar.weixin.open.bean.*;
 import me.chanjar.weixin.open.bean.auth.WxOpenAuthorizationInfo;
@@ -394,10 +394,10 @@ public class WxOpenComponentServiceImpl implements WxOpenComponentService {
   }
 
   @Override
-  public WxMpOAuth2AccessToken oauth2getAccessToken(String appId, String code) throws WxErrorException {
+  public WxOAuth2AccessToken oauth2getAccessToken(String appId, String code) throws WxErrorException {
     String url = String.format(OAUTH2_ACCESS_TOKEN_URL, appId, code, getWxOpenConfigStorage().getComponentAppId());
     String responseContent = get(url);
-    return WxMpOAuth2AccessToken.fromJson(responseContent);
+    return WxOAuth2AccessToken.fromJson(responseContent);
   }
 
   @Override
@@ -406,10 +406,10 @@ public class WxOpenComponentServiceImpl implements WxOpenComponentService {
   }
 
   @Override
-  public WxMpOAuth2AccessToken oauth2refreshAccessToken(String appId, String refreshToken) throws WxErrorException {
+  public WxOAuth2AccessToken oauth2refreshAccessToken(String appId, String refreshToken) throws WxErrorException {
     String url = String.format(OAUTH2_REFRESH_TOKEN_URL, appId, refreshToken, getWxOpenConfigStorage().getComponentAppId());
     String responseContent = get(url);
-    return WxMpOAuth2AccessToken.fromJson(responseContent);
+    return WxOAuth2AccessToken.fromJson(responseContent);
   }
 
   @Override
