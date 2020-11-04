@@ -5,14 +5,11 @@ import me.chanjar.weixin.common.api.WxErrorExceptionHandler;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.cp.bean.message.WxCpTpXmlMessage;
-import me.chanjar.weixin.cp.bean.message.WxCpXmlMessage;
 import me.chanjar.weixin.cp.bean.message.WxCpXmlOutMessage;
 import me.chanjar.weixin.cp.message.WxCpMessageMatcher;
 import me.chanjar.weixin.cp.tp.service.WxCpTpService;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
-import java.util.regex.Pattern;
 
 /**
  * The type Wx cp message router rule.
@@ -54,6 +51,16 @@ public class WxCpTpMessageRouterRule {
    */
   public WxCpTpMessageRouterRule async(boolean async) {
     this.async = async;
+    return this;
+  }
+
+  /**
+   * 匹配 Message infoType
+   *
+   * @param infoType info
+   */
+  public WxCpTpMessageRouterRule infoType(String infoType) {
+    this.infoType = infoType;
     return this;
   }
 
