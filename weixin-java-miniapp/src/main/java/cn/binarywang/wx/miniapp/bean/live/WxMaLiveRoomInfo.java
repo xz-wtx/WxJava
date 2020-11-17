@@ -86,7 +86,7 @@ public class WxMaLiveRoomInfo implements Serializable {
   /**
    * 是否关闭分享 【0：开启，1：关闭】默认开启分享（直播开始后不允许修改）
    **/
-  private Integer loseShare;
+  private Integer closeShare;
   /**
    * closeKf	Number	否	是否关闭客服 【0：开启，1：关闭】 默认关闭客服
    **/
