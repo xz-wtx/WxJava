@@ -19,19 +19,19 @@ public class WxMpCardCodeDepositResult  implements Serializable {
    * 成功的code
    */
   @SerializedName("succ_code")
-  private List<String> succCode;
+  private List<String> successCodes;
 
   /**
    * 重复导入的code
    */
   @SerializedName("duplicate_code")
-  private List<String> duplicateCode;
+  private List<String> duplicateCodes;
 
   /**
    * 失败的code
    */
   @SerializedName("fail_code")
-  private List<String> failCode;
+  private List<String> failCodes;
 
 
   public static WxMpCardCodeDepositResult fromJson(String json) {
