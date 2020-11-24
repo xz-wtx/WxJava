@@ -8,6 +8,7 @@ import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.EntPayService;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.github.binarywang.wxpay.util.SignUtils;
+import lombok.RequiredArgsConstructor;
 import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.openssl.PEMParser;
@@ -30,17 +31,9 @@ import java.util.Base64;
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
  */
+@RequiredArgsConstructor
 public class EntPayServiceImpl implements EntPayService {
-  private WxPayService payService;
-
-  /**
-   * Instantiates a new Ent pay service.
-   *
-   * @param payService the pay service
-   */
-  public EntPayServiceImpl(WxPayService payService) {
-    this.payService = payService;
-  }
+  private final WxPayService payService;
 
   @Override
   public EntPayResult entPay(EntPayRequest request) throws WxPayException {

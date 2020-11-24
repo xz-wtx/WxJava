@@ -1,14 +1,14 @@
-package me.chanjar.weixin.common.util.http;
+package cn.binarywang.wx.miniapp.executor;
 
 import java.io.File;
 import java.io.IOException;
 
-import me.chanjar.weixin.common.bean.result.WxAuditMediaUploadResult;
+import me.chanjar.weixin.common.util.http.RequestExecutor;
+import me.chanjar.weixin.common.util.http.RequestHttp;
+import me.chanjar.weixin.common.util.http.ResponseHandler;
 import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.error.WxErrorException;
-import me.chanjar.weixin.common.util.http.apache.ApacheAuditMediaUploadRequestExecutor;
-import me.chanjar.weixin.common.util.http.jodd.JoddHttpAuditMediaUploadRequestExecutor;
-import me.chanjar.weixin.common.util.http.okhttp.OkHttpAuditMediaUploadRequestExecutor;
+import cn.binarywang.wx.miniapp.bean.WxMaAuditMediaUploadResult;
 
 /**
  * 小程序 提审素材上传接口
@@ -18,7 +18,7 @@ import me.chanjar.weixin.common.util.http.okhttp.OkHttpAuditMediaUploadRequestEx
  * @author yangyh22
  * @since 2020/11/14
  */
-public abstract class AuditMediaUploadRequestExecutor<H, P> implements RequestExecutor<WxAuditMediaUploadResult, File> {
+public abstract class AuditMediaUploadRequestExecutor<H, P> implements RequestExecutor<WxMaAuditMediaUploadResult, File> {
 
   protected RequestHttp<H, P> requestHttp;
 
@@ -27,11 +27,11 @@ public abstract class AuditMediaUploadRequestExecutor<H, P> implements RequestEx
   }
 
   @Override
-  public void execute(String uri, File data, ResponseHandler<WxAuditMediaUploadResult> handler, WxType wxType) throws WxErrorException, IOException {
+  public void execute(String uri, File data, ResponseHandler<WxMaAuditMediaUploadResult> handler, WxType wxType) throws WxErrorException, IOException {
     handler.handle(this.execute(uri, data, wxType));
   }
 
-  public static RequestExecutor<WxAuditMediaUploadResult, File> create(RequestHttp requestHttp) {
+  public static RequestExecutor<WxMaAuditMediaUploadResult, File> create(RequestHttp requestHttp) {
     switch (requestHttp.getRequestType()) {
       case APACHE_HTTP:
         return new ApacheAuditMediaUploadRequestExecutor(requestHttp);

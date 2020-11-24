@@ -1,4 +1,4 @@
-package me.chanjar.weixin.common.util.http.jodd;
+package cn.binarywang.wx.miniapp.executor;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,12 +8,11 @@ import jodd.http.HttpConnectionProvider;
 import jodd.http.HttpRequest;
 import jodd.http.HttpResponse;
 import jodd.http.ProxyInfo;
-import me.chanjar.weixin.common.bean.result.WxAuditMediaUploadResult;
 import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.error.WxError;
 import me.chanjar.weixin.common.error.WxErrorException;
-import me.chanjar.weixin.common.util.http.AuditMediaUploadRequestExecutor;
 import me.chanjar.weixin.common.util.http.RequestHttp;
+import cn.binarywang.wx.miniapp.bean.WxMaAuditMediaUploadResult;
 
 /**
  * @author yangyh22
@@ -26,7 +25,7 @@ public class JoddHttpAuditMediaUploadRequestExecutor extends AuditMediaUploadReq
   }
 
   @Override
-  public WxAuditMediaUploadResult execute(String uri, File file, WxType wxType) throws WxErrorException, IOException {
+  public WxMaAuditMediaUploadResult execute(String uri, File file, WxType wxType) throws WxErrorException, IOException {
     HttpRequest request = HttpRequest.post(uri);
     if (requestHttp.getRequestHttpProxy() != null) {
       requestHttp.getRequestHttpClient().useProxy(requestHttp.getRequestHttpProxy());
@@ -41,6 +40,6 @@ public class JoddHttpAuditMediaUploadRequestExecutor extends AuditMediaUploadReq
     if (error.getErrorCode() != 0) {
       throw new WxErrorException(error);
     }
-    return WxAuditMediaUploadResult.fromJson(responseContent);
+    return WxMaAuditMediaUploadResult.fromJson(responseContent);
   }
 }

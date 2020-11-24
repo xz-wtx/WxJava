@@ -6,7 +6,7 @@ import cn.binarywang.wx.miniapp.bean.live.WxMaAssistantResult;
 import cn.binarywang.wx.miniapp.bean.live.WxMaLiveAssistantInfo;
 import cn.binarywang.wx.miniapp.bean.live.WxMaLiveResult;
 import cn.binarywang.wx.miniapp.bean.live.WxMaLiveRoomInfo;
-import cn.binarywang.wx.miniapp.util.json.WxMaGsonBuilder;
+import cn.binarywang.wx.miniapp.json.WxMaGsonBuilder;
 import com.google.common.base.Joiner;
 import com.google.gson.JsonObject;
 import lombok.AllArgsConstructor;

@@ -1,15 +1,15 @@
-package me.chanjar.weixin.common.util.http.apache;
+package cn.binarywang.wx.miniapp.executor;
 
 import java.io.File;
 import java.io.IOException;
 
-import me.chanjar.weixin.common.bean.result.WxAuditMediaUploadResult;
 import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.error.WxError;
 import me.chanjar.weixin.common.error.WxErrorException;
-import me.chanjar.weixin.common.util.http.AuditMediaUploadRequestExecutor;
 import me.chanjar.weixin.common.util.http.RequestHttp;
 
+import me.chanjar.weixin.common.util.http.apache.Utf8ResponseHandler;
+import cn.binarywang.wx.miniapp.bean.WxMaAuditMediaUploadResult;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.RequestConfig;
@@ -30,7 +30,7 @@ public class ApacheAuditMediaUploadRequestExecutor extends AuditMediaUploadReque
   }
 
   @Override
-  public WxAuditMediaUploadResult execute(String uri, File file, WxType wxType) throws WxErrorException, IOException {
+  public WxMaAuditMediaUploadResult execute(String uri, File file, WxType wxType) throws WxErrorException, IOException {
     HttpPost httpPost = new HttpPost(uri);
     if (requestHttp.getRequestHttpProxy() != null) {
       RequestConfig config = RequestConfig.custom().setProxy(requestHttp.getRequestHttpProxy()).build();
@@ -50,7 +50,7 @@ public class ApacheAuditMediaUploadRequestExecutor extends AuditMediaUploadReque
       if (error.getErrorCode() != 0) {
         throw new WxErrorException(error);
       }
-      return WxAuditMediaUploadResult.fromJson(responseContent);
+      return WxMaAuditMediaUploadResult.fromJson(responseContent);
     } finally {
       httpPost.releaseConnection();
     }
