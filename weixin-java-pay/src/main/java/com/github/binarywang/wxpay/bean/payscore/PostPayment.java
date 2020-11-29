@@ -1,10 +1,11 @@
 package com.github.binarywang.wxpay.bean.payscore;
 
+import java.io.Serializable;
+
 import com.google.gson.annotations.SerializedName;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
 
 /**
  * 后付费项目.
@@ -25,9 +26,9 @@ public class PostPayment implements Serializable {
   @SerializedName("name")
   private String name;
   @SerializedName("amount")
-  private int amount;
+  private Integer amount;
   @SerializedName("description")
   private String description;
   @SerializedName("count")
-  private int count;
+  private Integer count;
 }

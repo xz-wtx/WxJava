@@ -13,6 +13,7 @@ import com.github.binarywang.wxpay.exception.WxPayException;
 import org.apache.http.client.methods.HttpPost;
 
 import java.io.File;
+import java.io.InputStream;
 import java.net.URI;
 import java.util.Date;
 import java.util.Map;
@@ -96,6 +97,15 @@ public interface WxPayService {
    * @throws WxPayException the wx pay exception
    */
   String getV3(URI url) throws WxPayException;
+
+  /**
+   * 发送下载 V3请求，得到响应流.
+   *
+   * @param url 请求地址
+   * @return 返回请求响应流
+   * @throws WxPayException the wx pay exception
+   */
+  InputStream downloadV3(URI url) throws WxPayException;
 
   /**
    * 获取企业付款服务类.
@@ -402,6 +412,17 @@ public interface WxPayService {
    * @throws WxPayException the wx pay exception
    */
   WxPayRefundNotifyResult parseRefundNotifyResult(String xmlData) throws WxPayException;
+
+  /**
+   * 解析扫码支付回调通知
+   * 详见https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=6_4
+   *
+   * @param xmlData the xml data
+   * @param signType 签名类型
+   * @return the wx scan pay notify result
+   * @throws WxPayException the wx pay exception
+   */
+  WxScanPayNotifyResult parseScanPayNotifyResult(String xmlData, String signType) throws WxPayException;
 
   /**
    * 解析扫码支付回调通知

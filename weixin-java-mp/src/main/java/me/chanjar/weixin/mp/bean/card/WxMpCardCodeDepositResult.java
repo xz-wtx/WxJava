@@ -2,34 +2,36 @@ package me.chanjar.weixin.mp.bean.card;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
-import me.chanjar.weixin.mp.bean.result.WxMpResult;
 import me.chanjar.weixin.mp.util.json.WxMpGsonBuilder;
 
 import java.io.Serializable;
+import java.util.List;
 
 
+/**
+ * @author S <sshzh90@gmail.com>
+ */
 @Data
-public class WxMpCardCodeDepositResult extends WxMpResult implements Serializable {
-
+public class WxMpCardCodeDepositResult  implements Serializable {
   private static final long serialVersionUID = 2955588617765355420L;
 
   /**
-   * 成功个数
+   * 成功的code
    */
   @SerializedName("succ_code")
-  private Integer succCode;
+  private List<String> successCodes;
 
   /**
-   * 重复导入的code会自动被过滤
+   * 重复导入的code
    */
   @SerializedName("duplicate_code")
-  private Integer duplicateCode;
+  private List<String> duplicateCodes;
 
   /**
-   * 失败个数
+   * 失败的code
    */
   @SerializedName("fail_code")
-  private Integer failCode;
+  private List<String> failCodes;
 
 
   public static WxMpCardCodeDepositResult fromJson(String json) {

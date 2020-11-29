@@ -7,6 +7,7 @@ import me.chanjar.weixin.cp.api.ApiTestModule;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.WxCpBaseResp;
 import me.chanjar.weixin.cp.bean.external.*;
+import me.chanjar.weixin.cp.bean.external.contact.WxCpExternalContactInfo;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.testng.annotations.Guice;
 import org.testng.annotations.Test;
@@ -28,7 +29,7 @@ public class WxCpExternalContactServiceImplTest {
   @Test
   public void testGetExternalContact() throws WxErrorException {
     String externalUserId = this.configStorage.getExternalUserId();
-    WxCpUserExternalContactInfo result = this.wxCpService.getExternalContactService().getExternalContact(externalUserId);
+    WxCpExternalContactInfo result = this.wxCpService.getExternalContactService().getExternalContact(externalUserId);
     System.out.println(result);
     assertNotNull(result);
   }
@@ -105,7 +106,7 @@ public class WxCpExternalContactServiceImplTest {
   @Test
   public void testGetContactDetail() throws WxErrorException {
     String externalUserId = this.configStorage.getExternalUserId();
-    WxCpUserExternalContactInfo result = this.wxCpService.getExternalContactService().getContactDetail(externalUserId);
+    WxCpExternalContactInfo result = this.wxCpService.getExternalContactService().getContactDetail(externalUserId);
     System.out.println(result);
     assertNotNull(result);
   }
@@ -215,6 +216,19 @@ public class WxCpExternalContactServiceImplTest {
   public void testSendWelcomeMsg() throws WxErrorException {
     this.wxCpService.getExternalContactService().sendWelcomeMsg(WxCpWelcomeMsg.builder()
       .welcomeCode("abc")
+      .build());
+  }
+
+  @Test
+  public void testUpdateRemark() throws WxErrorException {
+    this.wxCpService.getExternalContactService().updateRemark(WxCpUpdateRemarkRequest.builder()
+      .description("abc")
+      .userId("aaa")
+      .externalUserId("aaa")
+      .remark("aa")
+      .remarkCompany("aaa")
+      .remarkMobiles(new String[]{"111","222"})
+      .remarkPicMediaId("aaa")
       .build());
   }
 }

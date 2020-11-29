@@ -2,12 +2,13 @@ package cn.binarywang.wx.miniapp.bean;
 
 import cn.binarywang.wx.miniapp.config.WxMaConfig;
 import cn.binarywang.wx.miniapp.util.crypt.WxMaCryptUtils;
-import cn.binarywang.wx.miniapp.util.json.WxMaGsonBuilder;
+import cn.binarywang.wx.miniapp.json.WxMaGsonBuilder;
 import cn.binarywang.wx.miniapp.util.xml.XStreamTransformer;
 import com.google.gson.annotations.SerializedName;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import lombok.Data;
+import me.chanjar.weixin.common.error.WxRuntimeException;
 import me.chanjar.weixin.common.util.xml.XStreamCDataConverter;
 import org.apache.commons.io.IOUtils;
 
@@ -174,7 +175,7 @@ public class WxMaMessage implements Serializable {
       return fromEncryptedXml(IOUtils.toString(is, StandardCharsets.UTF_8), wxMaConfig,
         timestamp, nonce, msgSignature);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new WxRuntimeException(e);
     }
   }
 
@@ -188,7 +189,7 @@ public class WxMaMessage implements Serializable {
       String plainText = new WxMaCryptUtils(config).decrypt(encryptedMessage.getEncrypt());
       return fromJson(plainText);
     } catch (Exception e) {
-      throw new RuntimeException(e);
+      throw new WxRuntimeException(e);
     }
   }
 
@@ -196,7 +197,7 @@ public class WxMaMessage implements Serializable {
     try {
       return fromEncryptedJson(IOUtils.toString(inputStream, StandardCharsets.UTF_8), config);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new WxRuntimeException(e);
     }
   }
 
