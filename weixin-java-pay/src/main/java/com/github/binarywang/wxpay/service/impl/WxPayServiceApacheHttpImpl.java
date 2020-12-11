@@ -100,7 +100,13 @@ public class WxPayServiceApacheHttpImpl extends BaseWxPayServiceImpl {
     try (CloseableHttpResponse response = httpClient.execute(httpPost)) {
       //v3已经改为通过状态码判断200 204 成功
       int statusCode = response.getStatusLine().getStatusCode();
-      String responseString = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
+      //post方法有可能会没有返回值的情况
+      String responseString;
+      if (response.getEntity() == null) {
+        responseString = null;
+      }else {
+        responseString = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
+      }
       if (HttpStatus.SC_OK == statusCode || HttpStatus.SC_NO_CONTENT == statusCode) {
         this.log.info("\n【请求地址】：{}\n【请求数据】：{}\n【响应数据】：{}", url, requestStr, responseString);
         return responseString;
@@ -166,7 +172,13 @@ public class WxPayServiceApacheHttpImpl extends BaseWxPayServiceImpl {
     try (CloseableHttpResponse response = httpClient.execute(httpPost)) {
       //v3已经改为通过状态码判断200 204 成功
       int statusCode = response.getStatusLine().getStatusCode();
-      String responseString = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
+      //post方法有可能会没有返回值的情况
+      String responseString;
+      if (response.getEntity() == null) {
+        responseString = null;
+      }else {
+        responseString = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
+      }
       if (HttpStatus.SC_OK == statusCode || HttpStatus.SC_NO_CONTENT == statusCode) {
         this.log.info("\n【请求地址】：{}\n【响应数据】：{}", url, responseString);
         return responseString;
