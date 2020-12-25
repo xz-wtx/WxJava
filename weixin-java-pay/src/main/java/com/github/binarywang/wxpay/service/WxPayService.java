@@ -69,7 +69,7 @@ public interface WxPayService {
 
   /**
    * 发送post请求，得到响应字符串.
-   *
+   * <p>
    * 部分字段会包含敏感信息，所以在提交前需要在请求头中会包含"Wechatpay-Serial"信息
    *
    * @param url        请求地址
@@ -82,7 +82,7 @@ public interface WxPayService {
   /**
    * 发送post请求，得到响应字符串.
    *
-   * @param url        请求地址
+   * @param url      请求地址
    * @param httpPost 请求信息
    * @return 返回请求结果字符串 string
    * @throws WxPayException the wx pay exception
@@ -102,7 +102,7 @@ public interface WxPayService {
    * 发送下载 V3请求，得到响应流.
    *
    * @param url 请求地址
-   * @return 返回请求响应流
+   * @return 返回请求响应流 input stream
    * @throws WxPayException the wx pay exception
    */
   InputStream downloadV3(URI url) throws WxPayException;
@@ -117,7 +117,7 @@ public interface WxPayService {
   /**
    * 获取红包接口服务类.
    *
-   * @return .
+   * @return . redpack service
    */
   RedpackService getRedpackService();
 
@@ -138,13 +138,15 @@ public interface WxPayService {
 
   /**
    * 获取电商收付通服务类
-   * @return
+   *
+   * @return the ecommerce service
    */
   EcommerceService getEcommerceService();
 
   /**
-   * 微信支付通用媒体服务类
-   * @return
+   * 获取微信支付通用媒体服务类
+   *
+   * @return the merchant media service
    */
   MerchantMediaService getMerchantMediaService();
 
@@ -243,11 +245,12 @@ public interface WxPayService {
   /**
    * 调用统一下单接口，并组装生成支付所需参数对象.
    *
+   * @param <T>               the type parameter
    * @param specificTradeType 将使用的交易方式，不能为 null
    * @param request           统一下单请求参数，设定的 tradeType 及配置里的 tradeType 将被忽略，转而使用 specificTradeType
    * @return 返回 {@link WxPayConstants.TradeType.Specific} 指定的类
    * @throws WxPayException the wx pay exception
-   * @see WxPayService#createOrder(WxPayUnifiedOrderRequest)
+   * @see WxPayService#createOrder(WxPayUnifiedOrderRequest) WxPayService#createOrder(WxPayUnifiedOrderRequest)
    */
   <T> T createOrder(WxPayConstants.TradeType.Specific<T> specificTradeType, WxPayUnifiedOrderRequest request) throws WxPayException;
 
@@ -423,7 +426,7 @@ public interface WxPayService {
    * 解析扫码支付回调通知
    * 详见https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=6_4
    *
-   * @param xmlData the xml data
+   * @param xmlData  the xml data
    * @param signType 签名类型
    * @return the wx scan pay notify result
    * @throws WxPayException the wx pay exception
@@ -518,7 +521,7 @@ public interface WxPayService {
    * @param billType   账单类型 bill_type ALL，返回当日所有订单信息，默认值，SUCCESS，返回当日成功支付的订单，REFUND，返回当日退款订单
    * @param tarType    压缩账单 tar_type 非必传参数，固定值：GZIP，返回格式为.gzip的压缩包账单。不传则默认为数据流形式。
    * @param deviceInfo 设备号 device_info 非必传参数，终端设备号
-   * @return 对账内容原始字符串
+   * @return 对账内容原始字符串 string
    * @throws WxPayException the wx pay exception
    */
   String downloadRawBill(String billDate, String billType, String tarType, String deviceInfo) throws WxPayException;
@@ -537,7 +540,7 @@ public interface WxPayService {
    * </pre>
    *
    * @param request 下载对账单请求
-   * @return 对账内容原始字符串
+   * @return 对账内容原始字符串 string
    * @throws WxPayException the wx pay exception
    */
   String downloadRawBill(WxPayDownloadBillRequest request) throws WxPayException;
@@ -684,7 +687,7 @@ public interface WxPayService {
    * @param longUrl 需要被压缩的网址
    * @return the string
    * @throws WxPayException the wx pay exception
-   * @see WxPayService#shorturl(WxPayShorturlRequest) WxPayService#shorturl(WxPayShorturlRequest)
+   * @see WxPayService#shorturl(WxPayShorturlRequest) WxPayService#shorturl(WxPayShorturlRequest)WxPayService#shorturl(WxPayShorturlRequest)
    */
   String shorturl(String longUrl) throws WxPayException;
 
@@ -712,7 +715,7 @@ public interface WxPayService {
    * @param authCode 授权码
    * @return openid string
    * @throws WxPayException the wx pay exception
-   * @see WxPayService#authcode2Openid(WxPayAuthcode2OpenidRequest) WxPayService#authcode2Openid(WxPayAuthcode2OpenidRequest)
+   * @see WxPayService#authcode2Openid(WxPayAuthcode2OpenidRequest) WxPayService#authcode2Openid(WxPayAuthcode2OpenidRequest)WxPayService#authcode2Openid(WxPayAuthcode2OpenidRequest)
    */
   String authcode2Openid(String authCode) throws WxPayException;
 
@@ -860,7 +863,7 @@ public interface WxPayService {
    *
    * @param feeType 外币币种
    * @param date    日期，格式为yyyyMMdd，如2009年12月25日表示为20091225。时区为GMT+8 beijing
-   * @return .
+   * @return . wx pay query exchange rate result
    * @throws WxPayException .
    */
   WxPayQueryExchangeRateResult queryExchangeRate(String feeType, String date) throws WxPayException;

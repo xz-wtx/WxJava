@@ -55,6 +55,7 @@ public abstract class BaseWxCpServiceImpl<H, P> implements WxCpService, RequestH
   private WxCpGroupRobotService groupRobotService = new WxCpGroupRobotServiceImpl(this);
   private WxCpMessageService messageService = new WxCpMessageServiceImpl(this);
   private WxCpOaCalendarService oaCalendarService = new WxCpOaCalendarServiceImpl(this);
+  private WxCpOaScheduleService oaScheduleService = new WxCpOaOaScheduleServiceImpl(this);
   private WxCpAgentWorkBenchService workBenchService = new WxCpAgentWorkBenchServiceImpl(this);
 
   /**
@@ -511,5 +512,10 @@ public abstract class BaseWxCpServiceImpl<H, P> implements WxCpService, RequestH
 
   public void setAgentService(WxCpAgentService agentService) {
     this.agentService = agentService;
+  }
+
+  @Override
+  public WxCpOaScheduleService getOaScheduleService() {
+    return this.oaScheduleService;
   }
 }

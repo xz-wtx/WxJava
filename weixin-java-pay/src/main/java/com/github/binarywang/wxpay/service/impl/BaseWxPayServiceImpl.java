@@ -50,25 +50,18 @@ import static com.github.binarywang.wxpay.constant.WxPayConstants.TarType;
 public abstract class BaseWxPayServiceImpl implements WxPayService {
   private static final String TOTAL_FUND_COUNT = "资金流水总笔数";
 
-  /**
-   * The Log.
-   */
+
   final Logger log = LoggerFactory.getLogger(this.getClass());
-  /**
-   * The constant wxApiData.
-   */
+
   static ThreadLocal<WxPayApiData> wxApiData = new ThreadLocal<>();
 
   private EntPayService entPayService = new EntPayServiceImpl(this);
-  private ProfitSharingService profitSharingService = new ProfitSharingServiceImpl(this);
-  private RedpackService redpackService = new RedpackServiceImpl(this);
-  private PayScoreService payScoreService = new PayScoreServiceImpl(this);
-  private EcommerceService ecommerceService = new EcommerceServiceImpl(this);
-  private MerchantMediaService merchantMediaService =new MerchantMediaServiceImpl(this);
+  private final ProfitSharingService profitSharingService = new ProfitSharingServiceImpl(this);
+  private final RedpackService redpackService = new RedpackServiceImpl(this);
+  private final PayScoreService payScoreService = new PayScoreServiceImpl(this);
+  private final EcommerceService ecommerceService = new EcommerceServiceImpl(this);
+  private final MerchantMediaService merchantMediaService = new MerchantMediaServiceImpl(this);
 
-  /**
-   * The Config.
-   */
   protected WxPayConfig config;
 
   @Override
@@ -98,7 +91,7 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
 
   @Override
   public MerchantMediaService getMerchantMediaService() {
-    return merchantMediaService;
+    return this.merchantMediaService;
   }
 
   @Override

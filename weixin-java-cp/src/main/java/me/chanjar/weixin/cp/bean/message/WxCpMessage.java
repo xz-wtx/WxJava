@@ -199,7 +199,7 @@ public class WxCpMessage implements Serializable {
     if (this.getDuplicateCheckInterval() != null) {
       messageJson.addProperty("duplicate_check_interval", this.getDuplicateCheckInterval());
     }
-    
+
     this.handleMsgType(messageJson);
 
     if (StringUtils.isNotBlank(this.getSafe())) {
