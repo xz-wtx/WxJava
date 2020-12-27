@@ -328,12 +328,13 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
   }
 
   @Override
-  public void addConfig(String mpId, WxMaConfig configStorages) {
+  public void addConfig(String miniappId, WxMaConfig configStorages) {
     synchronized (this) {
       if (this.configMap == null) {
         this.setWxMaConfig(configStorages);
       } else {
-        this.configMap.put(mpId, configStorages);
+        WxMaConfigHolder.set(miniappId);
+        this.configMap.put(miniappId, configStorages);
       }
     }
   }

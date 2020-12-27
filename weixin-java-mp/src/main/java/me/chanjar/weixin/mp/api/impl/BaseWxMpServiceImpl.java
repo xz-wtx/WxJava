@@ -439,6 +439,7 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
       if (this.configStorageMap == null) {
         this.setWxMpConfigStorage(configStorages);
       } else {
+        WxMpConfigStorageHolder.set(mpId);
         this.configStorageMap.put(mpId, configStorages);
       }
     }
