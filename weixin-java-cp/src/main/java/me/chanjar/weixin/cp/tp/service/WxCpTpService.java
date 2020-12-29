@@ -387,4 +387,15 @@ public interface WxCpTpService {
    * @param wxCpTpUserService the set user service
    */
   void setWxCpTpUserService(WxCpTpUserService wxCpTpUserService);
+
+  /**
+   * 获取应用的管理员列表
+   * @param authCorpId
+   * @param agentId
+   * @return
+   */
+  WxCpTpAdmin getAdminList(String authCorpId,Integer agentId) throws WxErrorException;
+
+
+
 }

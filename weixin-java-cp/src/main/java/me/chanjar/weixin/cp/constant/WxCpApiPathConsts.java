@@ -156,6 +156,8 @@ public final class WxCpApiPathConsts {
 
 
     public static final String CONTACT_SEARCH = "/cgi-bin/service/contact/search";
+    public static final String GET_ADMIN_LIST = "/cgi-bin/service/get_admin_list";
+
   }
 
   @UtilityClass
