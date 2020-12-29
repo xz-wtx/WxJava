@@ -4,6 +4,7 @@ import com.binarywang.spring.starter.wxjava.mp.enums.HttpClientType;
 import com.binarywang.spring.starter.wxjava.mp.enums.StorageType;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 import java.io.Serializable;
 
@@ -49,7 +50,7 @@ public class WxMpProperties {
   /**
    * 存储策略
    */
-  private ConfigStorage configStorage = new ConfigStorage();
+  private final ConfigStorage configStorage = new ConfigStorage();
 
   @Data
   public static class ConfigStorage implements Serializable {
@@ -68,7 +69,8 @@ public class WxMpProperties {
     /**
      * redis连接配置.
      */
-    private RedisProperties redis = new RedisProperties();
+    @NestedConfigurationProperty
+    private final RedisProperties redis = new RedisProperties();
 
     /**
      * http客户端类型.

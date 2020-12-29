@@ -137,8 +137,7 @@ public class WxMpStorageAutoConfiguration {
   }
 
   private JedisPoolAbstract getJedisPool() {
-    WxMpProperties.ConfigStorage storage = wxMpProperties.getConfigStorage();
-    RedisProperties redis = storage.getRedis();
+    RedisProperties redis = wxMpProperties.getConfigStorage().getRedis();
 
     JedisPoolConfig config = new JedisPoolConfig();
     if (redis.getMaxActive() != null) {

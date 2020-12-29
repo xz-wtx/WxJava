@@ -4,6 +4,7 @@ import com.binarywang.spring.starter.wxjava.miniapp.enums.HttpClientType;
 import com.binarywang.spring.starter.wxjava.miniapp.enums.StorageType;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 /**
  * 属性配置类.
@@ -60,6 +61,7 @@ public class WxMaProperties {
     /**
      * redis连接配置.
      */
+    @NestedConfigurationProperty
     private final RedisProperties redis = new RedisProperties();
 
     /**
