@@ -1,43 +1,42 @@
-package com.binarywang.spring.starter.wxjava.mp.properties;
+package com.binarywang.spring.starter.wxjava.qidian.properties;
 
-import com.binarywang.spring.starter.wxjava.mp.enums.HttpClientType;
-import com.binarywang.spring.starter.wxjava.mp.enums.StorageType;
+import com.binarywang.spring.starter.wxjava.qidian.enums.HttpClientType;
+import com.binarywang.spring.starter.wxjava.qidian.enums.StorageType;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 import java.io.Serializable;
 
-import static com.binarywang.spring.starter.wxjava.mp.enums.StorageType.Memory;
-import static com.binarywang.spring.starter.wxjava.mp.properties.WxMpProperties.PREFIX;
+import static com.binarywang.spring.starter.wxjava.qidian.enums.StorageType.Memory;
+import static com.binarywang.spring.starter.wxjava.qidian.properties.WxQidianProperties.PREFIX;
 
 /**
- * 微信接入相关配置属性.
+ * 企点接入相关配置属性.
  *
  * @author someone
  */
 @Data
 @ConfigurationProperties(PREFIX)
-public class WxMpProperties {
-  public static final String PREFIX = "wx.mp";
+public class WxQidianProperties {
+  public static final String PREFIX = "wx.qidian";
 
   /**
-   * 设置微信公众号的appid.
+   * 设置腾讯企点的appid.
    */
   private String appId;
 
   /**
-   * 设置微信公众号的app secret.
+   * 设置腾讯企点的app secret.
    */
   private String secret;
 
   /**
-   * 设置微信公众号的token.
+   * 设置腾讯企点的token.
    */
   private String token;
 
   /**
-   * 设置微信公众号的EncodingAESKey.
+   * 设置腾讯企点的EncodingAESKey.
    */
   private String aesKey;
 
@@ -49,7 +48,7 @@ public class WxMpProperties {
   /**
    * 存储策略
    */
-  private final ConfigStorage configStorage = new ConfigStorage();
+  private ConfigStorage configStorage = new ConfigStorage();
 
   @Data
   public static class ConfigStorage implements Serializable {
@@ -68,8 +67,7 @@ public class WxMpProperties {
     /**
      * redis连接配置.
      */
-    @NestedConfigurationProperty
-    private final RedisProperties redis = new RedisProperties();
+    private RedisProperties redis = new RedisProperties();
 
     /**
      * http客户端类型.
