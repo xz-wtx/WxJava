@@ -98,10 +98,10 @@
 </details>
 
 ----------------------------------
-### 使用案例
+### 应用案例
 完整案例登记列表，请[【访问这里】](https://github.com/Wechat-Group/weixin-java-tools/issues/729)查看，欢迎登记更多的案例。
 
-以下为部分案例列表：
+以下为节选的部分案例：
 
 #### 开源项目：
 - 基于微信公众号的签到、抽奖、发送弹幕程序：https://github.com/workcheng/weiya
@@ -129,7 +129,6 @@
 - 王朝社区（比亚迪新能源社区）
 - 极吼吼手机上门回收换新
 - 未来信封 
-
 
 #### 公众号：
 - 中国电信上海网厅（sh_189）
@@ -162,7 +161,7 @@
 ### 贡献者列表
 特别感谢参与贡献的所有同学，所有贡献者列表请在[此处](https://github.com/Wechat-Group/WxJava/graphs/contributors)查看，欢迎大家继续踊跃贡献代码！
 <details>
-<summary>点击此处展开查看贡献次数最多的几位同学</summary>
+<summary>点击此处展开查看贡献次数最多的几位小伙伴</summary>
 
 1. [chanjarster (Daniel Qian)](https://github.com/chanjarster)
 1. [binarywang (Binary Wang)](https://github.com/binarywang)
