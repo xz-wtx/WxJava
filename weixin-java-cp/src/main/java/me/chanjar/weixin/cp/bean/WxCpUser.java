@@ -22,6 +22,7 @@ public class WxCpUser implements Serializable {
   private static final long serialVersionUID = -5696099236344075582L;
 
   private String userId;
+  private String newUserId;
   private String name;
   private Long[] departIds;
   private Integer[] orders;
