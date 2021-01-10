@@ -190,7 +190,8 @@ public class EcommerceServiceImpl implements EcommerceService {
   @Override
   public ProfitSharingResult profitSharing(ProfitSharingRequest request) throws WxPayException {
     String url = String.format("%s/v3/ecommerce/profitsharing/orders", this.payService.getPayBaseUrl());
-    String response = this.payService.postV3(url, GSON.toJson(request));
+    RsaCryptoUtil.encryptFields(request, this.payService.getConfig().getVerifier().getValidCertificate());
+    String response = this.payService.postV3WithWechatpaySerial(url, GSON.toJson(request));
     return GSON.fromJson(response, ProfitSharingResult.class);
   }
 
