@@ -253,6 +253,30 @@ public interface EcommerceService {
 
   /**
    * <pre>
+   * 添加分账接收方API
+   * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/ecommerce/profitsharing/chapter3_7.shtml
+   * </pre>
+   *
+   * @param request 添加分账接收方
+   * @return 返回数据 profit sharing result
+   * @throws WxPayException the wx pay exception
+   */
+  ProfitSharingReceiverResult addReceivers(ProfitSharingReceiverRequest request) throws WxPayException;
+
+  /**
+   * <pre>
+   * 删除分账接收方API
+   * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/ecommerce/profitsharing/chapter3_8.shtml
+   * </pre>
+   *
+   * @param request 删除分账接收方
+   * @return 返回数据 profit sharing result
+   * @throws WxPayException the wx pay exception
+   */
+  ProfitSharingReceiverResult deleteReceivers(ProfitSharingReceiverRequest request) throws WxPayException;
+
+  /**
+   * <pre>
    * 请求分账回退API
    * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/ecommerce/profitsharing/chapter3_3.shtml
    * </pre>
