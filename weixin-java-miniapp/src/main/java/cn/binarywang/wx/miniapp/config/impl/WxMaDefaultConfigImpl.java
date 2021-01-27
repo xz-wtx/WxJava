@@ -2,6 +2,7 @@ package cn.binarywang.wx.miniapp.config.impl;
 
 import cn.binarywang.wx.miniapp.config.WxMaConfig;
 import cn.binarywang.wx.miniapp.json.WxMaGsonBuilder;
+import lombok.Getter;
 import me.chanjar.weixin.common.bean.WxAccessToken;
 import me.chanjar.weixin.common.util.http.apache.ApacheHttpClientBuilder;
 
@@ -14,6 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
  */
+@Getter
 public class WxMaDefaultConfigImpl implements WxMaConfig {
   protected volatile String appid;
   protected volatile String token;
@@ -49,6 +51,7 @@ public class WxMaDefaultConfigImpl implements WxMaConfig {
   protected volatile Lock jsapiTicketLock = new ReentrantLock();
   protected volatile Lock cardApiTicketLock = new ReentrantLock();
   private volatile ApacheHttpClientBuilder apacheHttpClientBuilder;
+  private String apiHostUrl;
 
   /**
    * 会过期的数据提前过期时间，默认预留200秒的时间
@@ -123,7 +126,6 @@ public class WxMaDefaultConfigImpl implements WxMaConfig {
     this.jsapiTicket = jsapiTicket;
     this.jsapiTicketExpiresTime = expiresAheadInMillis(expiresInSeconds);
   }
-
 
   @Override
   public String getCardApiTicket() {
@@ -272,6 +274,11 @@ public class WxMaDefaultConfigImpl implements WxMaConfig {
   @Override
   public boolean autoRefreshToken() {
     return true;
+  }
+
+  @Override
+  public void setApiHostUrl(String apiHostUrl) {
+    this.apiHostUrl = apiHostUrl;
   }
 
   @Override

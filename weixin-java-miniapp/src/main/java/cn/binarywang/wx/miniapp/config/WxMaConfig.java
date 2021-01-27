@@ -1,9 +1,9 @@
 package cn.binarywang.wx.miniapp.config;
 
-import java.util.concurrent.locks.Lock;
-
 import me.chanjar.weixin.common.bean.WxAccessToken;
 import me.chanjar.weixin.common.util.http.apache.ApacheHttpClientBuilder;
+
+import java.util.concurrent.locks.Lock;
 
 /**
  * 小程序配置
@@ -219,4 +219,19 @@ public interface WxMaConfig {
    */
   boolean autoRefreshToken();
 
+  /**
+   * 设置自定义的apiHost地址
+   * 具体取值，可以参考https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Interface_field_description.html
+   *
+   * @param apiHostUrl api域名地址
+   */
+  void setApiHostUrl(String apiHostUrl);
+
+  /**
+   * 获取自定义的apiHost地址，用于替换原请求中的https://api.weixin.qq.com
+   * 具体取值，可以参考https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Interface_field_description.html
+   *
+   * @return  自定义的api域名地址
+   */
+  String getApiHostUrl();
 }

@@ -22,7 +22,8 @@ public class WxMaPubTemplateTitleListResult implements Serializable {
   }
 
   @Data
-  public static class TemplateItem {
+  public static class TemplateItem implements Serializable {
+    private static final long serialVersionUID = 6888726696879905332L;
 
     private Integer type;
 

@@ -1,13 +1,14 @@
 package cn.binarywang.wx.miniapp.api;
 
-import cn.binarywang.wx.miniapp.bean.*;
+import cn.binarywang.wx.miniapp.bean.WxMaKefuMessage;
+import cn.binarywang.wx.miniapp.bean.WxMaSubscribeMessage;
+import cn.binarywang.wx.miniapp.bean.WxMaUniformMessage;
+import cn.binarywang.wx.miniapp.bean.WxMaUpdatableMsg;
 import com.google.gson.JsonObject;
 import me.chanjar.weixin.common.error.WxErrorException;
 
 /**
- * <pre>
  * 消息发送接口
- * </pre>
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
  */
