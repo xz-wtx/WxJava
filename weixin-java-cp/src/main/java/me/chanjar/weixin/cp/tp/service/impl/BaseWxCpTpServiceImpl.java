@@ -401,7 +401,7 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
   public WxTpLoginInfo getLoginInfo(String authCode) throws WxErrorException {
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("auth_code", authCode);
-    jsonObject.addProperty("access_token", configStorage.getAccessToken(authCode));
+    jsonObject.addProperty("access_token", configStorage.getProviderToken());
     String responseText = post(configStorage.getApiUrl(GET_LOGIN_INFO), jsonObject.toString());
     return WxTpLoginInfo.fromJson(responseText);
   }
