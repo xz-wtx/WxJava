@@ -267,7 +267,7 @@ public interface WxCpTpService {
    * 获取WxMpConfigStorage 对象.
    *
    * @return WxMpConfigStorage wx cp tp config storage
-   * @Deprecated storage应该在service内部使用，提供这个接口，容易破坏这个封装
+   * @deprecated storage应该在service内部使用，提供这个接口，容易破坏这个封装
    */
   @Deprecated
   WxCpTpConfigStorage getWxCpTpConfigStorage();
