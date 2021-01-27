@@ -59,6 +59,18 @@ public class EntPayResult extends BaseWxPayResult {
   @XStreamAlias("payment_time")
   private String paymentTime;
 
+  /**
+   * 企业付款失败时返回的状态码.
+   */
+  @XStreamAlias("retcode")
+  protected String retCode;
+
+  /**
+   * 企业付款失败时返回的信息.
+   */
+  @XStreamAlias("retmsg")
+  protected String retMsg;
+
   @Override
   protected void loadXml(Document d) {
     mchId = readXmlString(d, "mchid");
