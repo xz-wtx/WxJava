@@ -12,7 +12,7 @@ import java.util.Map;
 
 @AllArgsConstructor
 public class WxMaPluginServiceImpl implements WxMaPluginService {
-  private WxMaService wxMaService;
+  private final WxMaService service;
 
   @Override
   public void applyPlugin(String pluginAppId, String reason) throws WxErrorException {
@@ -20,21 +20,21 @@ public class WxMaPluginServiceImpl implements WxMaPluginService {
       "plugin_appid", pluginAppId,
       "reason", reason);
 
-    this.wxMaService.post(PLUGIN_URL, WxMaGsonBuilder.create().toJson(params));
+    this.service.post(PLUGIN_URL, WxMaGsonBuilder.create().toJson(params));
   }
 
   @Override
   public WxMaPluginListResult getPluginList() throws WxErrorException {
     Map<String, String> params = ImmutableMap.of("action", "list");
 
-    String responseContent = this.wxMaService.post(PLUGIN_URL, WxMaGsonBuilder.create().toJson(params));
+    String responseContent = this.service.post(PLUGIN_URL, WxMaGsonBuilder.create().toJson(params));
     return WxMaPluginListResult.fromJson(responseContent);
   }
 
   @Override
   public void unbindPlugin(String pluginAppId) throws WxErrorException {
     Map<String, String> params = ImmutableMap.of("action", "unbind", "plugin_appid", pluginAppId);
-    this.wxMaService.post(PLUGIN_URL, WxMaGsonBuilder.create().toJson(params));
+    this.service.post(PLUGIN_URL, WxMaGsonBuilder.create().toJson(params));
   }
 
   @Override
@@ -43,6 +43,6 @@ public class WxMaPluginServiceImpl implements WxMaPluginService {
       "plugin_appid", pluginAppId,
       "user_version", userVersion);
 
-    this.wxMaService.post(PLUGIN_URL, WxMaGsonBuilder.create().toJson(params));
+    this.service.post(PLUGIN_URL, WxMaGsonBuilder.create().toJson(params));
   }
 }

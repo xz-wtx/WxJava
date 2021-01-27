@@ -7,7 +7,7 @@ import cn.binarywang.wx.miniapp.json.WxMaGsonBuilder;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.util.json.GsonParser;
 import org.apache.commons.lang3.StringUtils;
@@ -19,9 +19,9 @@ import java.util.List;
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
  * @date 2019-12-15
  */
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class WxMaSubscribeServiceImpl implements WxMaSubscribeService {
-  private WxMaService wxMaService;
+  private final WxMaService wxMaService;
 
   @Override
   public WxMaPubTemplateTitleListResult getPubTemplateTitleList(String[] ids, int start, int limit) throws WxErrorException {

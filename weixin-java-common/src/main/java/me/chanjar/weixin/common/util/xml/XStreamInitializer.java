@@ -14,6 +14,11 @@ import com.thoughtworks.xstream.security.WildcardTypePermission;
 
 import java.io.Writer;
 
+/**
+ * The type X stream initializer.
+ *
+ * @author Daniel Qian
+ */
 public class XStreamInitializer {
   private static final XppDriver XPP_DRIVER = new XppDriver() {
     @Override
@@ -45,6 +50,11 @@ public class XStreamInitializer {
     }
   };
 
+  /**
+   * Gets instance.
+   *
+   * @return the instance
+   */
   public static XStream getInstance() {
     XStream xstream = new XStream(new PureJavaReflectionProvider(), XPP_DRIVER) {
       // only register the converters we need; other converters generate a private access warning in the console on Java9+...

@@ -31,7 +31,6 @@ import java.util.*;
 @Slf4j
 @RequiredArgsConstructor
 public class WxMaCloudServiceImpl implements WxMaCloudService {
-
   private final WxMaService wxMaService;
 
   @Override

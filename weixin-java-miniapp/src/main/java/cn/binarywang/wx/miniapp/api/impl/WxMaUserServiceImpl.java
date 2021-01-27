@@ -9,7 +9,7 @@ import cn.binarywang.wx.miniapp.config.WxMaConfig;
 import cn.binarywang.wx.miniapp.util.crypt.WxMaCryptUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.util.SignUtils;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -19,9 +19,9 @@ import java.util.Map;
 /**
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
  */
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class WxMaUserServiceImpl implements WxMaUserService {
-  private WxMaService service;
+  private final WxMaService service;
 
   @Override
   public WxMaJscode2SessionResult getSessionInfo(String jsCode) throws WxErrorException {

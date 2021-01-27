@@ -33,7 +33,7 @@ public class WxMaOcrServiceImpl implements WxOcrService {
   private static final String COMM = "https://api.weixin.qq.com/cv/ocr/comm?img_url=%s";
   private static final String FILE_COMM = "https://api.weixin.qq.com/cv/ocr/comm";
 
-  private final WxMaService mainService;
+  private final WxMaService service;
 
   @Override
   public WxOcrIdCardResult idCard(String imgUrl) throws WxErrorException {
@@ -43,13 +43,13 @@ public class WxMaOcrServiceImpl implements WxOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.mainService.post(String.format(IDCARD, imgUrl), (String) null);
+    final String result = this.service.post(String.format(IDCARD, imgUrl), (String) null);
     return WxOcrIdCardResult.fromJson(result);
   }
 
   @Override
   public WxOcrIdCardResult idCard(File imgFile) throws WxErrorException {
-    String result = this.mainService.execute(OcrDiscernRequestExecutor.create(this.mainService.getRequestHttp()),
+    String result = this.service.execute(OcrDiscernRequestExecutor.create(this.service.getRequestHttp()),
       FILEIDCARD, imgFile);
     return WxOcrIdCardResult.fromJson(result);
   }
@@ -62,13 +62,13 @@ public class WxMaOcrServiceImpl implements WxOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.mainService.post(String.format(BANK_CARD, imgUrl), (String) null);
+    final String result = this.service.post(String.format(BANK_CARD, imgUrl), (String) null);
     return WxOcrBankCardResult.fromJson(result);
   }
 
   @Override
   public WxOcrBankCardResult bankCard(File imgFile) throws WxErrorException {
-    String result = this.mainService.execute(OcrDiscernRequestExecutor.create(this.mainService.getRequestHttp()),
+    String result = this.service.execute(OcrDiscernRequestExecutor.create(this.service.getRequestHttp()),
       FILE_BANK_CARD, imgFile);
     return WxOcrBankCardResult.fromJson(result);
   }
@@ -81,13 +81,13 @@ public class WxMaOcrServiceImpl implements WxOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.mainService.post(String.format(DRIVING, imgUrl), (String) null);
+    final String result = this.service.post(String.format(DRIVING, imgUrl), (String) null);
     return WxOcrDrivingResult.fromJson(result);
   }
 
   @Override
   public WxOcrDrivingResult driving(File imgFile) throws WxErrorException {
-    String result = this.mainService.execute(OcrDiscernRequestExecutor.create(this.mainService.getRequestHttp()),
+    String result = this.service.execute(OcrDiscernRequestExecutor.create(this.service.getRequestHttp()),
       FILE_DRIVING, imgFile);
     return WxOcrDrivingResult.fromJson(result);
   }
@@ -100,13 +100,13 @@ public class WxMaOcrServiceImpl implements WxOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.mainService.post(String.format(DRIVING_LICENSE, imgUrl), (String) null);
+    final String result = this.service.post(String.format(DRIVING_LICENSE, imgUrl), (String) null);
     return WxOcrDrivingLicenseResult.fromJson(result);
   }
 
   @Override
   public WxOcrDrivingLicenseResult drivingLicense(File imgFile) throws WxErrorException {
-    String result = this.mainService.execute(OcrDiscernRequestExecutor.create(this.mainService.getRequestHttp()),
+    String result = this.service.execute(OcrDiscernRequestExecutor.create(this.service.getRequestHttp()),
       FILE_DRIVING_LICENSE, imgFile);
     return WxOcrDrivingLicenseResult.fromJson(result);
   }
@@ -119,13 +119,13 @@ public class WxMaOcrServiceImpl implements WxOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.mainService.post(String.format(BIZ_LICENSE, imgUrl), (String) null);
+    final String result = this.service.post(String.format(BIZ_LICENSE, imgUrl), (String) null);
     return WxOcrBizLicenseResult.fromJson(result);
   }
 
   @Override
   public WxOcrBizLicenseResult bizLicense(File imgFile) throws WxErrorException {
-    String result = this.mainService.execute(OcrDiscernRequestExecutor.create(this.mainService.getRequestHttp()),
+    String result = this.service.execute(OcrDiscernRequestExecutor.create(this.service.getRequestHttp()),
       FILE_BIZ_LICENSE, imgFile);
     return WxOcrBizLicenseResult.fromJson(result);
   }
@@ -138,13 +138,13 @@ public class WxMaOcrServiceImpl implements WxOcrService {
       // ignore cannot happen
     }
 
-    final String result = this.mainService.post(String.format(COMM, imgUrl), (String) null);
+    final String result = this.service.post(String.format(COMM, imgUrl), (String) null);
     return WxOcrCommResult.fromJson(result);
   }
 
   @Override
   public WxOcrCommResult comm(File imgFile) throws WxErrorException {
-    String result = this.mainService.execute(OcrDiscernRequestExecutor.create(this.mainService.getRequestHttp()),
+    String result = this.service.execute(OcrDiscernRequestExecutor.create(this.service.getRequestHttp()),
       FILE_COMM, imgFile);
     return WxOcrCommResult.fromJson(result);
   }

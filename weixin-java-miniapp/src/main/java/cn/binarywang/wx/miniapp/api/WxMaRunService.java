@@ -18,6 +18,7 @@ public interface WxMaRunService {
    * @param sessionKey    会话密钥
    * @param encryptedData 消息密文
    * @param ivStr         加密算法的初始向量
+   * @return the run step info
    */
   List<WxMaRunStepInfo> getRunStepInfo(String sessionKey, String encryptedData, String ivStr);
 

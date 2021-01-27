@@ -7,6 +7,7 @@ import cn.binarywang.wx.miniapp.json.WxMaGsonBuilder;
 import com.google.common.base.Joiner;
 import com.google.gson.JsonObject;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.error.WxError;
@@ -26,7 +27,7 @@ import java.util.Map;
  * @author <a href="https://github.com/yjwang3300300">yjwang</a>
  */
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class WxMaLiveServiceImpl implements WxMaLiveService {
   private static final String ERR_CODE = "errcode";
   private static final String ROOM_ID = "roomId";
