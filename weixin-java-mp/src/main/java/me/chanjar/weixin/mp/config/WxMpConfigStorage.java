@@ -3,7 +3,6 @@ package me.chanjar.weixin.mp.config;
 import me.chanjar.weixin.common.bean.WxAccessToken;
 import me.chanjar.weixin.common.enums.TicketType;
 import me.chanjar.weixin.common.util.http.apache.ApacheHttpClientBuilder;
-import me.chanjar.weixin.mp.bean.WxMpHostConfig;
 
 import java.io.File;
 import java.util.concurrent.locks.Lock;

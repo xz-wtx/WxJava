@@ -2,10 +2,10 @@ package me.chanjar.weixin.mp.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import me.chanjar.weixin.mp.bean.WxMpHostConfig;
+import me.chanjar.weixin.mp.config.WxMpHostConfig;
 import me.chanjar.weixin.mp.config.WxMpConfigStorage;
 
-import static me.chanjar.weixin.mp.bean.WxMpHostConfig.*;
+import static me.chanjar.weixin.mp.config.WxMpHostConfig.*;
 
 /**
  * <pre>

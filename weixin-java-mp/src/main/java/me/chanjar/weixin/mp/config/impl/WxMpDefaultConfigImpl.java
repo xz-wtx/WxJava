@@ -4,7 +4,7 @@ import lombok.Data;
 import me.chanjar.weixin.common.bean.WxAccessToken;
 import me.chanjar.weixin.common.enums.TicketType;
 import me.chanjar.weixin.common.util.http.apache.ApacheHttpClientBuilder;
-import me.chanjar.weixin.mp.bean.WxMpHostConfig;
+import me.chanjar.weixin.mp.config.WxMpHostConfig;
 import me.chanjar.weixin.mp.config.WxMpConfigStorage;
 import me.chanjar.weixin.mp.util.json.WxMpGsonBuilder;
 

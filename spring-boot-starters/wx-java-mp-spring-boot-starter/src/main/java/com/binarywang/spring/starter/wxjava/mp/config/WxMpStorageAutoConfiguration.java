@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.redis.JedisWxRedisOps;
 import me.chanjar.weixin.common.redis.RedisTemplateWxRedisOps;
 import me.chanjar.weixin.common.redis.WxRedisOps;
-import me.chanjar.weixin.mp.bean.WxMpHostConfig;
+import me.chanjar.weixin.mp.config.WxMpHostConfig;
 import me.chanjar.weixin.mp.config.WxMpConfigStorage;
 import me.chanjar.weixin.mp.config.impl.WxMpDefaultConfigImpl;
 import me.chanjar.weixin.mp.config.impl.WxMpRedisConfigImpl;

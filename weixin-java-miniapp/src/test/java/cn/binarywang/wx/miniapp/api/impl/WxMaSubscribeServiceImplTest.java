@@ -1,7 +1,9 @@
 package cn.binarywang.wx.miniapp.api.impl;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
-import cn.binarywang.wx.miniapp.api.WxMaSubscribeService;
+import cn.binarywang.wx.miniapp.bean.subscribemsg.CategoryData;
+import cn.binarywang.wx.miniapp.bean.subscribemsg.PubTemplateKeyword;
+import cn.binarywang.wx.miniapp.bean.subscribemsg.TemplateInfo;
 import cn.binarywang.wx.miniapp.bean.template.WxMaPubTemplateTitleListResult;
 import cn.binarywang.wx.miniapp.test.ApiTestModule;
 import com.google.common.collect.Lists;
@@ -35,7 +37,7 @@ public class WxMaSubscribeServiceImplTest {
 
   @Test
   public void testGetPubTemplateKeyWordsById() throws WxErrorException {
-    final List<WxMaSubscribeService.PubTemplateKeyword> result = this.wxService.getSubscribeService().getPubTemplateKeyWordsById("99");
+    final List<PubTemplateKeyword> result = this.wxService.getSubscribeService().getPubTemplateKeyWordsById("99");
     System.out.println(result);
   }
 
@@ -47,7 +49,7 @@ public class WxMaSubscribeServiceImplTest {
 
   @Test
   public void testGetTemplateList() throws WxErrorException {
-    final List<WxMaSubscribeService.TemplateInfo> templateList = this.wxService.getSubscribeService().getTemplateList();
+    final List<TemplateInfo> templateList = this.wxService.getSubscribeService().getTemplateList();
     System.out.println(templateList);
   }
 
@@ -58,7 +60,7 @@ public class WxMaSubscribeServiceImplTest {
 
   @Test
   public void testGetCategory() throws WxErrorException {
-    final List<WxMaSubscribeService.CategoryData> categoryData = this.wxService.getSubscribeService().getCategory();
+    final List<CategoryData> categoryData = this.wxService.getSubscribeService().getCategory();
     assertThat(categoryData).isNotNull();
     System.out.println(categoryData);
   }

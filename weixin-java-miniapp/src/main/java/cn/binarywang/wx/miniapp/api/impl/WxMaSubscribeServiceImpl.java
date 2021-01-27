@@ -2,12 +2,20 @@ package cn.binarywang.wx.miniapp.api.impl;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.api.WxMaSubscribeService;
+import cn.binarywang.wx.miniapp.bean.WxMaSubscribeMessage;
+import cn.binarywang.wx.miniapp.bean.subscribemsg.CategoryData;
+import cn.binarywang.wx.miniapp.bean.subscribemsg.PubTemplateKeyword;
+import cn.binarywang.wx.miniapp.bean.subscribemsg.TemplateInfo;
 import cn.binarywang.wx.miniapp.bean.template.WxMaPubTemplateTitleListResult;
+import cn.binarywang.wx.miniapp.constant.WxMaConstants;
 import cn.binarywang.wx.miniapp.json.WxMaGsonBuilder;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import lombok.RequiredArgsConstructor;
+import me.chanjar.weixin.common.enums.WxType;
+import me.chanjar.weixin.common.error.WxError;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.util.json.GsonParser;
 import org.apache.commons.lang3.StringUtils;
@@ -21,20 +29,20 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 public class WxMaSubscribeServiceImpl implements WxMaSubscribeService {
-  private final WxMaService wxMaService;
+  private final WxMaService service;
 
   @Override
   public WxMaPubTemplateTitleListResult getPubTemplateTitleList(String[] ids, int start, int limit) throws WxErrorException {
     ImmutableMap<String, ? extends Serializable> params = ImmutableMap.of("ids", StringUtils.join(ids, ","),
       "start", start, "limit", limit);
-    String responseText = this.wxMaService.get(GET_PUB_TEMPLATE_TITLE_LIST_URL,
+    String responseText = this.service.get(GET_PUB_TEMPLATE_TITLE_LIST_URL,
       Joiner.on("&").withKeyValueSeparator("=").join(params));
     return WxMaPubTemplateTitleListResult.fromJson(responseText);
   }
 
   @Override
   public List<PubTemplateKeyword> getPubTemplateKeyWordsById(String id) throws WxErrorException {
-    String responseText = this.wxMaService.get(GET_PUB_TEMPLATE_KEY_WORDS_BY_ID_URL,
+    String responseText = this.service.get(GET_PUB_TEMPLATE_KEY_WORDS_BY_ID_URL,
       Joiner.on("&").withKeyValueSeparator("=").join(ImmutableMap.of("tid", id)));
     return WxMaGsonBuilder.create().fromJson(GsonParser.parse(responseText)
       .getAsJsonArray("data"), new TypeToken<List<PubTemplateKeyword>>() {
@@ -43,7 +51,7 @@ public class WxMaSubscribeServiceImpl implements WxMaSubscribeService {
 
   @Override
   public String addTemplate(String id, List<Integer> keywordIdList, String sceneDesc) throws WxErrorException {
-    String responseText = this.wxMaService.post(TEMPLATE_ADD_URL, ImmutableMap.of("tid", id,
+    String responseText = this.service.post(TEMPLATE_ADD_URL, ImmutableMap.of("tid", id,
       "kidList", keywordIdList.toArray(),
       "sceneDesc", sceneDesc));
     return GsonParser.parse(responseText).get("priTmplId").getAsString();
@@ -51,7 +59,7 @@ public class WxMaSubscribeServiceImpl implements WxMaSubscribeService {
 
   @Override
   public List<TemplateInfo> getTemplateList() throws WxErrorException {
-    String responseText = this.wxMaService.get(TEMPLATE_LIST_URL, null);
+    String responseText = this.service.get(TEMPLATE_LIST_URL, null);
     return WxMaGsonBuilder.create().fromJson(GsonParser.parse(responseText)
       .getAsJsonArray("data"), new TypeToken<List<TemplateInfo>>() {
     }.getType());
@@ -59,15 +67,24 @@ public class WxMaSubscribeServiceImpl implements WxMaSubscribeService {
 
   @Override
   public boolean delTemplate(String templateId) throws WxErrorException {
-    this.wxMaService.post(TEMPLATE_DEL_URL, ImmutableMap.of("priTmplId", templateId));
+    this.service.post(TEMPLATE_DEL_URL, ImmutableMap.of("priTmplId", templateId));
     return true;
   }
 
   @Override
   public List<CategoryData> getCategory() throws WxErrorException {
-    String responseText = this.wxMaService.get(GET_CATEGORY_URL, null);
+    String responseText = this.service.get(GET_CATEGORY_URL, null);
     return WxMaGsonBuilder.create().fromJson(GsonParser.parse(responseText)
       .getAsJsonArray("data"), new TypeToken<List<CategoryData>>() {
     }.getType());
+  }
+
+  @Override
+  public void sendSubscribeMsg(WxMaSubscribeMessage subscribeMessage) throws WxErrorException {
+    String responseContent = this.service.post(SUBSCRIBE_MSG_SEND_URL, subscribeMessage.toJson());
+    JsonObject jsonObject = GsonParser.parse(responseContent);
+    if (jsonObject.get(WxMaConstants.ERRCODE).getAsInt() != 0) {
+      throw new WxErrorException(WxError.fromJson(responseContent, WxType.MiniApp));
+    }
   }
 }

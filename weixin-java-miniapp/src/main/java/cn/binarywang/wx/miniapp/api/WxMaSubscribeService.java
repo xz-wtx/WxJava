@@ -1,7 +1,10 @@
 package cn.binarywang.wx.miniapp.api;
 
+import cn.binarywang.wx.miniapp.bean.WxMaSubscribeMessage;
+import cn.binarywang.wx.miniapp.bean.subscribemsg.CategoryData;
+import cn.binarywang.wx.miniapp.bean.subscribemsg.PubTemplateKeyword;
+import cn.binarywang.wx.miniapp.bean.subscribemsg.TemplateInfo;
 import cn.binarywang.wx.miniapp.bean.template.WxMaPubTemplateTitleListResult;
-import lombok.Data;
 import me.chanjar.weixin.common.error.WxErrorException;
 
 import java.util.List;
@@ -42,6 +45,11 @@ public interface WxMaSubscribeService {
    * 获取小程序账号的类目
    */
   String GET_CATEGORY_URL = "https://api.weixin.qq.com/wxaapi/newtmpl/getcategory";
+
+  /**
+   * 发送订阅消息
+   */
+  String SUBSCRIBE_MSG_SEND_URL = "https://api.weixin.qq.com/cgi-bin/message/subscribe/send";
 
   /**
    * <pre>
@@ -128,26 +136,15 @@ public interface WxMaSubscribeService {
    */
   List<CategoryData> getCategory() throws WxErrorException;
 
-  @Data
-  class CategoryData {
-    int id;
-    String name;
-  }
+  /**
+   * <pre>
+   * 发送订阅消息
+   * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.send.html
+   * </pre>
+   *
+   * @param subscribeMessage 订阅消息
+   * @throws WxErrorException .
+   */
+  void sendSubscribeMsg(WxMaSubscribeMessage subscribeMessage) throws WxErrorException;
 
-  @Data
-  class TemplateInfo {
-    private String priTmplId;
-    private String title;
-    private String content;
-    private String example;
-    private int type;
-  }
-
-  @Data
-  class PubTemplateKeyword {
-    private int kid;
-    private String name;
-    private String example;
-    private String rule;
-  }
 }

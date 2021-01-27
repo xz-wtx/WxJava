@@ -1,4 +1,4 @@
-package me.chanjar.weixin.mp.bean;
+package me.chanjar.weixin.mp.config;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,6 +29,7 @@ public class WxMpHostConfig {
    * 对应于：https://open.weixin.qq.com
    */
   private String openHost;
+
   /**
    * 对应于：https://mp.weixin.qq.com
    */
