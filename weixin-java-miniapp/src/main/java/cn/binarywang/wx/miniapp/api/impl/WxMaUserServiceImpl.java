@@ -16,6 +16,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.Map;
 
+import static cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants.User.SET_USER_STORAGE;
+
 /**
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
  */

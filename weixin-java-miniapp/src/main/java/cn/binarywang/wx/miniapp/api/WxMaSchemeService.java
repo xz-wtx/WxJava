@@ -14,8 +14,6 @@ import me.chanjar.weixin.common.error.WxErrorException;
  * @date : 2021-01-26
  */
 public interface WxMaSchemeService {
-  String GENERATE_SCHEME_URL = "https://api.weixin.qq.com/wxa/generatescheme";
-
   /**
    * 获取小程序scheme码
    *

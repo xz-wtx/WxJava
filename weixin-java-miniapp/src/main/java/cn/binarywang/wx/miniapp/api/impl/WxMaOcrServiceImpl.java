@@ -2,15 +2,17 @@ package cn.binarywang.wx.miniapp.api.impl;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import lombok.RequiredArgsConstructor;
-import me.chanjar.weixin.common.service.WxOcrService;
 import me.chanjar.weixin.common.bean.ocr.*;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.requestexecuter.ocr.OcrDiscernRequestExecutor;
+import me.chanjar.weixin.common.service.WxOcrService;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+
+import static cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants.Ocr.*;
 
 /**
  * ocr 接口实现.
@@ -20,18 +22,6 @@ import java.nio.charset.StandardCharsets;
  */
 @RequiredArgsConstructor
 public class WxMaOcrServiceImpl implements WxOcrService {
-  private static final String IDCARD = "https://api.weixin.qq.com/cv/ocr/idcard?img_url=%s";
-  private static final String FILEIDCARD = "https://api.weixin.qq.com/cv/ocr/idcard";
-  private static final String BANK_CARD = "https://api.weixin.qq.com/cv/ocr/bankcard?img_url=%s";
-  private static final String FILE_BANK_CARD = "https://api.weixin.qq.com/cv/ocr/bankcard";
-  private static final String DRIVING = "https://api.weixin.qq.com/cv/ocr/driving?img_url=%s";
-  private static final String FILE_DRIVING = "https://api.weixin.qq.com/cv/ocr/driving";
-  private static final String DRIVING_LICENSE = "https://api.weixin.qq.com/cv/ocr/drivinglicense?img_url=%s";
-  private static final String FILE_DRIVING_LICENSE = "https://api.weixin.qq.com/cv/ocr/drivinglicense";
-  private static final String BIZ_LICENSE = "https://api.weixin.qq.com/cv/ocr/bizlicense?img_url=%s";
-  private static final String FILE_BIZ_LICENSE = "https://api.weixin.qq.com/cv/ocr/bizlicense";
-  private static final String COMM = "https://api.weixin.qq.com/cv/ocr/comm?img_url=%s";
-  private static final String FILE_COMM = "https://api.weixin.qq.com/cv/ocr/comm";
 
   private final WxMaService service;
 

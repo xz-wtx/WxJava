@@ -1,5 +1,20 @@
 package cn.binarywang.wx.miniapp.api.impl;
 
+import cn.binarywang.wx.miniapp.api.WxMaCodeService;
+import cn.binarywang.wx.miniapp.api.WxMaService;
+import cn.binarywang.wx.miniapp.bean.code.*;
+import cn.binarywang.wx.miniapp.json.WxMaGsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+import lombok.RequiredArgsConstructor;
+import me.chanjar.weixin.common.error.WxError;
+import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.common.util.http.BaseMediaDownloadRequestExecutor;
+import me.chanjar.weixin.common.util.http.RequestExecutor;
+import me.chanjar.weixin.common.util.json.GsonHelper;
+import me.chanjar.weixin.common.util.json.GsonParser;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -8,26 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import me.chanjar.weixin.common.util.json.GsonParser;
-import org.apache.commons.lang3.StringUtils;
-
-import cn.binarywang.wx.miniapp.api.WxMaCodeService;
-import cn.binarywang.wx.miniapp.api.WxMaService;
-import cn.binarywang.wx.miniapp.bean.code.WxMaCategory;
-import cn.binarywang.wx.miniapp.bean.code.WxMaCodeAuditStatus;
-import cn.binarywang.wx.miniapp.bean.code.WxMaCodeCommitRequest;
-import cn.binarywang.wx.miniapp.bean.code.WxMaCodeSubmitAuditRequest;
-import cn.binarywang.wx.miniapp.bean.code.WxMaCodeVersionDistribution;
-import cn.binarywang.wx.miniapp.json.WxMaGsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-import me.chanjar.weixin.common.error.WxError;
-import me.chanjar.weixin.common.error.WxErrorException;
-import me.chanjar.weixin.common.util.http.BaseMediaDownloadRequestExecutor;
-import me.chanjar.weixin.common.util.http.RequestExecutor;
-import me.chanjar.weixin.common.util.json.GsonHelper;
+import static cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants.Code.*;
 
 /**
  * @author <a href="https://github.com/charmingoh">Charming</a>

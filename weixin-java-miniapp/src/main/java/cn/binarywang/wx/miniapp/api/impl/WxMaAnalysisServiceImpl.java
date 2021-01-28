@@ -15,6 +15,8 @@ import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
 
+import static cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants.Analysis.*;
+
 /**
  * @author <a href="https://github.com/charmingoh">Charming</a>
  * @since 2018-04-28
@@ -22,6 +24,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WxMaAnalysisServiceImpl implements WxMaAnalysisService {
   private final WxMaService service;
+
+  private static String toJson(Date beginDate, Date endDate) {
+    JsonObject param = new JsonObject();
+    param.addProperty("begin_date", DateFormatUtils.format(beginDate, "yyyyMMdd"));
+    param.addProperty("end_date", DateFormatUtils.format(endDate, "yyyyMMdd"));
+    return param.toString();
+  }
 
   @Override
   public List<WxMaSummaryTrend> getDailySummaryTrend(Date beginDate, Date endDate) throws WxErrorException {
@@ -107,12 +116,5 @@ public class WxMaAnalysisServiceImpl implements WxMaAnalysisService {
     } else {
       return null;
     }
-  }
-
-  private static String toJson(Date beginDate, Date endDate) {
-    JsonObject param = new JsonObject();
-    param.addProperty("begin_date", DateFormatUtils.format(beginDate, "yyyyMMdd"));
-    param.addProperty("end_date", DateFormatUtils.format(endDate, "yyyyMMdd"));
-    return param.toString();
   }
 }

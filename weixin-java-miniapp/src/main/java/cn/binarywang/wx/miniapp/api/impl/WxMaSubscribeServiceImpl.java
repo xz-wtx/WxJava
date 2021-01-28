@@ -23,6 +23,8 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.Serializable;
 import java.util.List;
 
+import static cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants.Subscribe.*;
+
 /**
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
  * @date 2019-12-15

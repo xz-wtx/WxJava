@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+import static cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants.SecCheck.*;
+
 /**
  * <pre>
  *

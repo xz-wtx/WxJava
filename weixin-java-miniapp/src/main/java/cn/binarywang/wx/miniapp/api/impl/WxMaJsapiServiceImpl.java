@@ -12,6 +12,8 @@ import me.chanjar.weixin.common.util.json.GsonParser;
 
 import java.util.concurrent.locks.Lock;
 
+import static cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants.Jsapi.GET_JSAPI_TICKET_URL;
+
 /**
  * <pre>
  *  Created by BinaryWang on 2018/8/5.
@@ -30,7 +32,6 @@ public class WxMaJsapiServiceImpl implements WxMaJsapiService {
 
   @Override
   public String getCardApiTicket(boolean forceRefresh) throws WxErrorException {
-
     if (forceRefresh) {
       this.service.getWxMaConfig().expireCardApiTicket();
     }

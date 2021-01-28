@@ -6,7 +6,6 @@ import cn.binarywang.wx.miniapp.bean.live.*;
 import cn.binarywang.wx.miniapp.json.WxMaGsonBuilder;
 import com.google.common.base.Joiner;
 import com.google.gson.JsonObject;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.enums.WxType;
@@ -18,6 +17,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants.Live.*;
 
 /**
  * <pre>

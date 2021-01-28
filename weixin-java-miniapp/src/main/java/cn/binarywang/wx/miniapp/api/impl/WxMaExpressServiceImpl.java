@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants.Express.*;
+
 /**
  * @author <a href="https://github.com/mr-xiaoyu">xiaoyu</a>
  * @since 2019-11-26

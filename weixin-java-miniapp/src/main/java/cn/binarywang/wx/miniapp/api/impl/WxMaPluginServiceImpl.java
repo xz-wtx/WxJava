@@ -10,6 +10,8 @@ import me.chanjar.weixin.common.error.WxErrorException;
 
 import java.util.Map;
 
+import static cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants.Plugin.PLUGIN_URL;
+
 @AllArgsConstructor
 public class WxMaPluginServiceImpl implements WxMaPluginService {
   private final WxMaService service;

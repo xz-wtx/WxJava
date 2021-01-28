@@ -10,6 +10,8 @@ import me.chanjar.weixin.common.error.WxErrorException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants.Setting.*;
+
 /**
  * @author <a href="https://github.com/charmingoh">Charming</a>
  * @since 2018-04-27 15:46

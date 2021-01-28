@@ -10,6 +10,8 @@ import me.chanjar.weixin.common.error.WxError;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.util.json.GsonParser;
 
+import static cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants.Scheme.GENERATE_SCHEME_URL;
+
 /**
  * @author : cofedream
  * @date : 2021-01-28

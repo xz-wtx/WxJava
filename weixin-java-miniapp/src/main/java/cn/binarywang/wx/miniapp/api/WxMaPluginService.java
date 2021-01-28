@@ -5,18 +5,13 @@ import me.chanjar.weixin.common.error.WxErrorException;
 
 /**
  * 小程序插件管理 API
- *
+ * <p>
  * 详情请见：https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/plugin-management/pluginManager.applyPlugin.html
  * 或者：https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/Mini_Programs/Plug-ins_Management.html
  *
  * @author ArBing
  */
 public interface WxMaPluginService {
-
-  /**
-   * The constant PLUGIN_URL.
-   */
-  String PLUGIN_URL = "https://api.weixin.qq.com/wxa/plugin";
 
   /**
    * 向插件开发者发起使用插件的申请

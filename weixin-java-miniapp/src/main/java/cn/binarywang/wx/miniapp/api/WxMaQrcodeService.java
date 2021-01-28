@@ -17,9 +17,6 @@ import java.io.File;
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
  */
 public interface WxMaQrcodeService {
-  String CREATE_QRCODE_URL = "https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode";
-  String GET_WXACODE_URL = "https://api.weixin.qq.com/wxa/getwxacode";
-  String GET_WXACODE_UNLIMIT_URL = "https://api.weixin.qq.com/wxa/getwxacodeunlimit";
 
   /**
    * 接口C: 获取小程序页面二维码.
