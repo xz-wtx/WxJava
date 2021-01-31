@@ -1,10 +1,10 @@
 package cn.binarywang.wx.miniapp.api.impl;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
-import cn.binarywang.wx.miniapp.bean.subscribemsg.CategoryData;
-import cn.binarywang.wx.miniapp.bean.subscribemsg.PubTemplateKeyword;
-import cn.binarywang.wx.miniapp.bean.subscribemsg.TemplateInfo;
-import cn.binarywang.wx.miniapp.bean.template.WxMaPubTemplateTitleListResult;
+import me.chanjar.weixin.common.bean.subscribemsg.CategoryData;
+import me.chanjar.weixin.common.bean.subscribemsg.PubTemplateKeyword;
+import me.chanjar.weixin.common.bean.subscribemsg.TemplateInfo;
+import me.chanjar.weixin.common.bean.subscribemsg.PubTemplateTitleListResult;
 import cn.binarywang.wx.miniapp.test.ApiTestModule;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -30,7 +30,7 @@ public class WxMaSubscribeServiceImplTest {
 
   @Test
   public void testGetPubTemplateTitleList() throws WxErrorException {
-    WxMaPubTemplateTitleListResult result = this.wxService.getSubscribeService().getPubTemplateTitleList(new String[]{"2", "616"}, 0, 30);
+    PubTemplateTitleListResult result = this.wxService.getSubscribeService().getPubTemplateTitleList(new String[]{"2", "616"}, 0, 30);
     System.out.println(result);
 
   }

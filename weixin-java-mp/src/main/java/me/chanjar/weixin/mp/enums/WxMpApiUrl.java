@@ -280,9 +280,40 @@ public interface WxMpApiUrl {
      */
     SUBSCRIBE_MESSAGE_AUTHORIZE_URL(MP_DEFAULT_HOST_URL, "/mp/subscribemsg?action=get_confirm&appid=%s&scene=%d&template_id=%s&redirect_url=%s&reserved=%s#wechat_redirect"),
     /**
-     * subscribe.
+     * subscribe once.
      */
-    SEND_MESSAGE_URL(API_DEFAULT_HOST_URL, "/cgi-bin/message/template/subscribe");
+    SEND_MESSAGE_ONCE_URL(API_DEFAULT_HOST_URL, "/cgi-bin/message/template/subscribe"),
+    /**
+     * 订阅通知消息发送.
+     */
+    SEND_SUBSCRIBE_MESSAGE_URL(API_DEFAULT_HOST_URL, "/cgi-bin/message/subscribe/bizsend"),
+    /**
+     * 获取模板标题下的关键词列表.
+     */
+      GET_PUB_TEMPLATE_TITLE_LIST_URL (API_DEFAULT_HOST_URL,  "/wxaapi/newtmpl/getpubtemplatetitles"),
+    /**
+     * 获取模板标题下的关键词列表.
+     */
+      GET_PUB_TEMPLATE_KEY_WORDS_BY_ID_URL (API_DEFAULT_HOST_URL,  "/wxaapi/newtmpl/getpubtemplatekeywords"),
+    /**
+     * 组合模板并添加至帐号下的个人模板库.
+     */
+      TEMPLATE_ADD_URL(API_DEFAULT_HOST_URL,  "/wxaapi/newtmpl/addtemplate"),
+    /**
+     * 获取当前帐号下的个人模板列表.
+     */
+      TEMPLATE_LIST_URL(API_DEFAULT_HOST_URL,  "/wxaapi/newtmpl/gettemplate"),
+    /**
+     * 删除帐号下的某个模板.
+     */
+    TEMPLATE_DEL_URL(API_DEFAULT_HOST_URL,  "/wxaapi/newtmpl/deltemplate"),
+    /**
+     * 获取小程序账号的类目
+     */
+    GET_CATEGORY_URL (API_DEFAULT_HOST_URL,  "/wxaapi/newtmpl/getcategory"),
+    UNIFORM_MSG_SEND_URL(API_DEFAULT_HOST_URL, "/cgi-bin/message/wxopen/template/uniform_send"),
+    ACTIVITY_ID_CREATE_URL(API_DEFAULT_HOST_URL, "/cgi-bin/message/wxopen/activityid/create"),
+    UPDATABLE_MSG_SEND_URL(API_DEFAULT_HOST_URL, "/cgi-bin/message/wxopen/updatablemsg/send");
 
     private final String prefix;
     private final String path;

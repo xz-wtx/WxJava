@@ -1,4 +1,4 @@
-package cn.binarywang.wx.miniapp.bean.template;
+package me.chanjar.weixin.common.bean.subscribemsg;
 
 import lombok.Data;
 import me.chanjar.weixin.common.util.json.WxGsonBuilder;
@@ -10,15 +10,15 @@ import java.util.List;
  * @author ArBing
  */
 @Data
-public class WxMaPubTemplateTitleListResult implements Serializable {
+public class PubTemplateTitleListResult implements Serializable {
   private static final long serialVersionUID = -7718911668757837527L;
 
   private int count;
 
   private List<TemplateItem> data;
 
-  public static WxMaPubTemplateTitleListResult fromJson(String json) {
-    return WxGsonBuilder.create().fromJson(json, WxMaPubTemplateTitleListResult.class);
+  public static PubTemplateTitleListResult fromJson(String json) {
+    return WxGsonBuilder.create().fromJson(json, PubTemplateTitleListResult.class);
   }
 
   @Data

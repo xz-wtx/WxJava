@@ -1,4 +1,4 @@
-package cn.binarywang.wx.miniapp.bean.subscribemsg;
+package me.chanjar.weixin.common.bean.subscribemsg;
 
 import lombok.Data;
 
