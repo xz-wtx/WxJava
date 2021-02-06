@@ -184,9 +184,9 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
 
 
   @Override
-  public WxAccessToken getCorpToken(String authCorpid, String permanentCode) throws WxErrorException {
+  public WxAccessToken getCorpToken(String authCorpId, String permanentCode) throws WxErrorException {
     JsonObject jsonObject = new JsonObject();
-    jsonObject.addProperty("auth_corpid", authCorpid);
+    jsonObject.addProperty("auth_corpid", authCorpId);
     jsonObject.addProperty("permanent_code", permanentCode);
     String result = post(configStorage.getApiUrl(GET_CORP_TOKEN), jsonObject.toString());
 

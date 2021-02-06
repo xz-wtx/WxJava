@@ -86,8 +86,8 @@ public interface WxCpTpService {
    * @param forceRefresh 强制刷新
    * @return the suite ticket
    * @throws WxErrorException the wx error exception
-   * @deprecated 由于无法主动刷新 ，所以这个接口实际已经没有意义，需要在接收企业微信的主动推送后，保存这个ticket
    * @see #setSuiteTicket(String) #setSuiteTicket(String)
+   * @deprecated 由于无法主动刷新 ，所以这个接口实际已经没有意义，需要在接收企业微信的主动推送后，保存这个ticket
    */
   @Deprecated
   String getSuiteTicket(boolean forceRefresh) throws WxErrorException;
@@ -127,12 +127,12 @@ public interface WxCpTpService {
   /**
    * 获取企业凭证
    *
-   * @param authCorpid    授权方corpid
+   * @param authCorpId    授权方corpid
    * @param permanentCode 永久授权码，通过get_permanent_code获取
    * @return the corp token
    * @throws WxErrorException the wx error exception
    */
-  WxAccessToken getCorpToken(String authCorpid, String permanentCode) throws WxErrorException;
+  WxAccessToken getCorpToken(String authCorpId, String permanentCode) throws WxErrorException;
 
   /**
    * 获取企业永久授权码 .
@@ -178,7 +178,8 @@ public interface WxCpTpService {
    * @param authType 授权类型：0 正式授权， 1 测试授权。
    * @return pre auth url
    * @throws WxErrorException the wx error exception
-   * @Link https ://work.weixin.qq.com/api/doc/90001/90143/90602 </pre>
+   * @link https ://work.weixin.qq.com/api/doc/90001/90143/90602
+   * </pre>
    */
   String getPreAuthUrl(String redirectUri, String state, int authType) throws WxErrorException;
 
@@ -317,8 +318,9 @@ public interface WxCpTpService {
 
   /**
    * 获取登录用户信息
-   *
+   * <p>
    * 文档地址：https://work.weixin.qq.com/api/doc/90001/90143/91125
+   *
    * @param authCode the auth code
    * @return login info
    * @throws WxErrorException the wx error exception
