@@ -357,6 +357,13 @@ public interface WxMaService extends WxService {
   WxMaLiveGoodsService getLiveGoodsService();
 
   /**
+   * 获取直播成员管理接口服务对象
+   *
+   * @return . live service
+   */
+  WxMaLiveMemberService getLiveMemberService();
+
+  /**
    * 获取ocr实现接口服务对象
    *
    * @return 。

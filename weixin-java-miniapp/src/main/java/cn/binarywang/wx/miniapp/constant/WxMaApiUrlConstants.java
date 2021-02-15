@@ -157,28 +157,46 @@ public class WxMaApiUrlConstants {
     String GET_JSAPI_TICKET_URL = "https://api.weixin.qq.com/cgi-bin/ticket/getticket";
   }
 
-  public interface LiveGoods {
-    String ADD_GOODS = "https://api.weixin.qq.com/wxaapi/broadcast/goods/add";
-    String RESET_AUDIT_GOODS = "https://api.weixin.qq.com/wxaapi/broadcast/goods/resetaudit";
-    String AUDIT_GOODS = "https://api.weixin.qq.com/wxaapi/broadcast/goods/audit";
-    String DELETE_GOODS = "https://api.weixin.qq.com/wxaapi/broadcast/goods/delete";
-    String UPDATE_GOODS = "https://api.weixin.qq.com/wxaapi/broadcast/goods/update";
-    String GET_GOODS_WARE_HOUSE = "https://api.weixin.qq.com/wxa/business/getgoodswarehouse";
-    String GET_APPROVED_GOODS = "https://api.weixin.qq.com/wxaapi/broadcast/goods/getapproved";
-  }
-
-  public interface Live {
+  public interface Broadcast {
     String GET_LIVE_INFO = "https://api.weixin.qq.com/wxa/business/getliveinfo";
-    String CREATE_ROOM = "https://api.weixin.qq.com/wxaapi/broadcast/room/create";
-    String ADD_GOODS = "https://api.weixin.qq.com/wxaapi/broadcast/room/addgoods";
-    String DELETE_ROOM = "https://api.weixin.qq.com/wxaapi/broadcast/room/deleteroom";
-    String EDIT_ROOM = "https://api.weixin.qq.com/wxaapi/broadcast/room/editroom";
-    String GET_PUSH_URL = "https://api.weixin.qq.com/wxaapi/broadcast/room/getpushurl";
-    String GET_SHARED_CODE = "https://api.weixin.qq.com/wxaapi/broadcast/room/getsharedcode";
-    String ADD_ASSISTANT = "https://api.weixin.qq.com/wxaapi/broadcast/room/addassistant";
-    String MODIFY_ASSISTANT = "https://api.weixin.qq.com/wxaapi/broadcast/room/modifyassistant";
-    String REMOVE_ASSISTANT = "https://api.weixin.qq.com/wxaapi/broadcast/room/removeassistant";
-    String GET_ASSISTANT_LIST = "https://api.weixin.qq.com/wxaapi/broadcast/room/getassistantlist";
+
+    /**
+     * 直播间管理相关接口
+     */
+    interface Room {
+      String CREATE_ROOM = "https://api.weixin.qq.com/wxaapi/broadcast/room/create";
+      String ADD_GOODS = "https://api.weixin.qq.com/wxaapi/broadcast/room/addgoods";
+      String DELETE_ROOM = "https://api.weixin.qq.com/wxaapi/broadcast/room/deleteroom";
+      String EDIT_ROOM = "https://api.weixin.qq.com/wxaapi/broadcast/room/editroom";
+      String GET_PUSH_URL = "https://api.weixin.qq.com/wxaapi/broadcast/room/getpushurl";
+      String GET_SHARED_CODE = "https://api.weixin.qq.com/wxaapi/broadcast/room/getsharedcode";
+      String ADD_ASSISTANT = "https://api.weixin.qq.com/wxaapi/broadcast/room/addassistant";
+      String MODIFY_ASSISTANT = "https://api.weixin.qq.com/wxaapi/broadcast/room/modifyassistant";
+      String REMOVE_ASSISTANT = "https://api.weixin.qq.com/wxaapi/broadcast/room/removeassistant";
+      String GET_ASSISTANT_LIST = "https://api.weixin.qq.com/wxaapi/broadcast/room/getassistantlist";
+    }
+
+    /**
+     * 直播商品管理相关接口
+     */
+    interface Goods {
+      String ADD_GOODS = "https://api.weixin.qq.com/wxaapi/broadcast/goods/add";
+      String RESET_AUDIT_GOODS = "https://api.weixin.qq.com/wxaapi/broadcast/goods/resetaudit";
+      String AUDIT_GOODS = "https://api.weixin.qq.com/wxaapi/broadcast/goods/audit";
+      String DELETE_GOODS = "https://api.weixin.qq.com/wxaapi/broadcast/goods/delete";
+      String UPDATE_GOODS = "https://api.weixin.qq.com/wxaapi/broadcast/goods/update";
+      String GET_GOODS_WARE_HOUSE = "https://api.weixin.qq.com/wxa/business/getgoodswarehouse";
+      String GET_APPROVED_GOODS = "https://api.weixin.qq.com/wxaapi/broadcast/goods/getapproved";
+    }
+
+    /**
+     * 小程序直播成员管理接口
+     */
+    interface Role {
+      String ADD_ROLE = "https://api.weixin.qq.com/wxaapi/broadcast/role/addrole";
+      String DELETE_ROLE = "https://api.weixin.qq.com/wxaapi/broadcast/role/deleterole";
+      String LIST_BY_ROLE = "https://api.weixin.qq.com/wxaapi/broadcast/role/getrolelist";
+    }
   }
 
   public interface Media {
