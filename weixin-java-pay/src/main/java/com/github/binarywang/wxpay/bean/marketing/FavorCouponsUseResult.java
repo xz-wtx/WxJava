@@ -5,15 +5,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
- * 查询代金券详情结果对象
+ * 核销事件回调内容
  *
  * @author thinsstar
  */
 @NoArgsConstructor
 @Data
-public class FavorCouponsGetResult implements Serializable {
+public class FavorCouponsUseResult implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -47,10 +48,18 @@ public class FavorCouponsGetResult implements Serializable {
   /**
    * 单品优惠特定信息
    * <p>
-   * 单品优惠特定信息
+   * 单品优惠特定信息。
    */
-  @SerializedName("cut_to_message")
-  private CutToMessage cutToMessage;
+  @SerializedName("singleitem_discount_off")
+  private SingleitemDiscountOff singleitemDiscountOff;
+
+  /**
+   * 减至优惠特定信息
+   * <p>
+   * 减至优惠限定字段，仅减至优惠场景有返回。
+   */
+  @SerializedName("discount_to")
+  private DiscountTo discountTo;
 
   /**
    * 代金券名称
@@ -143,35 +152,58 @@ public class FavorCouponsGetResult implements Serializable {
   private Boolean singleitem;
 
   /**
-   * 满减券信息
+   * 普通满减券信息
    * <p>
    * 普通满减券面额、门槛信息。
    */
   @SerializedName("normal_coupon_information")
   private NormalCouponInformation normalCouponInformation;
 
+  /**
+   * 实扣代金券信息
+   * <p>
+   * 普通满减券面额、门槛信息。
+   */
+  @SerializedName("consume_information")
+  private ConsumeInformation consumeInformation;
+
   @Data
   @NoArgsConstructor
-  public static class CutToMessage implements Serializable {
+  public static class SingleitemDiscountOff implements Serializable {
 
     private static final long serialVersionUID = 1L;
     /**
-     * 可用优惠的商品最高单价
+     * 单品最高优惠价格
      * <p>
-     * 可用优惠的商品最高单价，单位：分。
+     * 单品最高优惠价格，单位：分。
      * 示例值：100
      */
     @SerializedName(value = "single_price_max")
     private Integer singlePriceMax;
+  }
 
+  @Data
+  @NoArgsConstructor
+  public static class DiscountTo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     /**
-     * 减至后的优惠单价
+     * 减至后优惠单价
      * <p>
-     * 减至后的优惠单价，单位：分。
+     * 减至后优惠单价，单位：分。
      * 示例值：100
      */
     @SerializedName(value = "cut_to_price")
     private Integer cutToPrice;
+
+    /**
+     * 最高价格
+     * <p>
+     * 可享受优惠的最高价格，单位：分。
+     * 示例值：20
+     */
+    @SerializedName(value = "max_price")
+    private Integer maxPrice;
   }
 
   @Data
@@ -196,5 +228,88 @@ public class FavorCouponsGetResult implements Serializable {
      */
     @SerializedName(value = "transaction_minimum")
     private Integer transactionMinimum;
+  }
+
+  @Data
+  @NoArgsConstructor
+  public static class ConsumeInformation implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    /**
+     * 核销时间
+     * <p>
+     * 代金券核销时间，遵循rfc3339标准格式，格式为YYYY-MM-DDTHH:mm:ss.sss+TIMEZONE，YYYY-MM-DD表示年月日，T出现在字符串中，表示time元素的开头，HH:mm:ss.sss表示时分秒毫秒，TIMEZONE表示时区（+08:00表示东八区时间，领先UTC 8小时，即北京时间）。例如：2015-05-20T13:29:35.120+08:00表示，北京时间2015年5月20日 13点29分35秒。
+     * 示例值：2015-05-20T13:29:35.120+08:00
+     */
+    @SerializedName(value = "consume_time")
+    private String consumeTime;
+
+    /**
+     * 核销商户号
+     * <p>
+     * 核销代金券的商户号。
+     * 示例值：9856081
+     */
+    @SerializedName(value = "consume_mchid")
+    private String consumeMchid;
+
+    /**
+     * 核销订单号
+     * <p>
+     * 核销订单号
+     * 示例值：2345234523
+     */
+    @SerializedName(value = "transaction_id")
+    private String transactionId;
+
+    /**
+     * 单品信息
+     * <p>
+     * 商户下单接口传的单品信息。
+     */
+    @SerializedName("goods_detail")
+    private List<GoodsDetail> goodsDetail;
+  }
+
+  @Data
+  @NoArgsConstructor
+  public static class GoodsDetail implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    /**
+     * 单品编码
+     * <p>
+     * 单品券创建时录入的单品编码。
+     * 示例值：a_goods1
+     */
+    @SerializedName(value = "goods_id")
+    private String goodsId;
+
+    /**
+     * 单品数量
+     * <p>
+     * 单品数据
+     * 示例值：7
+     */
+    @SerializedName(value = "quantity")
+    private Integer quantity;
+
+    /**
+     * 单品单价
+     * <p>
+     * 单品单价
+     * 示例值：1
+     */
+    @SerializedName(value = "price")
+    private Integer price;
+
+    /**
+     * 优惠金额
+     * <p>
+     * 优惠金额
+     * 示例值：4
+     */
+    @SerializedName(value = "discount_amount")
+    private Integer discountAmount;
   }
 }
