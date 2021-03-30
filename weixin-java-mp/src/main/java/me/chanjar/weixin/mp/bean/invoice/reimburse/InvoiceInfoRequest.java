@@ -2,8 +2,10 @@ package me.chanjar.weixin.mp.bean.invoice.reimburse;
 
 
 import com.google.gson.annotations.SerializedName;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import me.chanjar.weixin.mp.util.json.WxMpGsonBuilder;
 
 import java.io.Serializable;
@@ -17,6 +19,8 @@ import java.io.Serializable;
  */
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class InvoiceInfoRequest implements Serializable {
 
   private static final long serialVersionUID = 7854633127026139444L;
@@ -40,6 +44,7 @@ public class InvoiceInfoRequest implements Serializable {
   */
   @SerializedName("encrypt_code")
   private String encryptCode;
+
 
 
   public String toJson() {
