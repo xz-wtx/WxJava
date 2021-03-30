@@ -135,6 +135,7 @@ public interface WxMpService extends WxService {
    * @return 生成的短地址 string
    * @throws WxErrorException .
    */
+  @Deprecated
   String shortUrl(String longUrl) throws WxErrorException;
 
   /**
