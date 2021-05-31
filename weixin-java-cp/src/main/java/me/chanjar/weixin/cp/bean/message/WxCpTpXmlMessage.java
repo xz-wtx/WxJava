@@ -205,7 +205,7 @@ public class WxCpTpXmlMessage implements Serializable {
   protected String msgId;
 
   @XStreamAlias("AgentID")
-  protected Integer agentID;
+  protected String agentID;
 
   @XStreamAlias("PicUrl")
   @XStreamConverter(value = XStreamCDataConverter.class)
