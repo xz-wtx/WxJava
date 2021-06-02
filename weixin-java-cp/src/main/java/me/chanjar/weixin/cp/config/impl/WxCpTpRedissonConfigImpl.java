@@ -3,6 +3,7 @@ package me.chanjar.weixin.cp.config.impl;
 
 import lombok.Builder;
 import lombok.NonNull;
+import lombok.Setter;
 import me.chanjar.weixin.common.bean.WxAccessToken;
 import me.chanjar.weixin.common.redis.WxRedisOps;
 import me.chanjar.weixin.common.util.http.apache.ApacheHttpClientBuilder;
@@ -21,26 +22,46 @@ import java.util.concurrent.locks.Lock;
  */
 @Builder
 public class WxCpTpRedissonConfigImpl implements WxCpTpConfigStorage, Serializable {
+  private static final long serialVersionUID = -5385639031981770319L;
 
+  /**
+   * The constant LOCK_KEY.
+   */
+// lock key
+  protected static final String LOCK_KEY = "wechat_tp_lock:";
+  /**
+   * The constant LOCKER_PROVIDER_ACCESS_TOKEN.
+   */
+  protected static final String LOCKER_PROVIDER_ACCESS_TOKEN = "providerAccessTokenLock";
+  /**
+   * The constant LOCKER_SUITE_ACCESS_TOKEN.
+   */
+  protected static final String LOCKER_SUITE_ACCESS_TOKEN = "suiteAccessTokenLock";
+  /**
+   * The constant LOCKER_ACCESS_TOKEN.
+   */
+  protected static final String LOCKER_ACCESS_TOKEN = "accessTokenLock";
+  /**
+   * The constant LOCKER_CORP_JSAPI_TICKET.
+   */
+  protected static final String LOCKER_CORP_JSAPI_TICKET = "corpJsapiTicketLock";
+  /**
+   * The constant LOCKER_SUITE_JSAPI_TICKET.
+   */
+  protected static final String LOCKER_SUITE_JSAPI_TICKET = "suiteJsapiTicketLock";
   @NonNull
   private final WxRedisOps wxRedisOps;
-
-  //redis里面key的统一前缀
-  //private final String keyPrefix = "";//4.0.9.B 有final为不可设置,去掉final改为可设置
-  private String keyPrefix = "";
-
   private final String suiteAccessTokenKey = ":suiteAccessTokenKey:";
-
   private final String suiteTicketKey = ":suiteTicketKey:";
-
   private final String accessTokenKey = ":accessTokenKey:";
-
   private final String authCorpJsApiTicketKey = ":authCorpJsApiTicketKey:";
-
   private final String authSuiteJsApiTicketKey = ":authSuiteJsApiTicketKey:";
-
   private final String providerTokenKey = ":providerTokenKey:";
-
+  /**
+   * redis里面key的统一前缀
+   */
+  @Setter
+  private String keyPrefix = "";
   private volatile String baseApiUrl;
   private volatile String httpProxyHost;
   private volatile int httpProxyPort;
@@ -48,35 +69,28 @@ public class WxCpTpRedissonConfigImpl implements WxCpTpConfigStorage, Serializab
   private volatile String httpProxyPassword;
   private volatile ApacheHttpClientBuilder apacheHttpClientBuilder;
   private volatile File tmpDirFile;
-
   /**
    * 第三方应用的其他配置，来自于企微配置
    */
   private volatile String suiteId;
   private volatile String suiteSecret;
-  // 第三方应用的token，用来检查应用的签名
+  /**
+   * 第三方应用的token，用来检查应用的签名
+   */
   private volatile String token;
-  //第三方应用的EncodingAESKey，用来检查签名
+  /**
+   * 第三方应用的EncodingAESKey，用来检查签名
+   */
   private volatile String aesKey;
-
   /**
    * 企微服务商企业ID & 企业secret，来自于企微配置
    */
   private volatile String corpId;
   private volatile String corpSecret;
-
   /**
    * 服务商secret
    */
   private volatile String providerSecret;
-
-  // lock key
-  protected static final String LOCK_KEY = "wechat_tp_lock:";
-  protected static final String LOCKER_PROVIDER_ACCESS_TOKEN = "providerAccessTokenLock";
-  protected static final String LOCKER_SUITE_ACCESS_TOKEN = "suiteAccessTokenLock";
-  protected static final String LOCKER_ACCESS_TOKEN = "accessTokenLock";
-  protected static final String LOCKER_CORP_JSAPI_TICKET = "corpJsapiTicketLock";
-  protected static final String LOCKER_SUITE_JSAPI_TICKET = "suiteJsapiTicketLock";
 
   @Override
   public void setBaseApiUrl(String baseUrl) {
@@ -221,7 +235,7 @@ public class WxCpTpRedissonConfigImpl implements WxCpTpConfigStorage, Serializab
 
     WxAccessToken accessTokenEntity = new WxAccessToken();
     accessTokenEntity.setAccessToken(accessToken);
-    accessTokenEntity.setExpiresIn((int)((expire - System.currentTimeMillis()) / 1000 + 200));
+    accessTokenEntity.setExpiresIn((int) ((expire - System.currentTimeMillis()) / 1000 + 200));
     return accessTokenEntity;
   }
 
@@ -393,8 +407,6 @@ public class WxCpTpRedissonConfigImpl implements WxCpTpConfigStorage, Serializab
 
   /**
    * 单独处理provider,且不应和suite 有关系
-   * @param key
-   * @return
    */
   private Lock getProviderLockByKey(String key) {
     return this.wxRedisOps.getLock(String.join(":", providerKeyWithPrefix(LOCK_KEY), key));
@@ -412,26 +424,23 @@ public class WxCpTpRedissonConfigImpl implements WxCpTpConfigStorage, Serializab
 
   @Override
   public String toString() {
-    //TODO:
     return WxCpGsonBuilder.create().toJson(this);
   }
 
   /**
    * 一个provider 会有多个suite,需要唯一标识作为前缀
-   * @param key
-   * @return
+   *
    */
   private String keyWithPrefix(String key) {
-    return keyPrefix +":"+suiteId+":" + key;
+    return keyPrefix + ":" + suiteId + ":" + key;
   }
 
   /**
    * provider 应该独享一个key,且不和任何suite关联
    * 一个provider  会有多个suite,不同的suite 都应该指向同一个provider 的数据
-   * @param key
-   * @return
+   *
    */
   private String providerKeyWithPrefix(String key) {
-    return keyPrefix +":"+corpId+":" + key;
+    return keyPrefix + ":" + corpId + ":" + key;
   }
 }
