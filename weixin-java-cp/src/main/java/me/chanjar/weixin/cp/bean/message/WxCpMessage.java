@@ -49,6 +49,22 @@ public class WxCpMessage implements Serializable {
   private Map<String, String> contentItems;
 
   /**
+   * enable_id_trans
+   * 表示是否开启id转译，0表示否，1表示是，默认0
+   */
+  private Boolean enableIdTrans = false;
+  /**
+   * enable_duplicate_check
+   * 表示是否开启重复消息检查，0表示否，1表示是，默认0
+   */
+  private Boolean enableDuplicateCheck = false;
+  /**
+   * duplicate_check_interval
+   * 表示是否重复消息检查的时间间隔，默认1800s，最大不超过4小时
+   */
+  private Integer duplicateCheckInterval;
+
+  /**
    * 任务卡片特有的属性.
    */
   private String taskId;
@@ -172,6 +188,18 @@ public class WxCpMessage implements Serializable {
       messageJson.addProperty("totag", this.getToTag());
     }
 
+    if (this.getEnableIdTrans()) {
+      messageJson.addProperty("enable_id_trans", 1);
+    }
+
+    if (this.getEnableDuplicateCheck()) {
+      messageJson.addProperty("enable_duplicate_check", 1);
+    }
+
+    if (this.getDuplicateCheckInterval() != null) {
+      messageJson.addProperty("duplicate_check_interval", this.getDuplicateCheckInterval());
+    }
+
     this.handleMsgType(messageJson);
 
     if (StringUtils.isNotBlank(this.getSafe())) {
@@ -253,15 +281,7 @@ public class WxCpMessage implements Serializable {
         } else {
           JsonArray articleJsonArray = new JsonArray();
           for (MpnewsArticle article : this.getMpnewsArticles()) {
-            JsonObject articleJson = new JsonObject();
-            articleJson.addProperty("title", article.getTitle());
-            articleJson.addProperty("thumb_media_id", article.getThumbMediaId());
-            articleJson.addProperty("author", article.getAuthor());
-            articleJson.addProperty("content_source_url", article.getContentSourceUrl());
-            articleJson.addProperty("content", article.getContent());
-            articleJson.addProperty("digest", article.getDigest());
-            articleJson.addProperty("show_cover_pic", article.getShowCoverPic());
-            articleJsonArray.add(articleJson);
+            article2Json(articleJsonArray, article);
           }
 
           newsJsonObject.add("articles", articleJsonArray);
@@ -282,23 +302,7 @@ public class WxCpMessage implements Serializable {
 
         JsonArray buttonJsonArray = new JsonArray();
         for (TaskCardButton button : this.getTaskButtons()) {
-          JsonObject buttonJson = new JsonObject();
-          buttonJson.addProperty("key", button.getKey());
-          buttonJson.addProperty("name", button.getName());
-
-          if (StringUtils.isNotBlank(button.getReplaceName())) {
-            buttonJson.addProperty("replace_name", button.getReplaceName());
-          }
-
-          if (StringUtils.isNotBlank(button.getColor())) {
-            buttonJson.addProperty("color", button.getColor());
-          }
-
-          if (button.getBold() != null) {
-            buttonJson.addProperty("is_bold", button.getBold());
-          }
-
-          buttonJsonArray.add(buttonJson);
+          btn2Json(buttonJsonArray, button);
         }
         text.add("btn", buttonJsonArray);
 
@@ -328,6 +332,38 @@ public class WxCpMessage implements Serializable {
         // do nothing
       }
     }
+  }
+
+  private void btn2Json(JsonArray buttonJsonArray, TaskCardButton button) {
+    JsonObject buttonJson = new JsonObject();
+    buttonJson.addProperty("key", button.getKey());
+    buttonJson.addProperty("name", button.getName());
+
+    if (StringUtils.isNotBlank(button.getReplaceName())) {
+      buttonJson.addProperty("replace_name", button.getReplaceName());
+    }
+
+    if (StringUtils.isNotBlank(button.getColor())) {
+      buttonJson.addProperty("color", button.getColor());
+    }
+
+    if (button.getBold() != null) {
+      buttonJson.addProperty("is_bold", button.getBold());
+    }
+
+    buttonJsonArray.add(buttonJson);
+  }
+
+  private void article2Json(JsonArray articleJsonArray, MpnewsArticle article) {
+    JsonObject articleJson = new JsonObject();
+    articleJson.addProperty("title", article.getTitle());
+    articleJson.addProperty("thumb_media_id", article.getThumbMediaId());
+    articleJson.addProperty("author", article.getAuthor());
+    articleJson.addProperty("content_source_url", article.getContentSourceUrl());
+    articleJson.addProperty("content", article.getContent());
+    articleJson.addProperty("digest", article.getDigest());
+    articleJson.addProperty("show_cover_pic", article.getShowCoverPic());
+    articleJsonArray.add(articleJson);
   }
 
 }

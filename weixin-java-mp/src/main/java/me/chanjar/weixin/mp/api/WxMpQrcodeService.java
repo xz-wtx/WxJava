@@ -22,6 +22,8 @@ public interface WxMpQrcodeService {
    *
    * @param sceneId       场景值ID，临时二维码时为32位非0整型
    * @param expireSeconds 该二维码有效时间，以秒为单位。 最大不超过2592000（即30天），此字段如果不填，则默认有效期为30秒。
+   * @return the wx mp qr code ticket
+   * @throws WxErrorException the wx error exception
    */
   WxMpQrCodeTicket qrCodeCreateTmpTicket(int sceneId, Integer expireSeconds) throws WxErrorException;
 
@@ -34,6 +36,8 @@ public interface WxMpQrcodeService {
    *
    * @param sceneStr      场景值ID（字符串形式的ID），字符串类型，长度限制为1到64
    * @param expireSeconds 该二维码有效时间，以秒为单位。 最大不超过2592000（即30天），此字段如果不填，则默认有效期为30秒。
+   * @return the wx mp qr code ticket
+   * @throws WxErrorException the wx error exception
    */
   WxMpQrCodeTicket qrCodeCreateTmpTicket(String sceneStr, Integer expireSeconds) throws WxErrorException;
 
@@ -44,6 +48,8 @@ public interface WxMpQrcodeService {
    * </pre>
    *
    * @param sceneId 场景值ID，最大值为100000（目前参数只支持1--100000）
+   * @return the wx mp qr code ticket
+   * @throws WxErrorException the wx error exception
    */
   WxMpQrCodeTicket qrCodeCreateLastTicket(int sceneId) throws WxErrorException;
 
@@ -54,6 +60,8 @@ public interface WxMpQrcodeService {
    * </pre>
    *
    * @param sceneStr 参数。字符串类型长度现在为1到64
+   * @return the wx mp qr code ticket
+   * @throws WxErrorException the wx error exception
    */
   WxMpQrCodeTicket qrCodeCreateLastTicket(String sceneStr) throws WxErrorException;
 
@@ -64,6 +72,8 @@ public interface WxMpQrcodeService {
    * </pre>
    *
    * @param ticket 二维码ticket
+   * @return the file
+   * @throws WxErrorException the wx error exception
    */
   File qrCodePicture(WxMpQrCodeTicket ticket) throws WxErrorException;
 
@@ -75,7 +85,10 @@ public interface WxMpQrcodeService {
    *
    * @param ticket       二维码ticket
    * @param needShortUrl 是否需要压缩的二维码地址
+   * @return the string
+   * @throws WxErrorException the wx error exception
    */
+  @Deprecated
   String qrCodePictureUrl(String ticket, boolean needShortUrl) throws WxErrorException;
 
   /**
@@ -85,6 +98,8 @@ public interface WxMpQrcodeService {
    * </pre>
    *
    * @param ticket 二维码ticket
+   * @return the string
+   * @throws WxErrorException the wx error exception
    */
   String qrCodePictureUrl(String ticket) throws WxErrorException;
 
