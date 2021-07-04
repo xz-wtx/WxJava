@@ -1,13 +1,13 @@
 package me.chanjar.weixin.open.bean.minishop;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 
 @Data
 public class MinishopBrand implements Serializable {
+  private static final long serialVersionUID = -112023091374421283L;
+
   private Integer firstCatId;
 
   private Integer secondCatId;
@@ -15,9 +15,9 @@ public class MinishopBrand implements Serializable {
   private Integer thirdCatId;
 
   @Data
-  @Getter
-  @Setter
   public static class MinishopBrandInfo implements Serializable {
+    private static final long serialVersionUID = 5727133059972671186L;
+
     private Integer brandId;
     private String brandName;
   }

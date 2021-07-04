@@ -1,20 +1,28 @@
 package me.chanjar.weixin.open.bean.minishop.coupon;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * 小商店优惠券消耗信息
+ */
 @Data
-@ApiModel("小商店优惠券消耗信息")
 public class WxMinishopCouponStockInfo implements Serializable {
-  @ApiModelProperty(value = "优惠券发放量")
+  private static final long serialVersionUID = 7690057714224606954L;
+
+  /**
+   * 优惠券发放量
+   */
   private Integer issuedNum;
 
-  @ApiModelProperty(value = "优惠券领用量")
+  /**
+   * 优惠券领用量
+   */
   private Integer receiveNum;
 
-  @ApiModelProperty(value = "优惠券已用量")
+  /**
+   * 优惠券已用量
+   */
   private Integer usedNum;
 }

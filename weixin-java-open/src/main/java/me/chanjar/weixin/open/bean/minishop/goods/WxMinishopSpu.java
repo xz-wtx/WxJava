@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 public class WxMinishopSpu implements Serializable {
-
+  private static final long serialVersionUID = 6689040014027161007L;
 
   private String outProductId;
 

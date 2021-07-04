@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 @Data
 public class MinishopDeliveryTemplate implements Serializable {
+  private static final long serialVersionUID = 6408833494371482534L;
 
   public enum ValuationType {
     PACKAGE,

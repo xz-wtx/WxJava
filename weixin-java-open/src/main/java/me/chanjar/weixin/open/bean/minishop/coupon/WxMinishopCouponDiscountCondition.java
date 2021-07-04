@@ -3,23 +3,31 @@ package me.chanjar.weixin.open.bean.minishop.coupon;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
+/**
+ * 小商店商品折扣券详细信息
+ */
 @Data
-@ApiModel("小商店商品折扣券详细信息")
-public class WxMinishopCouponDiscountCondition {
-  @ApiModelProperty(value = "商品折扣券打折金额", required = false)
+public class WxMinishopCouponDiscountCondition implements Serializable {
+  private static final long serialVersionUID = 7020614663289497294L;
+
+  /**
+   * 商品折扣券打折金额
+   */
   private Integer productCnt;
 
-  @ApiModelProperty(value = "商品id，商品折扣券需填写", required = false)
+  /**
+   * 商品id，商品折扣券需填写
+   */
   private List<Integer> productIds;
 
-
-  @ApiModelProperty(value = "商品价格，满减券需填写", required = false)
+  /**
+   * 商品价格，满减券需填写
+   */
   private Integer productPrice;
 
   public JsonObject toJsonObject() {

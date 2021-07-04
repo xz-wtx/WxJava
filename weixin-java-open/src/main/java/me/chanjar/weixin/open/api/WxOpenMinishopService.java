@@ -11,12 +11,11 @@ import java.io.File;
  * add by kelven 2021-01-29
  */
 public interface WxOpenMinishopService {
-   String submitMerchantInfoUrl = "https://api.weixin.qq.com/product/register/submit_merchantinfo";
+  String submitMerchantInfoUrl = "https://api.weixin.qq.com/product/register/submit_merchantinfo";
 
-   String submitBasicInfoUrl = "https://api.weixin.qq.com/product/register/submit_basicinfo";
+  String submitBasicInfoUrl = "https://api.weixin.qq.com/product/register/submit_basicinfo";
 
-
-  public final static String UPLOAD_IMG_MINISHOP_FILE_URL = "https://api.weixin.qq.com/product/img/upload";
+  String UPLOAD_IMG_MINISHOP_FILE_URL = "https://api.weixin.qq.com/product/img/upload";
 
   String getCategoryUrl = "https://api.weixin.qq.com/product/category/get";
 
@@ -24,12 +23,13 @@ public interface WxOpenMinishopService {
 
   String getDeliveryUrl = "https://api.weixin.qq.com/product/delivery/get_freight_template";
 
-  /**获取店铺的商品分类*/
+  /**
+   * 获取店铺的商品分类
+   */
   String getShopCatUrl = "https://api.weixin.qq.com/product/store/get_shopcat";
 
 
   /**
-   *
    * @param appId
    * @param subjectType
    * @param busiLicense

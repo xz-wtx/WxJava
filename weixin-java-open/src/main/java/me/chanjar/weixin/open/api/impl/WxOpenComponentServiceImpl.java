@@ -1,17 +1,14 @@
 package me.chanjar.weixin.open.api.impl;
 
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
-import me.chanjar.weixin.common.bean.result.WxMediaUploadResult;
-import me.chanjar.weixin.common.bean.result.WxMinishopImageUploadResult;
 import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
+import me.chanjar.weixin.common.bean.result.WxMinishopImageUploadResult;
 import me.chanjar.weixin.common.error.WxError;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.error.WxRuntimeException;
@@ -20,17 +17,8 @@ import me.chanjar.weixin.common.util.http.URIUtil;
 import me.chanjar.weixin.common.util.json.GsonParser;
 import me.chanjar.weixin.common.util.json.WxGsonBuilder;
 import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.open.api.WxOpenComponentService;
-import me.chanjar.weixin.open.api.WxOpenConfigStorage;
-import me.chanjar.weixin.open.api.WxOpenFastMaService;
-import me.chanjar.weixin.open.api.WxOpenMaService;
-import me.chanjar.weixin.open.api.WxOpenMpService;
-import me.chanjar.weixin.open.api.WxOpenService;
-import me.chanjar.weixin.open.bean.WxOpenAuthorizerAccessToken;
-import me.chanjar.weixin.open.bean.WxOpenComponentAccessToken;
-import me.chanjar.weixin.open.bean.WxOpenCreateResult;
-import me.chanjar.weixin.open.bean.WxOpenGetResult;
-import me.chanjar.weixin.open.bean.WxOpenMaCodeTemplate;
+import me.chanjar.weixin.open.api.*;
+import me.chanjar.weixin.open.bean.*;
 import me.chanjar.weixin.open.bean.auth.WxOpenAuthorizationInfo;
 import me.chanjar.weixin.open.bean.message.WxOpenXmlMessage;
 import me.chanjar.weixin.open.bean.minishop.*;
@@ -40,11 +28,6 @@ import me.chanjar.weixin.open.bean.minishop.goods.*;
 import me.chanjar.weixin.open.bean.minishop.limitdiscount.LimitDiscountGoods;
 import me.chanjar.weixin.open.bean.minishop.limitdiscount.LimitDiscountSku;
 import me.chanjar.weixin.open.bean.result.*;
-import me.chanjar.weixin.open.bean.result.WxOpenAuthorizerInfoResult;
-import me.chanjar.weixin.open.bean.result.WxOpenAuthorizerListResult;
-import me.chanjar.weixin.open.bean.result.WxOpenAuthorizerOptionResult;
-import me.chanjar.weixin.open.bean.result.WxOpenQueryAuthResult;
-import me.chanjar.weixin.open.bean.result.WxOpenResult;
 import me.chanjar.weixin.open.util.json.WxOpenGsonBuilder;
 import org.apache.commons.lang3.StringUtils;
 
@@ -519,7 +502,7 @@ public class WxOpenComponentServiceImpl implements WxOpenComponentService {
   }
 
   @Override
-  public void addToTemplate(long draftId,int templateType) throws WxErrorException {
+  public void addToTemplate(long draftId, int templateType) throws WxErrorException {
     JsonObject param = new JsonObject();
     param.addProperty("draft_id", draftId);
     param.addProperty("template_type", templateType);
@@ -657,7 +640,7 @@ public class WxOpenComponentServiceImpl implements WxOpenComponentService {
   public String checkAuditStatus(String appId, String wxName) throws WxErrorException {
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("wx_name", wxName);
-    String url = CHECK_SHOP_AUDITSTATUS_URL + "?access_token=" + getAuthorizerAccessToken(appId,  false);
+    String url = CHECK_SHOP_AUDITSTATUS_URL + "?access_token=" + getAuthorizerAccessToken(appId, false);
     String response = post(url, jsonObject.toString());
     log.info("CHECK_SHOP_AUDITSTATUS_URL: " + response);
     return response;
@@ -700,7 +683,7 @@ public class WxOpenComponentServiceImpl implements WxOpenComponentService {
 
   @Override
   public WxMinishopImageUploadResult uploadMinishopImagePicFile(String appId, Integer height, Integer width, File file) throws WxErrorException {
-    String url = WxOpenMinishopService.UPLOAD_IMG_MINISHOP_FILE_URL + "?access_token="+getAuthorizerAccessToken(appId, false)+"&height="+height+"&width="+width;
+    String url = WxOpenMinishopService.UPLOAD_IMG_MINISHOP_FILE_URL + "?access_token=" + getAuthorizerAccessToken(appId, false) + "&height=" + height + "&width=" + width;
     log.info("upload url: " + url);
 //    String response = (url, file);
     WxMinishopImageUploadResult result = getWxOpenService().uploadMinishopMediaFile(url, file);
@@ -1114,8 +1097,6 @@ public class WxOpenComponentServiceImpl implements WxOpenComponentService {
     jsonObject.addProperty("stock_num", stockNum);
 
 
-
-
     String response = getWxOpenService().post(url, jsonObject.toString());
 
     return WxOpenGsonBuilder.create().fromJson(response, WxOpenResult.class);
@@ -1155,18 +1136,18 @@ public class WxOpenComponentServiceImpl implements WxOpenComponentService {
 
       JsonArray jsonArray = respObj.get("limited_discount_list").getAsJsonArray();
       if (jsonArray != null && jsonArray.size() > 0) {
-        for (int i = 0; i < jsonArray.size(); i ++) {
+        for (int i = 0; i < jsonArray.size(); i++) {
           JsonObject goodsObj = jsonArray.get(i).getAsJsonObject();
           LimitDiscountGoods discountGoods = new LimitDiscountGoods();
           discountGoods.setTaskId(goodsObj.get("task_id").getAsLong());
           discountGoods.setStatus(goodsObj.get("status").getAsInt());
-          discountGoods.setStartTime(new Date(goodsObj.get("start_time").getAsLong()*1000));
-          discountGoods.setEndTime(new Date(goodsObj.get("end_time").getAsLong()*1000));
+          discountGoods.setStartTime(new Date(goodsObj.get("start_time").getAsLong() * 1000));
+          discountGoods.setEndTime(new Date(goodsObj.get("end_time").getAsLong() * 1000));
 
           List<LimitDiscountSku> skuList = new ArrayList<>();
           JsonArray skuArray = goodsObj.get("limited_discount_sku_list").getAsJsonArray();
           if (skuArray != null && skuArray.size() > 0) {
-            for (int j = 0; j < skuArray.size(); j ++) {
+            for (int j = 0; j < skuArray.size(); j++) {
               JsonObject skuObj = skuArray.get(i).getAsJsonObject();
               LimitDiscountSku sku = new LimitDiscountSku();
               sku.setSkuId(skuObj.get("sku_id").getAsLong());
@@ -1186,7 +1167,7 @@ public class WxOpenComponentServiceImpl implements WxOpenComponentService {
   }
 
   @Override
-  public WxOpenResult updateLimitDiscountStatus(String appId, Long taskId, Integer status) throws WxErrorException  {
+  public WxOpenResult updateLimitDiscountStatus(String appId, Long taskId, Integer status) throws WxErrorException {
     String url = API_MINISHOP_UPDATE_LIMIT_DICOUNT_STATUS_URL + "access_token=" + getAuthorizerAccessToken(appId, false);
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("task_id", taskId);

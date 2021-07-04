@@ -9,6 +9,8 @@ import java.io.Serializable;
  */
 @Data
 public class MinishopShopCat implements Serializable {
+  private static final long serialVersionUID = 4179473856929659641L;
+
   private Integer shopCatId;
 
   private String shopCatName;

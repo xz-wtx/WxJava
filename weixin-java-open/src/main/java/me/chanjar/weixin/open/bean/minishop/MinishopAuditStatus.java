@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 @Data
 public class MinishopAuditStatus implements Serializable {
+  private static final long serialVersionUID = 106594659951047198L;
 
   private WxError wxError;
 

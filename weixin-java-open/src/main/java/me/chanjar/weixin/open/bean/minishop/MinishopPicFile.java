@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Data
 public class MinishopPicFile implements Serializable {
-
+  private static final long serialVersionUID = 6406252666763442010L;
 
   private String mediaId;
 

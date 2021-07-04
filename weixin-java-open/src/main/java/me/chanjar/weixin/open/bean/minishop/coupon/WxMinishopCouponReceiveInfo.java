@@ -1,25 +1,35 @@
 package me.chanjar.weixin.open.bean.minishop.coupon;
 
 import com.google.gson.JsonObject;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * 小商店优惠券领取信息
+ */
 @Data
-@ApiModel("小商店优惠券领取信息")
 public class WxMinishopCouponReceiveInfo implements Serializable {
-  @ApiModelProperty(value = "优惠券领用结束时间", required = true)
+  private static final long serialVersionUID = -3168216738144299136L;
+
+  /**
+   * 优惠券领用结束时间
+   */
   private Long endTime;
 
-  @ApiModelProperty(value = "是否限制一人使用", required = true)
+  /**
+   * 是否限制一人使用
+   */
   private Integer limitNumOnePerson;
 
-  @ApiModelProperty(value = "优惠券领用开始时间",required = true)
+  /**
+   * 优惠券领用开始时间
+   */
   private Long startTime;
 
-  @ApiModelProperty(value = "优惠券领用总数", required = true)
+  /**
+   * 优惠券领用总数
+   */
   private Integer totalNum;
 
   public JsonObject toJsonObject() {

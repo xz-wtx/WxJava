@@ -5,11 +5,12 @@ import com.google.gson.JsonObject;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 
 @Data
 public class WxMinishopSku implements Serializable {
+  private static final long serialVersionUID = 12373392723136246L;
+
   private Long productId;
 
   private String outProductId;

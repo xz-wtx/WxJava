@@ -1,21 +1,30 @@
 package me.chanjar.weixin.open.bean.minishop.coupon;
 
 import com.google.gson.JsonObject;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-@Data
-@ApiModel("小商店商品折扣券信息")
-public class WxMinishopCouponDiscountInfo {
+import java.io.Serializable;
 
-  @ApiModelProperty(value = "小商店商品折扣详情")
+/**
+ * 小商店商品折扣券信息
+ */
+@Data
+public class WxMinishopCouponDiscountInfo implements Serializable {
+  private static final long serialVersionUID = -2290048692838721473L;
+
+  /**
+   * 小商店商品折扣详情
+   */
   private WxMinishopCouponDiscountCondition discountCondition;
 
-  @ApiModelProperty(value = "满减金额", required = true)
+  /**
+   * 满减金额
+   */
   private Integer discountFee;
 
-  @ApiModelProperty(value = "打折商品数量，满减券需填写")
+  /**
+   * 打折商品数量，满减券需填写
+   */
   private Integer discountNum;
 
   public JsonObject toJsonObject() {
