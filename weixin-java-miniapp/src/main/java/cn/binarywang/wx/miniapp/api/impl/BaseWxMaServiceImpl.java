@@ -74,6 +74,7 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
   private final WxMaShopAfterSaleService shopAfterSaleService = new WxMaShopAfterSaleServiceImpl(this);
   private final WxMaShopDeliveryService shopDeliveryService = new WxMaShopDeliveryServiceImpl(this);
   private final WxMaLinkService linkService = new WxMaLinkServiceImpl(this);
+  private final WxMaShortLinkService shortlinkService = new WxMaShortLinkServiceImpl(this);
   private final WxMaReimburseInvoiceService reimburseInvoiceService = new WxMaReimburseInvoiceServiceImpl(this);
   private Map<String, WxMaConfig> configMap;
   private int retrySleepMillis = 1000;
@@ -567,6 +568,11 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
   @Override
   public WxMaLinkService getLinkService() {
     return this.linkService;
+  }
+
+  @Override
+  public WxMaShortLinkService getShortLinkService() {
+    return this.shortlinkService;
   }
 
   @Override
