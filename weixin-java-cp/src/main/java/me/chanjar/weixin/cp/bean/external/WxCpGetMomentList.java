@@ -3,6 +3,7 @@ package me.chanjar.weixin.cp.bean.external;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import me.chanjar.weixin.cp.bean.WxCpBaseResp;
 import me.chanjar.weixin.cp.bean.external.moment.MomentInfo;
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
@@ -14,7 +15,9 @@ import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
  * @date 2021-10-29
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class WxCpGetMomentList extends WxCpBaseResp {
+  private static final long serialVersionUID = 106159971765109008L;
   @SerializedName("next_cursor")
   private String nextCursor;
   @SerializedName("moment_list")
