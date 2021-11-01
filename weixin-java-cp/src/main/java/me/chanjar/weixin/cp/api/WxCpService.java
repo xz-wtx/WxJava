@@ -8,6 +8,7 @@ import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.common.util.http.MediaUploadRequestExecutor;
 import me.chanjar.weixin.common.util.http.RequestExecutor;
 import me.chanjar.weixin.common.util.http.RequestHttp;
+import me.chanjar.weixin.cp.bean.WxCpAgentJsapiSignature;
 import me.chanjar.weixin.cp.bean.WxCpMaJsCode2SessionResult;
 import me.chanjar.weixin.cp.bean.WxCpProviderToken;
 import me.chanjar.weixin.cp.config.WxCpConfigStorage;
@@ -124,6 +125,18 @@ public interface WxCpService extends WxService {
    */
   WxJsapiSignature createJsapiSignature(String url) throws WxErrorException;
 
+  /**
+   * <pre>
+   *   创建调用wx.agentConfig时所需要的签名
+   *
+   * 详情请见：https://open.work.weixin.qq.com/api/doc/90000/90136/94313
+   * </pre>
+   *
+   * @param url url
+   * @return the agent jsapi signature
+   * @throws WxErrorException
+   */
+  WxCpAgentJsapiSignature createAgentJsapiSignature(String url) throws WxErrorException;
 
   /**
    * 小程序登录凭证校验
@@ -286,6 +299,14 @@ public interface WxCpService extends WxService {
    * @param wxConfigProvider 配置对象
    */
   void setWxCpConfigStorage(WxCpConfigStorage wxConfigProvider);
+
+  /**
+   * 构造扫码登录链接 - 构造独立窗口登录二维码
+   * @param redirectUri 重定向地址，需要进行UrlEncode
+   * @param state 用于保持请求和回调的状态，授权请求后原样带回给企业。该参数可用于防止csrf攻击（跨站请求伪造攻击），建议企业带上该参数，可设置为简单的随机数加session进行校验
+   * @return .
+   */
+  String buildQrConnectUrl(String redirectUri, String state);
 
   /**
    * 获取部门相关接口的服务类对象

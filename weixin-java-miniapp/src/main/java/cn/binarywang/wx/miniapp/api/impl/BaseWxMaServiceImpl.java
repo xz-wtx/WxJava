@@ -49,6 +49,7 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
   private final WxMaSchemeService schemeService = new WxMaSchemeServiceImpl(this);
   private final WxMaAnalysisService analysisService = new WxMaAnalysisServiceImpl(this);
   private final WxMaCodeService codeService = new WxMaCodeServiceImpl(this);
+  private final WxMaInternetService internetService = new WxMaInternetServiceImpl(this);
   private final WxMaSettingService settingService = new WxMaSettingServiceImpl(this);
   private final WxMaJsapiService jsapiService = new WxMaJsapiServiceImpl(this);
   private final WxMaShareService shareService = new WxMaShareServiceImpl(this);
@@ -65,6 +66,15 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
   private final WxImgProcService imgProcService = new WxMaImgProcServiceImpl(this);
   private final WxMaShopSpuService shopSpuService = new WxMaShopSpuServiceImpl(this);
   private final WxMaShopOrderService shopOrderService = new WxMaShopOrderServiceImpl(this);
+  private final WxMaShopRegisterService shopRegisterService = new WxMaShopRegisterServiceImpl(this);
+  private final WxMaShopAccountService shopAccountService = new WxMaShopAccountServiceImpl(this);
+  private final WxMaShopCatService shopCatService = new WxMaShopCatServiceImpl(this);
+  private final WxMaShopImgService shopImgService = new WxMaShopImgServiceImpl(this);
+  private final WxMaShopAuditService shopAuditService = new WxMaShopAuditServiceImpl(this);
+  private final WxMaShopAfterSaleService shopAfterSaleService = new WxMaShopAfterSaleServiceImpl(this);
+  private final WxMaShopDeliveryService shopDeliveryService = new WxMaShopDeliveryServiceImpl(this);
+  private final WxMaLinkService linkService = new WxMaLinkServiceImpl(this);
+  private final WxMaReimburseInvoiceService reimburseInvoiceService = new WxMaReimburseInvoiceServiceImpl(this);
   private Map<String, WxMaConfig> configMap;
   private int retrySleepMillis = 1000;
   private int maxRetryTimes = 5;
@@ -298,6 +308,7 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
    * @throws WxErrorException 异常
    */
   protected String extractAccessToken(String resultContent) throws WxErrorException {
+    log.info("resultContent: " + resultContent);
     WxMaConfig config = this.getWxMaConfig();
     WxError error = WxError.fromJson(resultContent, WxType.MiniApp);
     if (error.getErrorCode() != 0) {
@@ -479,6 +490,11 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
   }
 
   @Override
+  public WxMaInternetService getInternetService() {
+    return this.internetService;
+  }
+
+  @Override
   public WxMaLiveService getLiveService() {
     return this.liveService;
   }
@@ -511,5 +527,50 @@ public abstract class BaseWxMaServiceImpl<H, P> implements WxMaService, RequestH
   @Override
   public WxMaShopOrderService getShopOrderService() {
     return this.shopOrderService;
+  }
+
+  @Override
+  public WxMaShopRegisterService getShopRegisterService() {
+    return this.shopRegisterService;
+  }
+
+  @Override
+  public WxMaShopAccountService getShopAccountService() {
+    return this.shopAccountService;
+  }
+
+  @Override
+  public WxMaShopCatService getShopCatService() {
+    return this.shopCatService;
+  }
+
+  @Override
+  public WxMaShopImgService getShopImgService() {
+    return this.shopImgService;
+  }
+
+  @Override
+  public WxMaShopAuditService getShopAuditService() {
+    return this.shopAuditService;
+  }
+
+  @Override
+  public WxMaShopAfterSaleService getShopAfterSaleService() {
+    return this.shopAfterSaleService;
+  }
+
+  @Override
+  public WxMaShopDeliveryService getShopDeliveryService() {
+    return this.shopDeliveryService;
+  }
+
+  @Override
+  public WxMaLinkService getLinkService() {
+    return this.linkService;
+  }
+
+  @Override
+  public WxMaReimburseInvoiceService getReimburseInvoiceService() {
+    return this.reimburseInvoiceService;
   }
 }

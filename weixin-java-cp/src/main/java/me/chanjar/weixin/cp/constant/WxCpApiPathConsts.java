@@ -91,8 +91,13 @@ public interface WxCpApiPathConsts {
   }
 
   interface Oa {
+    String GET_CORP_CHECKIN_OPTION = "/cgi-bin/checkin/getcorpcheckinoption";
     String GET_CHECKIN_DATA = "/cgi-bin/checkin/getcheckindata";
     String GET_CHECKIN_OPTION = "/cgi-bin/checkin/getcheckinoption";
+    String GET_CHECKIN_DAY_DATA = "/cgi-bin/checkin/getcheckin_daydata";
+    String GET_CHECKIN_MONTH_DATA = "/cgi-bin/checkin/getcheckin_monthdata";
+    String GET_CHECKIN_SCHEDULE_DATA = "/cgi-bin/checkin/getcheckinschedulist";
+    String SET_CHECKIN_SCHEDULE_DATA = "/cgi-bin/checkin/setcheckinschedulist";
     String GET_APPROVAL_INFO = "/cgi-bin/oa/getapprovalinfo";
     String GET_APPROVAL_DETAIL = "/cgi-bin/oa/getapprovaldetail";
     String GET_DIAL_RECORD = "/cgi-bin/dial/get_dial_record";
@@ -175,13 +180,21 @@ public interface WxCpApiPathConsts {
     String CLOSE_TEMP_CHAT = "/cgi-bin/externalcontact/close_temp_chat";
     String GET_FOLLOW_USER_LIST = "/cgi-bin/externalcontact/get_follow_user_list";
     String GET_CONTACT_DETAIL = "/cgi-bin/externalcontact/get?external_userid=";
+    String CONVERT_TO_OPENID = "/cgi-bin/externalcontact/convert_to_openid";
+    String UNIONID_TO_EXTERNAL_USERID = "/cgi-bin/externalcontact/unionid_to_external_userid";
     String GET_CONTACT_DETAIL_BATCH = "/cgi-bin/externalcontact/batch/get_by_user?";
     String UPDATE_REMARK = "/cgi-bin/externalcontact/remark";
     String LIST_EXTERNAL_CONTACT = "/cgi-bin/externalcontact/list?userid=";
     String LIST_UNASSIGNED_CONTACT = "/cgi-bin/externalcontact/get_unassigned_list";
+    @Deprecated
     String TRANSFER_UNASSIGNED_CONTACT = "/cgi-bin/externalcontact/transfer";
+    String TRANSFER_CUSTOMER = "/cgi-bin/externalcontact/transfer_customer";
+    String TRANSFER_RESULT = "/cgi-bin/externalcontact/transfer_result";
+    String RESIGNED_TRANSFER_CUSTOMER = "/cgi-bin/externalcontact/resigned/transfer_customer";
+    String RESIGNED_TRANSFER_RESULT = "/cgi-bin/externalcontact/resigned/transfer_result";
     String GROUP_CHAT_LIST = "/cgi-bin/externalcontact/groupchat/list";
     String GROUP_CHAT_INFO = "/cgi-bin/externalcontact/groupchat/get";
+    String GROUP_CHAT_TRANSFER = "/cgi-bin/externalcontact/groupchat/transfer";
     String LIST_USER_BEHAVIOR_DATA = "/cgi-bin/externalcontact/get_user_behavior_data";
     String LIST_GROUP_CHAT_DATA = "/cgi-bin/externalcontact/groupchat/statistic";
     String ADD_MSG_TEMPLATE = "/cgi-bin/externalcontact/add_msg_template";
@@ -192,5 +205,18 @@ public interface WxCpApiPathConsts {
     String EDIT_CORP_TAG = "/cgi-bin/externalcontact/edit_corp_tag";
     String DEL_CORP_TAG = "/cgi-bin/externalcontact/del_corp_tag";
     String MARK_TAG = "/cgi-bin/externalcontact/mark_tag";
+
+    String ADD_MOMENT_TASK = "/cgi-bin/externalcontact/add_moment_task";
+    String GET_MOMENT_TASK_RESULT = "/cgi-bin/externalcontact/get_moment_task_result";
+    String GET_MOMENT_LIST = "/cgi-bin/externalcontact/get_moment_list";
+    String GET_MOMENT_TASK = "/cgi-bin/externalcontact/get_moment_task";
+    String GET_MOMENT_CUSTOMER_LIST = "/cgi-bin/externalcontact/get_moment_customer_list";
+    String GET_MOMENT_SEND_RESULT = "/cgi-bin/externalcontact/get_moment_send_result";
+    String GET_MOMENT_COMMENTS = "/cgi-bin/externalcontact/get_moment_comments";
+
+    String GET_GROUP_MSG_SEND_RESULT = "/cgi-bin/externalcontact/get_groupmsg_send_result";
+    String GET_GROUP_MSG_TASK = "/cgi-bin/externalcontact/get_groupmsg_task";
+    String GET_GROUP_MSG_LIST_V2 = "/cgi-bin/externalcontact/get_groupmsg_list_v2";
+
   }
 }

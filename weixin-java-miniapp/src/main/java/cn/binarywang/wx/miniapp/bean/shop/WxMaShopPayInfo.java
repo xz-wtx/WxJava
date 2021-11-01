@@ -7,21 +7,19 @@ import lombok.Data;
 /**
  * @author leiin
  * @date 2021/3/23
- * @description:
  */
 @Data
 public class WxMaShopPayInfo implements Serializable {
-
   private static final long serialVersionUID = 687488209024968647L;
 
   /**
-   * 支付方式（目前只有"微信支付"）
+   * 支付方式（支付方式，0:微信支付，1: 货到付款，2：商家会员储蓄卡, 默认0)
    * <pre>
    * 是否必填：是
    * </pre>
    */
-  @SerializedName("pay_method")
-  private String payMethod;
+  @SerializedName("pay_method_type")
+  private Integer payMethodType;
 
   /**
    * 预支付ID
