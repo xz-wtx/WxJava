@@ -12,33 +12,7 @@ import me.chanjar.weixin.common.util.json.GsonParser;
 import me.chanjar.weixin.cp.api.WxCpExternalContactService;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.WxCpBaseResp;
-import me.chanjar.weixin.cp.bean.external.WxCpAddMomentResult;
-import me.chanjar.weixin.cp.bean.external.WxCpAddMomentTask;
-import me.chanjar.weixin.cp.bean.external.WxCpContactWayInfo;
-import me.chanjar.weixin.cp.bean.external.WxCpContactWayResult;
-import me.chanjar.weixin.cp.bean.external.WxCpGetMomentComments;
-import me.chanjar.weixin.cp.bean.external.WxCpGetMomentCustomerList;
-import me.chanjar.weixin.cp.bean.external.WxCpGetMomentList;
-import me.chanjar.weixin.cp.bean.external.WxCpGetMomentSendResult;
-import me.chanjar.weixin.cp.bean.external.WxCpGetMomentTask;
-import me.chanjar.weixin.cp.bean.external.WxCpGetMomentTaskResult;
-import me.chanjar.weixin.cp.bean.external.WxCpMsgTemplate;
-import me.chanjar.weixin.cp.bean.external.WxCpMsgTemplateAddResult;
-import me.chanjar.weixin.cp.bean.external.WxCpUpdateRemarkRequest;
-import me.chanjar.weixin.cp.bean.external.WxCpUserExternalContactList;
-import me.chanjar.weixin.cp.bean.external.WxCpUserExternalGroupChatInfo;
-import me.chanjar.weixin.cp.bean.external.WxCpUserExternalGroupChatList;
-import me.chanjar.weixin.cp.bean.external.WxCpUserExternalGroupChatStatistic;
-import me.chanjar.weixin.cp.bean.external.WxCpUserExternalGroupChatTransferResp;
-import me.chanjar.weixin.cp.bean.external.WxCpUserExternalTagGroupInfo;
-import me.chanjar.weixin.cp.bean.external.WxCpUserExternalTagGroupList;
-import me.chanjar.weixin.cp.bean.external.WxCpUserExternalUnassignList;
-import me.chanjar.weixin.cp.bean.external.WxCpUserExternalUserBehaviorStatistic;
-import me.chanjar.weixin.cp.bean.external.WxCpUserTransferCustomerReq;
-import me.chanjar.weixin.cp.bean.external.WxCpUserTransferCustomerResp;
-import me.chanjar.weixin.cp.bean.external.WxCpUserTransferResultResp;
-import me.chanjar.weixin.cp.bean.external.WxCpUserWithExternalPermission;
-import me.chanjar.weixin.cp.bean.external.WxCpWelcomeMsg;
+import me.chanjar.weixin.cp.bean.external.*;
 import me.chanjar.weixin.cp.bean.external.contact.*;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -155,6 +129,16 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
     String responseContent = this.mainService.post(url, json.toString());
     JsonObject tmpJson = GsonParser.parse(responseContent);
     return tmpJson.get("external_userid").getAsString();
+  }
+
+  @Override
+  public String opengidToChatid(@NotNull String opengid) throws WxErrorException {
+    JsonObject json = new JsonObject();
+    json.addProperty("opengid",opengid);
+    final String url = this.mainService.getWxCpConfigStorage().getApiUrl(OPENID_TO_CHATID);
+    String responseContent = this.mainService.post(url, json.toString());
+    JsonObject tmpJson = GsonParser.parse(responseContent);
+    return tmpJson.get("chat_id").getAsString();
   }
 
   @Override
@@ -586,7 +570,7 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
     json.addProperty("limit", limit);
     json.addProperty("cursor", cursor);
 
-    final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GET_GROUP_MSG_SEND_RESULT);
+    final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GET_GROUP_MSG_LIST_V2);
     final String result = this.mainService.post(url, json.toString());
     return WxCpGroupMsgListResult.fromJson(result);
   }
@@ -636,8 +620,86 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
     json.addProperty("limit", limit);
     json.addProperty("cursor", cursor);
 
-    final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GET_GROUP_MSG_SEND_RESULT);
+    final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GET_GROUP_MSG_TASK);
     final String result = this.mainService.post(url, json.toString());
     return WxCpGroupMsgTaskResult.fromJson(result);
+  }
+
+  /**
+   * <pre>
+   * 添加入群欢迎语素材。
+   * https://open.work.weixin.qq.com/api/doc/90000/90135/92366#添加入群欢迎语素材
+   * </pre>
+   *
+   * @param template 素材内容
+   * @return template_id      欢迎语素材id
+   * @throws WxErrorException the wx error exception
+   */
+  @Override
+  public String addGroupWelcomeTemplate(WxCpGroupWelcomeTemplateResult template) throws WxErrorException {
+    final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GROUP_WELCOME_TEMPLATE_ADD);
+    final String responseContent = this.mainService.post(url, template.toJson());
+    JsonObject tmpJson = GsonParser.parse(responseContent);
+    return tmpJson.get("template_id").getAsString();
+  }
+
+  /**
+   * <pre>
+   * 编辑入群欢迎语素材。
+   * https://open.work.weixin.qq.com/api/doc/90000/90135/92366#编辑入群欢迎语素材
+   * </pre>
+   *
+   * @param template
+   * @return wx cp base resp
+   * @throws WxErrorException the wx error exception
+   */
+  @Override
+  public WxCpBaseResp editGroupWelcomeTemplate(WxCpGroupWelcomeTemplateResult template) throws WxErrorException {
+    final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GROUP_WELCOME_TEMPLATE_EDIT);
+    final String result = this.mainService.post(url, template.toJson());
+    return WxCpGroupWelcomeTemplateResult.fromJson(result);
+  }
+
+  /**
+   * <pre>
+   * 获取入群欢迎语素材。
+   * https://open.work.weixin.qq.com/api/doc/90000/90135/92366#获取入群欢迎语素材
+   * </pre>
+   *
+   * @param templateId 群欢迎语的素材id
+   * @return wx cp base resp
+   * @throws WxErrorException the wx error exception
+   */
+  @Override
+  public WxCpGroupWelcomeTemplateResult getGroupWelcomeTemplate(@NotNull String templateId) throws WxErrorException {
+    JsonObject json = new JsonObject();
+    json.addProperty("template_id", templateId);
+    final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GROUP_WELCOME_TEMPLATE_GET);
+    final String result = this.mainService.post(url, json.toString());
+    return WxCpGroupWelcomeTemplateResult.fromJson(result);
+  }
+
+  /**
+   * <pre>
+   * 删除入群欢迎语素材。
+   * 企业可通过此API删除入群欢迎语素材，且仅能删除调用方自己创建的入群欢迎语素材。
+   * https://open.work.weixin.qq.com/api/doc/90000/90135/92366#删除入群欢迎语素材
+   * </pre>
+   *
+   * @param templateId 群欢迎语的素材id
+   * @param agentId
+   * @return wx cp base resp
+   * @throws WxErrorException the wx error exception
+   */
+  @Override
+  public WxCpBaseResp delGroupWelcomeTemplate(@NotNull String templateId, String agentId) throws WxErrorException {
+    JsonObject json = new JsonObject();
+    json.addProperty("template_id", templateId);
+    if (!StringUtils.isEmpty(agentId)) {
+      json.addProperty("agentid", agentId);
+    }
+    final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GROUP_WELCOME_TEMPLATE_DEL);
+    final String result = this.mainService.post(url, json.toString());
+    return WxCpBaseResp.fromJson(result);
   }
 }
