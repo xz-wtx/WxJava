@@ -103,12 +103,8 @@ public class DefaultApacheHttpClientBuilder implements ApacheHttpClientBuilder {
    */
   private ConnectionKeepAliveStrategy connectionKeepAliveStrategy;
 
-  private final HttpRequestRetryHandler defaultHttpRequestRetryHandler = new HttpRequestRetryHandler() {
-    @Override
-    public boolean retryRequest(IOException exception, int executionCount, HttpContext context) {
-      return false;
-    }
-  };
+  private final HttpRequestRetryHandler defaultHttpRequestRetryHandler = (exception, executionCount, context) -> false;
+
   private SSLConnectionSocketFactory sslConnectionSocketFactory = SSLConnectionSocketFactory.getSocketFactory();
   private final PlainConnectionSocketFactory plainConnectionSocketFactory = PlainConnectionSocketFactory.getSocketFactory();
   private String httpProxyHost;
@@ -152,6 +148,18 @@ public class DefaultApacheHttpClientBuilder implements ApacheHttpClientBuilder {
   @Override
   public ApacheHttpClientBuilder httpProxyPassword(String httpProxyPassword) {
     this.httpProxyPassword = httpProxyPassword;
+    return this;
+  }
+
+  @Override
+  public ApacheHttpClientBuilder httpRequestRetryHandler(HttpRequestRetryHandler httpRequestRetryHandler) {
+    this.httpRequestRetryHandler = httpRequestRetryHandler;
+    return this;
+  }
+
+  @Override
+  public ApacheHttpClientBuilder keepAliveStrategy(ConnectionKeepAliveStrategy keepAliveStrategy) {
+    this.connectionKeepAliveStrategy = keepAliveStrategy;
     return this;
   }
 
