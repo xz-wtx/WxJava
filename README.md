@@ -10,35 +10,32 @@
 
 #### 微信`Java`开发工具包，支持包括微信支付、开放平台、公众号、企业微信/企业号、小程序等微信功能模块的后端开发。
 
-<p align="center">
+<div align="center">
   <b>特别赞助</b>
-</p>
-<br/>
-<table align="center" cellspacing="0" cellpadding="0">
-  <tbody>
-    <tr>
-      <td align="center" valign="middle" width="500" colspan="3">
-	      <a href="http://www.ccflow.org/?from=wxjava" target="_blank">
-					<img height="120" src="https://gitee.com/binary/weixin-java-tools/raw/develop/images/banners/ccflow.png">
-				</a>
-      </td>
-    </tr>
-    <tr>
-			<td align="left" valign="middle">
-        <a href="http://mp.weixin.qq.com/mp/homepage?__biz=MzI3MzAwMzk4OA==&hid=1&sn=f31af3bf562b116b061c9ab4edf70b61&scene=18#wechat_redirect" target="_blank">
-				  <img height="120" src="https://gitee.com/binary/weixin-java-tools/raw/develop/images/qrcodes/mp.png">
-        </a>
-			</td>
-      <td align="center" valign="middle" width="250">
-				赞助商招募中，欢迎联系洽谈
-      </td>
-      <td align="right" valign="middle">
-        <a href="https://promotion.aliyun.com/ntms/act/qwbk.html?userCode=7makzf5h" target="_blank">
-					<img height="120" src="https://gitee.com/binary/weixin-java-tools/raw/develop/images/banners/aliyun.jpg">
-				</a>
-      </td>
-		</tr>
-	</tbody>
+</div>
+<table align="center" cellspacing="0" cellpadding="0" width="500">
+  <tr>
+    <td align="center" valign="middle" colspan="3">
+      <a href="http://www.ccflow.org/?from=wxjava" target="_blank">
+        <img height="120" src="https://gitee.com/binary/weixin-java-tools/raw/develop/images/banners/ccflow.png" alt="">
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="middle">
+      <a href="http://mp.weixin.qq.com/mp/homepage?__biz=MzI3MzAwMzk4OA==&hid=1&sn=f31af3bf562b116b061c9ab4edf70b61&scene=18#wechat_redirect" target="_blank">
+        <img height="120" src="https://gitee.com/binary/weixin-java-tools/raw/develop/images/qrcodes/mp.png" alt="">
+      </a>
+    </td>
+    <td>
+      <div style="text-align: center;">赞助商招募中，欢迎联系洽谈</div>
+    </td>
+    <td align="right" valign="middle">
+      <a href="https://promotion.aliyun.com/ntms/act/qwbk.html?userCode=7makzf5h" target="_blank">
+        <img height="120" src="https://gitee.com/binary/weixin-java-tools/raw/develop/images/banners/aliyun.jpg" alt="">
+      </a>
+    </td>
+  </tr>
 </table>
 
 ### 重要信息
