@@ -1,8 +1,13 @@
 package me.chanjar.weixin.cp.bean.external;
 
+import com.google.gson.reflect.TypeToken;
+import lombok.val;
+import me.chanjar.weixin.common.util.json.GsonParser;
+import me.chanjar.weixin.cp.bean.WxCpDepart;
 import me.chanjar.weixin.cp.bean.external.contact.ExternalContact;
 import me.chanjar.weixin.cp.bean.external.contact.FollowedUser;
 import me.chanjar.weixin.cp.bean.external.contact.WxCpExternalContactInfo;
+import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 import org.testng.annotations.*;
 
 import java.util.List;
@@ -78,8 +83,8 @@ public class WxCpUserExternalContactInfoTest {
       "    }\n" +
       "  ]\n" +
       "}";
-    
-        final String testJson = "{\n" +
+
+    final String testJson = "{\n" +
       "   \"errcode\": 0,\n" +
       "   \"errmsg\": \"ok\",\n" +
       "   \"department\": [\n" +
@@ -114,7 +119,7 @@ public class WxCpUserExternalContactInfoTest {
     String toJson = depart.toJson();
 
     // 测试企业微信字段返回
-    List<WxCpDepart> department = WxCpGsonBuilder.create().fromJson(GsonParser.parse(two).get("department"), new TypeToken<List<WxCpDepart>>() {
+    List<WxCpDepart> department = WxCpGsonBuilder.create().fromJson(GsonParser.parse(testJson).get("department"), new TypeToken<List<WxCpDepart>>() {
     }.getType());
 
     final WxCpExternalContactInfo contactInfo = WxCpExternalContactInfo.fromJson(json);
