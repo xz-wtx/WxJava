@@ -1,8 +1,6 @@
 package me.chanjar.weixin.cp.constant;
 
 
-import lombok.experimental.UtilityClass;
-
 /**
  * <pre>
  *  企业微信api地址常量类
@@ -116,6 +114,19 @@ public interface WxCpApiPathConsts {
     String SCHEDULE_LIST = "/cgi-bin/oa/schedule/get_by_calendar";
 
     String COPY_TEMPLATE = "/cgi-bin/oa/approval/copytemplate";
+  }
+
+  interface Living {
+    String GET_LIVING_CODE = "/cgi-bin/living/get_living_code";
+    String GET_LIVING_INFO = "/cgi-bin/living/get_living_info?livingid=";
+    String GET_WATCH_STAT = "/cgi-bin/living/get_watch_stat";
+    String GET_LIVING_SHARE_INFO = "/cgi-bin/living/get_living_share_info";
+    String GET_USER_ALL_LIVINGID = "/cgi-bin/living/get_user_all_livingid";
+
+    String CREATE = "/cgi-bin/living/create";
+    String MODIFY = "/cgi-bin/living/modify";
+    String CANCEL = "/cgi-bin/living/cancel";
+    String DELETE_REPLAY_DATA = "/cgi-bin/living/delete_replay_data";
   }
 
   interface Tag {
