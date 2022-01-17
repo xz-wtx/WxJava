@@ -69,7 +69,7 @@
 <dependency>
   <groupId>com.github.binarywang</groupId>
   <artifactId>（不同模块参考下文）</artifactId>
-  <version>4.1.0</version>
+  <version>4.2.0</version>
 </dependency>
 ```
 
