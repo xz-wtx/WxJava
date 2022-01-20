@@ -428,6 +428,13 @@ public interface WxCpService extends WxService {
   WxCpAgentWorkBenchService getWorkBenchService();
 
   /**
+   * 获取微信客服服务
+   *
+   * @return 微信客服服务
+   */
+  WxCpKfService getKfService();
+
+  /**
    * http请求对象
    *
    * @return the request http
@@ -476,4 +483,10 @@ public interface WxCpService extends WxService {
    */
   void setTagService(WxCpTagService tagService);
 
+  /**
+   * Sets kf service.
+   *
+   * @param kfService the kf service
+   */
+  void setKfService(WxCpKfService kfService);
 }

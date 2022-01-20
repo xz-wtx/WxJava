@@ -244,4 +244,13 @@ public interface WxCpApiPathConsts {
     String GROUP_WELCOME_TEMPLATE_DEL = "/cgi-bin/externalcontact/group_welcome_template/del";
 
   }
+
+  interface Kf {
+    String ACCOUNT_ADD = "/cgi-bin/kf/account/add";
+    String ACCOUNT_UPD = "/cgi-bin/kf/account/update";
+    String ACCOUNT_DEL = "/cgi-bin/kf/account/del";
+    String ACCOUNT_LIST = "/cgi-bin/kf/account/list";
+    String ADD_CONTACT_WAY = "/cgi-bin/kf/add_contact_way";
+
+  }
 }

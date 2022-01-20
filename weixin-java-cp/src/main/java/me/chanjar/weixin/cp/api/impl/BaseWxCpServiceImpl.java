@@ -57,6 +57,7 @@ public abstract class BaseWxCpServiceImpl<H, P> implements WxCpService, RequestH
   private WxCpOaCalendarService oaCalendarService = new WxCpOaCalendarServiceImpl(this);
   private WxCpOaScheduleService oaScheduleService = new WxCpOaOaScheduleServiceImpl(this);
   private WxCpAgentWorkBenchService workBenchService = new WxCpAgentWorkBenchServiceImpl(this);
+  private WxCpKfService kfService = new WxCpKfServiceImpl(this);
 
   /**
    * 全局的是否正在刷新access token的锁.
@@ -555,5 +556,15 @@ public abstract class BaseWxCpServiceImpl<H, P> implements WxCpService, RequestH
   @Override
   public WxCpOaScheduleService getOaScheduleService() {
     return this.oaScheduleService;
+  }
+
+  @Override
+  public WxCpKfService getKfService() {
+    return kfService;
+  }
+
+  @Override
+  public void setKfService(WxCpKfService kfService) {
+    this.kfService = kfService;
   }
 }
