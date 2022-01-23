@@ -9,8 +9,6 @@ import java.io.Serializable;
  */
 @Data
 public class ClearOutInvoiceRequest implements Serializable {
-
-
   private ClearOutInvoiceInfo invoiceinfo;
 
   @Data
