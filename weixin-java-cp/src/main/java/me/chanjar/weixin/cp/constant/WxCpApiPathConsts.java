@@ -129,6 +129,12 @@ public interface WxCpApiPathConsts {
     String DELETE_REPLAY_DATA = "/cgi-bin/living/delete_replay_data";
   }
 
+  interface MsgAudit {
+    String GET_PERMIT_USER_LIST = "/cgi-bin/msgaudit/get_permit_user_list";
+    String GET_GROUP_CHAT = "/cgi-bin/msgaudit/groupchat/get";
+    String CHECK_SINGLE_AGREE = "/cgi-bin/msgaudit/check_single_agree";
+  }
+
   interface Tag {
     String TAG_CREATE = "/cgi-bin/tag/create";
     String TAG_UPDATE = "/cgi-bin/tag/update";
