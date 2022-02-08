@@ -736,7 +736,6 @@ public class WxCpXmlMessage implements Serializable {
     @XStreamAlias("Details")
     @Data
     public static class Detail implements Serializable {
-
       private static final long serialVersionUID = -8446107461495047603L;
 
       /**
@@ -765,8 +764,10 @@ public class WxCpXmlMessage implements Serializable {
 
       /**
        * 节点分支审批人审批意见附件，赋值为media_id具体使用请参考：文档-获取临时素材
+       * TODO 居然可以返回多个，坑爹的，暂时屏蔽注解以免报错，有兴趣挑战的，尽管把代码砸过来吧！
+       * 请先通过allFieldsMap解析需要的参数！
        */
-      @XStreamAlias("Attach")
+      // @XStreamAlias("Attach")
       private String attach;
     }
 
