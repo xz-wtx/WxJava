@@ -51,11 +51,11 @@ public class WxOpenMaCodeTemplate implements Serializable {
    * 开发小程序的appid
    */
   @SerializedName(value = "sourceMiniProgramAppid", alternate = "source_miniprogram_appid")
-  private Long sourceMiniProgramAppid;
+  private String sourceMiniProgramAppid;
 
   /**
    * 开发小程序的名称
    */
   @SerializedName(value = "sourceMiniProgram", alternate = "source_miniprogram")
-  private Long sourceMiniProgram;
+  private String sourceMiniProgram;
 }
