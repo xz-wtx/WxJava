@@ -16,6 +16,7 @@ import me.chanjar.weixin.cp.util.crypto.WxCpCryptUtil;
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 import me.chanjar.weixin.cp.util.xml.XStreamTransformer;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,7 +52,7 @@ public class WxCpXmlMessage implements Serializable {
   ///////////////////////
 
   @XStreamAlias("AgentID")
-  private Integer agentId;
+  private String agentId;
 
   @XStreamAlias("ToUserName")
   @XStreamConverter(value = XStreamCDataConverter.class)
@@ -476,7 +477,7 @@ public class WxCpXmlMessage implements Serializable {
     return xmlMessage;
   }
 
-  public static WxCpXmlMessage fromXml(String xml, Integer agentId) {
+  public static WxCpXmlMessage fromXml(String xml, String agentId) {
     //修改微信变态的消息内容格式，方便解析
     xml = xml.replace("</PicList><PicList>", "");
     final WxCpXmlMessage xmlMessage = fromXml(xml);
@@ -497,7 +498,7 @@ public class WxCpXmlMessage implements Serializable {
     WxCpXmlMessage wxCpXmlMessage = fromXml(encryptedXml);
     String plainText = cryptUtil.decrypt(msgSignature, timestamp, nonce, encryptedXml);
     log.debug("解密后的原始xml消息内容：{}", plainText);
-    if (null != wxCpXmlMessage.getAgentId()) {
+    if (StringUtils.isNotEmpty(wxCpXmlMessage.getAgentId())) {
       return fromXml(plainText, wxCpXmlMessage.getAgentId());
     } else {
       return fromXml(plainText);
