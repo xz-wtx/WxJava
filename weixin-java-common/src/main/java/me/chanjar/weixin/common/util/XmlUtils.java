@@ -39,7 +39,18 @@ public class XmlUtils {
       Element root = doc.getRootElement();
       List<Element> elements = root.elements();
       for (Element element : elements) {
-        map.put(element.getName(), element2MapOrString(element));
+        String elementName = element.getName();
+        if (map.containsKey(elementName)) {
+          if (map.get(elementName) instanceof List) {
+            ((List<Object>) map.get(elementName)).add(element2MapOrString(element));
+          } else {
+            List<Object> value = Lists.newArrayList(map.get(elementName));
+            value.add(element2MapOrString(element));
+            map.put(elementName, value);
+          }
+        } else {
+          map.put(elementName, element2MapOrString(element));
+        }
       }
     } catch (DocumentException | SAXException e) {
       throw new WxRuntimeException(e);
