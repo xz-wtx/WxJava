@@ -20,13 +20,13 @@ import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.*;
 import com.github.binarywang.wxpay.util.SignUtils;
 import com.github.binarywang.wxpay.util.XmlConfig;
+import com.github.binarywang.wxpay.util.ZipUtils;
 import com.github.binarywang.wxpay.v3.util.AesUtils;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import jodd.io.ZipUtil;
 import me.chanjar.weixin.common.error.WxRuntimeException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -888,7 +888,7 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
       Path path = Paths.get(tempDirectory.toString(), System.currentTimeMillis() + ".gzip");
       Files.write(path, responseBytes);
       try {
-        List<String> allLines = Files.readAllLines(ZipUtil.ungzip(path.toFile()).toPath(), StandardCharsets.UTF_8);
+        List<String> allLines = Files.readAllLines(ZipUtils.unGzip(path.toFile()).toPath(), StandardCharsets.UTF_8);
         return Joiner.on("\n").join(allLines);
       } catch (ZipException e) {
         if (e.getMessage().contains("Not in GZIP format")) {
@@ -941,7 +941,7 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
       Files.write(path, responseBytes);
 
       try {
-        List<String> allLines = Files.readAllLines(ZipUtil.ungzip(path.toFile()).toPath(), StandardCharsets.UTF_8);
+        List<String> allLines = Files.readAllLines(ZipUtils.unGzip(path.toFile()).toPath(), StandardCharsets.UTF_8);
         return Joiner.on("\n").join(allLines);
       } catch (ZipException e) {
         if (e.getMessage().contains("Not in GZIP format")) {
