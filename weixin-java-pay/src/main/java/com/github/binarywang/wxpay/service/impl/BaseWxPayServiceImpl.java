@@ -147,10 +147,14 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
   }
 
   @Override
-  public PartnerTransferService getPartnerTransferService(){return partnerTransferService;}
+  public PartnerTransferService getPartnerTransferService() {
+    return partnerTransferService;
+  }
 
   @Override
-  public PayrollService getPayrollService(){return payrollService;}
+  public PayrollService getPayrollService() {
+    return payrollService;
+  }
 
   @Override
   public WxPayConfig getConfig() {
@@ -358,8 +362,9 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
 
   /**
    * 校验通知签名
+   *
    * @param header 通知头信息
-   * @param data 通知数据
+   * @param data   通知数据
    * @return true:校验通过 false:校验不通过
    */
   private boolean verifyNotifySign(SignatureHeader header, String data) {
@@ -700,6 +705,10 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
     if (StringUtils.isBlank(request.getMchid())) {
       request.setMchid(this.getConfig().getMchId());
     }
+    if (StringUtils.isBlank(request.getNotifyUrl())) {
+      request.setNotifyUrl(this.getConfig().getNotifyUrl());
+    }
+
     String url = this.getPayBaseUrl() + tradeType.getPartnerUrl();
     String response = this.postV3(url, GSON.toJson(request));
     return GSON.fromJson(response, WxPayUnifiedOrderV3Result.class);
