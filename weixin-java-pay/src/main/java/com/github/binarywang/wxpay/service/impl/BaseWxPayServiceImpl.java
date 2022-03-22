@@ -77,6 +77,7 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
   private final WxEntrustPapService wxEntrustPapService = new WxEntrustPapServiceImpl(this);
   private final PartnerTransferService partnerTransferService = new PartnerTransferServiceImpl(this);
   private final PayrollService payrollService = new PayrollServiceImpl(this);
+  private final ComplaintService complaintsService = new ComplaintServiceImpl(this);
 
   protected Map<String, WxPayConfig> configMap;
 
@@ -1222,4 +1223,33 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
     result.checkResult(this, request.getSignType(), true);
     return result;
   }
+
+  @Override
+  public ComplaintNotifyResult parseComplaintNotifyResult(String notifyData, SignatureHeader header) throws WxPayException {
+    if (Objects.nonNull(header) && !this.verifyNotifySign(header, notifyData)) {
+      throw new WxPayException("非法请求，头部信息验证失败");
+    }
+    OriginNotifyResponse response = GSON.fromJson(notifyData, OriginNotifyResponse.class);
+    OriginNotifyResponse.Resource resource = response.getResource();
+    String cipherText = resource.getCiphertext();
+    String associatedData = resource.getAssociatedData();
+    String nonce = resource.getNonce();
+    String apiV3Key = this.getConfig().getApiV3Key();
+    try {
+      String result = AesUtils.decryptToString(associatedData, nonce, cipherText, apiV3Key);
+      ComplaintNotifyResult.DecryptNotifyResult decryptNotifyResult = GSON.fromJson(result, ComplaintNotifyResult.DecryptNotifyResult.class);
+      ComplaintNotifyResult notifyResult = new ComplaintNotifyResult();
+      notifyResult.setRawData(response);
+      notifyResult.setResult(decryptNotifyResult);
+      return notifyResult;
+    } catch (GeneralSecurityException | IOException e) {
+      throw new WxPayException("解析报文异常！", e);
+    }
+  }
+
+  @Override
+  public ComplaintService getComplaintsService() {
+    return complaintsService;
+  }
+
 }
