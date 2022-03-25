@@ -34,8 +34,10 @@ public class ComplaintServiceImpl implements ComplaintService {
     List<ComplaintDetailResult> data = complaintResult.getData();
     for (ComplaintDetailResult complaintDetailResult : data) {
       // 对手机号进行解密操作
-      String payerPhone = RsaCryptoUtil.decryptOAEP(complaintDetailResult.getPayerPhone(), this.payService.getConfig().getPrivateKey());
-      complaintDetailResult.setPayerPhone(payerPhone);
+      if(complaintDetailResult.getPayerPhone() != null) {
+        String payerPhone = RsaCryptoUtil.decryptOAEP(complaintDetailResult.getPayerPhone(), this.payService.getConfig().getPrivateKey());
+        complaintDetailResult.setPayerPhone(payerPhone);
+      }
     }
     return complaintResult;
   }
@@ -47,8 +49,10 @@ public class ComplaintServiceImpl implements ComplaintService {
     String response = this.payService.getV3(url);
     ComplaintDetailResult result = GSON.fromJson(response, ComplaintDetailResult.class);
     // 对手机号进行解密操作
-    String payerPhone = RsaCryptoUtil.decryptOAEP(result.getPayerPhone(), this.payService.getConfig().getPrivateKey());
-    result.setPayerPhone(payerPhone);
+    if(result.getPayerPhone() != null) {
+      String payerPhone = RsaCryptoUtil.decryptOAEP(result.getPayerPhone(), this.payService.getConfig().getPrivateKey());
+      result.setPayerPhone(payerPhone);
+    }
     return result;
   }
 
