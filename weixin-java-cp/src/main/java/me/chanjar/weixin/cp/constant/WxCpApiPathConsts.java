@@ -71,8 +71,10 @@ public interface WxCpApiPathConsts {
   interface Department {
     String DEPARTMENT_CREATE = "/cgi-bin/department/create";
     String DEPARTMENT_UPDATE = "/cgi-bin/department/update";
+    String DEPARTMENT_GET = "/cgi-bin/department/get?id=%d";
     String DEPARTMENT_DELETE = "/cgi-bin/department/delete?id=%d";
     String DEPARTMENT_LIST = "/cgi-bin/department/list";
+    String DEPARTMENT_SIMPLE_LIST = "/cgi-bin/department/simplelist";
   }
 
   interface Media {
