@@ -285,6 +285,15 @@ public class WxCpDefaultConfigImpl implements WxCpConfigStorage, Serializable {
     this.agentId = agentId;
   }
 
+  /**
+   * 设置企微会话存档路径.
+   *
+   * @param msgAuditLibPath 会话存档具体路径
+   */
+  public void setMsgAuditLibPath(String msgAuditLibPath) {
+    this.msgAuditLibPath = msgAuditLibPath;
+  }
+
   @Override
   public String getOauth2redirectUri() {
     return this.oauth2redirectUri;
