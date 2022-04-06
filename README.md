@@ -34,8 +34,10 @@
         <img height="120" src="https://gitee.com/binary/weixin-java-tools/raw/develop/images/qrcodes/mp.png" alt="">
       </a>
     </td>
-    <td>
-      <div style="text-align: center;">赞助商招募中，欢迎微信联系洽谈</div>
+    <td valign="middle">
+      <a href="https://www.diboot.com/" target="_blank">
+        <img height="120" src="https://gitee.com/binary/weixin-java-tools/raw/develop/images/banners/diboot.png" alt="diboot低代码开发平台"/>
+      </a>
     </td>
     <td align="right" valign="middle">
       <a href="https://promotion.aliyun.com/ntms/act/qwbk.html?userCode=7makzf5h" target="_blank">
