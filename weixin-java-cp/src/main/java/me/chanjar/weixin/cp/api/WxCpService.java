@@ -400,6 +400,13 @@ public interface WxCpService extends WxService {
   WxCpLivingService getLivingService();
 
   /**
+   * 获取OA 自建应用相关接口的服务类对象
+   *
+   * @return
+   */
+  WxCpOaAgentService getOaAgentService();
+
+  /**
    * 获取会话存档相关接口的服务类对象
    *
    * @return

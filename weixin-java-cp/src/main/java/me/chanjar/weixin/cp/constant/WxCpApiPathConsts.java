@@ -91,6 +91,10 @@ public interface WxCpApiPathConsts {
   }
 
   interface Oa {
+    /**
+     * 打卡
+     * https://developer.work.weixin.qq.com/document/path/94204
+     */
     String GET_CORP_CHECKIN_OPTION = "/cgi-bin/checkin/getcorpcheckinoption";
     String GET_CHECKIN_DATA = "/cgi-bin/checkin/getcheckindata";
     String GET_CHECKIN_OPTION = "/cgi-bin/checkin/getcheckinoption";
@@ -98,12 +102,27 @@ public interface WxCpApiPathConsts {
     String GET_CHECKIN_MONTH_DATA = "/cgi-bin/checkin/getcheckin_monthdata";
     String GET_CHECKIN_SCHEDULE_DATA = "/cgi-bin/checkin/getcheckinschedulist";
     String SET_CHECKIN_SCHEDULE_DATA = "/cgi-bin/checkin/setcheckinschedulist";
-    String GET_APPROVAL_INFO = "/cgi-bin/oa/getapprovalinfo";
-    String GET_APPROVAL_DETAIL = "/cgi-bin/oa/getapprovaldetail";
-    String GET_DIAL_RECORD = "/cgi-bin/dial/get_dial_record";
+
+    /**
+     * 审批
+     * https://developer.work.weixin.qq.com/document/path/91956
+     */
+    String COPY_TEMPLATE = "/cgi-bin/oa/approval/copytemplate";
     String GET_TEMPLATE_DETAIL = "/cgi-bin/oa/gettemplatedetail";
     String APPLY_EVENT = "/cgi-bin/oa/applyevent";
+    String GET_APPROVAL_INFO = "/cgi-bin/oa/getapprovalinfo";
+    String GET_APPROVAL_DETAIL = "/cgi-bin/oa/getapprovaldetail";
 
+    /**
+     * 公费电话
+     * https://developer.work.weixin.qq.com/document/path/93662
+     */
+    String GET_DIAL_RECORD = "/cgi-bin/dial/get_dial_record";
+
+    /**
+     * 日程
+     * https://developer.work.weixin.qq.com/document/path/93624
+     */
     String CALENDAR_ADD = "/cgi-bin/oa/calendar/add";
     String CALENDAR_UPDATE = "/cgi-bin/oa/calendar/update";
     String CALENDAR_GET = "/cgi-bin/oa/calendar/get";
@@ -115,7 +134,11 @@ public interface WxCpApiPathConsts {
     String SCHEDULE_DEL = "/cgi-bin/oa/schedule/del";
     String SCHEDULE_LIST = "/cgi-bin/oa/schedule/get_by_calendar";
 
-    String COPY_TEMPLATE = "/cgi-bin/oa/approval/copytemplate";
+    /**
+     * 审批流程引擎
+     * https://developer.work.weixin.qq.com/document/path/90269
+     */
+    String GET_OPEN_APPROVAL_DATA = "/cgi-bin/corp/getopenapprovaldata";
   }
 
   interface Living {
