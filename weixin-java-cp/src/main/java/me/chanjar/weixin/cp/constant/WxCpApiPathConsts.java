@@ -112,6 +112,11 @@ public interface WxCpApiPathConsts {
     String APPLY_EVENT = "/cgi-bin/oa/applyevent";
     String GET_APPROVAL_INFO = "/cgi-bin/oa/getapprovalinfo";
     String GET_APPROVAL_DETAIL = "/cgi-bin/oa/getapprovaldetail";
+    String GET_APPROVAL_DATA = "/cgi-bin/oa/getapprovaldata";
+
+    String GET_CORP_CONF = "/cgi-bin/oa/vacation/getcorpconf";
+    String GET_USER_VACATION_QUOTA = "/cgi-bin/oa/vacation/getuservacationquota";
+    String SET_ONE_USER_QUOTA = "/cgi-bin/oa/vacation/setoneuserquota";
 
     /**
      * 公费电话

@@ -9,11 +9,9 @@ import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.util.json.GsonParser;
 import me.chanjar.weixin.cp.api.WxCpOaAgentService;
 import me.chanjar.weixin.cp.api.WxCpService;
-import me.chanjar.weixin.cp.bean.living.WxCpLivingInfo;
 import me.chanjar.weixin.cp.bean.oa.selfagent.WxCpOpenApprovalData;
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
-import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Living.GET_USER_ALL_LIVINGID;
 import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Oa.GET_OPEN_APPROVAL_DATA;
 
 /**

@@ -166,6 +166,13 @@ public class WxCpOaServiceImpl implements WxCpOaService {
   }
 
   @Override
+  public WxCpCorpConfInfo getCorpConf() throws WxErrorException {
+    final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GET_CORP_CONF);
+    String responseContent = this.mainService.get(url, null);
+    return WxCpCorpConfInfo.fromJson(responseContent);
+  }
+
+  @Override
   public List<WxCpDialRecord> getDialRecord(Date startTime, Date endTime, Integer offset, Integer limit)
     throws WxErrorException {
     JsonObject jsonObject = new JsonObject();

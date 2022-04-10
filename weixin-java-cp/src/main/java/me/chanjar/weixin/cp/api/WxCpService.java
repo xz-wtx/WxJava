@@ -386,7 +386,7 @@ public interface WxCpService extends WxService {
   WxCpMessageService getMessageService();
 
   /**
-   * Gets oa service.
+   * 获取OA相关接口的服务类对象.
    *
    * @return the oa service
    */
