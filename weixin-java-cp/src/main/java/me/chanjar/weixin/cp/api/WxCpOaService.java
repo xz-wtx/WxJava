@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 企业微信OA相关接口.
  *
- * @author Element
+ * @author Element & Wang_Wong
  * @date 2019-04-06 10:52
  */
 public interface WxCpOaService {
@@ -107,6 +107,7 @@ public interface WxCpOaService {
    */
   WxCpApprovalInfo getApprovalInfo(@NonNull Date startTime, @NonNull Date endTime) throws WxErrorException;
 
+
   /**
    * <pre>
    *   获取审批申请详情
@@ -121,6 +122,21 @@ public interface WxCpOaService {
    * @throws WxErrorException .
    */
   WxCpApprovalDetailResult getApprovalDetail(@NonNull String spNo) throws WxErrorException;
+
+
+  /**
+   * 获取企业假期管理配置
+   * 企业可通过审批应用或自建应用Secret调用本接口，获取可见范围内员工的“假期管理”配置，包括：各个假期的id、名称、请假单位、时长计算方式、发放规则等。
+   * 第三方应用可获取应用可见范围内员工的“假期管理”配置，包括：各个假期的id、名称、请假单位、时长计算方式、发放规则等。
+   *
+   * 请求方式：GET(HTTPS)
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/oa/vacation/getcorpconf?access_token=ACCESS_TOKEN
+   *
+   * @return
+   * @throws WxErrorException
+   */
+  WxCpCorpConfInfo getCorpConf() throws WxErrorException;
+
 
   /**
    * 获取公费电话拨打记录

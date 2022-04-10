@@ -178,30 +178,38 @@ public class WxCpMessageTest {
       .appid("小程序的appid")
       .pagepath("/index.html")
       .build();
-
+    QuoteArea quoteArea=QuoteArea.builder()
+      .type(1)
+      .title("引用文献标题")
+      .appid("小程序的appid")
+      .pagepath("/index.html")
+      .url("https://work.weixin.qq.com")
+      .quoteText("引用文献样式的引用文案")
+      .build();
     WxCpMessage reply = WxCpMessage.TEMPLATECARD().toUser("OPENID")
       .agentId(1000002)
-      .card_type(WxConsts.TemplateCardType.TEXT_NOTICE)
-      .source_icon_url("图片的url")
-      .source_desc("企业微信")
-      .main_title_title("欢迎使用企业微信")
-      .main_title_desc("您的好友正在邀请您加入企业微信")
-      .emphasis_content_title("100")
-      .emphasis_content_desc("核心数据")
-      .sub_title_text("下载企业微信还能抢红包！")
-      .horizontal_contents(Arrays.asList(hContent1,hContent2,hContent3))
+      .cardType(WxConsts.TemplateCardType.TEXT_NOTICE)
+      .sourceIconUrl("图片的url")
+      .sourceDesc("企业微信")
+      .mainTitleTitle("欢迎使用企业微信")
+      .mainTitleDesc("您的好友正在邀请您加入企业微信")
+      .emphasisContentTitle("100")
+      .emphasisContentDesc("核心数据")
+      .subTitleText("下载企业微信还能抢红包！")
+      .horizontalContents(Arrays.asList(hContent1,hContent2,hContent3))
       .jumps(Arrays.asList(jump1,jump2))
-      .card_action_type(2)
-      .card_action_appid("小程序的appid")
-      .card_action_url("https://work.weixin.qq.com")
-      .card_action_pagepath("/index.html")
+      .cardActionType(2)
+      .cardActionAppid("小程序的appid")
+      .cardActionUrl("https://work.weixin.qq.com")
+      .cardActionPagepath("/index.html")
+      .quoteArea(quoteArea)
       .build();
     reply.setEnableIdTrans(false);
     reply.setEnableDuplicateCheck(false);
     reply.setDuplicateCheckInterval(1800);
 //    System.out.println(reply.toJson());
     assertThat(reply.toJson())
-      .isEqualTo("{\"agentid\":1000002,\"touser\":\"OPENID\",\"msgtype\":\"template_card\",\"duplicate_check_interval\":1800,\"template_card\":{\"card_type\":\"text_notice\",\"source\":{\"icon_url\":\"图片的url\",\"desc\":\"企业微信\"},\"main_title\":{\"title\":\"欢迎使用企业微信\",\"desc\":\"您的好友正在邀请您加入企业微信\"},\"emphasis_content\":{\"title\":\"100\",\"desc\":\"核心数据\"},\"sub_title_text\":\"下载企业微信还能抢红包！\",\"horizontal_content_list\":[{\"keyname\":\"邀请人\",\"value\":\"张三\"},{\"type\":1,\"keyname\":\"企业微信官网\",\"value\":\"点击访问\",\"url\":\"https://work.weixin.qq.com\"},{\"type\":2,\"keyname\":\"企业微信下载\",\"value\":\"企业微信.apk\",\"media_id\":\"文件的media_id\"}],\"jump_list\":[{\"type\":1,\"title\":\"企业微信官网\",\"url\":\"https://work.weixin.qq.com\"},{\"type\":2,\"title\":\"跳转小程序\",\"appid\":\"小程序的appid\",\"pagepath\":\"/index.html\"}],\"card_action\":{\"type\":2,\"url\":\"https://work.weixin.qq.com\",\"appid\":\"小程序的appid\",\"pagepath\":\"/index.html\"}}}");
+      .isEqualTo("{\"agentid\":1000002,\"touser\":\"OPENID\",\"msgtype\":\"template_card\",\"duplicate_check_interval\":1800,\"template_card\":{\"card_type\":\"text_notice\",\"source\":{\"icon_url\":\"图片的url\",\"desc\":\"企业微信\"},\"main_title\":{\"title\":\"欢迎使用企业微信\",\"desc\":\"您的好友正在邀请您加入企业微信\"},\"emphasis_content\":{\"title\":\"100\",\"desc\":\"核心数据\"},\"sub_title_text\":\"下载企业微信还能抢红包！\",\"horizontal_content_list\":[{\"keyname\":\"邀请人\",\"value\":\"张三\"},{\"type\":1,\"keyname\":\"企业微信官网\",\"value\":\"点击访问\",\"url\":\"https://work.weixin.qq.com\"},{\"type\":2,\"keyname\":\"企业微信下载\",\"value\":\"企业微信.apk\",\"media_id\":\"文件的media_id\"}],\"jump_list\":[{\"type\":1,\"title\":\"企业微信官网\",\"url\":\"https://work.weixin.qq.com\"},{\"type\":2,\"title\":\"跳转小程序\",\"appid\":\"小程序的appid\",\"pagepath\":\"/index.html\"}],\"card_action\":{\"type\":2,\"url\":\"https://work.weixin.qq.com\",\"appid\":\"小程序的appid\",\"pagepath\":\"/index.html\"},\"quote_area\":{\"type\":1,\"url\":\"https://work.weixin.qq.com\",\"appid\":\"小程序的appid\",\"pagepath\":\"/index.html\",\"title\":\"引用文献标题\",\"quote_text\":\"引用文献样式的引用文案\"}}}");
 
   }
 
@@ -251,18 +259,18 @@ public class WxCpMessageTest {
 
     WxCpMessage reply = WxCpMessage.TEMPLATECARD().toUser("OPENID")
       .agentId(1000002)
-      .card_type(WxConsts.TemplateCardType.NEWS_NOTICE)
-      .source_icon_url("图片的url")
-      .source_desc("企业微信")
-      .main_title_title("欢迎使用企业微信")
-      .main_title_desc("您的好友正在邀请您加入企业微信")
-      .vertical_contents(Arrays.asList(vContent1,vContent2))
-      .horizontal_contents(Arrays.asList(hContent1,hContent2,hContent3))
+      .cardType(WxConsts.TemplateCardType.NEWS_NOTICE)
+      .sourceIconUrl("图片的url")
+      .sourceDesc("企业微信")
+      .mainTitleTitle("欢迎使用企业微信")
+      .mainTitleDesc("您的好友正在邀请您加入企业微信")
+      .verticalContents(Arrays.asList(vContent1,vContent2))
+      .horizontalContents(Arrays.asList(hContent1,hContent2,hContent3))
       .jumps(Arrays.asList(jump1,jump2))
-      .card_action_type(2)
-      .card_action_appid("小程序的appid")
-      .card_action_url("https://work.weixin.qq.com")
-      .card_action_pagepath("/index.html")
+      .cardActionType(2)
+      .cardActionAppid("小程序的appid")
+      .cardActionUrl("https://work.weixin.qq.com")
+      .cardActionPagepath("/index.html")
       .build();
     reply.setEnableIdTrans(false);
     reply.setEnableDuplicateCheck(false);
@@ -308,18 +316,18 @@ public class WxCpMessageTest {
 
     WxCpMessage reply = WxCpMessage.TEMPLATECARD().toUser("OPENID")
       .agentId(1000002)
-      .card_type(WxConsts.TemplateCardType.BUTTON_INTERACTION)
-      .source_icon_url("图片的url")
-      .source_desc("企业微信")
-      .main_title_title("欢迎使用企业微信")
-      .main_title_desc("您的好友正在邀请您加入企业微信")
-      .sub_title_text("下载企业微信还能抢红包！")
-      .horizontal_contents(Arrays.asList(hContent1,hContent2,hContent3))
-      .card_action_type(2)
-      .card_action_appid("小程序的appid")
-      .card_action_url("https://work.weixin.qq.com")
-      .card_action_pagepath("/index.html")
-      .task_id("task_id")
+      .cardType(WxConsts.TemplateCardType.BUTTON_INTERACTION)
+      .sourceIconUrl("图片的url")
+      .sourceDesc("企业微信")
+      .mainTitleTitle("欢迎使用企业微信")
+      .mainTitleDesc("您的好友正在邀请您加入企业微信")
+      .subTitleText("下载企业微信还能抢红包！")
+      .horizontalContents(Arrays.asList(hContent1,hContent2,hContent3))
+      .cardActionType(2)
+      .cardActionAppid("小程序的appid")
+      .cardActionUrl("https://work.weixin.qq.com")
+      .cardActionPagepath("/index.html")
+      .taskId("task_id")
       .buttons(Arrays.asList(tButton1,tButton2))
       .build();
     reply.setEnableIdTrans(false);
@@ -348,22 +356,24 @@ public class WxCpMessageTest {
 
     WxCpMessage reply = WxCpMessage.TEMPLATECARD().toUser("OPENID")
       .agentId(1000002)
-      .card_type(WxConsts.TemplateCardType.VOTE_INTERACTION)
-      .source_icon_url("图片的url")
-      .source_desc("企业微信")
-      .main_title_title("欢迎使用企业微信")
-      .main_title_desc("您的好友正在邀请您加入企业微信")
-      .task_id("task_id")
-      .checkbox_question_key("question_key1")
-      .checkbox_mode(1)
+      .cardType(WxConsts.TemplateCardType.VOTE_INTERACTION)
+      .sourceIconUrl("图片的url")
+      .sourceDesc("企业微信")
+      .mainTitleTitle("欢迎使用企业微信")
+      .mainTitleDesc("您的好友正在邀请您加入企业微信")
+      .taskId("task_id")
+      .checkboxQuestionKey("question_key1")
+      .checkboxMode(1)
       .options(Arrays.asList(option1,option2))
-      .submit_button_key("key")
-      .submit_button_text("提交")
+      .submitButtonKey("key")
+      .submitButtonText("提交")
       .build();
+
     reply.setEnableIdTrans(false);
     reply.setEnableDuplicateCheck(false);
     reply.setDuplicateCheckInterval(1800);
     System.out.println(reply.toJson());
+
     assertThat(reply.toJson())
       .isEqualTo("{\"agentid\":1000002,\"touser\":\"OPENID\",\"msgtype\":\"template_card\",\"duplicate_check_interval\":1800,\"template_card\":{\"card_type\":\"vote_interaction\",\"source\":{\"icon_url\":\"图片的url\",\"desc\":\"企业微信\"},\"main_title\":{\"title\":\"欢迎使用企业微信\",\"desc\":\"您的好友正在邀请您加入企业微信\"},\"task_id\":\"task_id\",\"checkbox\":{\"question_key\":\"question_key1\",\"mode\":1,\"option_list\":[{\"id\":\"option_id1\",\"text\":\"选择题选项1\",\"is_checked\":true},{\"id\":\"option_id2\",\"text\":\"选择题选项2\",\"is_checked\":false}]},\"submit_button\":{\"text\":\"提交\",\"key\":\"key\"}}}");
   }
@@ -406,15 +416,15 @@ public class WxCpMessageTest {
 
     WxCpMessage reply = WxCpMessage.TEMPLATECARD().toUser("OPENID")
       .agentId(1000002)
-      .card_type(WxConsts.TemplateCardType.MULTIPLE_INTERACTION)
-      .source_icon_url("图片的url")
-      .source_desc("企业微信")
-      .main_title_title("欢迎使用企业微信")
-      .main_title_desc("您的好友正在邀请您加入企业微信")
-      .task_id("task_id")
+      .cardType(WxConsts.TemplateCardType.MULTIPLE_INTERACTION)
+      .sourceIconUrl("图片的url")
+      .sourceDesc("企业微信")
+      .mainTitleTitle("欢迎使用企业微信")
+      .mainTitleDesc("您的好友正在邀请您加入企业微信")
+      .taskId("task_id")
       .selects(Arrays.asList(mSelect1,mSelect2))
-      .submit_button_key("key")
-      .submit_button_text("提交")
+      .submitButtonKey("key")
+      .submitButtonText("提交")
       .build();
     reply.setEnableIdTrans(false);
     reply.setEnableDuplicateCheck(false);

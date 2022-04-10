@@ -2,12 +2,13 @@ package me.chanjar.weixin.cp.bean.external.moment;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
-import me.chanjar.weixin.cp.bean.external.msg.Image;
-import me.chanjar.weixin.cp.bean.external.msg.Link;
-import me.chanjar.weixin.cp.bean.external.msg.Location;
-import me.chanjar.weixin.cp.bean.external.msg.Text;
-import me.chanjar.weixin.cp.bean.external.msg.Video;
+import me.chanjar.weixin.cp.bean.external.msg.*;
 
+import java.util.List;
+
+/**
+ * @author Borisg
+ */
 @Data
 public class MomentInfo {
   @SerializedName("moment_id")
@@ -21,7 +22,7 @@ public class MomentInfo {
   @SerializedName("visible_type")
   private Integer visibleType;
   private Text text;
-  private Image image;
+  private List<Image> image;
   private Video video;
   private Link link;
   private Location location;

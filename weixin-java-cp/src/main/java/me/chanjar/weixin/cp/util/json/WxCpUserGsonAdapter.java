@@ -89,6 +89,7 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
     user.setToInvite(GsonHelper.getBoolean(o, "to_invite"));
     user.setOpenUserId(GsonHelper.getString(o, "open_userid"));
     user.setMainDepartment(GsonHelper.getString(o, "main_department"));
+    user.setDirectLeader(GsonHelper.getStringArray(o, "direct_leader"));
 
     if (GsonHelper.isNotNull(o.get(EXTRA_ATTR))) {
       this.buildExtraAttrs(o, user);
@@ -97,9 +98,9 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
     if (GsonHelper.isNotNull(o.get(EXTERNAL_PROFILE))) {
       user.setExternalCorpName(GsonHelper.getString(o.getAsJsonObject().get(EXTERNAL_PROFILE).getAsJsonObject(), EXTERNAL_CORP_NAME));
       JsonElement jsonElement = o.get(EXTERNAL_PROFILE).getAsJsonObject().get(WECHAT_CHANNELS);
-      if(jsonElement !=null){
+      if (jsonElement != null) {
         JsonObject asJsonObject = jsonElement.getAsJsonObject();
-        user.setWechatChannels(WechatChannels.builder().nickname(GsonHelper.getString(asJsonObject,"nickname")).status(GsonHelper.getInteger(asJsonObject,"status")).build());
+        user.setWechatChannels(WechatChannels.builder().nickname(GsonHelper.getString(asJsonObject, "nickname")).status(GsonHelper.getInteger(asJsonObject, "status")).build());
       }
       this.buildExternalAttrs(o, user);
     }
@@ -139,7 +140,12 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
   }
 
   private void buildExternalAttrs(JsonObject o, WxCpUser user) {
-    JsonArray attrJsonElements = o.get(EXTERNAL_PROFILE).getAsJsonObject().get(EXTERNAL_ATTR).getAsJsonArray();
+    JsonElement jsonElement = o.get(EXTERNAL_PROFILE).getAsJsonObject().get(EXTERNAL_ATTR);
+    if (jsonElement == null) {
+      return;
+    }
+
+    JsonArray attrJsonElements = jsonElement.getAsJsonArray();
     for (JsonElement element : attrJsonElements) {
       final Integer type = GsonHelper.getInteger(element.getAsJsonObject(), "type");
       final String name = GsonHelper.getString(element.getAsJsonObject(), "name");
@@ -327,8 +333,8 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
       attrsJson.addProperty(EXTERNAL_CORP_NAME, user.getExternalCorpName());
     }
 
-    if(user.getWechatChannels() != null){
-      attrsJson.add(WECHAT_CHANNELS,GsonHelper.buildJsonObject("nickname", user.getWechatChannels().getNickname(), "status", user.getWechatChannels().getStatus()));
+    if (user.getWechatChannels() != null) {
+      attrsJson.add(WECHAT_CHANNELS, GsonHelper.buildJsonObject("nickname", user.getWechatChannels().getNickname(), "status", user.getWechatChannels().getStatus()));
     }
 
     if (!user.getExternalAttrs().isEmpty()) {

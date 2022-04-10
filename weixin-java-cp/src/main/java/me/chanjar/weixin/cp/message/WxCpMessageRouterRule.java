@@ -246,7 +246,7 @@ public class WxCpMessageRouterRule {
     return
       (this.fromUser == null || this.fromUser.equals(wxMessage.getFromUserName()))
         &&
-        (this.agentId == null || this.agentId.equals(wxMessage.getAgentId()))
+        (this.agentId == null || this.agentId.equals(Integer.valueOf(wxMessage.getAgentId())))
         &&
         (this.msgType == null || this.msgType.equalsIgnoreCase(wxMessage.getMsgType()))
         &&

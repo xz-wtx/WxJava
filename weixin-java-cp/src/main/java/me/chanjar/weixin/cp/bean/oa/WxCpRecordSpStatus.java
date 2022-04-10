@@ -1,14 +1,18 @@
 package me.chanjar.weixin.cp.bean.oa;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * 审批记录(节点)分支审批状态
- *
- * 1-审批中；2-已同意；3-已驳回；4-已转审
+ * <p>
+ * 1-审批中；2-已同意；3-已驳回；4-已转审；11-已退回
  *
  * @author element
  */
+@AllArgsConstructor
+@Getter
 public enum WxCpRecordSpStatus {
 
   /**
@@ -30,12 +34,13 @@ public enum WxCpRecordSpStatus {
    * 已转审
    */
   @SerializedName("4")
-  TURNED(4);
+  TURNED(4),
+  /**
+   * 已退回
+   */
+  @SerializedName("11")
+  WITHDRAWN(11);
 
-  private Integer status;
-
-  private WxCpRecordSpStatus(Integer status) {
-    this.status = status;
-  }
+  private final Integer status;
 
 }

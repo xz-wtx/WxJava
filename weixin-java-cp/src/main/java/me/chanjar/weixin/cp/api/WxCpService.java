@@ -386,11 +386,32 @@ public interface WxCpService extends WxService {
   WxCpMessageService getMessageService();
 
   /**
-   * Gets oa service.
+   * 获取OA相关接口的服务类对象.
    *
    * @return the oa service
    */
   WxCpOaService getOaService();
+
+  /**
+   * 获取直播相关接口的服务类对象
+   *
+   * @return the Living service
+   */
+  WxCpLivingService getLivingService();
+
+  /**
+   * 获取OA 自建应用相关接口的服务类对象
+   *
+   * @return
+   */
+  WxCpOaAgentService getOaAgentService();
+
+  /**
+   * 获取会话存档相关接口的服务类对象
+   *
+   * @return
+   */
+  WxCpMsgAuditService getMsgAuditService();
 
   /**
    * 获取日历相关接口的服务类对象
@@ -419,6 +440,13 @@ public interface WxCpService extends WxService {
    * @return the workbench service
    */
   WxCpAgentWorkBenchService getWorkBenchService();
+
+  /**
+   * 获取微信客服服务
+   *
+   * @return 微信客服服务
+   */
+  WxCpKfService getKfService();
 
   /**
    * http请求对象
@@ -469,4 +497,10 @@ public interface WxCpService extends WxService {
    */
   void setTagService(WxCpTagService tagService);
 
+  /**
+   * Sets kf service.
+   *
+   * @param kfService the kf service
+   */
+  void setKfService(WxCpKfService kfService);
 }

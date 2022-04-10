@@ -1,6 +1,7 @@
 package com.github.binarywang.wxpay.config;
 
 import com.github.binarywang.wxpay.exception.WxPayException;
+import com.github.binarywang.wxpay.util.HttpProxyUtils;
 import com.github.binarywang.wxpay.util.ResourcesUtils;
 import com.github.binarywang.wxpay.v3.WxPayV3HttpClientBuilder;
 import com.github.binarywang.wxpay.v3.auth.*;
@@ -9,7 +10,13 @@ import lombok.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.ssl.SSLContexts;
 
 import javax.net.ssl.SSLContext;
@@ -109,6 +116,16 @@ public class WxPayConfig {
   private String privateCertPath;
 
   /**
+   * apiclient_key.pem证书文件内容的字节数组.
+   */
+  private byte[] privateKeyContent;
+
+  /**
+   * apiclient_cert.pem证书文件内容的字节数组.
+   */
+  private byte[] privateCertContent;
+
+  /**
    * apiV3 秘钥值.
    */
   private String apiV3Key;
@@ -205,15 +222,7 @@ public class WxPayConfig {
       throw new WxPayException("请确保商户号mchId已设置");
     }
 
-    InputStream inputStream;
-    if (this.keyContent != null) {
-      inputStream = new ByteArrayInputStream(this.keyContent);
-    } else {
-      if (StringUtils.isBlank(this.getKeyPath())) {
-        throw new WxPayException("请确保证书文件地址keyPath已配置");
-      }
-      inputStream = this.loadConfigInputStream(this.getKeyPath());
-    }
+    InputStream inputStream = this.loadConfigInputStream(this.getKeyPath(), this.keyContent, "p12证书");
 
     try {
       KeyStore keystore = KeyStore.getInstance("PKCS12");
@@ -240,37 +249,34 @@ public class WxPayConfig {
     val privateCertPath = this.getPrivateCertPath();
     val serialNo = this.getCertSerialNo();
     val apiV3Key = this.getApiV3Key();
-    if (StringUtils.isBlank(privateKeyPath)) {
-      throw new WxPayException("请确保privateKeyPath已设置");
-    }
-    if (StringUtils.isBlank(privateCertPath)) {
-      throw new WxPayException("请确保privateCertPath已设置");
-    }
-//    if (StringUtils.isBlank(certSerialNo)) {
-//      throw new WxPayException("请确保certSerialNo证书序列号已设置");
-//    }
     if (StringUtils.isBlank(apiV3Key)) {
       throw new WxPayException("请确保apiV3Key值已设置");
     }
 
-    InputStream keyInputStream = this.loadConfigInputStream(privateKeyPath);
-    InputStream certInputStream = this.loadConfigInputStream(privateCertPath);
+    InputStream keyInputStream = this.loadConfigInputStream(privateKeyPath, this.privateKeyContent, "privateKeyPath");
+    InputStream certInputStream = this.loadConfigInputStream(privateCertPath, this.privateCertContent, "privateCertPath");
     try {
       PrivateKey merchantPrivateKey = PemUtils.loadPrivateKey(keyInputStream);
       X509Certificate certificate = PemUtils.loadCertificate(certInputStream);
       if(StringUtils.isBlank(serialNo)){
         this.certSerialNo = certificate.getSerialNumber().toString(16).toUpperCase();
       }
+      //构造Http Proxy正向代理
+      WxPayHttpProxy wxPayHttpProxy = getWxPayHttpProxy();
 
       AutoUpdateCertificatesVerifier verifier = new AutoUpdateCertificatesVerifier(
         new WxPayCredentials(mchId, new PrivateKeySigner(certSerialNo, merchantPrivateKey)),
-        apiV3Key.getBytes(StandardCharsets.UTF_8), this.getCertAutoUpdateTime());
+        apiV3Key.getBytes(StandardCharsets.UTF_8), this.getCertAutoUpdateTime(),wxPayHttpProxy);
 
-      CloseableHttpClient httpClient = WxPayV3HttpClientBuilder.create()
+      WxPayV3HttpClientBuilder wxPayV3HttpClientBuilder = WxPayV3HttpClientBuilder.create()
         .withMerchant(mchId, certSerialNo, merchantPrivateKey)
         .withWechatpay(Collections.singletonList(certificate))
-        .withValidator(new WxPayValidator(verifier))
-        .build();
+        .withValidator(new WxPayValidator(verifier));
+      //初始化V3接口正向代理设置
+      HttpProxyUtils.initHttpProxy(wxPayV3HttpClientBuilder,wxPayHttpProxy);
+
+      CloseableHttpClient httpClient = wxPayV3HttpClientBuilder.build();
+
       this.apiV3HttpClient = httpClient;
       this.verifier=verifier;
       this.privateKey = merchantPrivateKey;
@@ -280,6 +286,31 @@ public class WxPayConfig {
       throw new WxPayException("v3请求构造异常！", e);
     }
   }
+
+  /**
+   * 初始化一个WxPayHttpProxy对象
+   * @return 返回封装的WxPayHttpProxy对象。如未指定代理主机和端口，则默认返回null
+   */
+  private WxPayHttpProxy getWxPayHttpProxy() {
+    if (StringUtils.isNotBlank(this.getHttpProxyHost()) && this.getHttpProxyPort() > 0) {
+      return new WxPayHttpProxy(getHttpProxyHost(), getHttpProxyPort(), getHttpProxyUsername(), getHttpProxyPassword());
+    }
+    return null;
+  }
+
+  private InputStream loadConfigInputStream(String configPath, byte[] configContent, String fileName) throws WxPayException {
+    InputStream inputStream;
+    if (configContent != null) {
+      inputStream = new ByteArrayInputStream(configContent);
+    } else {
+      if (StringUtils.isBlank(configPath)) {
+        throw new WxPayException("请确保证书文件地址【" + fileName + "】或者内容已配置");
+      }
+      inputStream = this.loadConfigInputStream(configPath);
+    }
+    return inputStream;
+  }
+
 
   /**
    * 从配置路径 加载配置 信息（支持 classpath、本地路径、网络url）

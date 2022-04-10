@@ -16,6 +16,7 @@ import me.chanjar.weixin.cp.util.crypto.WxCpCryptUtil;
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 import me.chanjar.weixin.cp.util.xml.XStreamTransformer;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,7 +52,7 @@ public class WxCpXmlMessage implements Serializable {
   ///////////////////////
 
   @XStreamAlias("AgentID")
-  private Integer agentId;
+  private String agentId;
 
   @XStreamAlias("ToUserName")
   @XStreamConverter(value = XStreamCDataConverter.class)
@@ -138,6 +139,29 @@ public class WxCpXmlMessage implements Serializable {
   @XStreamConverter(value = XStreamCDataConverter.class)
   private String event;
 
+  @XStreamAlias("UpdateDetail")
+  @XStreamConverter(value = XStreamCDataConverter.class)
+  private String updateDetail;
+
+  @XStreamAlias("JoinScene")
+  @XStreamConverter(value = XStreamCDataConverter.class)
+  private String joinScene;
+
+  @XStreamAlias("QuitScene")
+  @XStreamConverter(value = XStreamCDataConverter.class)
+  private String quitScene;
+
+  @XStreamAlias("MemChangeCnt")
+  @XStreamConverter(value = XStreamCDataConverter.class)
+  private String memChangeCnt;
+
+  @XStreamAlias("Source")
+  @XStreamConverter(value = XStreamCDataConverter.class)
+  private String source;
+
+  @XStreamAlias("StrategyId")
+  private String strategyId;
+
   @XStreamAlias("EventKey")
   @XStreamConverter(value = XStreamCDataConverter.class)
   private String eventKey;
@@ -219,6 +243,12 @@ public class WxCpXmlMessage implements Serializable {
   @XStreamAlias("Department")
   @XStreamConverter(value = LongArrayConverter.class)
   private Long[] departments;
+
+  /**
+   * 主部门
+   */
+  @XStreamAlias("MainDepartment")
+  private Long mainDepartment;
 
   /**
    * 手机号码.
@@ -447,6 +477,14 @@ public class WxCpXmlMessage implements Serializable {
     return xmlMessage;
   }
 
+  public static WxCpXmlMessage fromXml(String xml, String agentId) {
+    //修改微信变态的消息内容格式，方便解析
+    xml = xml.replace("</PicList><PicList>", "");
+    final WxCpXmlMessage xmlMessage = fromXml(xml);
+    xmlMessage.setAgentId(agentId);
+    return xmlMessage;
+  }
+
   protected static WxCpXmlMessage fromXml(InputStream is) {
     return XStreamTransformer.fromXml(WxCpXmlMessage.class, is);
   }
@@ -457,9 +495,15 @@ public class WxCpXmlMessage implements Serializable {
   public static WxCpXmlMessage fromEncryptedXml(String encryptedXml, WxCpConfigStorage wxCpConfigStorage,
                                                 String timestamp, String nonce, String msgSignature) {
     WxCpCryptUtil cryptUtil = new WxCpCryptUtil(wxCpConfigStorage);
+    WxCpXmlMessage wxCpXmlMessage = fromXml(encryptedXml);
     String plainText = cryptUtil.decrypt(msgSignature, timestamp, nonce, encryptedXml);
     log.debug("解密后的原始xml消息内容：{}", plainText);
-    return fromXml(plainText);
+    if (StringUtils.isNotEmpty(wxCpXmlMessage.getAgentId())) {
+      return fromXml(plainText, wxCpXmlMessage.getAgentId());
+    } else {
+      return fromXml(plainText);
+    }
+
   }
 
   public static WxCpXmlMessage fromEncryptedXml(InputStream is, WxCpConfigStorage wxCpConfigStorage,
@@ -533,7 +577,7 @@ public class WxCpXmlMessage implements Serializable {
     @Data
     public static class Item implements Serializable {
       private static final long serialVersionUID = -6549728838848064881L;
-      
+
       @XStreamAlias("PicMd5Sum")
       @XStreamConverter(value = XStreamCDataConverter.class)
       private String picMd5Sum;
@@ -615,20 +659,20 @@ public class WxCpXmlMessage implements Serializable {
     /**
      * 审批流程信息，可能有多个审批节点。
      */
-    @XStreamImplicit(itemFieldName="SpRecord")
+    @XStreamImplicit(itemFieldName = "SpRecord")
     private List<SpRecord> spRecords;
 
     /**
      * 抄送信息，可能有多个抄送节点
      * 这回查字典，notifier通知人，Notifyer这不知道是什么
      */
-    @XStreamImplicit(itemFieldName="Notifyer")
+    @XStreamImplicit(itemFieldName = "Notifyer")
     private List<Notifier> notifier;
 
     /**
      * 审批申请备注信息，可能有多个备注节点
      */
-    @XStreamImplicit(itemFieldName="Comments")
+    @XStreamImplicit(itemFieldName = "Comments")
     private List<Comment> comments;
 
     /**
@@ -663,7 +707,7 @@ public class WxCpXmlMessage implements Serializable {
      */
     @XStreamAlias("SpRecord")
     @Data
-    public static class SpRecord implements Serializable{
+    public static class SpRecord implements Serializable {
 
       private static final long serialVersionUID = 1247535623941881764L;
 
@@ -682,7 +726,7 @@ public class WxCpXmlMessage implements Serializable {
       /**
        * 审批节点详情。当节点为标签或上级时，一个节点可能有多个分支
        */
-      @XStreamImplicit(itemFieldName="Details")
+      @XStreamImplicit(itemFieldName = "Details")
       private List<Detail> details;
 
     }
@@ -692,8 +736,7 @@ public class WxCpXmlMessage implements Serializable {
      */
     @XStreamAlias("Details")
     @Data
-    public static class Detail implements Serializable{
-
+    public static class Detail implements Serializable {
       private static final long serialVersionUID = -8446107461495047603L;
 
       /**
@@ -722,8 +765,10 @@ public class WxCpXmlMessage implements Serializable {
 
       /**
        * 节点分支审批人审批意见附件，赋值为media_id具体使用请参考：文档-获取临时素材
+       * TODO 居然可以返回多个，坑爹的，暂时屏蔽注解以免报错，有兴趣挑战的，尽管把代码砸过来吧！
+       * 请先通过allFieldsMap解析需要的参数！
        */
-      @XStreamAlias("Attach")
+      // @XStreamAlias("Attach")
       private String attach;
     }
 
@@ -732,7 +777,7 @@ public class WxCpXmlMessage implements Serializable {
      */
     @Data
     @XStreamAlias("Approver")
-    public static class Approver implements  Serializable{
+    public static class Approver implements Serializable {
 
       private static final long serialVersionUID = 7360442444186683191L;
 
@@ -748,7 +793,7 @@ public class WxCpXmlMessage implements Serializable {
      */
     @Data
     @XStreamAlias("Notifyer")
-    public static class Notifier implements Serializable{
+    public static class Notifier implements Serializable {
 
       private static final long serialVersionUID = -4524071522890013920L;
 
@@ -764,7 +809,7 @@ public class WxCpXmlMessage implements Serializable {
      */
     @Data
     @XStreamAlias("Comments")
-    public static class Comment implements Serializable{
+    public static class Comment implements Serializable {
 
       private static final long serialVersionUID = 6912156206252719485L;
 
@@ -796,7 +841,7 @@ public class WxCpXmlMessage implements Serializable {
 
     @Data
     @XStreamAlias("CommentUserInfo")
-    private static class CommentUserInfo implements Serializable{
+    private static class CommentUserInfo implements Serializable {
 
       private static final long serialVersionUID = 5031739716823000947L;
 

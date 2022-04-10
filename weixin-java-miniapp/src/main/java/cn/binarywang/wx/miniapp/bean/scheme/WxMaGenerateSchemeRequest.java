@@ -40,10 +40,23 @@ public class WxMaGenerateSchemeRequest {
   private Long expireTime;
 
   /**
-   * 要打开的小程序版本。正式版为"release"，体验版为"trial"，开发版为"develop"默认值：release
+   * 到期失效的 scheme 码失效类型，失效时间：0，失效间隔天数：1
+   *  <pre>
+   * 是否必填：否
+   * </pre>
    */
-  @SerializedName("env_version")
-  private String envVersion = "release";
+  @SerializedName("expire_type")
+  private Integer expireType;
+
+  /**
+   * 到期失效的 scheme 码的失效间隔天数。
+   * <pre>
+   * 生成的到期失效 scheme 码在该间隔时间到达前有效。最长间隔天数为365天。is_expire 为 true 且 expire_type 为 1 时必填   * <pre>
+   * 是否必填：否
+   * </pre>
+   */
+  @SerializedName("expire_interval")
+  private Integer expireInterval;
 
   @Data
   @Builder(builderMethodName = "newBuilder")
@@ -66,6 +79,12 @@ public class WxMaGenerateSchemeRequest {
      */
     @SerializedName("query")
     private String query;
+
+    /**
+     * 要打开的小程序版本。正式版为"release"，体验版为"trial"，开发版为"develop"默认值：release
+     */
+    @SerializedName("env_version")
+    private String envVersion = "release";
   }
 
   public String toJson() {
