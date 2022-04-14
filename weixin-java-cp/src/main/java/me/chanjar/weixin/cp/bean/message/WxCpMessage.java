@@ -408,6 +408,8 @@ public class WxCpMessage implements Serializable {
           articleJson.addProperty("description", article.getDescription());
           articleJson.addProperty("url", article.getUrl());
           articleJson.addProperty("picurl", article.getPicUrl());
+          articleJson.addProperty("appid", article.getAppid());
+          articleJson.addProperty("pagepath", article.getPagepath());
           articleJsonArray.add(articleJson);
         }
         newsJsonObject.add("articles", articleJsonArray);
