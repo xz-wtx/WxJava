@@ -70,6 +70,7 @@ public class WxMaApiUrlConstants {
     String GET_SUPPORT_VERSION_URL = "https://api.weixin.qq.com/cgi-bin/wxopen/getweappsupportversion";
     String SET_SUPPORT_VERSION_URL = "https://api.weixin.qq.com/cgi-bin/wxopen/setweappsupportversion";
     String UNDO_CODE_AUDIT_URL = "https://api.weixin.qq.com/wxa/undocodeaudit";
+    String GET_VERSION_INFO_URL = "https://api.weixin.qq.com/wxa/getversioninfo";
   }
 
   public interface Express {
