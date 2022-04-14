@@ -11,8 +11,10 @@ import me.chanjar.weixin.common.error.WxRuntimeException;
 import me.chanjar.weixin.common.util.json.GsonParser;
 import me.chanjar.weixin.cp.api.WxCpOaService;
 import me.chanjar.weixin.cp.api.WxCpService;
+import me.chanjar.weixin.cp.bean.WxCpBaseResp;
 import me.chanjar.weixin.cp.bean.oa.*;
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -179,6 +181,21 @@ public class WxCpOaServiceImpl implements WxCpOaService {
     jsonObject.addProperty("userid", userId);
     String responseContent = this.mainService.post(url, jsonObject.toString());
     return WxCpUserVacationQuota.fromJson(responseContent);
+  }
+
+  @Override
+  public WxCpBaseResp setOneUserQuota(@NonNull String userId, @NonNull Integer vacationId, @NonNull Integer leftDuration, @NonNull Integer timeAttr, String remarks) throws WxErrorException {
+    final String url = this.mainService.getWxCpConfigStorage().getApiUrl(SET_ONE_USER_QUOTA);
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.addProperty("userid", userId);
+    jsonObject.addProperty("vacation_id", vacationId);
+    jsonObject.addProperty("leftduration", leftDuration);
+    jsonObject.addProperty("time_attr", timeAttr);
+    if (StringUtils.isNotEmpty(remarks)) {
+      jsonObject.addProperty("remarks", remarks);
+    }
+    String responseContent = this.mainService.post(url, jsonObject.toString());
+    return WxCpBaseResp.fromJson(responseContent);
   }
 
   @Override

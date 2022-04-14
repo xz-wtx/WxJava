@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.api.ApiTestModule;
 import me.chanjar.weixin.cp.api.WxCpService;
+import me.chanjar.weixin.cp.bean.WxCpBaseResp;
 import me.chanjar.weixin.cp.bean.oa.*;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.testng.annotations.Guice;
@@ -176,7 +177,7 @@ public class WxCpOaServiceImplTest {
    * @throws WxErrorException
    */
   @Test
-  public void testGetCorpConf() throws WxErrorException{
+  public void testGetCorpConf() throws WxErrorException {
     WxCpCorpConfInfo corpConf = this.wxService.getOaService().getCorpConf();
     log.info(corpConf.toJson());
   }
@@ -188,13 +189,30 @@ public class WxCpOaServiceImplTest {
    * @throws WxErrorException
    */
   @Test
-  public void testGetUserVacationQuota() throws WxErrorException{
+  public void testGetUserVacationQuota() throws WxErrorException {
     WxCpUserVacationQuota vacationQuota = this.wxService.getOaService().getUserVacationQuota("WangKai");
     log.info(vacationQuota.toJson());
 
     String text = "{\"errcode\":0,\"errmsg\":\"ok\",\"lists\":[{\"id\":1,\"assignduration\":0,\"usedduration\":0,\"leftduration\":604800,\"vacationname\":\"年假\"},{\"id\":2,\"assignduration\":0,\"usedduration\":0,\"leftduration\":1296000,\"vacationname\":\"事假\"},{\"id\":3,\"assignduration\":0,\"usedduration\":0,\"leftduration\":0,\"vacationname\":\"病假\"}]}";
     WxCpUserVacationQuota json = WxCpUserVacationQuota.fromJson(text);
     log.info("数据为：{}", json.toJson());
+
+  }
+
+  /**
+   * 修改成员假期余额
+   * https://developer.work.weixin.qq.com/document/path/93377
+   *
+   * @throws WxErrorException
+   */
+  @Test
+  public void testSetOneUserQuota() throws WxErrorException {
+
+    String text = "{\"errcode\":0,\"errmsg\":\"ok\"}";
+    WxCpBaseResp resp = WxCpBaseResp.fromJson(text);
+    log.info("返回结果为：{}", resp.toJson());
+
+//    WxCpBaseResp wxCpBaseResp = this.wxService.getOaService().setOneUserQuota(, , , , );
 
   }
 
