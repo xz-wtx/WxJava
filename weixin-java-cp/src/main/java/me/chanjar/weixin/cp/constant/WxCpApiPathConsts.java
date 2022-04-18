@@ -281,6 +281,11 @@ public interface WxCpApiPathConsts {
 
     String UPLOAD_ATTACHMENT = "/cgi-bin/media/upload_attachment";
 
+
+    String ADD_INTERCEPT_RULE = "/cgi-bin/externalcontact/add_intercept_rule";
+    String UPDATE_INTERCEPT_RULE = "/cgi-bin/externalcontact/update_intercept_rule";
+    String DEL_INTERCEPT_RULE = "/cgi-bin/externalcontact/del_intercept_rule";
+
   }
 
   interface Kf {
