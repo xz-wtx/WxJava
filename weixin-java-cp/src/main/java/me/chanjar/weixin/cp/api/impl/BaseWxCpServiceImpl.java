@@ -409,6 +409,15 @@ public abstract class BaseWxCpServiceImpl<H, P> implements WxCpService, RequestH
   }
 
   @Override
+  public String syncUser(String mediaId) throws WxErrorException {
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.addProperty("media_id", mediaId);
+    String responseContent = post(this.configStorage.getApiUrl(BATCH_SYNC_USER), jsonObject.toString());
+    JsonObject tmpJson = GsonParser.parse(responseContent);
+    return tmpJson.get("jobid").getAsString();
+  }
+
+  @Override
   public String replaceUser(String mediaId) throws WxErrorException {
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("media_id", mediaId);
@@ -416,8 +425,8 @@ public abstract class BaseWxCpServiceImpl<H, P> implements WxCpService, RequestH
   }
 
   @Override
-  public String getTaskResult(String joinId) throws WxErrorException {
-    String url = this.configStorage.getApiUrl(BATCH_GET_RESULT + joinId);
+  public String getTaskResult(String jobId) throws WxErrorException {
+    String url = this.configStorage.getApiUrl(BATCH_GET_RESULT + jobId);
     return get(url, null);
   }
 

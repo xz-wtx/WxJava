@@ -264,6 +264,14 @@ public interface WxCpService extends WxService {
   String replaceParty(String mediaId) throws WxErrorException;
 
   /**
+   * 上传用户列表，增量更新成员
+   * @param mediaId 媒体id
+   * @return jobId 异步任务id
+   * @throws WxErrorException the wx error exception
+   */
+  String syncUser(String mediaId) throws WxErrorException;
+
+  /**
    * 上传用户列表覆盖企业号上的用户信息
    *
    * @param mediaId 媒体id
@@ -275,11 +283,11 @@ public interface WxCpService extends WxService {
   /**
    * 获取异步任务结果
    *
-   * @param joinId the join id
+   * @param jobId 异步任务id
    * @return the task result
    * @throws WxErrorException the wx error exception
    */
-  String getTaskResult(String joinId) throws WxErrorException;
+  String getTaskResult(String jobId) throws WxErrorException;
 
   /**
    * 初始化http请求对象
