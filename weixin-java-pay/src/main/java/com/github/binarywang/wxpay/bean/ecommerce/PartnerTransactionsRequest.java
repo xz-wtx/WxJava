@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 普通支付（电商收付通）API
  * <pre>
- * 文档地址:https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pages/e_transactions.shtml
+ * 文档地址:<a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pages/e_transactions.shtml">https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pages/e_transactions.shtml</a>
  * </pre>
  *
  * @author cloudX
