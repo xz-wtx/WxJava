@@ -23,6 +23,15 @@ public class WxOpenAuthorizerInfo implements Serializable {
   private Map<String, Integer> businessInfo;
   private String alias;
   private String qrcodeUrl;
+  /**
+   * 帐号状态
+   * 类型	说明
+   * 1	正常
+   * 14	已注销
+   * 16	已封禁
+   * 18	已告警
+   * 19	已冻结
+   */
   private Integer accountStatus;
   /**
    * 账号介绍
@@ -35,7 +44,8 @@ public class WxOpenAuthorizerInfo implements Serializable {
   private MiniProgramInfo miniProgramInfo;
 
   @Data
-  public class MiniProgramInfo {
+  public static class MiniProgramInfo implements Serializable {
+    private static final long serialVersionUID = 8857028017332191988L;
     @SerializedName("visit_status")
     private Integer visitStatus;
     /**
@@ -45,13 +55,15 @@ public class WxOpenAuthorizerInfo implements Serializable {
     private List<Category> categories;
 
     @Data
-    public class Category {
+    public static class Category implements Serializable {
+      private static final long serialVersionUID = -5771529867281696141L;
       private String first;
       private String second;
     }
 
     @Data
-    public class Network {
+    public static class Network implements Serializable {
+      private static final long serialVersionUID = -18932624803859857L;
       @SerializedName("RequestDomain")
       private List<String> requestDomain;
       @SerializedName("WsRequestDomain")
