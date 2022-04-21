@@ -155,6 +155,23 @@ public interface WxCpOaService {
 
 
   /**
+   * 获取审批数据（旧）
+   * 提示：推荐使用新接口“批量获取审批单号”及“获取审批申请详情”，此接口后续将不再维护、逐步下线。
+   * 通过本接口来获取公司一段时间内的审批记录。一次拉取调用最多拉取100个审批记录，可以通过多次拉取的方式来满足需求，但调用频率不可超过600次/分。
+   *
+   * 请求方式：POST（HTTPS）
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/corp/getapprovaldata?access_token=ACCESS_TOKEN
+   *
+   * @param startTime 获取审批记录的开始时间。Unix时间戳
+   * @param endTime 获取审批记录的结束时间。Unix时间戳
+   * @param nextSpNum 第一个拉取的审批单号，不填从该时间段的第一个审批单拉取
+   * @return
+   * @throws WxErrorException
+   */
+  WxCpGetApprovalData getApprovalData(@NonNull Long startTime, @NonNull Long endTime, Long nextSpNum) throws WxErrorException;
+
+
+  /**
    * 修改成员假期余额
    * 企业可通过审批应用或自建应用Secret调用本接口，修改可见范围内员工的“假期余额”。
    * 第三方应用可通过应本接口修改应用可见范围内指定员工的“假期余额”。

@@ -162,8 +162,23 @@ public class WxCpOaServiceImplTest {
     this.wxService.getOaService().apply(new WxCpOaApplyEventRequest().setCreatorUserId("123"));
   }
 
+  /**
+   * 获取审批数据（旧）
+   * https://developer.work.weixin.qq.com/document/path/91530
+   *
+   * @throws WxErrorException
+   */
   @Test
-  public void testGetApprovalData() {
+  public void testGetApprovalData() throws WxErrorException {
+
+    // 提示：推荐使用新接口“批量获取审批单号”及“获取审批申请详情”，此接口后续将不再维护、逐步下线。
+//    WxCpGetApprovalData approvalData = this.wxService.getOaService().getApprovalData(System.currentTimeMillis(), System.currentTimeMillis() + 3600L, null);
+//    log.info("返回数据：{}", approvalData.toJson());
+
+    String text = "{\"errcode\":0,\"errmsg\":\"ok\",\"count\":3,\"total\":5,\"next_spnum\":201704240001,\"data\":[{\"spname\":\"报销\",\"apply_name\":\"报销测试\",\"apply_org\":\"报销测试企业\",\"approval_name\":[\"审批人测试\"],\"notify_name\":[\"抄送人测试\"],\"sp_status\":1,\"sp_num\":201704200001,\"mediaids\":[\"WWCISP_G8PYgRaOVHjXWUWFqchpBqqqUpGj0OyR9z6WTwhnMZGCPHxyviVstiv_2fTG8YOJq8L8zJT2T2OvTebANV-2MQ\"],\"apply_time\":1499153693,\"apply_user_id\":\"testuser\",\"expense\":{\"expense_type\":1,\"reason\":\"\",\"item\":[{\"expenseitem_type\":6,\"time\":1492617600,\"sums\":9900,\"reason\":\"\"}]},\"comm\":{\"apply_data\":\"{\\\"item-1492610773696\\\":{\\\"title\\\":\\\"abc\\\",\\\"type\\\":\\\"text\\\",\\\"value\\\":\\\"\\\"}}\"}},{\"spname\":\"请假\",\"apply_name\":\"请假测试\",\"apply_org\":\"请假测试企业\",\"approval_name\":[\"审批人测试\"],\"notify_name\":[\"抄送人测试\"],\"sp_status\":1,\"sp_num\":201704200004,\"apply_time\":1499153693,\"apply_user_id\":\"testuser\",\"leave\":{\"timeunit\":0,\"leave_type\":4,\"start_time\":1492099200,\"end_time\":1492790400,\"duration\":144,\"reason\":\"\"},\"comm\":{\"apply_data\":\"{\\\"item-1492610773696\\\":{\\\"title\\\":\\\"abc\\\",\\\"type\\\":\\\"text\\\",\\\"value\\\":\\\"\\\"}}\"}},{\"spname\":\"自定义审批\",\"apply_name\":\"自定义\",\"apply_org\":\"自定义测试企业\",\"approval_name\":[\"自定义审批人\"],\"notify_name\":[\"自定义抄送人\"],\"sp_status\":1,\"sp_num\":201704240001,\"apply_time\":1499153693,\"apply_user_id\":\"testuser\",\"comm\":{\"apply_data\":\"{\\\"item-1492610773696\\\":{\\\"title\\\":\\\"abc\\\",\\\"type\\\":\\\"text\\\",\\\"value\\\":\\\"\\\"}}\"}}]}";
+    WxCpGetApprovalData wxCpGetApprovalData = WxCpGetApprovalData.fromJson(text);
+    log.info("返回数据2：{}", wxCpGetApprovalData.toJson());
+
   }
 
   @Test

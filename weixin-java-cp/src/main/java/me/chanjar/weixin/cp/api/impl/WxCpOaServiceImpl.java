@@ -184,6 +184,19 @@ public class WxCpOaServiceImpl implements WxCpOaService {
   }
 
   @Override
+  public WxCpGetApprovalData getApprovalData(@NonNull Long startTime, @NonNull Long endTime, Long nextSpNum) throws WxErrorException {
+    final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GET_APPROVAL_DATA);
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.addProperty("starttime", startTime);
+    jsonObject.addProperty("endtime", endTime);
+    if (nextSpNum != null) {
+      jsonObject.addProperty("next_spnum", nextSpNum);
+    }
+    String responseContent = this.mainService.post(url, jsonObject.toString());
+    return WxCpGetApprovalData.fromJson(responseContent);
+  }
+
+  @Override
   public WxCpBaseResp setOneUserQuota(@NonNull String userId, @NonNull Integer vacationId, @NonNull Integer leftDuration, @NonNull Integer timeAttr, String remarks) throws WxErrorException {
     final String url = this.mainService.getWxCpConfigStorage().getApiUrl(SET_ONE_USER_QUOTA);
     JsonObject jsonObject = new JsonObject();
