@@ -202,6 +202,18 @@ public class ApplymentsRequest implements Serializable {
 
   /**
    * <pre>
+   * 字段名：+结算规则
+   * 变量名：settlement_info
+   * 是否必填：否
+   * 类型：object
+   * 描述：请填写商家的结算费率规则、所属行业等信息。若电商平台未传入，系统将填写默认值
+   * </pre>
+   */
+  @SerializedName(value = "settlement_info")
+  private SettlementInfo settlementInfo;
+
+  /**
+   * <pre>
    * 字段名：商户简称
    * 变量名：merchant_shortname
    * 是否必填：是
@@ -819,6 +831,41 @@ public class ApplymentsRequest implements Serializable {
      */
     @SerializedName(value = "mini_program_sub_appid")
     private String miniProgramSubAppid;
+
+  }
+
+  @Data
+  @NoArgsConstructor
+  public static class SettlementInfo implements Serializable {
+    /**
+     * <pre>
+     * 字段名：结算规则ID
+     * 变量名：settlement_id
+     * 是否必填：否
+     * 类型：int
+     * 描述：
+     *  1、选填，请选择二级商户的结算规则ID，需匹配电商平台开通工具箱选择的费率档位，详细参见电商二级商户结算规则对照表；https://kf.qq.com/faq/220228qEfuAz220228bMFji6.html
+     *  2、若电商平台未传入，将默认选择0.6%费率对应的结算规则id；
+     *  示例值：719
+     * </pre>
+     */
+    @SerializedName(value = "settlement_id")
+    private Integer settlementId;
+
+    /**
+     * <pre>
+     * 字段名：所属行业
+     * 变量名：qualification_type
+     * 是否必填：二选一
+     * 类型：string[1, 200]
+     * 描述：
+     *  1、选填，请填写二级商户所属的行业名称，映射特殊资质要求，详细参见电商二级商户结算规则对照表；
+     *  2、若电商平台未传入，将默认填写无需特殊资质的行业名称；
+     *  示例值：零售批发/生活娱乐/其他
+     * </pre>
+     */
+    @SerializedName(value = "qualification_type")
+    private String qualificationType;
 
   }
 
