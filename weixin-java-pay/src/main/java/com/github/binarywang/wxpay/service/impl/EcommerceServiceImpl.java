@@ -110,7 +110,8 @@ public class EcommerceServiceImpl implements EcommerceService {
   @Override
   public <T> T partnerTransactions(TradeTypeEnum tradeType, PartnerTransactionsRequest request) throws WxPayException {
     TransactionsResult result = this.partner(tradeType, request);
-    return result.getPayInfo(tradeType, request.getSpAppid(),
+    String appId = request.getSubAppid() != null ? request.getSubAppid() : request.getSpAppid();
+    return result.getPayInfo(tradeType, appId,
       request.getSpMchid(), payService.getConfig().getPrivateKey());
   }
 
