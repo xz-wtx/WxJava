@@ -148,6 +148,9 @@ public interface WxCpApiPathConsts {
     String SPACE_CREATE = "/cgi-bin/wedrive/space_create";
     String SPACE_RENAME = "/cgi-bin/wedrive/space_rename";
     String SPACE_DISMISS = "/cgi-bin/wedrive/space_dismiss";
+    String SPACE_INFO = "/cgi-bin/wedrive/space_info";
+    String SPACE_ACL_ADD = "/cgi-bin/wedrive/space_acl_add";
+    String SPACE_ACL_DEL = "/cgi-bin/wedrive/space_acl_del";
 
     /**
      * 审批流程引擎

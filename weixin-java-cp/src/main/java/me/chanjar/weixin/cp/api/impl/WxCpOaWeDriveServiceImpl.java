@@ -8,9 +8,7 @@ import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.api.WxCpOaWeDriveService;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.WxCpBaseResp;
-import me.chanjar.weixin.cp.bean.oa.wedrive.WxCpSpaceCreateData;
-import me.chanjar.weixin.cp.bean.oa.wedrive.WxCpSpaceCreateRequest;
-import me.chanjar.weixin.cp.bean.oa.wedrive.WxCpSpaceRenameRequest;
+import me.chanjar.weixin.cp.bean.oa.wedrive.*;
 
 import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Oa.*;
 
@@ -46,6 +44,30 @@ public class WxCpOaWeDriveServiceImpl implements WxCpOaWeDriveService {
     jsonObject.addProperty("userid", userId);
     jsonObject.addProperty("spaceid", spaceId);
     String responseContent = this.cpService.post(apiUrl, jsonObject.toString());
+    return WxCpBaseResp.fromJson(responseContent);
+  }
+
+  @Override
+  public WxCpSpaceInfo spaceInfo(@NonNull String userId, @NonNull String spaceId) throws WxErrorException {
+    String apiUrl = this.cpService.getWxCpConfigStorage().getApiUrl(SPACE_INFO);
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.addProperty("userid", userId);
+    jsonObject.addProperty("spaceid", spaceId);
+    String responseContent = this.cpService.post(apiUrl, jsonObject.toString());
+    return WxCpSpaceInfo.fromJson(responseContent);
+  }
+
+  @Override
+  public WxCpBaseResp spaceAclAdd(@NonNull WxCpSpaceAclAddRequest request) throws WxErrorException {
+    String apiUrl = this.cpService.getWxCpConfigStorage().getApiUrl(SPACE_ACL_ADD);
+    String responseContent = this.cpService.post(apiUrl, request.toJson());
+    return WxCpBaseResp.fromJson(responseContent);
+  }
+
+  @Override
+  public WxCpBaseResp spaceAclDel(@NonNull WxCpSpaceAclDelRequest request) throws WxErrorException {
+    String apiUrl = this.cpService.getWxCpConfigStorage().getApiUrl(SPACE_ACL_DEL);
+    String responseContent = this.cpService.post(apiUrl, request.toJson());
     return WxCpBaseResp.fromJson(responseContent);
   }
 
