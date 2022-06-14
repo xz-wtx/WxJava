@@ -1,7 +1,6 @@
 package com.github.binarywang.wxpay.service.impl;
 
-import com.github.binarywang.wxpay.bean.bank.BankAccountResult;
-import com.github.binarywang.wxpay.bean.bank.BankingResult;
+import com.github.binarywang.wxpay.bean.bank.*;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.BankService;
 import com.github.binarywang.wxpay.service.WxPayService;
@@ -42,5 +41,28 @@ public class BankServiceImpl implements BankService {
     String url = String.format("%s/v3/capital/capitallhh/banks/corporate-banking?offset=%s&limit=%s", this.payService.getPayBaseUrl(), offset, limit);
     String response = payService.getV3(url);
     return GSON.fromJson(response, BankingResult.class);
+  }
+
+  @Override
+  public ProvincesResult areasProvinces() throws WxPayException {
+    String url = String.format("%s/v3/capital/capitallhh/areas/provinces", this.payService.getPayBaseUrl());
+    String response = payService.getV3WithWechatPaySerial(url);
+    return GSON.fromJson(response, ProvincesResult.class);
+  }
+
+  @Override
+  public CitiesResult areasCities(Integer provinceCode) throws WxPayException {
+    String url = String.format("%s/v3/capital/capitallhh/areas/provinces/%s/cities", this.payService.getPayBaseUrl(), provinceCode);
+    String response = payService.getV3WithWechatPaySerial(url);
+    return GSON.fromJson(response, CitiesResult.class);
+  }
+
+  @Override
+  public BankBranchesResult bankBranches(String bankAliasCode, Integer cityCode, Integer offset, Integer limit) throws WxPayException {
+    offset = offset == null ? 0 : offset;
+    limit = limit == null ? 200 : limit;
+    String url = String.format("%s/v3/capital/capitallhh/banks/%s/branches?city_code=%s&offset=%s&limit=%s", this.payService.getPayBaseUrl(), bankAliasCode, cityCode, offset, limit);
+    String response = payService.getV3(url);
+    return GSON.fromJson(response, BankBranchesResult.class);
   }
 }

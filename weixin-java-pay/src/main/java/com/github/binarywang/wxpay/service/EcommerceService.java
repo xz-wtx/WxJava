@@ -22,7 +22,7 @@ public interface EcommerceService {
    * <pre>
    * 二级商户进件API
    * 接口地址: https://api.mch.weixin.qq.com/v3/ecommerce/applyments/
-   * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/ecommerce/applyments/chapter3_1.shtml
+   * 文档地址: https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter7_1_8.shtml
    *
    * </pre>
    *
