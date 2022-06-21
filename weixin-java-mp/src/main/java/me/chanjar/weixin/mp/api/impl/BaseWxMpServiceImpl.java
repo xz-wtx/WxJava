@@ -87,7 +87,7 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
   private WxMpTemplateMsgService templateMsgService = new WxMpTemplateMsgServiceImpl(this);
   @Getter
   @Setter
-  private final WxMpSubscribeMsgService subscribeMsgService = new WxMpSubscribeMsgServiceImpl(this);
+  private WxMpSubscribeMsgService subscribeMsgService = new WxMpSubscribeMsgServiceImpl(this);
   @Getter
   @Setter
   private WxMpDeviceService deviceService = new WxMpDeviceServiceImpl(this);
@@ -105,7 +105,7 @@ public abstract class BaseWxMpServiceImpl<H, P> implements WxMpService, RequestH
   private WxMpAiOpenService aiOpenService = new WxMpAiOpenServiceImpl(this);
   @Getter
   @Setter
-  private final WxMpWifiService wifiService = new WxMpWifiServiceImpl(this);
+  private WxMpWifiService wifiService = new WxMpWifiServiceImpl(this);
   @Getter
   @Setter
   private WxMpMarketingService marketingService = new WxMpMarketingServiceImpl(this);
