@@ -305,6 +305,13 @@ public interface WxPayService {
   MarketingBusiFavorService getMarketingBusiFavorService();
 
   /**
+   * 获取商家转账到零钱服务类
+   *
+   * @return the merchant transfer service
+   */
+  MerchantTransferService getMerchantTransferService();
+
+  /**
    * 设置企业付款服务类，允许开发者自定义实现类.
    *
    * @param entPayService the ent pay service
