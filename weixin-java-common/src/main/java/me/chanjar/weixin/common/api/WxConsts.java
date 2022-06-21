@@ -287,6 +287,10 @@ public class WxConsts {
      */
     public static final String CARD_USER_GIFTING_CARD = "user_gifting_card";
 
+    /**
+     * 异步安全校验事件
+     */
+    public static final String WXA_MEDIA_CHECK = "wxa_media_check";
 
     /**
      * 卡券事件：用户核销卡券
