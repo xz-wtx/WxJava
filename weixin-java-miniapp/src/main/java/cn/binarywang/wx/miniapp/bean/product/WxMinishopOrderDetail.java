@@ -1,25 +1,17 @@
-package cn.binarywang.wx.miniapp.bean.shop;
+package cn.binarywang.wx.miniapp.bean.product;
 
 import com.google.gson.annotations.SerializedName;
-import lombok.Data;
-
 import java.io.Serializable;
 import java.util.List;
+import lombok.Data;
 
 /**
  * @author leiin
  * @date 2021/3/23
  */
 @Data
-public class WxMaShopOrderDetail implements Serializable {
+public class WxMinishopOrderDetail implements Serializable {
   private static final long serialVersionUID = 3325843289672341160L;
-
-
-  /**
-   * 推广员、分享员信息
-   */
-  @SerializedName("promotion_info")
-  private WxMaShopPromotionInfo promotionInfo;
 
   /**
    * 下单商品信息
@@ -28,7 +20,7 @@ public class WxMaShopOrderDetail implements Serializable {
    * </pre>
    */
   @SerializedName("product_infos")
-  private List<WxMaShopProductInfo> productInfos;
+  private List<WxMinishopProductInfo> productInfos;
 
   /**
    * 支付信息 (当作为返回结果，payorder时action_type!=6时存在)
@@ -37,7 +29,7 @@ public class WxMaShopOrderDetail implements Serializable {
    * </pre>
    */
   @SerializedName("pay_info")
-  private WxMaShopPayInfo payInfo;
+  private WxMinishopPayInfo payInfo;
 
   /**
    * 价格信息
@@ -46,18 +38,11 @@ public class WxMaShopOrderDetail implements Serializable {
    * </pre>
    */
   @SerializedName("price_info")
-  private WxMaShopPriceInfo priceInfo;
-
-  // 以下字段仅作为结果返回展示字段
-  /**
-   * payorder时action_type=6时存在
-   */
-  @SerializedName("multi_pay_info")
-  private List<WxMaShopPayInfo> multiPayInfo;
+  private WxMinishopPriceInfo priceInfo;
 
   /**
    * 必须调过发货接口才会存在这个字段
    */
-  @SerializedName("delivery_detail")
-  private WxMaShopDeliveryDetail deliveryDetail;
+  @SerializedName("delivery_info")
+  private WxMinishopDeliveryInfo deliveryInfo;
 }

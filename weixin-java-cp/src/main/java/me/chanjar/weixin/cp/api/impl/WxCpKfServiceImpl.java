@@ -10,6 +10,22 @@ import me.chanjar.weixin.cp.api.WxCpKfService;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.WxCpBaseResp;
 import me.chanjar.weixin.cp.bean.kf.*;
+import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountAdd;
+import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountAddResp;
+import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountDel;
+import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountLink;
+import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountLinkResp;
+import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountListResp;
+import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountUpd;
+import me.chanjar.weixin.cp.bean.kf.WxCpKfCustomerBatchGetResp;
+import me.chanjar.weixin.cp.bean.kf.WxCpKfMsgListResp;
+import me.chanjar.weixin.cp.bean.kf.WxCpKfMsgSendRequest;
+import me.chanjar.weixin.cp.bean.kf.WxCpKfMsgSendResp;
+import me.chanjar.weixin.cp.bean.kf.WxCpKfServiceStateResp;
+import me.chanjar.weixin.cp.bean.kf.WxCpKfServiceStateTransResp;
+import me.chanjar.weixin.cp.bean.kf.WxCpKfServiceUpgradeConfigResp;
+import me.chanjar.weixin.cp.bean.kf.WxCpKfServicerListResp;
+import me.chanjar.weixin.cp.bean.kf.WxCpKfServicerOpResp;
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
 import java.util.List;
@@ -182,6 +198,63 @@ public class WxCpKfServiceImpl implements WxCpKfService {
     return WxCpKfCustomerBatchGetResp.fromJson(responseContent);
   }
 
+  @Override
+  public WxCpKfServiceUpgradeConfigResp getUpgradeServiceConfig() throws WxErrorException {
+    String url = cpService.getWxCpConfigStorage().getApiUrl(CUSTOMER_GET_UPGRADE_SERVICE_CONFIG);
+
+    String response = cpService.get(url, null);
+    return WxCpKfServiceUpgradeConfigResp.fromJson(response);
+  }
+
+  @Override
+  public WxCpBaseResp upgradeMemberService(String openKfid, String externalUserId,
+    String userid, String wording) throws WxErrorException {
+    String url = cpService.getWxCpConfigStorage().getApiUrl(CUSTOMER_UPGRADE_SERVICE);
+
+    JsonObject json = new JsonObject();
+    json.addProperty("open_kfid", openKfid);
+    json.addProperty("external_userid", externalUserId);
+    json.addProperty("type", 1);
+
+    JsonObject memberJson = new JsonObject();
+    memberJson.addProperty("userid", userid);
+    memberJson.addProperty("wording", wording);
+    json.add("member", memberJson);
+
+    String response = cpService.post(url, json);
+    return WxCpBaseResp.fromJson(response);
+  }
+
+  @Override
+  public WxCpBaseResp upgradeGroupchatService(String openKfid, String externalUserId,
+    String chatId, String wording) throws WxErrorException {
+    String url = cpService.getWxCpConfigStorage().getApiUrl(CUSTOMER_UPGRADE_SERVICE);
+
+    JsonObject json = new JsonObject();
+    json.addProperty("open_kfid", openKfid);
+    json.addProperty("external_userid", externalUserId);
+    json.addProperty("type", 2);
+
+    JsonObject groupchatJson = new JsonObject();
+    groupchatJson.addProperty("chat_id", chatId);
+    groupchatJson.addProperty("wording", wording);
+    json.add("groupchat", groupchatJson);
+
+    String response = cpService.post(url, json);
+    return WxCpBaseResp.fromJson(response);
+  }
+
+  @Override
+  public WxCpBaseResp cancelUpgradeService(String openKfid, String externalUserId)
+    throws WxErrorException {
+    String url = cpService.getWxCpConfigStorage().getApiUrl(CUSTOMER_CANCEL_UPGRADE_SERVICE);
+
+    JsonObject json = new JsonObject();
+    json.addProperty("open_kfid", openKfid);
+    json.addProperty("external_userid", externalUserId);
+    String response = cpService.post(url, json);
+    return WxCpBaseResp.fromJson(response);
+  }
   @Override
   public WxCpKfGetCorpStatisticResp getCorpStatistic(WxCpKfGetCorpStatisticRequest request) throws WxErrorException {
     String url = cpService.getWxCpConfigStorage().getApiUrl(GET_CORP_STATISTIC);

@@ -492,4 +492,15 @@ public interface WxMaService extends WxService {
    */
   WxMaSafetyRiskControlService getSafetyRiskControlService();
 
+  /**
+   * 分享人接口
+   * @return
+   */
+  WxMaShopSharerService getShopSharerService();
+
+  /**
+   * 标准交易组件接口
+   * @return
+   */
+  WxMaProductService getProductService();
 }
