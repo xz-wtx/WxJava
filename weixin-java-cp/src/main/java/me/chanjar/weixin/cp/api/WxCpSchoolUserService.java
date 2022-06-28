@@ -136,6 +136,70 @@ public interface WxCpSchoolUserService {
   WxCpBaseResp deleteDepartment(Integer id) throws WxErrorException;
 
   /**
+   * 设置关注「学校通知」的模式
+   * 可通过此接口修改家长关注「学校通知」的模式：“可扫码填写资料加入”或“禁止扫码填写资料加入”
+   * <p>
+   * 请求方式：POST（HTTPS）
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/externalcontact/set_subscribe_mode?access_token=ACCESS_TOKEN
+   *
+   * @param subscribeMode 关注模式, 1:可扫码填写资料加入, 2:禁止扫码填写资料加入
+   * @return
+   * @throws WxErrorException
+   */
+  WxCpBaseResp setSubscribeMode(@NonNull Integer subscribeMode) throws WxErrorException;
+
+  /**
+   * 获取关注「学校通知」的模式
+   * 可通过此接口获取家长关注「学校通知」的模式：“可扫码填写资料加入”或“禁止扫码填写资料加入”
+   * <p>
+   * 请求方式：GET（HTTPS）
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/externalcontact/get_subscribe_mode?access_token=ACCESS_TOKEN
+   *
+   * @return
+   * @throws WxErrorException
+   */
+  Integer getSubscribeMode() throws WxErrorException;
+
+  /**
+   * 获取外部联系人详情
+   * 学校可通过此接口，根据外部联系人的userid（如何获取?），拉取外部联系人详情。
+   * <p>
+   * 请求方式：GET（HTTPS）
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/externalcontact/get?access_token=ACCESS_TOKEN&external_userid=EXTERNAL_USERID
+   *
+   * @param externalUserId 外部联系人的userid，注意不是学校成员的帐号
+   * @return
+   * @throws WxErrorException
+   */
+  WxCpExternalContact getExternalContact(@NonNull String externalUserId) throws WxErrorException;
+
+  /**
+   * 获取可使用的家长范围
+   * 获取可在微信「学校通知-学校应用」使用该应用的家长范围，以学生或部门列表的形式返回。应用只能给该列表下的家长发送「学校通知」。注意该范围只能由学校的系统管理员在「管理端-家校沟通-配置」配置。
+   * <p>
+   * 请求方式：GET（HTTPS）
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/school/agent/get_allow_scope?access_token=ACCESS_TOKEN&agentid=AGENTID
+   *
+   * @param agentId
+   * @return
+   * @throws WxErrorException
+   */
+  WxCpAllowScope getAllowScope(@NonNull Integer agentId) throws WxErrorException;
+
+  /**
+   * 外部联系人openid转换
+   * 企业和服务商可通过此接口，将微信外部联系人的userid（如何获取?）转为微信openid，用于调用支付相关接口。暂不支持企业微信外部联系人（ExternalUserid为wo开头）的userid转openid。
+   * <p>
+   * 请求方式：POST（HTTPS）
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/externalcontact/convert_to_openid?access_token=ACCESS_TOKEN
+   *
+   * @param externalUserId
+   * @return
+   * @throws WxErrorException
+   */
+  String convertToOpenId(@NonNull String externalUserId) throws WxErrorException;
+
+  /**
    * 获取部门列表
    * 请求方式：GET（HTTPS）
    * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/school/department/list?access_token=ACCESS_TOKEN&id=ID
@@ -145,6 +209,17 @@ public interface WxCpSchoolUserService {
    * @throws WxErrorException
    */
   WxCpDepartmentList listDepartment(Integer id) throws WxErrorException;
+
+  /**
+   * 获取「学校通知」二维码
+   * 学校可通过此接口获取「学校通知」二维码，家长可通过扫描此二维码关注「学校通知」并接收学校推送的消息。
+   * 请求方式：GET（HTTPS）
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/externalcontact/get_subscribe_qr_code?access_token=ACCESS_TOKEN
+   *
+   * @return
+   * @throws WxErrorException
+   */
+  WxCpSubscribeQrCode getSubscribeQrCode() throws WxErrorException;
 
   /**
    * 修改自动升年级的配置

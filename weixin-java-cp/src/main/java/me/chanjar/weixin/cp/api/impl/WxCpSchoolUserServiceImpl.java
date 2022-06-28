@@ -7,6 +7,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.common.util.json.GsonParser;
 import me.chanjar.weixin.cp.api.WxCpSchoolUserService;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.WxCpBaseResp;
@@ -15,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
+import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.ExternalContact.*;
 import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.School.*;
 
 /**
@@ -126,10 +128,52 @@ public class WxCpSchoolUserServiceImpl implements WxCpSchoolUserService {
   }
 
   @Override
+  public WxCpBaseResp setSubscribeMode(@NonNull Integer subscribeMode) throws WxErrorException {
+    String apiUrl = this.cpService.getWxCpConfigStorage().getApiUrl(SET_SUBSCRIBE_MODE);
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.addProperty("subscribe_mode", subscribeMode);
+    String responseContent = this.cpService.post(apiUrl, jsonObject.toString());
+    return WxCpBaseResp.fromJson(responseContent);
+  }
+
+  @Override
+  public Integer getSubscribeMode() throws WxErrorException {
+    String apiUrl = this.cpService.getWxCpConfigStorage().getApiUrl(GET_SUBSCRIBE_MODE);
+    String responseContent = this.cpService.get(apiUrl, null);
+    return GsonParser.parse(responseContent).get("subscribe_mode").getAsInt();
+  }
+
+  @Override
+  public WxCpExternalContact getExternalContact(@NonNull String externalUserId) throws WxErrorException {
+    String apiUrl = this.cpService.getWxCpConfigStorage().getApiUrl(EXTERNAL_CONTACT_GET) + externalUserId;
+    String responseContent = this.cpService.get(apiUrl, null);
+    return WxCpExternalContact.fromJson(responseContent);
+  }
+
+  @Override
+  public WxCpAllowScope getAllowScope(@NonNull Integer agentId) throws WxErrorException {
+    String apiUrl = this.cpService.getWxCpConfigStorage().getApiUrl(GET_ALLOW_SCOPE) + agentId;
+    String responseContent = this.cpService.get(apiUrl, null);
+    return WxCpAllowScope.fromJson(responseContent);
+  }
+
+  @Override
+  public String convertToOpenId(@NonNull String externalUserId) throws WxErrorException {
+    return cpService.getExternalContactService().convertToOpenid(externalUserId);
+  }
+
+  @Override
   public WxCpDepartmentList listDepartment(Integer id) throws WxErrorException {
     String apiUrl = this.cpService.getWxCpConfigStorage().getApiUrl(DEPARTMENT_LIST) + id;
     String responseContent = this.cpService.get(apiUrl, null);
     return WxCpDepartmentList.fromJson(responseContent);
+  }
+
+  @Override
+  public WxCpSubscribeQrCode getSubscribeQrCode() throws WxErrorException {
+    String apiUrl = this.cpService.getWxCpConfigStorage().getApiUrl(GET_SUBSCRIBE_QR_CODE);
+    String responseContent = this.cpService.get(apiUrl, null);
+    return WxCpSubscribeQrCode.fromJson(responseContent);
   }
 
   @Override
