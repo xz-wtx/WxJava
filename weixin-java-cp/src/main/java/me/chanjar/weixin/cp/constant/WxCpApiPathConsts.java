@@ -28,6 +28,7 @@ public interface WxCpApiPathConsts {
    * https://work.weixin.qq.com/api/doc/90000/90135/90235
    */
   interface Message {
+
     /**
      * 发送应用消息
      */
@@ -40,8 +41,16 @@ public interface WxCpApiPathConsts {
 
     /**
      * 互联企业发送应用消息
+     * https://developer.work.weixin.qq.com/document/path/90250
      */
     String LINKEDCORP_MESSAGE_SEND = "/cgi-bin/linkedcorp/message/send";
+
+    /**
+     * 发送「学校通知」
+     * https://developer.work.weixin.qq.com/document/path/92321
+     */
+    String EXTERNAL_CONTACT_MESSAGE_SEND = "/cgi-bin/externalcontact/message/send";
+
   }
 
   interface Agent {
@@ -182,6 +191,10 @@ public interface WxCpApiPathConsts {
     String GET_TEACHER_CUSTOMIZE_HEALTH_INFO = "/cgi-bin/school/user/get_teacher_customize_health_info";
     String GET_STUDENT_CUSTOMIZE_HEALTH_INFO = "/cgi-bin/school/user/get_student_customize_health_info";
     String GET_HEALTH_QRCODE = "/cgi-bin/school/user/get_health_qrcode";
+
+    String BATCH_CREATE_STUDENT = "/cgi-bin/school/user/batch_create_student";
+    String BATCH_DELETE_STUDENT = "/cgi-bin/school/user/batch_delete_student";
+    String BATCH_UPDATE_STUDENT = "/cgi-bin/school/user/batch_update_student";
 
     String CREATE_STUDENT = "/cgi-bin/school/user/create_student";
     String DELETE_STUDENT = "/cgi-bin/school/user/delete_student?userid=";
