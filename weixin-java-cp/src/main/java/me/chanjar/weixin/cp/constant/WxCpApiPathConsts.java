@@ -67,6 +67,7 @@ public interface WxCpApiPathConsts {
 
   interface OAuth2 {
     String GET_USER_INFO = "/cgi-bin/user/getuserinfo?code=%s&agentid=%d";
+    String GET_SCHOOL_USER_INFO = "/cgi-bin/school/getuserinfo?code=%s";
     String GET_USER_DETAIL = "/cgi-bin/user/getuserdetail";
     String URL_OAUTH2_AUTHORIZE = "https://open.weixin.qq.com/connect/oauth2/authorize";
   }
@@ -195,6 +196,9 @@ public interface WxCpApiPathConsts {
     String BATCH_CREATE_STUDENT = "/cgi-bin/school/user/batch_create_student";
     String BATCH_DELETE_STUDENT = "/cgi-bin/school/user/batch_delete_student";
     String BATCH_UPDATE_STUDENT = "/cgi-bin/school/user/batch_update_student";
+    String BATCH_CREATE_PARENT = "/cgi-bin/school/user/batch_create_parent";
+    String BATCH_DELETE_PARENT = "/cgi-bin/school/user/batch_delete_parent";
+    String BATCH_UPDATE_PARENT = "/cgi-bin/school/user/batch_update_parent";
 
     String CREATE_STUDENT = "/cgi-bin/school/user/create_student";
     String DELETE_STUDENT = "/cgi-bin/school/user/delete_student?userid=";

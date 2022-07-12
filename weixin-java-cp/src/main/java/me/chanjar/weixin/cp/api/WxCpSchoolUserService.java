@@ -3,6 +3,7 @@ package me.chanjar.weixin.cp.api;
 import lombok.NonNull;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.bean.WxCpBaseResp;
+import me.chanjar.weixin.cp.bean.WxCpOauth2UserInfo;
 import me.chanjar.weixin.cp.bean.school.user.*;
 
 import java.util.List;
@@ -15,6 +16,32 @@ import java.util.List;
  * @date: 2022/6/18 9:10
  */
 public interface WxCpSchoolUserService {
+
+  /**
+   * 获取访问用户身份
+   * 该接口用于根据code获取成员信息
+   * <p>
+   * 请求方式：GET（HTTPS）
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token=ACCESS_TOKEN&code=CODE
+   *
+   * @param code
+   * @return
+   * @throws WxErrorException
+   */
+  WxCpOauth2UserInfo getUserInfo(@NonNull String code) throws WxErrorException;
+
+  /**
+   * 获取家校访问用户身份
+   * 该接口用于根据code获取家长或者学生信息
+   * <p>
+   * 请求方式：GET（HTTPS）
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/school/getuserinfo?access_token=ACCESS_TOKEN&code=CODE
+   *
+   * @param code
+   * @return
+   * @throws WxErrorException
+   */
+  WxCpOauth2UserInfo getSchoolUserInfo(@NonNull String code) throws WxErrorException;
 
   /**
    * 创建学生
@@ -97,6 +124,39 @@ public interface WxCpSchoolUserService {
    * @throws WxErrorException
    */
   WxCpBaseResp createParent(@NonNull WxCpCreateParentRequest request) throws WxErrorException;
+
+  /**
+   * 批量创建家长
+   * 请求方式：POST（HTTPS）
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/school/user/batch_create_parent?access_token=ACCESS_TOKEN
+   *
+   * @param request
+   * @return
+   * @throws WxErrorException
+   */
+  WxCpBatchResultList batchCreateParent(@NonNull WxCpBatchCreateParentRequest request) throws WxErrorException;
+
+  /**
+   * 批量删除家长
+   * 请求方式：POST（HTTPS）
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/school/user/batch_delete_parent?access_token=ACCESS_TOKEN
+   *
+   * @param userIdList
+   * @return
+   * @throws WxErrorException
+   */
+  WxCpBatchResultList batchDeleteParent(@NonNull String... userIdList) throws WxErrorException;
+
+  /**
+   * 批量更新家长
+   * 请求方式：POST（HTTPS）
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/school/user/batch_update_parent?access_token=ACCESS_TOKEN
+   *
+   * @param request
+   * @return
+   * @throws WxErrorException
+   */
+  WxCpBatchResultList batchUpdateParent(@NonNull WxCpBatchUpdateParentRequest request) throws WxErrorException;
 
   /**
    * 更新家长

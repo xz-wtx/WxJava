@@ -11,6 +11,7 @@ import me.chanjar.weixin.common.util.json.GsonParser;
 import me.chanjar.weixin.cp.api.WxCpSchoolUserService;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.WxCpBaseResp;
+import me.chanjar.weixin.cp.bean.WxCpOauth2UserInfo;
 import me.chanjar.weixin.cp.bean.school.user.*;
 import org.apache.commons.lang3.StringUtils;
 
@@ -31,6 +32,16 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.School.*;
 public class WxCpSchoolUserServiceImpl implements WxCpSchoolUserService {
 
   private final WxCpService cpService;
+
+  @Override
+  public WxCpOauth2UserInfo getUserInfo(@NonNull String code) throws WxErrorException {
+    return cpService.getOauth2Service().getUserInfo(code);
+  }
+
+  @Override
+  public WxCpOauth2UserInfo getSchoolUserInfo(@NonNull String code) throws WxErrorException {
+    return cpService.getOauth2Service().getSchoolUserInfo(code);
+  }
 
   @Override
   public WxCpBaseResp createStudent(@NonNull String studentUserId, @NonNull String name, @NonNull List<Integer> departments) throws WxErrorException {
@@ -102,6 +113,33 @@ public class WxCpSchoolUserServiceImpl implements WxCpSchoolUserService {
     String apiUrl = this.cpService.getWxCpConfigStorage().getApiUrl(CREATE_PARENT);
     String responseContent = this.cpService.post(apiUrl, request.toJson());
     return WxCpBaseResp.fromJson(responseContent);
+  }
+
+  @Override
+  public WxCpBatchResultList batchCreateParent(@NonNull WxCpBatchCreateParentRequest request) throws WxErrorException {
+    String apiUrl = this.cpService.getWxCpConfigStorage().getApiUrl(BATCH_CREATE_PARENT);
+    String responseContent = this.cpService.post(apiUrl, request.toJson());
+    return WxCpBatchResultList.fromJson(responseContent);
+  }
+
+  @Override
+  public WxCpBatchResultList batchDeleteParent(@NonNull String... userIdList) throws WxErrorException {
+    String apiUrl = this.cpService.getWxCpConfigStorage().getApiUrl(BATCH_DELETE_PARENT);
+    JsonObject jsonObject = new JsonObject();
+    JsonArray jsonArray = new JsonArray();
+    for (String userId : userIdList) {
+      jsonArray.add(new JsonPrimitive(userId));
+    }
+    jsonObject.add("useridlist", jsonArray);
+    String responseContent = this.cpService.post(apiUrl, jsonObject.toString());
+    return WxCpBatchResultList.fromJson(responseContent);
+  }
+
+  @Override
+  public WxCpBatchResultList batchUpdateParent(@NonNull WxCpBatchUpdateParentRequest request) throws WxErrorException {
+    String apiUrl = this.cpService.getWxCpConfigStorage().getApiUrl(BATCH_UPDATE_PARENT);
+    String responseContent = this.cpService.post(apiUrl, request.toJson());
+    return WxCpBatchResultList.fromJson(responseContent);
   }
 
   @Override
