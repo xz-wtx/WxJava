@@ -223,7 +223,7 @@ public class WxPayApplyment4SubCreateRequest implements Serializable {
      * 是否是金融机构
      */
     @SerializedName("finance_institution")
-    private boolean financeInstitution;
+    private Boolean financeInstitution;
 
     /**
      * 营业执照
@@ -450,7 +450,7 @@ public class WxPayApplyment4SubCreateRequest implements Serializable {
        * 经营者/法人是否为受益人
        */
       @SerializedName("owner")
-      private boolean owner;
+      private Boolean owner;
 
       @Data
       @Builder
