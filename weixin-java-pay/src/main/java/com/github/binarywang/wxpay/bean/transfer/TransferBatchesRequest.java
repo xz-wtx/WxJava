@@ -62,6 +62,7 @@ public class TransferBatchesRequest implements Serializable {
   /**
    * 转账明细列表
    */
+  @SpecEncrypt
   @SerializedName("transfer_detail_list")
   private List<TransferDetail> transferDetailList;
 
