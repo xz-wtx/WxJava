@@ -475,6 +475,21 @@ public interface WxCpTpService {
   void setWxCpTpUserService(WxCpTpUserService wxCpTpUserService);
 
   /**
+   * set license service
+   *
+   * @param wxCpTpLicenseService the oa service
+   */
+  void setWxCpTpLicenseService(WxCpTpLicenseService wxCpTpLicenseService);
+
+
+  /**
+   * get license service
+   *
+   * @return getCpTPLicenseService wx cp tp license service
+   */
+  WxCpTpLicenseService getWxCpTpLicenseService();
+
+  /**
    * 获取应用的管理员列表
    *
    * @param authCorpId the auth corp id
@@ -530,4 +545,31 @@ public interface WxCpTpService {
    */
   void expireProviderToken();
 
+  /**
+   * 获取应用版本付费订单相关接口服务
+   *
+   * @return the wx cp tp order service
+   */
+  WxCpTpOrderService getWxCpTpOrderService();
+
+  /**
+   * 设置应用版本付费订单相关接口服务
+   *
+   * @param wxCpTpOrderService the wx cp tp order service
+   */
+  void setWxCpTpOrderService(WxCpTpOrderService wxCpTpOrderService);
+
+  /**
+   * 获取应用版本付费版本相关接口服务
+   *
+   * @return the wx cp tp edition service
+   */
+  WxCpTpEditionService getWxCpTpEditionService();
+
+  /**
+   * 设置应用版本付费版本相关接口服务
+   *
+   * @param wxCpTpEditionService the wx cp tp edition service
+   */
+  void setWxCpTpOrderService(WxCpTpEditionService wxCpTpEditionService);
 }

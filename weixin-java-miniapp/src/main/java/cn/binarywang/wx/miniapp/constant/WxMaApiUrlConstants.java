@@ -42,6 +42,7 @@ public class WxMaApiUrlConstants {
     String DATABASE_UPDATE_URL = "https://api.weixin.qq.com/tcb/databaseupdate";
     String DATABASE_DELETE_URL = "https://api.weixin.qq.com/tcb/databasedelete";
     String DATABASE_ADD_URL = "https://api.weixin.qq.com/tcb/databaseadd";
+    String SEND_SMS_V2_URL = "https://api.weixin.qq.com/tcb/sendsmsv2";
   }
 
   public interface Msg {
@@ -70,6 +71,7 @@ public class WxMaApiUrlConstants {
     String GET_SUPPORT_VERSION_URL = "https://api.weixin.qq.com/cgi-bin/wxopen/getweappsupportversion";
     String SET_SUPPORT_VERSION_URL = "https://api.weixin.qq.com/cgi-bin/wxopen/setweappsupportversion";
     String UNDO_CODE_AUDIT_URL = "https://api.weixin.qq.com/wxa/undocodeaudit";
+    String GET_VERSION_INFO_URL = "https://api.weixin.qq.com/wxa/getversioninfo";
   }
 
   public interface Express {
@@ -399,6 +401,48 @@ public class WxMaApiUrlConstants {
     String FILE_COMM = "https://api.weixin.qq.com/cv/ocr/comm";
   }
 
+  public interface Product {
+    interface Spu {
+      String PRODUCT_SPU_ADD_URL = "https://api.weixin.qq.com/product/spu/add";
+      String PRODUCT_SPU_DEL_URL = "https://api.weixin.qq.com/product/spu/del";
+      String PRODUCT_SPU_GET_URL = "https://api.weixin.qq.com/product/spu/get";
+      String PRODUCT_SPU_GET_LIST_URL = "https://api.weixin.qq.com/product/spu/get_list";
+      String PRODUCT_SPU_UPDATE_URL = "https://api.weixin.qq.com/product/spu/update";
+      String PRODUCT_SPU_LISTING_URL = "https://api.weixin.qq.com/product/spu/listing";
+      String PRODUCT_SPU_DELISTING_URL = "https://api.weixin.qq.com/product/spu/delisting";
+    }
+
+    interface Sku {
+      String PRODUCT_ADD_SKU_URL = "https://api.weixin.qq.com/product/sku/add";
+      String PRODUCT_BATCH_ADD_SKU_URL = "https://api.weixin.qq.com/product/sku/batch_add";
+      String PRODUCT_DEL_SKU_URL = "https://api.weixin.qq.com/product/sku/del";
+      String PRODUCT_UPDATE_SKU_URL = "https://api.weixin.qq.com/product/sku/update";
+      String PRODUCT_UPDATE_SKU_PRICE_URL = "https://api.weixin.qq.com/product/sku/update_price";
+      String PRODUCT_UPDATE_SKU_STOCK_URL = "https://api.weixin.qq.com/product/stock/update";
+      String PRODUCT_SKU_LIST = "https://api.weixin.qq.com/product/sku/get_list";
+    }
+
+    interface Order {
+      String PRODUCT_ORDER_GET_LIST = "https://api.weixin.qq.com/product/order/get_list";
+      String PRODUCT_ORDER_DETAIL_URL = "https://api.weixin.qq.com/product/order/get";
+      String PRODUCT_ORDER_CHANGE_MERCHANT_NOTES_URL = "https://api.weixin.qq.com/product/order/change_merchant_notes";
+
+      String PRODUCT_DELIVERY_SEND = "https://api.weixin.qq.com/product/delivery/send";
+
+      String GET_AFTER_SALE_ORDER = "https://api.weixin.qq.com/product/order/getaftersaleorder";
+      String BATCH_GET_AFTER_SALE_ORDER = "https://api.weixin.qq.com/product/order/batchgetaftersaleorder";
+      String AFTER_SALE_ACCEPT_APPLY = "https://api.weixin.qq.com/product/order/acceptapply";
+      String AFTER_SALE_REJECT_APPLY = "https://api.weixin.qq.com/product/order/rejectrefund";
+    }
+
+    interface OTHER {
+      String GET_CATEGORY = "https://api.weixin.qq.com/product/category/get";
+      String GET_BRAND = "https://api.weixin.qq.com/product/brand/get";
+      String GET_FREIGHT_TEMPLATE = "https://api.weixin.qq.com/product/delivery/get_freight_template";
+      String IMG_UPLOAD = "https://api.weixin.qq.com/product/img/upload";
+    }
+  }
+
   public interface Shop {
     interface Spu {
       String SPU_ADD_URL = "https://api.weixin.qq.com/shop/spu/add";
@@ -417,6 +461,8 @@ public class WxMaApiUrlConstants {
       String ORDER_ADD = "https://api.weixin.qq.com/shop/order/add";
       String ORDER_PAY = "https://api.weixin.qq.com/shop/order/pay";
       String ORDER_GET = "https://api.weixin.qq.com/shop/order/get";
+      String ORDER_GET_LIST = "https://api.weixin.qq.com/shop/order/get_list";
+      String ORDER_GET_PAYMENT_PARAMS = "https://api.weixin.qq.com/shop/order/getpaymentparams";
     }
 
     interface Register {
@@ -455,9 +501,44 @@ public class WxMaApiUrlConstants {
     }
 
     interface Aftersale {
-      String AFTERSALE_ADD = "https://api.weixin.qq.com/shop/aftersale/add";
-      String AFTERSALE_GET = "https://api.weixin.qq.com/shop/aftersale/get";
-      String AFTERSALE_UPDATE = "https://api.weixin.qq.com/shop/aftersale/update";
+      String AFTERSALE_ADD = "https://api.weixin.qq.com/shop/ecaftersale/add";
+      String AFTERSALE_CANCEL = "https://api.weixin.qq.com/shop/ecaftersale/cancel";
+      String AFTERSALE_UPDATE = "https://api.weixin.qq.com/shop/ecaftersale/update";
+      String AFTERSALE_UPLOAD_RETURN_INFO = "https://api.weixin.qq.com/shop/ecaftersale/uploadreturninfo";
+      String AFTERSALE_ACCEPT_REFUND = "https://api.weixin.qq.com/shop/ecaftersale/acceptrefund";
+      String AFTERSALE_ACCEPT_RETURN = "https://api.weixin.qq.com/shop/ecaftersale/acceptreturn";
+      String AFTERSALE_REJECT = "https://api.weixin.qq.com/shop/ecaftersale/reject";
+      String AFTERSALE_UPLOAD_CERTIFICATES = "https://api.weixin.qq.com/shop/ecaftersale/upload_certificates";
+      String AFTERSALE_UPLOAD_DEADLINE = "https://api.weixin.qq.com/shop/aftersale/update_deadline";
+      String AFTERSALE_GET_LIST = "https://api.weixin.qq.com/shop/ecaftersale/get_list";
+      String AFTERSALE_GET = "https://api.weixin.qq.com/shop/ecaftersale/get";
+    }
+
+    interface Sharer {
+      String BIND = "https://api.weixin.qq.com/shop/sharer/bind";
+      String GET_SHARER_DATA_SUMMARY = "https://api.weixin.qq.com/shop/sharer/get_sharer_data_summary";
+      String GET_SHARER_LIST = "https://api.weixin.qq.com/shop/sharer/get_sharer_list";
+      String GET_SHARER_LIVE_ORDER_LIST = "https://api.weixin.qq.com/shop/sharer/get_sharer_live_order_list";
+      String GET_SHARER_LIVE_SUMMARY_LIST = "https://api.weixin.qq.com/shop/sharer/get_sharer_live_summary_list";
+      String SEARCH_SHARER = "https://api.weixin.qq.com/shop/sharer/search_sharer";
+      String UNBIND = "https://api.weixin.qq.com/shop/sharer/unbind";
+    }
+
+    interface Coupon {
+      String ADD_COUPON = "https://api.weixin.qq.com/shop/coupon/add";
+      String GET_COUPON = "https://api.weixin.qq.com/shop/coupon/get";
+      String GET_COUPON_LIST = "https://api.weixin.qq.com/shop/coupon/get_list";
+      String UPDATE_COUPON = "https://api.weixin.qq.com/shop/coupon/update";
+      String UPDATE_COUPON_STATUS = "https://api.weixin.qq.com/shop/coupon/update_status";
+      String UPDATE_COUPON_STOCK = "https://api.weixin.qq.com/shop/coupon/update_coupon_stock";
+      String ADD_USER_COUPON = "https://api.weixin.qq.com/shop/coupon/add_user_coupon";
+      String GET_USER_COUPON_LIST = "https://api.weixin.qq.com/shop/coupon/get_usercoupon_list";
+      String UPDATE_USER_COUPON = "https://api.weixin.qq.com/shop/coupon/update_user_coupon";
+      String UPDATE_USER_COUPON_STATUS = "https://api.weixin.qq.com/shop/coupon/update_usercoupon_status";
+    }
+
+    interface Pay {
+      String CREATE_ORDER = "https://api.weixin.qq.com/shop/pay/createorder";
     }
   }
 
@@ -549,6 +630,18 @@ public class WxMaApiUrlConstants {
      * 商户在调用完trace_waybill接口后，可以使用本接口查询到对应运单的详情信息
      */
     String QUERY_WAYBILL_TRACE_URL = "https://api.weixin.qq.com/cgi-bin/express/delivery/open_msg/query_trace";
+
+    /**
+     * 物流服务-消息组件-传运单接口(订阅消息) follow_waybill
+     * 商户在调用完trace_waybill接口后，可以使用本接口查询到对应运单的详情信息
+     */
+    String FOLLOW_WAYBILL_URL = "https://api.weixin.qq.com/cgi-bin/express/delivery/open_msg/follow_waybill";
+
+    /**
+     * 物流服务-消息组件-查运单接口(订阅消息) query_follow_trace
+     * 商户在调用完trace_waybill接口后，可以使用本接口查询到对应运单的详情信息
+     */
+    String QUERY_FOLLOW_TRACE_URL = "https://api.weixin.qq.com/cgi-bin/express/delivery/open_msg/query_follow_trace";
 
 
     /**

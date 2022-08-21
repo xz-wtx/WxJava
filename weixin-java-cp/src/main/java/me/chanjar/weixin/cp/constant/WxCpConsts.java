@@ -94,7 +94,7 @@ public class WxCpConsts {
     public static final String TASKCARD_CLICK = "taskcard_click";
 
     /**
-     * 企业成员添加外部联系人事件推送
+     * 企业成员添加外部联系人事件推送 & 会话存档客户同意进行聊天内容存档事件回调事件
      */
     public static final String CHANGE_EXTERNAL_CONTACT = "change_external_contact";
 
@@ -110,6 +110,7 @@ public class WxCpConsts {
 
     /**
      * 企业微信审批事件推送（自建应用审批）
+     * https://developer.work.weixin.qq.com/document/path/90269
      */
     public static final String OPEN_APPROVAL_CHANGE = "open_approval_change";
 
@@ -142,6 +143,61 @@ public class WxCpConsts {
      * 删除日程事件
      */
     public static final String DELETE_SCHEDULE = "delete_schedule";
+
+    /**
+     * 家校通讯录事件
+     */
+    public static final String CHANGE_SCHOOL_CONTACT = "change_school_contact";
+
+    /**
+     * 产生会话回调事件
+     */
+    public static final String MSGAUDIT_NOTIFY = "msgaudit_notify";
+
+    /**
+     * 直播回调事件
+     */
+    public static final String LIVING_STATUS_CHANGE = "living_status_change";
+
+  }
+
+  /**
+   * 会话存档事件CHANGE_TYPE
+   * https://developer.work.weixin.qq.com/document/path/92005
+   */
+  @UtilityClass
+  public static class MsgAuditChangeType {
+
+    public static final String MSG_AUDIT_APPROVED = "msg_audit_approved";
+
+  }
+
+  /**
+   * 家校通讯录变更事件CHANGE_TYPE
+   */
+  @UtilityClass
+  public static class SchoolContactChangeType {
+
+    /**
+     * 部门变更事件
+     * https://developer.work.weixin.qq.com/document/path/92052
+     */
+    public static final String CREATE_DEPARTMENT = "create_department";
+    public static final String UPDATE_DEPARTMENT = "update_department";
+    public static final String DELETE_DEPARTMENT = "delete_department";
+
+    /**
+     * 成员变更事件
+     * https://developer.work.weixin.qq.com/document/path/92032
+     */
+    public static final String CREATE_STUDENT = "create_student";
+    public static final String UPDATE_STUDENT = "update_student";
+    public static final String DELETE_STUDENT = "delete_student";
+    public static final String CREATE_PARENT = "create_parent";
+    public static final String UPDATE_PARENT = "update_parent";
+    public static final String DELETE_PARENT = "delete_parent";
+    public static final String SUBSCRIBE = "subscribe";
+    public static final String UNSUBSCRIBE = "unsubscribe";
 
   }
 
@@ -215,7 +271,7 @@ public class WxCpConsts {
        */
       public static final String DEL_MEMBER = "del_member";
       /**
-       * 成员退群
+       * 群主变更
        */
       public static final String CHANGE_OWNER = "change_owner";
       /**
@@ -228,8 +284,9 @@ public class WxCpConsts {
       public static final String CHANGE_NOTICE = "change_notice";
     }
   }
+
   @UtilityClass
-  public static class ExternalTagChangeType{
+  public static class ExternalTagChangeType {
 
     /**
      * 创建企业客户标签
@@ -250,7 +307,7 @@ public class WxCpConsts {
   }
 
   @UtilityClass
-  public static class TageType{
+  public static class TageType {
     /**
      * 标签
      */
@@ -373,6 +430,12 @@ public class WxCpConsts {
      * 图文消息（点击跳转到外链）.
      */
     public static final String NEWS = "news";
+
+    /**
+     * 文件类型消息.
+     */
+    public static final String FILE = "file";
+
   }
 
   /**

@@ -48,7 +48,7 @@ public interface WxCpLivingService {
    * @return
    * @throws WxErrorException
    */
-  WxCpWatchStat getWatchStat(@NonNull String livingId, Integer nextKey) throws WxErrorException;
+  WxCpWatchStat getWatchStat(@NonNull String livingId, String nextKey) throws WxErrorException;
 
   /**
    * 获取成员直播ID列表
@@ -84,7 +84,7 @@ public interface WxCpLivingService {
    * 请求地址： https://qyapi.weixin.qq.com/cgi-bin/living/create?access_token=ACCESS_TOKEN
    *
    * @param request 创建预约直播请求参数.
-   * @return
+   * @return livingId（直播id）
    * @throws WxErrorException
    */
   String livingCreate(WxCpLivingCreateRequest request) throws WxErrorException;

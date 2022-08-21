@@ -1,11 +1,17 @@
 package me.chanjar.weixin.cp.api;
-import com.google.common.collect.Lists;
 
+import com.google.common.collect.Lists;
+import com.tencent.wework.Finance;
 import lombok.extern.slf4j.Slf4j;
+import me.chanjar.weixin.common.util.XmlUtils;
 import me.chanjar.weixin.cp.api.impl.WxCpServiceImpl;
+import me.chanjar.weixin.cp.bean.message.WxCpXmlMessage;
 import me.chanjar.weixin.cp.bean.msgaudit.*;
 import me.chanjar.weixin.cp.config.WxCpConfigStorage;
+import me.chanjar.weixin.cp.constant.WxCpConsts;
 import me.chanjar.weixin.cp.demo.WxCpDemoInMemoryConfigStorage;
+import me.chanjar.weixin.cp.util.xml.XStreamTransformer;
+import org.eclipse.jetty.util.ajax.JSON;
 import org.testng.annotations.Test;
 
 import java.io.InputStream;
@@ -18,7 +24,7 @@ import java.util.List;
  * 企业微信会话内容存档测试类.
  * 官方文档：https://developer.work.weixin.qq.com/document/path/91360
  *
- * @author Wang_Wong
+ * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
  * @date 2022-01-17
  */
 @Slf4j
@@ -28,6 +34,7 @@ public class WxCpMsgAuditTest {
   private static WxCpService cpService;
 
   // com.binarywang.spring.starter.wxjava.cp.config.WxCpServiceAutoConfiguration
+  // WxCpServiceImpl.getAccessToken()
   @Test
   public void test() throws Exception {
 
@@ -38,22 +45,104 @@ public class WxCpMsgAuditTest {
     cpService = new WxCpServiceImpl();
     cpService.setWxCpConfigStorage(config);
 
+
     /**
-     * 配置：
+     * 客户同意进行聊天内容存档事件回调
+     * 配置了客户联系功能的成员添加外部联系人同意进行聊天内容存档时，回调该事件。
+     *
+     * https://developer.work.weixin.qq.com/document/path/92005
+     */
+    String msgAuditApprovedXml = "<xml>\n" +
+      "\t<ToUserName><![CDATA[toUser]]></ToUserName>\n" +
+      "\t<FromUserName><![CDATA[sys]]></FromUserName> \n" +
+      "\t<CreateTime>1403610513</CreateTime>\n" +
+      "\t<MsgType><![CDATA[event]]></MsgType>\n" +
+      "\t<Event><![CDATA[change_external_contact]]></Event>\n" +
+      "\t<ChangeType><![CDATA[msg_audit_approved]]></ChangeType>\n" +
+      "\t<UserID><![CDATA[zhangsan]]></UserID>\n" +
+      "\t<ExternalUserID><![CDATA[woAJ2GCAAABiuyujaWJHDDGi0mACHAAA]]></ExternalUserID>\n" +
+      "\t<WelcomeCode><![CDATA[WELCOMECODE]]></WelcomeCode>\n" +
+      "</xml>";
+
+    final WxCpXmlMessage msgAuditApprovedXmlMsg = XStreamTransformer.fromXml(WxCpXmlMessage.class, msgAuditApprovedXml);
+    msgAuditApprovedXmlMsg.setAllFieldsMap(XmlUtils.xml2Map(msgAuditApprovedXml));
+    log.info("msgAuditApprovedXmlMsg:{}", JSON.toString(msgAuditApprovedXmlMsg));
+
+    /**
+     * 产生会话回调事件
+     * 为了提升企业会话存档的使用性能，降低无效的轮询次数。
+     * 当企业收到或发送新消息时，企业微信可以以事件的形式推送到企业指定的url。回调间隔为15秒，在15秒内若有消息则触发回调，若无消息则不会触发回调。
+     *
+     * https://developer.work.weixin.qq.com/document/path/95039
+     */
+    String msgAuditNotifyXml = "<xml>\n" +
+      "   <ToUserName><![CDATA[CorpID]]></ToUserName>\n" +
+      "   <FromUserName><![CDATA[sys]]></FromUserName> \n" +
+      "   <CreateTime>1629101687</CreateTime>\n" +
+      "   <MsgType><![CDATA[event]]></MsgType>\n" +
+      "   <AgentID>2000004</AgentID>\n" +
+      "   <Event><![CDATA[msgaudit_notify]]></Event>\n" +
+      "</xml>";
+
+    final WxCpXmlMessage msgAuditNotifyXmlMsg = XStreamTransformer.fromXml(WxCpXmlMessage.class, msgAuditNotifyXml);
+    msgAuditNotifyXmlMsg.setAllFieldsMap(XmlUtils.xml2Map(msgAuditNotifyXml));
+    log.info("msgAuditNotifyXmlMsg:{}", JSON.toString(msgAuditNotifyXmlMsg));
+
+    /**
+     * 增加变更事件类型：产生会话回调事件
+     */
+    String msgauditNotify = WxCpConsts.EventType.MSGAUDIT_NOTIFY;
+
+
+    /**
+     * 仔细配置：
      * <xml>
-     *   <corpId>wwa3bexxXXXXXX</corpId>
-     *   <agentId>自定义agentId</agentId>
-     *   <corpSecret>xIpum7Yt4NMXXXXXXX</corpSecret>
-     *   <token>2bSNqXXXXXXXX</token>
-     *   <aesKey>MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDZuPVMyVyMvJkdSCZA893B2pggd1r95T8k2QZgz+VejtaDJCbD60mYoW1Uwwlwuqy8W78M6MmXsskn+5XunyR1WJlJGqgi0OMVGYvSfkNb9kD50fM21CGLcN1y4miL9fVNBIsvJmIUeJCNS8TioAVGFvh2EgzjqTR1gHfDwu8If7rfGmTHkPYL8hQxMg/EQ3451JOIBHSa7EQSx64SIoVWEgSDFQjGEpjUiJRfciyyz+nTSkEDgFa9hpyTS6E0c/3Q5lVDFgIwTArC19XBFKb00PbcFuLriOIsTBX4K9XWBtefVXowAdqUVQDH6BNUIK7/iVPQ4L3p+F5DBOrx8I/7AgMBAAECggEBAK53C/nwEX2lU3ynaB/8SuMga274ta1mmmbIkdfaQA65nyOPQJEWZe8szBN0BoiSzgBR9JI/p+srlQ25CLgiRnDSAmMWPU1I3e72fZi7HPcAKakGmEKDUi4OzyVUUDp3aY3B6lZqB4Yn5o2S/b4sRI2ZspfKdxGncSYHP/Far3i6hzq2C1hbyYM6HkHPcrQ+z6ir6GxjLvHXssVJ+/C0HMsVIQAWPyEGbzWozS+EswmQ+itk+7cewiLWbaCSp6lsjHKGTxJwCxRes0nUt2SfkLnIUkDLxB7c6zDQJCn1K2UckCjNBlCWl+oDWLkLQ7UAJ+4IYYSslR4wXzRg8PplW8ECgYEA9VlEprEoG2oSn3HXIMFg0MANViQe89QJQdwd7D5h4FLxXQLItxqmZj77iktlzlICcK9WT9WHRY1AOilsuMaDmY0VH3Z8r/X9BU712KFJqMYH5CNxrqHOya3BG+CclEKToaOTmo9kiOpFAMNSuuWs6gvILJ0CKEmSUo5G9fJu4fkCgYEA4yypHoRZIP0mDdVDeVtdHHcq5JdWF6xbAFs4P57VHG1KDMWouk3IHSeO279gEIwcBAdaLcMMgFfzyQBwcisxjC76oyoZnbSntB7ZMFdPqALKfxIdleLilbASuRKesVAF+OgOx/yp/aQUeLG2pVBivgn2TyGMwjnxznTh9vh+vpMCgYEAmOva7krdRLkIgnjiLXhab8JEjbxVzoQKgRJBVE5NkxQffGmP0RC7Rl9bSQdVnRNgkfu3QGtGtQMlVRscuM6Cl+JnmASyErqvye89LJja4GcN5BRzdvVDflDeXBHThlU4zza1eVCGyQ+7ko4rsnIVJIvTaHs0LQguO2aStBk3I4ECgYAyBsO3VK3L9fNLWItjThtTCWsIq8rpq6reiTf5yqBjgi2sYlqlrDtFMFDlU190RWZl/Lh/G1TFbpjgypf4jEp89Ft9UugRMpc7sw9g9dk0xmiRUwvw1eXP0NZOqysHIPgvt+qJX7qPgHKBoaD3Bpy3/Lmg82Jr4xa8wECCgnZmwQKBgH7hirPs1/HqBrbxS726IZUf9QTmVkyOYIwzuwFYKb/+4caSah+iaXexVux0xS5tchj/6c1dQSKJmlegV8smIb6EEcko7llA1y1P5QFtXtaaRd07tTsv3BKEg496YLRjbxPzgJn6Fsoz3TTdGwESL8Q3I2h0WmVVhmr/rjr+RkWQ</aesKey>
+     * <corpId>ww45xxx88865xxx</corpId>
+     * <corpSecret>xIpum7Yt4NMXcyxdzcQ2l_46BG4QIQDR57MhA45ebIw</corpSecret> // secret
+     * <agentId>200000</agentId> // 会话存档的应用id
+     * <token></token> // 回调配置的token
+     * <aesKey></aesKey> // 回调配置的EncodingAESKey
+     *
+     * // 企业微信会话存档
+     * // 1、会话存档私钥，最好去除前缀和换行，如下所示！
+     * // 2、仔细配置windows以及linux环境sdk路径
+     * <msgAuditPriKey>MIxxx893B2pggd1r95T8k2QxxxxbD6xxxxmXsskn+5XunyR1WJlJGqgi0OMVGYvSfkNb9kD50fM21CGLcN1y4miL9fVNBIsvJmIUeJCNS8TioAVGFvh2EgzjqTR1gH</msgAuditPriKey>
+     * <msgAuditLibPath>/www/osfile/libcrypto-1_1-x64.dll,libssl-1_1-x64.dll,libcurl-x64.dll,WeWorkFinanceSdk.dll,libWeWorkFinanceSdk_Java.so</msgAuditLibPath>
+     * </xml>
      *
      * 注意：最好先配置lib开头的系统库，再配置sdk类库，配置绝对路径，最好配置为linux路径
-     *   windows:
-     *   <msgAuditLibPath>D:/WorkSpace/libcrypto-1_1-x64.dll,libssl-1_1-x64.dll,libcurl-x64.dll,WeWorkFinanceSdk.dll,libWeWorkFinanceSdk_Java.so</msgAuditLibPath>
-     *   linux:
-     *   <msgAuditLibPath>/www/osfile/work_msg_storage/libcrypto-1_1-x64.dll,libssl-1_1-x64.dll,libcurl-x64.dll,WeWorkFinanceSdk.dll,libWeWorkFinanceSdk_Java.so</msgAuditLibPath>
-     * </xml>
-     */
+     * Windows:
+     * <msgAuditLibPath>D:/WorkSpace/libcrypto-1_1-x64.dll,libssl-1_1-x64.dll,libcurl-x64.dll,WeWorkFinanceSdk.dll,libWeWorkFinanceSdk_Java.so</msgAuditLibPath>
+     * Linux:
+     * <msgAuditLibPath>/www/osfile/work_msg_storage/libcrypto-1_1-x64.dll,libssl-1_1-x64.dll,libcurl-x64.dll,WeWorkFinanceSdk.dll,libWeWorkFinanceSdk_Java.so</msgAuditLibPath>
+     *
+     *
+     * yml配置（支持多个corpId）：
+     * wx:
+     *   cp:
+     *     appConfigs:
+     *     - agentId: 10001 #客户联系
+     *       corpId: xxxxxxxxxxx
+     *       secret: T5fTj1n-sBAT4rKNW5c9IYNfPdXZxxxxxxxxxxx
+     *       token: 2bSNqTcLtxxxxxxxxxxx
+     *       aesKey: AXazu2Xyw44SNY1x8go2phn9p9B2xxxxxxxxxxx
+     *     - agentId: 10002 #会话内容存档
+     *       corpId: xxxxxxxxxxx
+     *       secret: xIpum7Yt4NMXcyxdzcQ2l_46BG4Qxxxxxxxxxxx
+     *       token:
+     *       aesKey:
+     *       msgAuditPriKey: MIxxx893B2pggd1r95T8k2QxxxxbD6xxxxmXsskn+5XunyR1WJlJGqgi0OMVGYvSfkNb9kD50fM21CGLcN1y4miL9fVNBIsvJmIUeJCNS8TioAVGFvh2EgzjqTR1gHxxx
+     *       msgAuditLibPath: /www/osfile/libcrypto-1_1-x64.dll,libssl-1_1-x64.dll,libcurl-x64.dll,WeWorkFinanceSdk.dll,libWeWorkFinanceSdk_Java.so
+     *
+     *
+     * 在线生成非对称加密公钥私钥对：
+     * http://web.chacuo.net/netrsakeypair
+     *
+     *
+     * 或者可以在linux上使用如下命令生成公钥私钥对：
+     * openssl genrsa -out private_key.pem 2048
+     * openssl rsa -in private_key.pem -pubout -out public_key.pem
+     * /
 
     /**
      * 建议放到redis，本次请求获取消息记录开始的seq值。首次访问填写0，非首次使用上次企业微信返回的最大seq。允许从任意seq重入拉取。
@@ -84,12 +173,13 @@ public class WxCpMsgAuditTest {
 //          Integer publickeyVer = chatData.getPublickeyVer();
 
           // 获取明文数据
-          final String chatPlainText = cpService.getMsgAuditService().getChatPlainText(chatData);
+          final String chatPlainText = cpService.getMsgAuditService().getChatPlainText(chatDatas.getSdk(), chatData, 2);
           final WxCpChatModel wxCpChatModel = WxCpChatModel.fromJson(chatPlainText);
           log.info("明文数据为：{}", wxCpChatModel.toJson());
 
           // 获取消息数据
-          final WxCpChatModel decryptData = cpService.getMsgAuditService().getDecryptData(chatData);
+          // https://developer.work.weixin.qq.com/document/path/91774
+          final WxCpChatModel decryptData = cpService.getMsgAuditService().getDecryptData(chatDatas.getSdk(), chatData, 2);
           log.info("获取消息数据为：{}", decryptData.toJson());
 
           /**
@@ -168,15 +258,24 @@ public class WxCpMsgAuditTest {
                 return;
             }
 
-            // 拉取媒体文件
+            /**
+             * 拉取媒体文件
+             *
+             * 注意：
+             * 1、根据上面返回的文件类型，拼接好存放文件的绝对路径即可。此时绝对路径写入文件流，来达到获取媒体文件的目的。
+             * 2、拉取完媒体文件之后，此时文件已经存在绝对路径，可以通过mq异步上传到对象存储
+             * 3、比如可以上传到阿里云oss或者腾讯云cos
+             */
             String targetPath = path + md5Sum + suffix;
-            cpService.getMsgAuditService().getMediaFile(sdkFileId, null, null, 1000L, targetPath);
+            cpService.getMsgAuditService().getMediaFile(chatDatas.getSdk(), sdkFileId, null, null, 1000L, targetPath);
 
           }
-
         }
-
       }
+      // 注意：
+      // 当此批次数据拉取完毕后，应释放此次sdk
+      log.info("释放sdk {}", chatDatas.getSdk());
+      Finance.DestroySdk(chatDatas.getSdk());
 
     }
 
@@ -427,6 +526,16 @@ public class WxCpMsgAuditTest {
      */
     WxCpGroupChat room = cpService.getMsgAuditService().getGroupChat("wrOQpTDwAAyPl84GBJ40W5eWxWtixSCA");
     log.info(room.toJson());
+
+
+    /**
+     * 获取access_token
+     * https://developer.work.weixin.qq.com/document/path/91039
+     * https://www.jianshu.com/p/dde171887d63
+     */
+    String getUrl = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=%s&corpsecret=%s";
+    String data = cpService.get(String.format(getUrl, config.getCorpId(), config.getCorpSecret()), null);
+
 
   }
 

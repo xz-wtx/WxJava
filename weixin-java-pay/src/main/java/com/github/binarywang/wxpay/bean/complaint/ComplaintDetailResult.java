@@ -10,14 +10,13 @@ import java.util.List;
 
 /**
  * 微信消费者投诉2.0
- * 查询投诉单列表返回的实体
+ * 查询投诉单列表接口 和 查询投诉单详情接口返回的实体
  *
  * @author <a href="https://gitee.com/jeequan/jeepay">jmdhappy</a>
  * @date 2022-3-19
  */
 @Data
 public class ComplaintDetailResult implements Serializable {
-
   private static final long serialVersionUID = -6201692411535927503L;
 
   /**
@@ -61,7 +60,7 @@ public class ComplaintDetailResult implements Serializable {
    * </pre>
    */
   @SerializedName("complainted_mchid")
-  private String complaintedMchid;
+  private String complainedMchid;
 
   /**
    * <pre>
@@ -233,4 +232,42 @@ public class ComplaintDetailResult implements Serializable {
    */
   @SerializedName("user_complaint_times")
   private Integer userComplaintTimes;
+
+  /**
+   * <pre>
+   * 字段名：问题类型
+   * 是否必填：否
+   * 描述：问题类型为申请退款的单据是需要最高优先处理的单据
+   * REFUND：申请退款
+   * SERVICE_NOT_WORK：服务权益未生效
+   * OTHERS：其他类型
+   * 示例值：REFUND
+   * </pre>
+   */
+  @SerializedName("problem_type")
+  private String problemType;
+
+  /**
+   * <pre>
+   * 字段名：用户投诉次数
+   * 是否必填：否
+   * 描述：仅当问题类型为申请退款时, 有值, (单位:分)
+   * 示例值：10
+   * </pre>
+   */
+  @SerializedName("apply_refund_amount")
+  private Integer applyRefundAmount;
+
+  /**
+   * <pre>
+   * 字段名：用户投诉次数
+   * 是否必填：否
+   * 描述：用户标签列表
+   * TRUSTED：可信，此类用户满足极速退款条件
+   * OTHERS：其它，此类用户不满足极速退款条件
+   * 示例值：[TRUSTED]
+   * </pre>
+   */
+  @SerializedName("user_tag_list")
+  private String[] userTagList;
 }

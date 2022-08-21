@@ -492,4 +492,33 @@ public interface WxMaService extends WxService {
    */
   WxMaSafetyRiskControlService getSafetyRiskControlService();
 
+  /**
+   * 分享人接口
+   * @return WxMaShopSharerService
+   */
+  WxMaShopSharerService getShopSharerService();
+
+  /**
+   * 标准交易组件接口
+   * @return WxMaProductService
+   */
+  WxMaProductService getProductService();
+
+  /**
+   * 小商店-标准交易组件-订单服务
+   * @return getProductOrderService
+   */
+  WxMaProductOrderService getProductOrderService();
+
+  /**
+   * 小商店-标准交易组件-优惠券
+   * @return getWxMaShopCouponService
+   */
+  WxMaShopCouponService getWxMaShopCouponService();
+
+  /**
+   * 小程序支付管理-订单支付
+   * @return getWxMaShopPayService
+   */
+  WxMaShopPayService getWxMaShopPayService();
 }
