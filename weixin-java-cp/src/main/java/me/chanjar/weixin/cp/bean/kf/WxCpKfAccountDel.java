@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 删除客服帐号-请求参数
  *
  * @author Fu
- * @date 2022/1/19 19:09
+ * created on  2022/1/19 19:09
  */
 @NoArgsConstructor
 @Data

@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * @author liming1019
- * @date 2021/8/10
+ * created on  2021/8/10
  */
 @Slf4j
 public class JoddHttpMinishopMediaUploadRequestCustomizeExecutor extends MinishopUploadRequestCustomizeExecutor<HttpConnectionProvider, ProxyInfo> {

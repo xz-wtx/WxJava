@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 推广员、分享员信息
  *
  * @author zhongjun
- * @date 2022/5/17
+ * created on  2022/5/17
  **/
 @Data
 public class WxMaShopPromotionInfo implements Serializable {

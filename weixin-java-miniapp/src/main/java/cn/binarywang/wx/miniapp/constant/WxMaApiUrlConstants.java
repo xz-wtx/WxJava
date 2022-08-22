@@ -6,7 +6,7 @@ import lombok.experimental.UtilityClass;
  * 小程序接口地址常量.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2021-01-28
+ * created on  2021-01-28
  */
 @UtilityClass
 public class WxMaApiUrlConstants {

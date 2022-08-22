@@ -12,7 +12,7 @@ import java.util.List;
  * 小程序版本信息
  *
  * @author cocoa
- * @date 20220727
+ * created on  20220727
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

@@ -17,7 +17,7 @@ import java.util.List;
  * 文档地址：https://developer.work.weixin.qq.com/document/path/95652
  * </pre>
  * @author Totoro
- * @date 2022/6/27 10:57
+ * created on  2022/6/27 10:57
  */
 public interface WxCpTpLicenseService {
 

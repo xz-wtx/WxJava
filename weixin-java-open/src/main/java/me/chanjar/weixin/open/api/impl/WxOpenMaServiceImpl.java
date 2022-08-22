@@ -35,7 +35,7 @@ import java.util.Map;
  *
  * @author <a href="https://github.com/007gzs">007</a>
  * @author yqx
- * @date 2018-09-12
+ * created on  2018-09-12
  */
 public class WxOpenMaServiceImpl extends WxMaServiceImpl implements WxOpenMaService {
   private final WxOpenComponentService wxOpenComponentService;

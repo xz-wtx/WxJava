@@ -17,7 +17,7 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Tp.GET_ORDER_LIST;
  * 应用版本付费订单相关接口实现
  *
  * @author leigouqing
- * @date 2022年4月24日
+ * created on  2022年4月24日
  */
 @RequiredArgsConstructor
 public class WxCpTpOrderServiceImpl implements WxCpTpOrderService {

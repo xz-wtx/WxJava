@@ -12,7 +12,7 @@ import java.util.List;
  * 查询投诉单列表返回的实体
  *
  * @author <a href="https://gitee.com/jeequan/jeepay">jmdhappy</a>
- * @date 2022-3-19
+ * created on  2022-3-19
  */
 @Data
 public class ComplaintResult implements Serializable {

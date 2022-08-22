@@ -12,7 +12,7 @@ import java.util.List;
  * 批量删除学生请求.
  *
  * @author Wang_Wong
- * @date 2022-07-01
+ * created on  2022-07-01
  */
 @Data
 @Builder

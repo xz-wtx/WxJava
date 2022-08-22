@@ -10,7 +10,7 @@ import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
 /**
  * @author leiin
- * @date 2022/4/26 5:21 下午
+ * created on  2022/4/26 5:21 下午
  */
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor

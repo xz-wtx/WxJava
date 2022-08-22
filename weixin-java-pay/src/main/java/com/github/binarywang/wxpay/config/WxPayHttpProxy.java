@@ -7,7 +7,7 @@ import java.io.Serializable;
  * 微信支付 HTTP Proxy 正向代理配置
  *
  * @author Long Yu
- * @date 2021-12-28 15:49:03
+ * created on  2021-12-28 15:49:03
  */
 public class WxPayHttpProxy implements Serializable {
 

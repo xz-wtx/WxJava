@@ -13,7 +13,7 @@ import java.util.List;
  * </pre>
  *
  * @author <a href="https://github.com/domainname">Jeff</a>
- * @date 2019-05-16
+ * created on  2019-05-16
  */
 public class TaskCardBuilder extends BaseBuilder<TaskCardBuilder> {
   private String title;

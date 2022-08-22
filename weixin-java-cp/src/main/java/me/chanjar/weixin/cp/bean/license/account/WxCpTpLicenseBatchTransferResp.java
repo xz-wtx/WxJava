@@ -13,7 +13,7 @@ import java.util.List;
  * 基础结果返回信息
  * 文档地址：https://developer.work.weixin.qq.com/document/path/95673
  * @author Totoro
- * @date 2022/6/27 15:49
+ * created on  2022/6/27 15:49
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

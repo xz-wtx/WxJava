@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * 服务端网络相关接口测试
  *
  * @author <a href="https://github.com/chutian0124">chutian0124</a>
- * @date 2021-09-06
+ * created on  2021-09-06
  */
 @Test
 @Guice(modules = ApiTestModule.class)

@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 服务商凭证.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2019-11-02
+ * created on  2019-11-02
  */
 @Data
 public class WxCpProviderToken implements Serializable {

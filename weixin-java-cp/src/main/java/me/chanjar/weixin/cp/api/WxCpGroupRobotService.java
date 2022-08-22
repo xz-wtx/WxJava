@@ -11,7 +11,7 @@ import java.util.List;
  * 调用地址：https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=
  *
  * @author yr
- * @date 2020-8-20
+ * created on  2020-8-20
  */
 public interface WxCpGroupRobotService {
 

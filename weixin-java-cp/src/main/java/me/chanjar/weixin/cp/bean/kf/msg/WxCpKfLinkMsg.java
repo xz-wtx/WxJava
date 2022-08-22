@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author leiin
- * @date 2022/1/26 5:33 下午
+ * created on  2022/1/26 5:33 下午
  */
 @NoArgsConstructor
 @Data

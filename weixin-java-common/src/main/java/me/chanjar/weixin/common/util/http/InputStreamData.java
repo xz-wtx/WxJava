@@ -14,7 +14,7 @@ import java.io.Serializable;
  * InputStreamData
  *
  * @author zichuan.zhou91@gmail.com
- * @date 2022/2/15
+ * created on  2022/2/15
  */
 @Data
 @Accessors(chain = true)

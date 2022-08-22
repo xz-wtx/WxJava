@@ -15,7 +15,7 @@ import me.chanjar.weixin.common.util.json.WxGsonBuilder;
 
 /**
  * @author doger.wang
- * @date 2020/5/12 16:36
+ * created on  2020/5/12 16:36
  */
 @Data
 @SuperBuilder

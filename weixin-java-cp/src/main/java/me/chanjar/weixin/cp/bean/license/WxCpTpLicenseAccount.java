@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 /**
  * 订单账号信息
  * @author Totoro
- * @date 2022/6/27 14:04
+ * created on  2022/6/27 14:04
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

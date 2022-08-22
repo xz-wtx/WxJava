@@ -10,7 +10,7 @@ import java.util.List;
  * 企业微信打卡规则.
  *
  * @author Element
- * @date 2019-04-06 13:22
+ * created on  2019-04-06 13:22
  */
 @Data
 public class WxCpCheckinOption implements Serializable {

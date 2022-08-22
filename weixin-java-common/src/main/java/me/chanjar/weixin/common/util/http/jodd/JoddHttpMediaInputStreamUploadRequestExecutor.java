@@ -22,7 +22,7 @@ import java.nio.charset.StandardCharsets;
  * 文件输入流上传.
  *
  * @author meiqin.zhou91@gmail.com
- * @date 2022/02/15
+ * created on  2022/02/15
  */
 public class JoddHttpMediaInputStreamUploadRequestExecutor extends MediaInputStreamUploadRequestExecutor<HttpConnectionProvider, ProxyInfo> {
   public JoddHttpMediaInputStreamUploadRequestExecutor(RequestHttp requestHttp) {

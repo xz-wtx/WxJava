@@ -23,7 +23,7 @@ import me.chanjar.weixin.common.util.json.GsonParser;
 
 /**
  * @author leiin
- * @date 2022/6/18 3:38 下午
+ * created on  2022/6/18 3:38 下午
  */
 @RequiredArgsConstructor
 @Slf4j

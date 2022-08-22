@@ -14,7 +14,7 @@ import java.util.List;
  * 请求分账API请求实体
  *
  * @author pg
- * @date 2021-6-24
+ * created on  2021-6-24
  */
 @Data
 @Builder(builderMethodName = "newBuilder")

@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 一条草稿
  *
  * @author dragon
- * @date 2021-10-22
+ * created on  2021-10-22
  */
 @Data
 public class WxMpDraftItem implements Serializable {

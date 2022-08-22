@@ -10,7 +10,7 @@ import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
  * 订单详情结果
  * 文档：https://developer.work.weixin.qq.com/document/path/95648
  * @author Totoro
- * @date 2022/06/27 11:56:03
+ * created on  2022/06/27 11:56:03
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

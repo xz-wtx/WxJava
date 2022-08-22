@@ -23,7 +23,7 @@ import java.io.IOException;
  * 文件输入流上传.
  *
  * @author meiqin.zhou91@gmail.com
- * @date 2022/02/15
+ * created on  2022/02/15
  */
 public class ApacheMediaInputStreamUploadRequestExecutor extends MediaInputStreamUploadRequestExecutor<CloseableHttpClient, HttpHost> {
   public ApacheMediaInputStreamUploadRequestExecutor(RequestHttp requestHttp) {

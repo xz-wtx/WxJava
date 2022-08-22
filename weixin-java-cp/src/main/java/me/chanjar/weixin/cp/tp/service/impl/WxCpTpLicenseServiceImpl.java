@@ -21,7 +21,7 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.License.*;
 
 /**
  * @author Totoro
- * @date 2022/6/27 11:03
+ * created on  2022/6/27 11:03
  */
 @RequiredArgsConstructor
 public class WxCpTpLicenseServiceImpl implements WxCpTpLicenseService {

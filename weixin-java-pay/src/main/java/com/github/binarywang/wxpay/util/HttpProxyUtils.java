@@ -13,7 +13,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
  * 微信支付 HTTP Proxy 工具类
  *
  * @author Long Yu
- * @date 2021-12-28 15:58:03
+ * created on  2021-12-28 15:58:03
  */
 public class HttpProxyUtils {
 

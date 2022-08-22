@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * WxPayNotifyResponse 测试.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2019-06-30
+ * created on  2019-06-30
  */
 @Slf4j
 public class WxPayNotifyResponseTest {

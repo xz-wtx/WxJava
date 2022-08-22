@@ -11,7 +11,7 @@ import java.io.Serializable;
 /**
  * 基础的信息
  * @author Totoro
- * @date 2022/6/27 15:50
+ * created on  2022/6/27 15:50
  */
 @Data
 @Builder

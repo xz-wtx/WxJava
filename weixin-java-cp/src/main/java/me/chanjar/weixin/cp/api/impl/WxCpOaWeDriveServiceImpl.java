@@ -18,7 +18,7 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Oa.*;
  * 企业微信微盘接口实现类.
  *
  * @author Wang_Wong
- * @date 2022-04-22
+ * created on  2022-04-22
  */
 @Slf4j
 @RequiredArgsConstructor

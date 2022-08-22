@@ -12,7 +12,7 @@ import java.util.List;
  * 请求分账API返回的分账结果实体
  *
  * @author pg
- * @date 2021-6-24
+ * created on  2021-6-24
  */
 @Data
 public class ProfitSharingResult implements Serializable {

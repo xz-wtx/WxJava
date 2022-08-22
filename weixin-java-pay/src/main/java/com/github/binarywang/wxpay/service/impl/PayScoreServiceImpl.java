@@ -28,7 +28,7 @@ import java.util.Objects;
 
 /**
  * @author doger.wang
- * @date 2020/5/14 9:43
+ * created on  2020/5/14 9:43
  */
 @RequiredArgsConstructor
 public class PayScoreServiceImpl implements PayScoreService {

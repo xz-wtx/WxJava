@@ -6,7 +6,7 @@ import lombok.Data;
 
 /**
  * @author leiin
- * @date 2022/6/18 3:14 下午
+ * created on  2022/6/18 3:14 下午
  */
 @Data
 public class WxMaPromotionInfo implements Serializable {

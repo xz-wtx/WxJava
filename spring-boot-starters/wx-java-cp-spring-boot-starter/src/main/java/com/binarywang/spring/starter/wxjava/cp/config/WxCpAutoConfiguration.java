@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
  * 企业微信自动注册
  *
  * @author yl
- * @date 2021/12/6
+ * created on  2021/12/6
  */
 @Configuration
 @EnableConfigurationProperties(WxCpProperties.class)

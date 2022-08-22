@@ -13,7 +13,7 @@ import java.util.List;
  * 日程信息bean.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020-12-25
+ * created on  2020-12-25
  */
 @Data
 @Accessors(chain = true)

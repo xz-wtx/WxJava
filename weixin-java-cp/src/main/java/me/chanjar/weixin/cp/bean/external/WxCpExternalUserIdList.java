@@ -13,7 +13,7 @@ import java.util.List;
  * 企业客户微信unionid的升级 - 企业客户external_userid列表
  *
  * @author Mr.Pan
- * @date 2021/11/18
+ * created on  2021/11/18
  */
 @Getter
 @Setter

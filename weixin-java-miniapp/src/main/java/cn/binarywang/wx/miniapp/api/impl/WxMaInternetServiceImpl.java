@@ -18,7 +18,7 @@ import javax.crypto.spec.SecretKeySpec;
  * 服务端网络相关接口
  *
  * @author <a href="https://github.com/chutian0124">chutian0124</a>
- * @Date 2021-09-06
+ * created on  2021-09-06
  */
 @RequiredArgsConstructor
 public class WxMaInternetServiceImpl implements WxMaInternetService {

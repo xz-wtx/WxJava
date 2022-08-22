@@ -11,7 +11,7 @@ import java.io.Serializable;
 /**
  * 卡片右上角更多操作按钮点击后出现的操作列表，列表长度取值范围为 [1, 3]
  * @author xiaohe
- * @date 2022-03-06
+ * created on  2022-03-06
  */
 @Data
 @Builder

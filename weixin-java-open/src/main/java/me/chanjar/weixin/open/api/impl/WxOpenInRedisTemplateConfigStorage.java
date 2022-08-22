@@ -17,7 +17,7 @@ import me.chanjar.weixin.common.redis.WxRedisOps;
  * </pre>
  *
  * @author taneg
- * @date 2021/05/13 11:12:35
+ * created on  2021/05/13 11:12:35
  */
 public class WxOpenInRedisTemplateConfigStorage extends AbstractWxOpenInRedisConfigStorage {
 

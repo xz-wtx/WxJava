@@ -11,7 +11,7 @@ import java.util.List;
  * 摘要行信息，用于定义某一行摘要显示的内容.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020-07-19
+ * created on  2020-07-19
  */
 @Data
 @Accessors(chain = true)

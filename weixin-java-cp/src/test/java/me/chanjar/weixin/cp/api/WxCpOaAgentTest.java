@@ -24,7 +24,7 @@ import java.io.InputStream;
  * https://developer.work.weixin.qq.com/document/path/90240#%E5%AE%A1%E6%89%B9%E7%8A%B6%E6%80%81%E9%80%9A%E7%9F%A5%E4%BA%8B%E4%BB%B6
  *
  * @author <a href="https://gitee.com/Wang_Wong/">Wang_Wong</a>
- * @date 2022-04-06
+ * created on  2022-04-06
  */
 @Slf4j
 public class WxCpOaAgentTest {

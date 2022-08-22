@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
  * WxCpConfigStorage 抽象配置类
  *
  * @author yl & Wang_Wong
- * @date 2021/12/6
+ * created on  2021/12/6
  */
 public abstract class AbstractWxCpConfigStorageConfiguration {
 

@@ -11,7 +11,7 @@ import com.github.binarywang.wxpay.exception.WxPayException;
  *  </pre>
  *
  * @author chenliang
- * @date 2021 -08-02 4:50 下午
+ * created on  2021 -08-02 4:50 下午
  */
 public interface WxEntrustPapService {
 

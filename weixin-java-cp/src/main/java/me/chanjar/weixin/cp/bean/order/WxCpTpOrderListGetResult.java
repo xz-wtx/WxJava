@@ -12,7 +12,7 @@ import java.util.List;
  * 应用版本付费订单列表
  *
  * @author leiguoqing
- * @date 2022年4月24日
+ * created on  2022年4月24日
  */
 @Getter
 @Setter

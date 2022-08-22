@@ -12,7 +12,7 @@ import me.chanjar.weixin.common.error.WxErrorException;
 /**
  * 分享员
  * @author leiin
- * @date 2022/6/18 2:48 下午
+ * created on  2022/6/18 2:48 下午
  */
 public interface WxMaShopSharerService {
 

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
  * 查询订单剩余待分金额API 结果响应
  *
  * @author mshyh
- * @date 2022/05/26
+ * created on  2022/05/26
  */
 
 @Data

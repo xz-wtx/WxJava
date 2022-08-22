@@ -18,7 +18,7 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Oa.*;
  * 企业微信 OA 接口实现
  *
  * @author Element
- * @date 2019-04-06 11:20
+ * created on  2019-04-06 11:20
  */
 @RequiredArgsConstructor
 public class WxCpTpOAServiceImpl implements WxCpTpOAService {

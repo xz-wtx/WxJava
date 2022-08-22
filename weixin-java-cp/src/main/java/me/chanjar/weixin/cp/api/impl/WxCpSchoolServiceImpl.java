@@ -22,7 +22,7 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.School.*;
  * https://developer.work.weixin.qq.com/document/path/93744
  *
  * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
- * @date: 2022/6/1 14:05
+ * created on : 2022/6/1 14:05
  */
 @Slf4j
 @RequiredArgsConstructor

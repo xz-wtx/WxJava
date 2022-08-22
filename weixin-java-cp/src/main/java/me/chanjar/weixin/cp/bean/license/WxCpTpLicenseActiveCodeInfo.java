@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
  * 激活码信息
  * 文档地址：https://developer.work.weixin.qq.com/document/path/95553
  * @author Totoro
- * @date 2022/6/27 14:34
+ * created on  2022/6/27 14:34
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

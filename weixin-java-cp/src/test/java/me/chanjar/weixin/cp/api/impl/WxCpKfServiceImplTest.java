@@ -23,7 +23,7 @@ import java.io.InputStream;
  * 需要用到专门的 secret https://kf.weixin.qq.com/api/doc/path/93304#secret
  *
  * @author Fu
- * @date 2022/1/19 20:12
+ * created on  2022/1/19 20:12
  */
 @Guice(modules = ApiTestModule.class)
 public class WxCpKfServiceImplTest {

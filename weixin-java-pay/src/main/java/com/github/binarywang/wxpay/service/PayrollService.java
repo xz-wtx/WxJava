@@ -7,7 +7,7 @@ import com.github.binarywang.wxpay.exception.WxPayException;
  * 微工卡-对接微信api
  *
  * @author xiaoqiang
- * @date 2021/12/7 14:26
+ * created on  2021/12/7 14:26
  */
 public interface PayrollService {
   /**

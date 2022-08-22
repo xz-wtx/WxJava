@@ -12,7 +12,7 @@ import java.io.InputStream;
  * 微信批量转账到零钱【V3接口】服务商API
  *
  * @author xiaoqiang
- * @date 2021-12-06
+ * created on  2021-12-06
  */
 public interface PartnerTransferService {
 

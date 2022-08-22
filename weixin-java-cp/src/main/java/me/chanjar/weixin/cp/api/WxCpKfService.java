@@ -30,7 +30,7 @@ import java.util.List;
  *  企业可在微信客服官网使用企业微信扫码开通微信客服，开通后即可使用。
  *
  * @author Fu
- * @date 2022/1/19 19:25
+ * created on  2022/1/19 19:25
  */
 public interface WxCpKfService {
 

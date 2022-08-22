@@ -32,7 +32,7 @@ import static cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants.Cloud.*;
  * 云开发相关接口实现类.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020-01-22
+ * created on  2020-01-22
  */
 @Slf4j
 @RequiredArgsConstructor

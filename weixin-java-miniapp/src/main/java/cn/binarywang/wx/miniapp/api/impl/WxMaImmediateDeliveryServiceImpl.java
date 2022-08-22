@@ -44,7 +44,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author Luo
  * @version 1.0
- * @date 2021-10-13 16:40
+ * created on  2021-10-13 16:40
  */
 @RequiredArgsConstructor
 public class WxMaImmediateDeliveryServiceImpl implements WxMaImmediateDeliveryService {

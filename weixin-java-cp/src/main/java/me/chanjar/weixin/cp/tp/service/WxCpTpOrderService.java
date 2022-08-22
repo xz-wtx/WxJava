@@ -11,7 +11,7 @@ import java.util.Date;
  * 应用版本付费订单相关接口
  *
  * @author leiguoqing
- * @date 2022年4月24日
+ * created on  2022年4月24日
  */
 public interface WxCpTpOrderService {
 

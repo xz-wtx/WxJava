@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * 自动装配基于内存策略配置
  *
  * @author yl
- * @date 2021/12/6
+ * created on  2021/12/6
  */
 @Configuration
 @ConditionalOnProperty(

@@ -25,7 +25,7 @@ import static me.chanjar.weixin.common.api.WxConsts.SchoolContactMsgType.*;
  * https://developer.work.weixin.qq.com/document/path/92321
  *
  * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
- * @date 2022-06-29
+ * created on  2022-06-29
  */
 @Data
 @Builder

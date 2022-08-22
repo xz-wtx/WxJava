@@ -17,7 +17,7 @@ import javax.crypto.IllegalBlockSizeException;
  * 微信支付-微工卡
  *
  * @author xiaoqiang
- * @date 2021/12/2
+ * created on  2021/12/2
  */
 @Slf4j
 @RequiredArgsConstructor

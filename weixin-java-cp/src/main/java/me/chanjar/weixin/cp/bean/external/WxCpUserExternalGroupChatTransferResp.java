@@ -12,7 +12,7 @@ import java.util.List;
  * 分配离职成员的客户群结果
  *
  * @author pg
- * @date 2021年6月21日
+ * created on  2021年6月21日
  */
 @Getter
 @Setter

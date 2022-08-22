@@ -9,7 +9,7 @@ import lombok.Setter;
 
 /**
  * @author leiin
- * @date 2022/6/18 2:51 下午
+ * created on  2022/6/18 2:51 下午
  */
 @Data
 public class WxMaShopSharerBindResponse extends WxMaShopBaseResponse implements Serializable {

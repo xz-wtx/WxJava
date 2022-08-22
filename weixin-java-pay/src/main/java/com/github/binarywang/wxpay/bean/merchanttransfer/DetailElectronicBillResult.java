@@ -13,7 +13,7 @@ import java.io.Serializable;
  * 查询转账明细电子回单受理结果响应实体
  *
  * @author glz
- * @date 2022-6-11
+ * created on  2022-6-11
  */
 @Data
 @Builder

@@ -36,7 +36,7 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Kf.*;
  * 微信客服接口-服务实现
  *
  * @author Fu
- * @date 2022/1/19 19:41
+ * created on  2022/1/19 19:41
  */
 @RequiredArgsConstructor
 public class WxCpKfServiceImpl implements WxCpKfService {

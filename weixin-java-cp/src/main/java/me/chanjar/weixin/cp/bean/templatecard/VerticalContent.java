@@ -13,7 +13,7 @@ import java.io.Serializable;
  * 卡片二级垂直内容，该字段可为空数组，但有数据的话需确认对应字段是否必填，列表长度不超过4
  *
  * @author yzts
- * @date 2021/9/22
+ * created on  2021/9/22
  */
 @Data
 @Builder

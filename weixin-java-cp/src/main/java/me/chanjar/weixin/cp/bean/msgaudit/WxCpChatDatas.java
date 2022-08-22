@@ -13,7 +13,7 @@ import java.util.List;
  * 聊天记录数据内容.
  *
  * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
- * @date 2022-01-17
+ * created on  2022-01-17
  */
 @Data
 public class WxCpChatDatas implements Serializable {

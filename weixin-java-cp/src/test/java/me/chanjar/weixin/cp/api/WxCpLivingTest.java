@@ -23,7 +23,7 @@ import java.util.Date;
  * 官方文档：https://open.work.weixin.qq.com/api/doc/90000/90135/93632
  *
  * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
- * @date 2021-12-23
+ * created on  2021-12-23
  */
 @Slf4j
 public class WxCpLivingTest {

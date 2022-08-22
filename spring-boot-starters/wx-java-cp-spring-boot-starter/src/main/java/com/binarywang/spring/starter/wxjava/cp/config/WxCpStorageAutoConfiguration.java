@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Import;
  * 企业微信存储策略自动配置
  *
  * @author yl
- * @date 2021/12/6
+ * created on  2021/12/6
  */
 @Configuration
 @Import({

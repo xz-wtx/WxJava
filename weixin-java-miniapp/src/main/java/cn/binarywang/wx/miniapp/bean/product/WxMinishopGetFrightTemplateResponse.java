@@ -7,7 +7,7 @@ import lombok.Data;
 
 /**
  * @author leiin
- * @date 2022/7/8 3:46 下午
+ * created on  2022/7/8 3:46 下午
  */
 @Data
 public class WxMinishopGetFrightTemplateResponse extends WxMaShopBaseResponse {

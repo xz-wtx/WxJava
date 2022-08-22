@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 视频消息
  *
  * @author pg
- * @date 2021-6-21
+ * created on  2021-6-21
  */
 @Data
 public class Video implements Serializable {

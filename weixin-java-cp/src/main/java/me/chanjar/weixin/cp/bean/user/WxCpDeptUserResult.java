@@ -14,7 +14,7 @@ import java.util.List;
  * 获取成员ID列表返回参数
  *
  * @author <a href="https://gitee.com/Wang_Wong/">Wang_Wong</a>
- * @date 2022/08/09
+ * created on  2022/08/09
  */
 @Data
 public class WxCpDeptUserResult extends WxCpBaseResp {

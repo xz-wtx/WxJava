@@ -11,7 +11,7 @@ import java.util.List;
  * 解冻剩余资金API返回实体
  *
  * @author pg
- * @date 2021-6-25
+ * created on  2021-6-25
  */
 @Data
 public class ProfitSharingUnfreezeResult implements Serializable {

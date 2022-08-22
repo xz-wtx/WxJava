@@ -9,7 +9,7 @@ import me.chanjar.weixin.common.error.WxErrorException;
 
 /**
  * @author leiin
- * @date 2022/7/1 2:49 下午
+ * created on  2022/7/1 2:49 下午
  */
 public interface WxMaShopCouponService {
 

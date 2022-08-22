@@ -14,7 +14,7 @@ import java.util.List;
  * 批量返回结果.
  *
  * @author Wang_Wong
- * @date 2022-07-01
+ * created on  2022-07-01
  */
 @Data
 public class WxCpBatchResultList extends WxCpBaseResp implements Serializable {

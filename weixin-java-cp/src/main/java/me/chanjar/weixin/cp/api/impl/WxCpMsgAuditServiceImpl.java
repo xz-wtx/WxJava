@@ -28,7 +28,7 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.MsgAudit.*;
  * 会话内容存档接口实现类.
  *
  * @author Wang_Wong
- * @date 2022-01-17
+ * created on  2022-01-17
  */
 @Slf4j
 @RequiredArgsConstructor

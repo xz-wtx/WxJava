@@ -9,7 +9,7 @@ import me.chanjar.weixin.cp.bean.living.*;
  * 官方文档：https://work.weixin.qq.com/api/doc/90000/90135/93633
  *
  * @author Wang_Wong
- * @date 2021-12-21
+ * created on  2021-12-21
  */
 public interface WxCpLivingService {
 

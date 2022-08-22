@@ -12,7 +12,7 @@ import java.io.Serializable;
  * 入群欢迎语素材.
  *
  * @author <a href="https://github.com/wslongchen">Mr.Pan</a>
- * @date 2021-11-3
+ * created on  2021-11-3
  */
 @Data
 @Builder

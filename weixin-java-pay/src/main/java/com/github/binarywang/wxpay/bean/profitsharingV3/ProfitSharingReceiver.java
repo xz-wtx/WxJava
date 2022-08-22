@@ -13,7 +13,7 @@ import java.io.Serializable;
  *
  * 微信V3接口 分账接收方实体
  * @author pg
- * @date 2021-6-25
+ * created on  2021-6-25
  *
  */
 @Data

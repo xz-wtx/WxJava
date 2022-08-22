@@ -13,7 +13,7 @@ import java.util.List;
  * 企业的帐号列表（已激活）
  * 文档地址：https://developer.work.weixin.qq.com/document/path/95544
  * @author Totoro
- * @date 2022/6/27 15:15
+ * created on  2022/6/27 15:15
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

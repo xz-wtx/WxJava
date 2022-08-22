@@ -14,7 +14,7 @@ import java.util.List;
  * 新增敏感词规则请求参数封装实体类
  *
  * @author didi
- * @date 2022-04-17
+ * created on  2022-04-17
  */
 @Data
 @Builder

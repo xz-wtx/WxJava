@@ -6,7 +6,7 @@ import lombok.Data;
  * 地理位置
  *
  * @author leiin
- * @date 2021-10-29
+ * created on  2021-10-29
  */
 @Data
 public class Location {

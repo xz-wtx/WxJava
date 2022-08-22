@@ -6,7 +6,7 @@ import lombok.Data;
 
 /**
  * @author leiin
- * @date 2022/6/28 11:29 上午
+ * created on  2022/6/28 11:29 上午
  */
 @Data
 public class WxMaShopAfterSaleAddResponse extends WxMaShopBaseResponse implements Serializable {

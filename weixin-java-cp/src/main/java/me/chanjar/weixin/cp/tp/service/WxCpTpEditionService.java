@@ -8,7 +8,7 @@ import me.chanjar.weixin.cp.bean.WxCpTpProlongTryResult;
  * 应用版本付费版本相关接口
  *
  * @author leiguoqing
- * @date 2022年4月24日
+ * created on  2022年4月24日
  */
 public interface WxCpTpEditionService {
 

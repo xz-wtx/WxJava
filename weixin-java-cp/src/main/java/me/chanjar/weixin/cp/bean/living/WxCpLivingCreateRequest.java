@@ -12,7 +12,7 @@ import java.util.List;
  * 创建预约直播请求.
  *
  * @author Wang_Wong
- * @date 2021-12-23
+ * created on  2021-12-23
  */
 @Data
 @Builder

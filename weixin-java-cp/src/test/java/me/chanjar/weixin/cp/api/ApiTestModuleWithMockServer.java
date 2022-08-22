@@ -6,7 +6,7 @@ import com.google.inject.Binder;
  * 带mock server 的test module.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020-08-30
+ * created on  2020-08-30
  */
 public class ApiTestModuleWithMockServer extends ApiTestModule {
   public static final int mockServerPort = 8080;

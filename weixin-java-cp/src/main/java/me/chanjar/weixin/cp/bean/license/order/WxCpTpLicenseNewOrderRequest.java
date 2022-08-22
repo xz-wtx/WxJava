@@ -14,7 +14,7 @@ import java.io.Serializable;
  * 下单购买帐号
  * 文档地址：https://developer.work.weixin.qq.com/document/path/95644
  * @author Totoro
- * @date 2022/6/27 10:52
+ * created on  2022/6/27 10:52
  */
 @Data
 @Builder

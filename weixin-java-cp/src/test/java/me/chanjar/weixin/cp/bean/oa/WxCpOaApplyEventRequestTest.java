@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * 测试.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020-07-18
+ * created on  2020-07-18
  */
 public class WxCpOaApplyEventRequestTest {
   @Test

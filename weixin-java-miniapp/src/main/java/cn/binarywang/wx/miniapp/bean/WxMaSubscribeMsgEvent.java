@@ -14,7 +14,7 @@ import java.util.List;
  * WxMaSubscribeMsgEvent class
  *  客户端订阅，服务端收到的通知
  * @author dany
- * @date 2021/12/31
+ * created on  2021/12/31
  */
 public class WxMaSubscribeMsgEvent {
   /**

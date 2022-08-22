@@ -9,7 +9,7 @@ import me.chanjar.weixin.cp.bean.oa.selfagent.WxCpOpenApprovalData;
  * https://developer.work.weixin.qq.com/document/path/90269
  *
  * @author <a href="https://gitee.com/Wang_Wong/">Wang_Wong</a>
- * @date 2022-04-06
+ * created on  2022-04-06
  */
 public interface WxCpOaAgentService {
 

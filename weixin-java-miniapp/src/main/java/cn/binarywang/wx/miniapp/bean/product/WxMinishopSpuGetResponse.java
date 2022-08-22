@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * @author leiin
- * @date 2022/6/20 4:46 下午
+ * created on  2022/6/20 4:46 下午
  */
 @Data
 public class WxMinishopSpuGetResponse extends WxMinishopResult<WxMinishopSpuGet> {

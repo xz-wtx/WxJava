@@ -8,6 +8,8 @@ import java.util.List;
 
 /**
  * 直播商品信息
+ *
+ * @author unkown
  */
 @Data
 public class WxMaLiveGoodInfo implements Serializable {

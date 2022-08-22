@@ -12,7 +12,7 @@ import java.util.List;
  * 发送携带 URL Link 的短信结果
  *
  * @author liming1019
- * @date 2022-07-26
+ * created on  2022-07-26
  */
 @Data
 public class WxCloudSendSmsV2Result extends WxMaBaseResponse implements Serializable {

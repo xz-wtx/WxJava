@@ -6,7 +6,7 @@ import lombok.Data;
 
 /**
  * @author leiin
- * @date 2022/7/11 20:33
+ * created on  2022/7/11 20:33
  */
 @Data
 public class WxMiniAfterSaleOrder {

@@ -8,7 +8,7 @@ import com.github.binarywang.wxpay.exception.WxPayException;
  * 微信支付V3-资金应用-分账
  *
  * @author pg 2021-6-23
- * @date 2021-6-23
+ * created on  2021-6-23
  */
 public interface ProfitSharingV3Service {
   /**

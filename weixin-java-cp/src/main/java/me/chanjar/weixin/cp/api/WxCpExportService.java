@@ -8,7 +8,7 @@ import me.chanjar.weixin.cp.bean.export.WxCpExportResult;
  * 异步导出接口
  *
  * @author <a href="https://github.com/zhongjun96">zhongjun</a>
- * @date 2022/4/21
+ * created on  2022/4/21
  **/
 public interface WxCpExportService {
 

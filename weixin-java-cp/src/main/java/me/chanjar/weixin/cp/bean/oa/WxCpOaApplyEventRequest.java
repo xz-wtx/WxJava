@@ -13,7 +13,7 @@ import java.util.List;
  * 提交审批申请 请求对象类.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020-07-18
+ * created on  2020-07-18
  */
 @Data
 @Accessors(chain = true)

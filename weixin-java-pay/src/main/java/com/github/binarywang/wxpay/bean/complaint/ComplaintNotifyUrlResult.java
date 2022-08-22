@@ -14,7 +14,7 @@ import java.util.List;
  * 投诉通知地址返回的实体
  *
  * @author <a href="https://gitee.com/jeequan/jeepay">jmdhappy</a>
- * @date 2022-3-19
+ * created on  2022-3-19
  */
 @Data
 public class ComplaintNotifyUrlResult implements Serializable {

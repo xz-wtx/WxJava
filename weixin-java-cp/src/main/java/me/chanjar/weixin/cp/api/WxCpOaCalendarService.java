@@ -9,7 +9,7 @@ import java.util.List;
  * 企业微信日历接口.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020-09-20
+ * created on  2020-09-20
  */
 public interface WxCpOaCalendarService {
   /**

@@ -5,7 +5,7 @@ import me.chanjar.weixin.cp.bean.WxCpAgentWorkBench;
 
 /**
  * @author songshiyu
- * @date : create in 16:16 2020/9/27
+ * created on  : create in 16:16 2020/9/27
  * @description: 工作台自定义展示：https://work.weixin.qq.com/api/doc/90000/90135/92535
  */
 public interface WxCpAgentWorkBenchService {

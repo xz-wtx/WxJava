@@ -18,7 +18,7 @@ import java.util.Map;
  * </pre>
  *
  * @author yqx
- * @date 2018 /9/12
+ * created on  2018 /9/12
  */
 public interface WxOpenMaService extends WxMaService {
   /**

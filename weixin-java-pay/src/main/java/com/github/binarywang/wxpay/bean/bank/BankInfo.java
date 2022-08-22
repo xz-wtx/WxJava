@@ -9,7 +9,7 @@ import lombok.Setter;
  * 银行信息
  *
  * @author zhongjun
- * @date 2022/5/12
+ * created on  2022/5/12
  **/
 @Data
 public class BankInfo {

@@ -11,7 +11,7 @@ import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
  * 查询的激活码详情
  * 文档地址：https://developer.work.weixin.qq.com/document/path/95553
  * @author Totoro
- * @date 2022/6/27 14:28
+ * created on  2022/6/27 14:28
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

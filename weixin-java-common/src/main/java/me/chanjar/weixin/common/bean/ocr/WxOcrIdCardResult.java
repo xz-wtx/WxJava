@@ -10,7 +10,7 @@ import java.io.Serializable;
  * OCR身份证识别结果.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2019-06-23
+ * created on  2019-06-23
  */
 @Data
 public class WxOcrIdCardResult implements Serializable {

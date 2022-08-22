@@ -11,7 +11,7 @@ import java.util.List;
  * 查询微信批次单号查询批次单API响应
  *
  * @author zhongjun
- * @date 2022/6/17
+ * created on  2022/6/17
  **/
 @Data
 @NoArgsConstructor

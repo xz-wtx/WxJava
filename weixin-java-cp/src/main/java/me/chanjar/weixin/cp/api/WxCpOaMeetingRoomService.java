@@ -9,7 +9,7 @@ import java.util.List;
  * 企业微信会议室接口.
  *
  * @author <a href="https://github.com/lm93129">lm93129</a>
- * @date 2022年8月12日22:33:36
+ * created on  2022年8月12日22:33:36
  */
 public interface WxCpOaMeetingRoomService {
   /**

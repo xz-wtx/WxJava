@@ -15,7 +15,7 @@ import java.io.Serializable;
  * 草稿箱能力-图文素材文章实体.
  *
  * @author dragon
- * @date 2021-10-22
+ * created on  2021-10-22
  */
 @Data
 @Builder

@@ -26,7 +26,7 @@ import java.math.BigDecimal;
  *
  * @author Luo
  * @version 1.0
- * @date 2021-10-14 11:48
+ * created on  2021-10-14 11:48
  */
 @Guice(modules = ApiTestModule.class)
 public class WxMaImmediateDeliveryServiceImplTest {

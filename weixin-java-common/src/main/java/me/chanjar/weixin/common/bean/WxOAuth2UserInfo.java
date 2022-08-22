@@ -11,7 +11,7 @@ import java.io.Serializable;
  * oauth2用户个人信息.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020-10-11
+ * created on  2020-10-11
  */
 @Data
 public class WxOAuth2UserInfo implements Serializable {

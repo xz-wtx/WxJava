@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  *   消息去重，记录消息ID首次出现时的时间戳，
  *   15S后定时任务触发时废除该记录消息ID
  * </p>
- * @date 2022/5/26 1:32
+ * created on  2022/5/26 1:32
  */
 @Slf4j
 public class WxMessageInMemoryDuplicateCheckerSingleton implements WxMessageDuplicateChecker {

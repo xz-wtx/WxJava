@@ -20,7 +20,7 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.School.*;
  * 企业微信家校应用 健康上报接口实现类.
  *
  * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
- * @date: 2022/5/31 9:16
+ * created on : 2022/5/31 9:16
  */
 @Slf4j
 @RequiredArgsConstructor

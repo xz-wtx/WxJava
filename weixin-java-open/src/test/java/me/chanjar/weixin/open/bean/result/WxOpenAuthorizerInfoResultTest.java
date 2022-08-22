@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 /**
  * @title: 获取授权帐号详情 信息反序列化测试
  * @author: trifolium
- * @date: 2022/6/7
+ * created on : 2022/6/7
  * @modified :
  */
 public class WxOpenAuthorizerInfoResultTest {

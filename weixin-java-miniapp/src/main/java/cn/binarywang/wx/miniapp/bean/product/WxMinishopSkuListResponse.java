@@ -6,7 +6,7 @@ import lombok.Data;
 
 /**
  * @author leiin
- * @date 2022/7/13 20:00
+ * created on  2022/7/13 20:00
  */
 @Data
 public class WxMinishopSkuListResponse extends WxMaShopBaseResponse {

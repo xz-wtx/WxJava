@@ -14,7 +14,7 @@ import java.util.List;
  * com.tencent.wework.Finance
  *
  * @author Wang_Wong
- * @date 2022-01-14
+ * created on  2022-01-14
  */
 public interface WxCpMsgAuditService {
 

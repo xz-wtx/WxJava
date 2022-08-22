@@ -20,7 +20,7 @@ import java.io.InputStream;
  * 批量转账到零钱（服务商）
  *
  * @author xiaoqiang
- * @date 2021/12/9
+ * created on  2021/12/9
  */
 @Slf4j
 @Test

@@ -15,7 +15,7 @@ import java.util.Arrays;
  * 单元测试类.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020-12-25
+ * created on  2020-12-25
  */
 @Test
 @Guice(modules = ApiTestModule.class)

@@ -17,7 +17,7 @@ import static me.chanjar.weixin.cp.constant.WxCpConsts.GroupRobotMsgType.*;
  * 微信群机器人消息
  *
  * @author yr
- * @date 2020-08-20
+ * created on  2020-08-20
  */
 @AllArgsConstructor
 @NoArgsConstructor

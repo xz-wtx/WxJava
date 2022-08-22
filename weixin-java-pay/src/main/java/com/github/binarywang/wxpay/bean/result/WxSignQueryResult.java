@@ -12,7 +12,7 @@ import java.io.Serializable;
 
 /**
  * @author chenliang
- * @date 2021-08-02 5:40 下午
+ * created on  2021-08-02 5:40 下午
  *
  * <pre>
  *   微信签约查询返回结果

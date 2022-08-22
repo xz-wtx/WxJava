@@ -5,7 +5,7 @@ import lombok.Data;
 
 /**
  * @author leiin
- * @date 2022/6/20 4:36 下午
+ * created on  2022/6/20 4:36 下午
  */
 @Data
 public class WxMinishopSpuGet implements Serializable {

@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 添加了外部联系人的企业成员.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020-11-04
+ * created on  2020-11-04
  */
 @Data
 public class FollowedUser implements Serializable {

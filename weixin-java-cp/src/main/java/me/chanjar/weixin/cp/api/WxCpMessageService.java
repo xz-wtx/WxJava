@@ -7,7 +7,7 @@ import me.chanjar.weixin.cp.bean.message.*;
  * 消息推送接口.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020 -08-30
+ * created on  2020 -08-30
  */
 public interface WxCpMessageService {
   /**

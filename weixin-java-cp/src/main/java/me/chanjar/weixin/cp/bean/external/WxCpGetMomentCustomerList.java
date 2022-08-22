@@ -13,7 +13,7 @@ import java.util.List;
  * 企业发表内容到客户的朋友圈 获取客户朋友圈发表时选择的可见范围
  *
  * @author leiin
- * @date 2021-10-29
+ * created on  2021-10-29
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 异步导出参数
  *
  * @author zhongjun
- * @date 2022/4/21
+ * created on  2022/4/21
  **/
 @Data
 public class WxCpExportRequest implements Serializable {

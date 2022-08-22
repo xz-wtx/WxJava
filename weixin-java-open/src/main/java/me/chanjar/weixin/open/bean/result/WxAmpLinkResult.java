@@ -12,7 +12,7 @@ import java.util.List;
  * 公众号关联的小程序
  *
  * @author zhongjun
- * @date 2022/4/29
+ * created on  2022/4/29
  **/
 
 @Data

@@ -11,7 +11,7 @@ import java.io.Serializable;
 /**
  * 许可证账号基础类
  * @author Totoro
- * @date 2022/6/27 14:39
+ * created on  2022/6/27 14:39
  */
 @Data
 @SuperBuilder

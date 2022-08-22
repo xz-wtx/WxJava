@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * .
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2019-08-18
+ * created on  2019-08-18
  */
 public class WxCpTpXmlPackageTest {
 

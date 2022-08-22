@@ -12,7 +12,7 @@ import java.util.List;
  * 获取会话同意情况请求参数.
  *
  * @author Wang_Wong
- * @date 2022-01-21
+ * created on  2022-01-21
  */
 @Data
 @Builder

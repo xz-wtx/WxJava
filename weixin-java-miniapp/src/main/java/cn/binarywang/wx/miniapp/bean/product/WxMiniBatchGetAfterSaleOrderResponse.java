@@ -7,7 +7,7 @@ import lombok.Data;
 
 /**
  * @author leiin
- * @date 2022/7/11 20:59
+ * created on  2022/7/11 20:59
  */
 @Data
 public class WxMiniBatchGetAfterSaleOrderResponse extends WxMaShopBaseResponse {

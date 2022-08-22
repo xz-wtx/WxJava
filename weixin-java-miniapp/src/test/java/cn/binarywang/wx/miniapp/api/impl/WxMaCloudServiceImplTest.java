@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * 测试类.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020-01-22
+ * created on  2020-01-22
  */
 @Guice(modules = ApiTestModule.class)
 public class WxMaCloudServiceImplTest {

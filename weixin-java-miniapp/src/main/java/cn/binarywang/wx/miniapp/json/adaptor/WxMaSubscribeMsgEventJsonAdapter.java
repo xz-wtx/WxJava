@@ -15,7 +15,7 @@ import java.lang.reflect.Type;
  * WxMaSubscribeMsgEventJsonAdapter class
  *
  * @author dany
- * @date 2021/12/31
+ * created on  2021/12/31
  */
 @Slf4j
 public class WxMaSubscribeMsgEventJsonAdapter implements JsonDeserializer<WxMaSubscribeMsgEvent.WxMaSubscribeMsgEventJson> {

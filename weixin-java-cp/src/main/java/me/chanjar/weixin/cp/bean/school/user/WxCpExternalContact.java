@@ -15,7 +15,7 @@ import java.util.List;
  * https://developer.work.weixin.qq.com/document/path/91670
  *
  * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
- * @date: 2022/6/27 9:10
+ * created on : 2022/6/27 9:10
  */
 @Data
 public class WxCpExternalContact extends WxCpBaseResp implements Serializable {

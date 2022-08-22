@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 请求分账回退API返回实体
  *
  * @author pg
- * @date 2021-6-25
+ * created on  2021-6-25
  */
 @Data
 public class ProfitSharingReturnResult implements Serializable {

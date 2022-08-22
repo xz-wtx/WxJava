@@ -12,7 +12,7 @@ import java.util.Map;
  * 云开发相关接口.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020 -01-22
+ * created on  2020 -01-22
  */
 public interface WxMaCloudService {
   /**

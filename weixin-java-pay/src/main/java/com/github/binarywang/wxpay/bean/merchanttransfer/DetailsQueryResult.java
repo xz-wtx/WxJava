@@ -13,7 +13,7 @@ import java.io.Serializable;
  * 微信明细单号查询明细单 响应实体、
  *
  * @author glz
- * @date 2022-6-11
+ * created on  2022-6-11
  */
 @Data
 @Builder

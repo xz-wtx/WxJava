@@ -13,7 +13,7 @@ import java.io.Serializable;
  * 请求分账回退API请求实体
  *
  * @author pg
- * @date 2021-6-25
+ * created on  2021-6-25
  */
 @Data
 @Builder(builderMethodName = "newBuilder")

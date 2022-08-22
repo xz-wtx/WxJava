@@ -12,7 +12,7 @@ import java.util.List;
  * 登录信息
  *
  * @author Jamie.shi
- * @date 2020-08-03 17:18
+ * created on  2020-08-03 17:18
  **/
 @Data
 @EqualsAndHashCode(callSuper = true)

@@ -12,7 +12,7 @@ import java.util.List;
  * 企业微信OA相关接口.
  *
  * @author Element & Wang_Wong
- * @date 2019-04-06 10:52
+ * created on  2019-04-06 10:52
  */
 public interface WxCpOaService {
 

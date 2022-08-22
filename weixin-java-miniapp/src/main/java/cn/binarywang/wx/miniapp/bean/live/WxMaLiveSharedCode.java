@@ -5,6 +5,10 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * @author linlinjava
+ */
+@Data
 public class WxMaLiveSharedCode implements Serializable {
     private static final long serialVersionUID = 8525117884393611947L;
     /**

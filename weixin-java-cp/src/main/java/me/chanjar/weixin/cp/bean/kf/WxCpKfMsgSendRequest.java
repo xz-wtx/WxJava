@@ -12,7 +12,7 @@ import me.chanjar.weixin.cp.bean.kf.msg.WxCpKfTextMsg;
 
 /**
  * @author leiin
- * @date 2022/1/26 7:00 下午
+ * created on  2022/1/26 7:00 下午
  */
 @NoArgsConstructor
 @Data

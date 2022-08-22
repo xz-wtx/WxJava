@@ -10,7 +10,7 @@ import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
  * 互联企业的消息推送接口返回实体
  *
  * @author pg
- * @date 2021年6月22日
+ * created on  2021年6月22日
  */
 @Setter
 @Getter

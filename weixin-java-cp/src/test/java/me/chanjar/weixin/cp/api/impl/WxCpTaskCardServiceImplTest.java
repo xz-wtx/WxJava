@@ -18,7 +18,7 @@ import static org.testng.Assert.assertNotNull;
  * 测试任务卡片服务
  *
  * @author <a href="https://github.com/domainname">Jeff</a>
- * @date 2019-05-16
+ * created on  2019-05-16
  */
 @Guice(modules = ApiTestModule.class)
 public class WxCpTaskCardServiceImplTest {

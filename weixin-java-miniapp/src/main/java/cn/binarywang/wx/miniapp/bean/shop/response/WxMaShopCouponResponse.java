@@ -5,7 +5,7 @@ import lombok.Data;
 
 /**
  * @author leiin
- * @date 2022/7/1 3:34 下午
+ * created on  2022/7/1 3:34 下午
  */
 @Data
 public class WxMaShopCouponResponse extends WxMaShopBaseResponse {

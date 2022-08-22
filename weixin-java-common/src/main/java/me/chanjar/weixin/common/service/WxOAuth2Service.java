@@ -8,7 +8,7 @@ import me.chanjar.weixin.common.error.WxErrorException;
  * oauth2 相关接口.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020-08-08
+ * created on  2020-08-08
  */
 public interface WxOAuth2Service {
   /**

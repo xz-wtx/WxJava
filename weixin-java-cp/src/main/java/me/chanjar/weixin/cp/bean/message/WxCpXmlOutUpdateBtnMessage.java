@@ -9,7 +9,7 @@ import me.chanjar.weixin.common.util.xml.XStreamReplaceNameConverter;
 
 /**
  * @author nickname263
- * @date 2021-09-23
+ * created on  2021-09-23
  */
 @XStreamAlias("xml")
 @Data

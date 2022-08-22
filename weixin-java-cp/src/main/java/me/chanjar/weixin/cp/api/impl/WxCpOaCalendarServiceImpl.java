@@ -18,7 +18,7 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Oa.*;
  * .
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020-09-20
+ * created on  2020-09-20
  */
 @RequiredArgsConstructor
 public class WxCpOaCalendarServiceImpl implements WxCpOaCalendarService {

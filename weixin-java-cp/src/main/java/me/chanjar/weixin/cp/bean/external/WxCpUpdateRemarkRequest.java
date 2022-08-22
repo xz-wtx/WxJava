@@ -14,7 +14,7 @@ import java.io.Serializable;
  * 修改客户备注信息请求.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020-09-19
+ * created on  2020-09-19
  */
 @Data
 @Builder

@@ -13,7 +13,7 @@ import java.io.Serializable;
  * The type Wx details query request.
  *
  * @author glz
- * @date 2022-6-11
+ * created on  2022-6-11
  */
 @Data
 @Builder

@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 企业微信接入相关配置属性
  *
  * @author yl
- * @date 2021/12/6
+ * created on  2021/12/6
  */
 @Data
 @NoArgsConstructor

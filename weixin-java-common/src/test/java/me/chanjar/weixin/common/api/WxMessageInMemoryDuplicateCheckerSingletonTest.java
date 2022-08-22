@@ -11,7 +11,7 @@ import static org.testng.Assert.assertTrue;
  * @author jiangby
  * @version 1.0
  * @description: 作用
- * @date 2022/5/26 1:46
+ * created on  2022/5/26 1:46
  */
 @Test
 public class WxMessageInMemoryDuplicateCheckerSingletonTest {

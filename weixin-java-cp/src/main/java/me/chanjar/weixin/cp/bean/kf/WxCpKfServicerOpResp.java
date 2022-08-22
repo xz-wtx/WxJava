@@ -12,7 +12,7 @@ import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 /**
  * 添加/删除客服接待人员返回结果
  * @author leiin
- * @date 2022/1/26 4:11 下午
+ * created on  2022/1/26 4:11 下午
  */
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor

@@ -10,7 +10,7 @@ import me.chanjar.weixin.cp.bean.oa.WxCpTemplateResult;
  * 企业微信OA相关接口.
  *
  * @author Element
- * @date 2019-04-06 10:52
+ * created on  2019-04-06 10:52
  */
 public interface WxCpTpOAService {
 

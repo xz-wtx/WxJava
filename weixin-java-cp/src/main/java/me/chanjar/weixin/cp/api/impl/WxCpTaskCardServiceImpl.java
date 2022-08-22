@@ -19,7 +19,7 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.TaskCard.*;
  * </pre>
  *
  * @author <a href="https://github.com/domainname">Jeff</a>
- * @date 2019-05-16
+ * created on  2019-05-16
  */
 @RequiredArgsConstructor
 public class WxCpTaskCardServiceImpl implements WxCpTaskCardService {

@@ -25,7 +25,7 @@ import static org.testng.Assert.assertNotNull;
 /**
  * 许可证账号服务测试
  * @author Totoro
- * @date 2022/6/27 16:34
+ * created on  2022/6/27 16:34
  */
 public class WxCpTpLicenseServiceImplTest {
 

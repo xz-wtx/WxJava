@@ -20,7 +20,7 @@ import java.util.stream.Stream;
  * 微信群机器人消息发送api 单元测试
  *
  * @author yr
- * @date 2020-08-20
+ * created on  2020-08-20
  */
 @Slf4j
 @Guice(modules = ApiTestModule.class)

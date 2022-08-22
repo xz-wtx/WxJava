@@ -8,7 +8,7 @@ import java.lang.reflect.Type;
 
 /**
  * @author zhongjun
- * @date 2022/4/25
+ * created on  2022/4/25
  **/
 public class StatisticListAdapter implements JsonDeserializer<WxCpKfGetCorpStatisticResp.StatisticList> {
 

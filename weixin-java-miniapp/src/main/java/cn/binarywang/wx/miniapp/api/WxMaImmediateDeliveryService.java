@@ -29,7 +29,7 @@ import me.chanjar.weixin.common.error.WxErrorException;
  *
  * @author Luo
  * @version 1.0
- * @date 2021-10-13 16:40
+ * created on  2021-10-13 16:40
  */
 public interface WxMaImmediateDeliveryService {
 

@@ -13,7 +13,7 @@ import static cn.binarywang.wx.miniapp.constant.WxMaConstants.DEFAULT_ENV_VERSIO
  * 小程序码接口B.
  *
  * @author Element
- * @date 2017/7/27
+ * created on  2017/7/27
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

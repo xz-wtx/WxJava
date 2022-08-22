@@ -11,7 +11,7 @@ import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
  * 添加客服帐号-返回结果
  *
  * @author Fu
- * @date 2022/1/19 19:04
+ * created on  2022/1/19 19:04
  */
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor

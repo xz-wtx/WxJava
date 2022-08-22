@@ -7,7 +7,7 @@ import lombok.Data;
  * 获取订单详情 回包结构
  *
  * @author leiin
- * @date 2022/6/20 7:09 下午
+ * created on  2022/6/20 7:09 下午
  */
 @Data
 public class WxMinishopOrderDetailResponse extends WxMaShopBaseResponse {

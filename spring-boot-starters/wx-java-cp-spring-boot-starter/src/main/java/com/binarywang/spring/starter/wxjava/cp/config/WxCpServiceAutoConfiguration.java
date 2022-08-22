@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * 企业微信平台相关服务自动注册
  *
  * @author yl
- * @date 2021/12/6
+ * created on  2021/12/6
  */
 @Configuration
 @RequiredArgsConstructor

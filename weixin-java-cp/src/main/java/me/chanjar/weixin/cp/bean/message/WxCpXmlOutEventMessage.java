@@ -10,7 +10,7 @@ import me.chanjar.weixin.common.util.xml.XStreamCDataConverter;
 /**
  * @author eYoung
  * @description:
- * @date create at 2021/12/3 16:36
+ * created on  create at 2021/12/3 16:36
  */
 @XStreamAlias("xml")
 @Data

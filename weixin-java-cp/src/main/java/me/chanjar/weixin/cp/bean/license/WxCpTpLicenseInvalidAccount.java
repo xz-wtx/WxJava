@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 
 /**
  * @author Totoro
- * @date 2022-6-27 15:35:30
+ * created on  2022-6-27 15:35:30
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

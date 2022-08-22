@@ -8,7 +8,7 @@ import static org.testng.Assert.assertEquals;
 
 /**
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020-06-11
+ * created on  2020-06-11
  */
 public class WxCpCryptUtilTest {
   @Test

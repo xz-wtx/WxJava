@@ -12,7 +12,7 @@ import java.io.Serializable;
  * 生成支付参数响应
  *
  * @author zhongjun
- * @date 2022/5/17
+ * created on  2022/5/17
  **/
 @Data
 @EqualsAndHashCode(callSuper = true)

@@ -7,7 +7,7 @@ import com.github.binarywang.wxpay.exception.WxPayException;
  * 商家转账到零钱（直联商户）
  *
  * @author glz
- * @date 2022-6-11
+ * created on  2022-6-11
  */
 public interface MerchantTransferService {
 

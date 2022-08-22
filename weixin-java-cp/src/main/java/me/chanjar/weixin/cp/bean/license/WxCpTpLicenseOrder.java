@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 详细的订单信息
  * 文档地址：https://developer.work.weixin.qq.com/document/path/95648
  * @author Totoro
- * @date 2022/6/27 11:38
+ * created on  2022/6/27 11:38
  */
 @Data
 public class WxCpTpLicenseOrder implements Serializable {

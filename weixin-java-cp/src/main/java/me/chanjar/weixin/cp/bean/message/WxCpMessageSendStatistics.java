@@ -11,7 +11,7 @@ import java.util.List;
  * 应用消息发送统计信息.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020-09-13
+ * created on  2020-09-13
  */
 @Data
 public class WxCpMessageSendStatistics implements Serializable {

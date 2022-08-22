@@ -11,7 +11,7 @@ import java.io.Serializable;
  * 发布列表的一条记录
  *
  * @author dragon
- * @date 2021-10-23
+ * created on  2021-10-23
  */
 @NoArgsConstructor
 @Data

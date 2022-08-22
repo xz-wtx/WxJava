@@ -15,7 +15,7 @@ import com.github.binarywang.wxpay.exception.WxPayException;
  *   （即需在应用场景中使用过一次，钱包才会出现支付分入口）
  *
  * @author hallkk
- * @date 2022/05/18
+ * created on  2022/05/18
  */
 public interface PartnerPayScoreService {
 

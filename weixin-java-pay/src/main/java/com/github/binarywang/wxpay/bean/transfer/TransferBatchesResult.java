@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 商家转账结果
  *
  * @author zhongjun
- * @date 2022/6/17
+ * created on  2022/6/17
  **/
 @Data
 @NoArgsConstructor

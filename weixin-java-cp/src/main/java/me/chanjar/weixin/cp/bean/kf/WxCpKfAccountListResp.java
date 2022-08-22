@@ -14,7 +14,7 @@ import java.util.List;
  * 获取客服帐号列表-结果
  *
  * @author Fu
- * @date 2022/1/19 19:13
+ * created on  2022/1/19 19:13
  */
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor

@@ -10,7 +10,7 @@ import java.util.Objects;
  * 模版消息行业枚举.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2019-10-18
+ * created on  2019-10-18
  */
 @Getter
 @AllArgsConstructor
