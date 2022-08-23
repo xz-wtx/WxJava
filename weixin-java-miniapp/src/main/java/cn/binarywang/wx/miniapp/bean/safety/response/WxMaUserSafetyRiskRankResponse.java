@@ -26,7 +26,7 @@ public class WxMaUserSafetyRiskRankResponse implements Serializable {
    * 唯一请求标识，标记单次请求
    */
   @SerializedName("unoin_id")
-  private Integer unoinId;
+  private Long unoinId;
 
   /**
    * 用户风险等级
