@@ -40,8 +40,68 @@ public class WxCpSchoolHealthTest {
     String currDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
 
-    // Test
-    String reportAnswerStr = "{\"errcode\":0,\"errmsg\":\"ok\",\"answers\":[{\"id_type\":1,\"userid\":\"userid2\",\"report_time\":123456789,\"report_values\":[{\"question_id\":1,\"single_choice\":2},{\"question_id\":2,\"text\":\"广东省广州市\"},{\"question_id\":3,\"multi_choice\":[1,3]},{\"question_id\":4,\"fileid\":[\"XXXXXXX\"]}]},{\"id_type\":2,\"student_userid\":\"student_userid1\",\"parent_userid\":\"parent_userid1\",\"report_time\":123456789,\"report_values\":[{\"question_id\":1,\"single_choice\":1},{\"question_id\":2,\"text\":\"广东省深圳市\"},{\"question_id\":3,\"multi_choice\":[1,2,3]},{\"question_id\":4,\"fileid\":[\"XXXXXXX\"]}]}]}";
+    // Test Json
+    String reportAnswerStr = "{\n" +
+      "   \"errcode\": 0,\n" +
+      "   \"errmsg\": \"ok\",\n" +
+      "   \"answers\":[\n" +
+      "\t\t{\n" +
+      "\t\t\t\"id_type\": 1,\n" +
+      "\t\t\t\"userid\": \"userid2\",\n" +
+      "\t\t\t\"report_time\": 123456789,\n" +
+      "\t\t\t\"report_values\": [\n" +
+      "\t\t\t\t{\n" +
+      "\t\t\t\t\t\"question_id\": 1,\n" +
+      "\t\t\t\t\t\"single_choice\": 2\n" +
+      "\t\t\t\t},\n" +
+      "\t\t\t\t{\n" +
+      "\t\t\t\t\t\"question_id\": 2,\n" +
+      "\t\t\t\t\t\"text\": \"广东省广州市\"\n" +
+      "\t\t\t\t},\n" +
+      "\t\t\t\t{\n" +
+      "\t\t\t\t\t\"question_id\": 3,\n" +
+      "\t\t\t\t\t\"multi_choice\": [\n" +
+      "\t\t\t\t\t\t1, 3\n" +
+      "\t\t\t\t\t]\n" +
+      "\t\t\t\t},\n" +
+      "\t\t\t\t{\n" +
+      "\t\t\t\t\t\"question_id\": 4,\n" +
+      "\t\t\t\t\t\"fileid\": [\n" +
+      "                        \"XXXXXXX\"\n" +
+      "                    ]\n" +
+      "\t\t\t\t}\n" +
+      "\t\t\t]\n" +
+      "\t\t},\n" +
+      "\t\t{\n" +
+      "\t\t\t\"id_type\": 2,\n" +
+      "\t\t\t\"student_userid\": \"student_userid1\",\n" +
+      "\t\t\t\"parent_userid\": \"parent_userid1\",\n" +
+      "\t\t\t\"report_time\": 123456789,\n" +
+      "\t\t\t\"report_values\":[\n" +
+      "\t\t\t\t{\n" +
+      "\t\t\t\t\t\"question_id\": 1,\n" +
+      "\t\t\t\t\t\"single_choice\": 1\n" +
+      "\t\t\t\t},\n" +
+      "\t\t\t\t{\n" +
+      "\t\t\t\t\t\"question_id\": 2,\n" +
+      "\t\t\t\t\t\"text\": \"广东省深圳市\"\n" +
+      "\t\t\t\t},\n" +
+      "\t\t\t\t{\n" +
+      "\t\t\t\t\t\"question_id\": 3,\n" +
+      "\t\t\t\t\t\"multi_choice\":[\n" +
+      "\t\t\t\t\t\t1,2,3\n" +
+      "\t\t\t\t\t]\n" +
+      "\t\t\t\t},\n" +
+      "\t\t\t\t{\n" +
+      "\t\t\t\t\t\"question_id\": 4,\n" +
+      "\t\t\t\t\t\"fileid\": [\n" +
+      "                        \"XXXXXXX\"\n" +
+      "                    ]\n" +
+      "\t\t\t\t}\n" +
+      "\t\t\t]\n" +
+      "\t\t}\n" +
+      "\t]\n" +
+      "}";
     WxCpGetReportAnswer getReportAnswer = WxCpGetReportAnswer.fromJson(reportAnswerStr);
     log.info("获取对应的getReportAnswer：{}", getReportAnswer.toJson());
 
