@@ -12,8 +12,9 @@ import java.util.List;
 
 /**
  * 获取用户填写答案.
+ * https://developer.work.weixin.qq.com/document/path/93679
  *
- * @author Wang_Wong
+ * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
  */
 @Data
 public class WxCpGetReportAnswer extends WxCpBaseResp implements Serializable {
@@ -63,8 +64,8 @@ public class WxCpGetReportAnswer extends WxCpBaseResp implements Serializable {
     @SerializedName("question_id")
     private Integer questionId;
 
-    @SerializedName("single_chose")
-    private Integer singleChose;
+    @SerializedName("single_choice")
+    private Integer singleChoice;
 
     @SerializedName("multi_choice")
     private List<Integer> multiChoice;
