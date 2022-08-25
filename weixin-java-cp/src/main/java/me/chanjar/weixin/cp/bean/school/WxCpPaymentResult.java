@@ -28,9 +28,12 @@ public class WxCpPaymentResult extends WxCpBaseResp implements Serializable {
   @SerializedName("payment_result")
   private List<PaymentResult> paymentResult;
 
+  /**
+   * The type Payment result.
+   */
   @Setter
   @Getter
-  public static class PaymentResult{
+  public static class PaymentResult {
 
     @SerializedName("student_userid")
     private String studentUserId;
@@ -44,16 +47,33 @@ public class WxCpPaymentResult extends WxCpBaseResp implements Serializable {
     @SerializedName("trade_state")
     private Integer tradeState;
 
+    /**
+     * From json payment result.
+     *
+     * @param json the json
+     * @return the payment result
+     */
     public static PaymentResult fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, PaymentResult.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * From json wx cp payment result.
+   *
+   * @param json the json
+   * @return the wx cp payment result
+   */
   public static WxCpPaymentResult fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpPaymentResult.class);
   }

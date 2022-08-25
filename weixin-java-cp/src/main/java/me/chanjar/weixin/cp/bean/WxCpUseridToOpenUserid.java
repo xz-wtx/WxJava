@@ -11,7 +11,6 @@ import java.io.Serializable;
  * 将自建应用或代开发应用获取的userid转换为第三方应用的userid
  * 中间对象
  * Created by gxh0797 on 2022.07.26.
- *
  */
 @Data
 public class WxCpUseridToOpenUserid implements Serializable {
@@ -22,6 +21,12 @@ public class WxCpUseridToOpenUserid implements Serializable {
     return WxCpGsonBuilder.create().toJson(this);
   }
 
+  /**
+   * From json wx cp userid to open userid.
+   *
+   * @param json the json
+   * @return the wx cp userid to open userid
+   */
   public static WxCpUseridToOpenUserid fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpUseridToOpenUserid.class);
   }

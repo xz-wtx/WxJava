@@ -12,8 +12,7 @@ import java.util.List;
 /**
  * 获取部门成员详情返回结果.
  *
- * @author Wang_Wong
- * created on  2022-07-13
+ * @author Wang_Wong  created on  2022-07-13
  */
 @Data
 @Builder
@@ -26,6 +25,9 @@ public class WxCpUserListResult extends WxCpBaseResp implements Serializable {
   @SerializedName("students")
   private List<Student> students;
 
+  /**
+   * The type Parent.
+   */
   @Setter
   @Getter
   @Builder
@@ -48,16 +50,30 @@ public class WxCpUserListResult extends WxCpBaseResp implements Serializable {
     @SerializedName("is_subscribe")
     private Integer isSubscribe;
 
+    /**
+     * From json parent.
+     *
+     * @param json the json
+     * @return the parent
+     */
     public static Parent fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, Parent.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * The type Student.
+   */
   @Setter
   @Getter
   @Builder
@@ -77,16 +93,33 @@ public class WxCpUserListResult extends WxCpBaseResp implements Serializable {
     @SerializedName("parents")
     private List<Parent> parents;
 
+    /**
+     * From json student.
+     *
+     * @param json the json
+     * @return the student
+     */
     public static Student fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, Student.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * From json wx cp user list result.
+   *
+   * @param json the json
+   * @return the wx cp user list result
+   */
   public static WxCpUserListResult fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpUserListResult.class);
   }

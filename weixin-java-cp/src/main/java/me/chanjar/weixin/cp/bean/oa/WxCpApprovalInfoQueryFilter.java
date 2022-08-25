@@ -25,10 +25,18 @@ public class WxCpApprovalInfoQueryFilter implements Serializable {
 
   private Object value;
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxGsonBuilder.create().toJson(this);
   }
 
+  /**
+   * The enum Key.
+   */
   public enum KEY {
 
     /**

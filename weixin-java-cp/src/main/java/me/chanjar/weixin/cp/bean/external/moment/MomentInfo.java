@@ -7,6 +7,8 @@ import me.chanjar.weixin.cp.bean.external.msg.*;
 import java.util.List;
 
 /**
+ * The type Moment info.
+ *
  * @author Borisg
  */
 @Data

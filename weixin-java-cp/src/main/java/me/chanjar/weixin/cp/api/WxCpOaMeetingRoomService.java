@@ -8,8 +8,7 @@ import java.util.List;
 /**
  * 企业微信会议室接口.
  *
- * @author <a href="https://github.com/lm93129">lm93129</a>
- * created on  2022年8月12日22:33:36
+ * @author <a href="https://github.com/lm93129">lm93129</a> created on  2022年8月12日22:33:36
  */
 public interface WxCpOaMeetingRoomService {
   /**
@@ -23,7 +22,7 @@ public interface WxCpOaMeetingRoomService {
    * </pre>
    *
    * @param meetingRoom 会议室对象
-   * @return 会议室ID
+   * @return 会议室ID string
    * @throws WxErrorException .
    */
   String addMeetingRoom(WxCpOaMeetingRoom meetingRoom) throws WxErrorException;
@@ -39,7 +38,7 @@ public interface WxCpOaMeetingRoomService {
    * </pre>
    *
    * @param meetingRoomRequest 会议室查询对象
-   * @return 会议室ID
+   * @return 会议室ID list
    * @throws WxErrorException .
    */
   List<WxCpOaMeetingRoom> listMeetingRoom(WxCpOaMeetingRoom meetingRoomRequest) throws WxErrorException;

@@ -1,4 +1,5 @@
 package me.chanjar.weixin.cp.bean.license.order;
+
 import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,8 +14,8 @@ import java.util.List;
 /**
  * 创建下单续期帐号任务
  * 文档地址：https://developer.work.weixin.qq.com/document/path/95646
- * @author Totoro
- * created on  2022/6/27 11:12
+ *
+ * @author Totoro  created on  2022/6/27 11:12
  */
 @Data
 @Builder
@@ -40,7 +41,11 @@ public class WxCpTpLicenseRenewOrderJobRequest implements Serializable {
   private String jobId;
 
 
-
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

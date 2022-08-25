@@ -24,6 +24,11 @@ public class Attachment implements Serializable {
    */
   private Image image;
 
+  /**
+   * Sets image.
+   *
+   * @param image the image
+   */
   public void setImage(Image image) {
     this.image = image;
     this.type = WxCpConsts.ProductAttachmentType.IMAGE;

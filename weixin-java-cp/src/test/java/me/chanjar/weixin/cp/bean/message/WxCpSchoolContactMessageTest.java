@@ -26,8 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * 发送「学校通知」消息测试类
  * https://developer.work.weixin.qq.com/document/path/92321
  *
- * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
- * created on  2022-06-29
+ * @author <a href="https://github.com/0katekate0">Wang_Wong</a> created on  2022-06-29
  */
 @Slf4j
 public class WxCpSchoolContactMessageTest {
@@ -39,13 +38,14 @@ public class WxCpSchoolContactMessageTest {
   /**
    * 发送「学校通知」
    * 学校可以通过此接口来给家长发送不同类型的学校通知，来满足多种场景下的学校通知需求。目前支持的消息类型为文本、图片、语音、视频、文件、图文。
-   *
+   * <p>
    * https://developer.work.weixin.qq.com/document/path/92321
-   *
+   * <p>
    * 消息体类型请参考测试类
    * WxCpSchoolContactMessageTest
    * {@link WxCpSchoolContactMessageTest}
-   * @throws WxErrorException
+   *
+   * @throws WxErrorException the wx error exception
    */
   @Test
   public void testSendSchoolContactMessage() throws WxErrorException {
@@ -71,7 +71,7 @@ public class WxCpSchoolContactMessageTest {
 
     String[] parentsId = {"ab0b1691d0204d4900f6b7a7e5a6aa8f", collect.get(0).getParentUserId()};
 
-    WxCpSchoolContactMessageSendResult sendResult = this.cpService.getMessageService().sendSchoolContactMessage(
+    WxCpSchoolContactMessageSendResult sendResult = cpService.getMessageService().sendSchoolContactMessage(
 
       WxCpSchoolContactMessage.builder()
         .recvScope(0)
@@ -95,7 +95,10 @@ public class WxCpSchoolContactMessageTest {
 
   }
 
-  //    WxCpConsts.SchoolContactChangeType
+  /**
+   * Test to json text.
+   */
+//    WxCpConsts.SchoolContactChangeType
   @Test
   public void testToJson_text() {
 
@@ -137,7 +140,8 @@ public class WxCpSchoolContactMessageTest {
       "\t\"msgtype\" : \"text\",\n" +
       "\t\"agentid\" : 1,\n" +
       "\t\"text\" : {\n" +
-      "\t\t\"content\" : \"你的快递已到，请携带工卡前往邮件中心领取。\\n出发前可查看<a href=\\\"http://work.weixin.qq.com\\\">邮件中心视频实况</a>，聪明避开排队。\"\n" +
+      "\t\t\"content\" : \"你的快递已到，请携带工卡前往邮件中心领取。\\n出发前可查看<a href=\\\"http://work.weixin.qq" +
+      ".com\\\">邮件中心视频实况</a>，聪明避开排队。\"\n" +
       "\t},\n" +
       "\t\"enable_id_trans\": 0,\n" +
       "\t\"enable_duplicate_check\": 0,\n" +
@@ -147,6 +151,9 @@ public class WxCpSchoolContactMessageTest {
     assertThat(json).isEqualTo(GsonParser.parse(expectedJson).toString());
   }
 
+  /**
+   * Test to json image.
+   */
   @Test
   public void testToJson_image() {
     WxCpSchoolContactMessage message = WxCpSchoolContactMessage.builder()
@@ -179,6 +186,9 @@ public class WxCpSchoolContactMessageTest {
     assertThat(json).isEqualTo(GsonParser.parse(expectedJson).toString());
   }
 
+  /**
+   * Test to json voice.
+   */
   @Test
   public void testToJson_voice() {
     WxCpSchoolContactMessage message = WxCpSchoolContactMessage.builder()
@@ -211,6 +221,9 @@ public class WxCpSchoolContactMessageTest {
     assertThat(json).isEqualTo(GsonParser.parse(expectedJson).toString());
   }
 
+  /**
+   * Test to json video.
+   */
   @Test
   public void testToJson_video() {
     WxCpSchoolContactMessage message = WxCpSchoolContactMessage.builder()
@@ -247,6 +260,9 @@ public class WxCpSchoolContactMessageTest {
     assertThat(json).isEqualTo(GsonParser.parse(expectedJson).toString());
   }
 
+  /**
+   * Test to json file.
+   */
   @Test
   public void testToJson_file() {
     WxCpSchoolContactMessage message = WxCpSchoolContactMessage.builder()
@@ -279,6 +295,9 @@ public class WxCpSchoolContactMessageTest {
     assertThat(json).isEqualTo(GsonParser.parse(expectedJson).toString());
   }
 
+  /**
+   * Test to json news.
+   */
   @Test
   public void testToJson_news() {
     WxCpSchoolContactMessage message = WxCpSchoolContactMessage.builder()
@@ -312,7 +331,8 @@ public class WxCpSchoolContactMessageTest {
       "               \"title\" : \"中秋节礼品领取\",\n" +
       "               \"description\" : \"今年中秋节公司有豪礼相送\",\n" +
       "               \"url\" : \"URL\",\n" +
-      "               \"picurl\" : \"http://res.mail.qq.com/node/ww/wwopenmng/images/independent/doc/test_pic_msg1.png\"\n" +
+      "               \"picurl\" : \"http://res.mail.qq.com/node/ww/wwopenmng/images/independent/doc/test_pic_msg1" +
+      ".png\"\n" +
       "           }\n" +
       "\t\t]\n" +
       "   },\n" +
@@ -325,6 +345,9 @@ public class WxCpSchoolContactMessageTest {
   }
 
 
+  /**
+   * Test to json mpnews.
+   */
   @Test
   public void testToJson_mpnews() {
     WxCpSchoolContactMessage message = WxCpSchoolContactMessage.builder()
@@ -374,6 +397,9 @@ public class WxCpSchoolContactMessageTest {
     assertThat(json).isEqualTo(GsonParser.parse(expectedJson).toString());
   }
 
+  /**
+   * Test to json mini program.
+   */
   @Test
   public void testToJson_miniProgram() {
     WxCpSchoolContactMessage message = WxCpSchoolContactMessage.builder()

@@ -7,6 +7,8 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 /**
+ * The type Visible range.
+ *
  * @author Boris
  */
 @Data

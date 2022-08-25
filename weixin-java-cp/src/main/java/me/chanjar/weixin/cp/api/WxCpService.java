@@ -38,7 +38,7 @@ public interface WxCpService extends WxService {
    *
    * @return the access token
    * @throws WxErrorException the wx error exception
-   * @see #getAccessToken(boolean) #getAccessToken(boolean)#getAccessToken(boolean)
+   * @see #getAccessToken(boolean) #getAccessToken(boolean)#getAccessToken(boolean)#getAccessToken(boolean)
    */
   String getAccessToken() throws WxErrorException;
 
@@ -62,7 +62,7 @@ public interface WxCpService extends WxService {
    *
    * @return the jsapi ticket
    * @throws WxErrorException the wx error exception
-   * @see #getJsapiTicket(boolean) #getJsapiTicket(boolean)#getJsapiTicket(boolean)
+   * @see #getJsapiTicket(boolean) #getJsapiTicket(boolean)#getJsapiTicket(boolean)#getJsapiTicket(boolean)
    */
   String getJsapiTicket() throws WxErrorException;
 
@@ -89,7 +89,7 @@ public interface WxCpService extends WxService {
    *
    * @return the agent jsapi ticket
    * @throws WxErrorException the wx error exception
-   * @see #getJsapiTicket(boolean) #getJsapiTicket(boolean)#getJsapiTicket(boolean)
+   * @see #getJsapiTicket(boolean) #getJsapiTicket(boolean)#getJsapiTicket(boolean)#getJsapiTicket(boolean)
    */
   String getAgentJsapiTicket() throws WxErrorException;
 
@@ -134,7 +134,7 @@ public interface WxCpService extends WxService {
    *
    * @param url url
    * @return the agent jsapi signature
-   * @throws WxErrorException
+   * @throws WxErrorException the wx error exception
    */
   WxCpAgentJsapiSignature createAgentJsapiSignature(String url) throws WxErrorException;
 
@@ -265,6 +265,7 @@ public interface WxCpService extends WxService {
 
   /**
    * 上传用户列表，增量更新成员
+   *
    * @param mediaId 媒体id
    * @return jobId 异步任务id
    * @throws WxErrorException the wx error exception
@@ -310,9 +311,10 @@ public interface WxCpService extends WxService {
 
   /**
    * 构造扫码登录链接 - 构造独立窗口登录二维码
+   *
    * @param redirectUri 重定向地址，需要进行UrlEncode
-   * @param state 用于保持请求和回调的状态，授权请求后原样带回给企业。该参数可用于防止csrf攻击（跨站请求伪造攻击），建议企业带上该参数，可设置为简单的随机数加session进行校验
-   * @return .
+   * @param state       用于保持请求和回调的状态，授权请求后原样带回给企业。该参数可用于防止csrf攻击（跨站请求伪造攻击），建议企业带上该参数，可设置为简单的随机数加session进行校验
+   * @return . string
    */
   String buildQrConnectUrl(String redirectUri, String state);
 
@@ -403,21 +405,21 @@ public interface WxCpService extends WxService {
   /**
    * 获取家校应用复学码相关接口的服务类对象
    *
-   * @return
+   * @return school service
    */
   WxCpSchoolService getSchoolService();
 
   /**
    * 获取家校沟通相关接口的服务类对象
    *
-   * @return
+   * @return school user service
    */
   WxCpSchoolUserService getSchoolUserService();
 
   /**
    * 获取家校应用健康上报的服务类对象
    *
-   * @return
+   * @return school health service
    */
   WxCpSchoolHealthService getSchoolHealthService();
 
@@ -431,21 +433,21 @@ public interface WxCpService extends WxService {
   /**
    * 获取OA 自建应用相关接口的服务类对象
    *
-   * @return
+   * @return oa agent service
    */
   WxCpOaAgentService getOaAgentService();
 
   /**
    * 获取OA效率工具 微盘的服务类对象
    *
-   * @return
+   * @return oa we drive service
    */
   WxCpOaWeDriveService getOaWeDriveService();
 
   /**
    * 获取会话存档相关接口的服务类对象
    *
-   * @return
+   * @return msg audit service
    */
   WxCpMsgAuditService getMsgAuditService();
 
@@ -487,7 +489,7 @@ public interface WxCpService extends WxService {
   /**
    * 获取微信客服服务
    *
-   * @return 微信客服服务
+   * @return 微信客服服务 kf service
    */
   WxCpKfService getKfService();
 
@@ -550,7 +552,7 @@ public interface WxCpService extends WxService {
   /**
    * 获取异步导出服务
    *
-   * @return 异步导出服务
+   * @return 异步导出服务 export service
    */
   WxCpExportService getExportService();
 

@@ -21,15 +21,30 @@ public final class NewsBuilder extends BaseBuilder<NewsBuilder> {
 
   private List<NewArticle> articles = new ArrayList<>();
 
+  /**
+   * Instantiates a new News builder.
+   */
   public NewsBuilder() {
     this.msgType = WxConsts.KefuMsgType.NEWS;
   }
 
+  /**
+   * Add article news builder.
+   *
+   * @param articles the articles
+   * @return the news builder
+   */
   public NewsBuilder addArticle(NewArticle... articles) {
     Collections.addAll(this.articles, articles);
     return this;
   }
 
+  /**
+   * Articles news builder.
+   *
+   * @param articles the articles
+   * @return the news builder
+   */
   public NewsBuilder articles(List<NewArticle> articles) {
     this.articles = articles;
     return this;

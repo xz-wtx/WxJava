@@ -15,8 +15,7 @@ import java.util.List;
  * 权限说明：
  * 仅复学码应用可以调用
  *
- * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
- * created on : 2022/5/31 9:10
+ * @author <a href="https://github.com/0katekate0">Wang_Wong</a> created on : 2022/5/31 9:10
  */
 public interface WxCpSchoolService {
 
@@ -25,11 +24,11 @@ public interface WxCpSchoolService {
    * 请求方式： POST（HTTPS）
    * 请求地址： https://qyapi.weixin.qq.com/cgi-bin/school/user/get_teacher_customize_health_info?access_token=ACCESS_TOKEN
    *
-   * @param date
-   * @param nextKey
-   * @param limit
-   * @return
-   * @throws WxErrorException
+   * @param date    the date
+   * @param nextKey the next key
+   * @param limit   the limit
+   * @return teacher customize health info
+   * @throws WxErrorException the wx error exception
    */
   WxCpCustomizeHealthInfo getTeacherCustomizeHealthInfo(@NotNull String date, String nextKey, Integer limit) throws WxErrorException;
 
@@ -38,11 +37,11 @@ public interface WxCpSchoolService {
    * 请求方式： POST（HTTPS）
    * 请求地址： https://qyapi.weixin.qq.com/cgi-bin/school/user/get_student_customize_health_info?access_token=ACCESS_TOKEN
    *
-   * @param date
-   * @param nextKey
-   * @param limit
-   * @return
-   * @throws WxErrorException
+   * @param date    the date
+   * @param nextKey the next key
+   * @param limit   the limit
+   * @return student customize health info
+   * @throws WxErrorException the wx error exception
    */
   WxCpCustomizeHealthInfo getStudentCustomizeHealthInfo(@NotNull String date, String nextKey, Integer limit) throws WxErrorException;
 
@@ -51,10 +50,10 @@ public interface WxCpSchoolService {
    * 请求方式：POST（HTTPS）
    * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/school/user/get_health_qrcode?access_token=ACCESS_TOKEN
    *
-   * @param userIds
-   * @param type
-   * @return
-   * @throws WxErrorException
+   * @param userIds the user ids
+   * @param type    the type
+   * @return health qr code
+   * @throws WxErrorException the wx error exception
    */
   WxCpResultList getHealthQrCode(@NotNull List<String> userIds, @NotNull Integer type) throws WxErrorException;
 
@@ -63,9 +62,9 @@ public interface WxCpSchoolService {
    * 请求方式： POST（HTTPS）
    * 请求地址： https://qyapi.weixin.qq.com/cgi-bin/school/get_payment_result?access_token=ACCESS_TOKEN
    *
-   * @param paymentId
-   * @return
-   * @throws WxErrorException
+   * @param paymentId the payment id
+   * @return payment result
+   * @throws WxErrorException the wx error exception
    */
   WxCpPaymentResult getPaymentResult(@NotNull String paymentId) throws WxErrorException;
 
@@ -74,20 +73,22 @@ public interface WxCpSchoolService {
    * 请求方式： POST（HTTPS）
    * 请求地址： https://qyapi.weixin.qq.com/cgi-bin/school/get_trade?access_token=ACCESS_TOKEN
    *
-   * @param paymentId
-   * @param tradeNo
-   * @return
-   * @throws WxErrorException
+   * @param paymentId the payment id
+   * @param tradeNo   the trade no
+   * @return trade
+   * @throws WxErrorException the wx error exception
    */
   WxCpTrade getTrade(@NotNull String paymentId, @NotNull String tradeNo) throws WxErrorException;
 
   /**
    * 获取直播详情
    * 请求方式：GET（HTTPS）
-   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/school/living/get_living_info?access_token=ACCESS_TOKEN&livingid=LIVINGID
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/school/living/get_living_info?access_token=ACCESS_TOKEN&livingid
+   * =LIVINGID
    *
-   * @param livingId
-   * @return
+   * @param livingId the living id
+   * @return living info
+   * @throws WxErrorException the wx error exception
    */
   WxCpSchoolLivingInfo getLivingInfo(@NotNull String livingId) throws WxErrorException;
 
@@ -98,11 +99,11 @@ public interface WxCpSchoolService {
    * 请求方式：POST（HTTPS）
    * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/living/get_user_all_livingid?access_token=ACCESS_TOKEN
    *
-   * @param userId
-   * @param cursor
-   * @param limit
-   * @return
-   * @throws WxErrorException
+   * @param userId the user id
+   * @param cursor the cursor
+   * @param limit  the limit
+   * @return user all living id
+   * @throws WxErrorException the wx error exception
    */
   WxCpLivingResult.LivingIdResult getUserAllLivingId(@NonNull String userId, String cursor, Integer limit) throws WxErrorException;
 
@@ -113,10 +114,10 @@ public interface WxCpSchoolService {
    * 请求方式：POST（HTTPS）
    * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/school/living/get_watch_stat?access_token=ACCESS_TOKEN
    *
-   * @param livingId
-   * @param nextKey
-   * @return
-   * @throws WxErrorException
+   * @param livingId the living id
+   * @param nextKey  the next key
+   * @return watch stat
+   * @throws WxErrorException the wx error exception
    */
   WxCpSchoolWatchStat getWatchStat(@NonNull String livingId, String nextKey) throws WxErrorException;
 
@@ -127,10 +128,10 @@ public interface WxCpSchoolService {
    * 请求方式：POST（HTTPS）
    * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/school/living/get_unwatch_stat?access_token=ACCESS_TOKEN
    *
-   * @param livingId
-   * @param nextKey
-   * @return
-   * @throws WxErrorException
+   * @param livingId the living id
+   * @param nextKey  the next key
+   * @return unwatch stat
+   * @throws WxErrorException the wx error exception
    */
   WxCpSchoolUnwatchStat getUnwatchStat(@NonNull String livingId, String nextKey) throws WxErrorException;
 
@@ -139,9 +140,9 @@ public interface WxCpSchoolService {
    * 请求方式： POST（HTTPS）
    * 请求地址： https://qyapi.weixin.qq.com/cgi-bin/living/delete_replay_data?access_token=ACCESS_TOKEN
    *
-   * @param livingId
-   * @return
-   * @throws WxErrorException
+   * @param livingId the living id
+   * @return wx cp living result
+   * @throws WxErrorException the wx error exception
    */
   WxCpLivingResult deleteReplayData(@NonNull String livingId) throws WxErrorException;
 

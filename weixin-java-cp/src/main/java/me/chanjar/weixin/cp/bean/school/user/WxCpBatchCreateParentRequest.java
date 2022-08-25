@@ -11,8 +11,7 @@ import java.util.List;
 /**
  * 批量创建家长.
  *
- * @author Wang_Wong
- * created on  2022-07-11
+ * @author Wang_Wong  created on  2022-07-11
  */
 @Data
 @Builder
@@ -25,6 +24,9 @@ public class WxCpBatchCreateParentRequest implements Serializable {
   @SerializedName("parents")
   private List<Parent> parents;
 
+  /**
+   * The type Parent.
+   */
   @Setter
   @Getter
   @Builder
@@ -44,16 +46,30 @@ public class WxCpBatchCreateParentRequest implements Serializable {
     @SerializedName("children")
     private List<Children> children;
 
+    /**
+     * From json parent.
+     *
+     * @param json the json
+     * @return the parent
+     */
     public static Parent fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, Parent.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * The type Children.
+   */
   @Setter
   @Getter
   @Builder
@@ -67,20 +83,42 @@ public class WxCpBatchCreateParentRequest implements Serializable {
     @SerializedName("relation")
     private String relation;
 
+    /**
+     * From json children.
+     *
+     * @param json the json
+     * @return the children
+     */
     public static Children fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, Children.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * From json wx cp batch create parent request.
+   *
+   * @param json the json
+   * @return the wx cp batch create parent request
+   */
   public static WxCpBatchCreateParentRequest fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpBatchCreateParentRequest.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

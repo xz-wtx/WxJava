@@ -67,7 +67,9 @@ public class WxCpOAuth2ServiceImpl implements WxCpOAuth2Service {
 
   @Override
   public WxCpOauth2UserInfo getUserInfo(Integer agentId, String code) throws WxErrorException {
-    String responseText = this.mainService.get(String.format(this.mainService.getWxCpConfigStorage().getApiUrl(GET_USER_INFO), code, agentId), null);
+    String responseText =
+      this.mainService.get(String.format(this.mainService.getWxCpConfigStorage().getApiUrl(GET_USER_INFO), code,
+        agentId), null);
     JsonObject jo = GsonParser.parse(responseText);
 
     return WxCpOauth2UserInfo.builder()
@@ -84,7 +86,9 @@ public class WxCpOAuth2ServiceImpl implements WxCpOAuth2Service {
 
   @Override
   public WxCpOauth2UserInfo getSchoolUserInfo(String code) throws WxErrorException {
-    String responseText = this.mainService.get(String.format(this.mainService.getWxCpConfigStorage().getApiUrl(GET_SCHOOL_USER_INFO), code), null);
+    String responseText =
+      this.mainService.get(String.format(this.mainService.getWxCpConfigStorage().getApiUrl(GET_SCHOOL_USER_INFO),
+        code), null);
     JsonObject jo = GsonParser.parse(responseText);
 
     return WxCpOauth2UserInfo.builder()
@@ -98,7 +102,8 @@ public class WxCpOAuth2ServiceImpl implements WxCpOAuth2Service {
   public WxCpUserDetail getUserDetail(String userTicket) throws WxErrorException {
     JsonObject param = new JsonObject();
     param.addProperty("user_ticket", userTicket);
-    String responseText = this.mainService.post(this.mainService.getWxCpConfigStorage().getApiUrl(GET_USER_DETAIL), param.toString());
+    String responseText = this.mainService.post(this.mainService.getWxCpConfigStorage().getApiUrl(GET_USER_DETAIL),
+      param.toString());
     return WxCpGsonBuilder.create().fromJson(responseText, WxCpUserDetail.class);
   }
 }

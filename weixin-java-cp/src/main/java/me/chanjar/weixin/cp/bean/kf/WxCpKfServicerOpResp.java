@@ -2,17 +2,18 @@ package me.chanjar.weixin.cp.bean.kf;
 
 
 import com.google.gson.annotations.SerializedName;
-import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import me.chanjar.weixin.cp.bean.WxCpBaseResp;
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
+import java.util.List;
+
 /**
  * 添加/删除客服接待人员返回结果
- * @author leiin
- * created on  2022/1/26 4:11 下午
+ *
+ * @author leiin  created on  2022/1/26 4:11 下午
  */
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
@@ -24,6 +25,9 @@ public class WxCpKfServicerOpResp extends WxCpBaseResp {
   @SerializedName("result_list")
   private List<WxCpKfServicerResp> resultList;
 
+  /**
+   * The type Wx cp kf servicer resp.
+   */
   @Data
   @NoArgsConstructor
   public static class WxCpKfServicerResp extends WxCpBaseResp {
@@ -32,6 +36,12 @@ public class WxCpKfServicerOpResp extends WxCpBaseResp {
     private String userId;
   }
 
+  /**
+   * From json wx cp kf servicer op resp.
+   *
+   * @param json the json
+   * @return the wx cp kf servicer op resp
+   */
   public static WxCpKfServicerOpResp fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpKfServicerOpResp.class);
   }

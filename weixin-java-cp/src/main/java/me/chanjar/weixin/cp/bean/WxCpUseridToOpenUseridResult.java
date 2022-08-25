@@ -11,7 +11,6 @@ import java.util.List;
  * userid转换为open_userid
  * 将自建应用或代开发应用获取的userid转换为第三方应用的userid
  * Created by gxh0797 on 2022.07.26.
- *
  */
 @Data
 public class WxCpUseridToOpenUseridResult implements Serializable {
@@ -22,6 +21,12 @@ public class WxCpUseridToOpenUseridResult implements Serializable {
     return WxCpGsonBuilder.create().toJson(this);
   }
 
+  /**
+   * From json wx cp userid to open userid result.
+   *
+   * @param json the json
+   * @return the wx cp userid to open userid result
+   */
   public static WxCpUseridToOpenUseridResult fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpUseridToOpenUseridResult.class);
   }

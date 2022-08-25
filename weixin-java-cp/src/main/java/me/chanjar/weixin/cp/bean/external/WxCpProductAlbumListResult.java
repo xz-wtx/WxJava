@@ -28,6 +28,12 @@ public class WxCpProductAlbumListResult extends WxCpBaseResp implements Serializ
   @SerializedName("next_cursor")
   private String nextCursor;
 
+  /**
+   * From json wx cp product album list result.
+   *
+   * @param json the json
+   * @return the wx cp product album list result
+   */
   public static WxCpProductAlbumListResult fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpProductAlbumListResult.class);
   }

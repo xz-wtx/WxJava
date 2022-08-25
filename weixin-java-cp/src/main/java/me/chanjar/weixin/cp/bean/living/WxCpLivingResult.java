@@ -23,6 +23,9 @@ public class WxCpLivingResult implements Serializable {
   @SerializedName("errmsg")
   private String errmsg;
 
+  /**
+   * The type Living id result.
+   */
   @Getter
   @Setter
   public static class LivingIdResult implements Serializable {
@@ -34,20 +37,42 @@ public class WxCpLivingResult implements Serializable {
     @SerializedName("livingid_list")
     private String[] livingIdList;
 
+    /**
+     * From json living id result.
+     *
+     * @param json the json
+     * @return the living id result
+     */
     public static LivingIdResult fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, LivingIdResult.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * From json wx cp living result.
+   *
+   * @param json the json
+   * @return the wx cp living result
+   */
   public static WxCpLivingResult fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpLivingResult.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

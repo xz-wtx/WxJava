@@ -8,13 +8,22 @@ import sun.security.util.DerInputStream;
 import sun.security.util.DerValue;
 
 import javax.crypto.Cipher;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.RSAPrivateCrtKeySpec;
 import java.util.Base64;
 
+/**
+ * The type Wx cp crypt util.
+ */
 public class WxCpCryptUtil extends WxCryptUtil {
+  /**
+   * Instantiates a new Wx cp crypt util.
+   *
+   * @param wxCpConfigStorage the wx cp config storage
+   */
   public WxCpCryptUtil(WxCpConfigStorage wxCpConfigStorage) {
     /*
      * @param token          公众平台上，开发者设置的token
@@ -36,8 +45,8 @@ public class WxCpCryptUtil extends WxCryptUtil {
    * @param encryptRandomKey 使用PUBLICKEY_VER指定版本的公钥进行非对称加密后base64加密的内容
    * @param msgAuditPriKey   会话存档私钥
    * @param pkcs1            使用什么方式进行解密，1代表使用PKCS1进行解密，2代表PKCS8进行解密 ...
-   * @return
-   * @throws Exception
+   * @return string
+   * @throws Exception the exception
    */
   public static String decryptPriKey(String encryptRandomKey, String msgAuditPriKey, Integer pkcs1) throws Exception {
     if (pkcs1 == null) {
@@ -54,10 +63,10 @@ public class WxCpCryptUtil extends WxCryptUtil {
   /**
    * PKCS8 解密私钥
    *
-   * @param encryptRandomKey
-   * @param msgAuditPriKey
-   * @return
-   * @throws Exception
+   * @param encryptRandomKey the encrypt random key
+   * @param msgAuditPriKey   the msg audit pri key
+   * @return string
+   * @throws Exception the exception
    */
   public static String decryptPriKeyByPKCS8(String encryptRandomKey, String msgAuditPriKey) throws Exception {
     String privateKey = msgAuditPriKey.replaceAll("(\r\n|\r|\n|\n\r)", "")
@@ -73,17 +82,18 @@ public class WxCpCryptUtil extends WxCryptUtil {
     Cipher cipher = Cipher.getInstance(keyFactory.getAlgorithm());
     cipher.init(Cipher.DECRYPT_MODE, priKey);
     byte[] utf8 = cipher.doFinal(Base64.getDecoder().decode(encryptRandomKey));
-    return new String(utf8, "UTF-8");
+    return new String(utf8, StandardCharsets.UTF_8);
   }
 
   /**
    * 会话存档，PKCS1 解密私钥
    * 企业获取的会话内容将用公钥加密，企业用自行保存的私钥解开会话内容数据
    *
-   * @param encryptRandomKey 使用PUBLICKEY_VER指定版本的公钥进行非对称加密后base64加密的内容，需要业务方先base64 decode处理后，再使用指定版本的私钥进行解密，得出内容。String类型
+   * @param encryptRandomKey 使用PUBLICKEY_VER指定版本的公钥进行非对称加密后base64加密的内容，需要业务方先base64
+   *                         decode处理后，再使用指定版本的私钥进行解密，得出内容。String类型
    * @param msgAuditPriKey   会话存档私钥
-   * @return
-   * @throws Exception
+   * @return string
+   * @throws Exception the exception
    */
   public static String decryptPriKeyByPKCS1(String encryptRandomKey, String msgAuditPriKey) throws Exception {
     String privateKey = msgAuditPriKey.replaceAll("(\r\n|\r|\n|\n\r)", "")
@@ -102,7 +112,7 @@ public class WxCpCryptUtil extends WxCryptUtil {
     Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
     cipher.init(Cipher.DECRYPT_MODE, priKey);
     byte[] utf8 = cipher.doFinal(Base64.getDecoder().decode(encryptRandomKey));
-    return new String(utf8, "UTF-8");
+    return new String(utf8, StandardCharsets.UTF_8);
   }
 
 }

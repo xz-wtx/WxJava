@@ -43,6 +43,9 @@ public class WxCpTpAuthInfo extends WxCpBaseResp {
   @SerializedName("edition_info")
   private EditionInfo editionInfo;
 
+  /**
+   * The type Dealer corp info.
+   */
   @Getter
   @Setter
   public static class DealerCorpInfo extends WxCpBaseResp {
@@ -55,6 +58,9 @@ public class WxCpTpAuthInfo extends WxCpBaseResp {
     private String corpName;
   }
 
+  /**
+   * The type Auth corp info.
+   */
   @Getter
   @Setter
   public static class AuthCorpInfo implements Serializable {
@@ -151,6 +157,9 @@ public class WxCpTpAuthInfo extends WxCpBaseResp {
 
   }
 
+  /**
+   * The type Agent.
+   */
   @Getter
   @Setter
   public static class Agent implements Serializable {
@@ -297,6 +306,12 @@ public class WxCpTpAuthInfo extends WxCpBaseResp {
   }
 
 
+  /**
+   * From json wx cp tp auth info.
+   *
+   * @param json the json
+   * @return the wx cp tp auth info
+   */
   public static WxCpTpAuthInfo fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpTpAuthInfo.class);
   }

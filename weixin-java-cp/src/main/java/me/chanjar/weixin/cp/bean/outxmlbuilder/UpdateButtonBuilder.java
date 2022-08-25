@@ -12,6 +12,12 @@ public class UpdateButtonBuilder extends BaseBuilder<UpdateButtonBuilder, WxCpXm
 
   private String replaceName;
 
+  /**
+   * Replace name update button builder.
+   *
+   * @param replaceName the replace name
+   * @return the update button builder
+   */
   public UpdateButtonBuilder replaceName(String replaceName) {
     this.replaceName = replaceName;
     return this;

@@ -11,8 +11,7 @@ import java.util.List;
  * 企业微信微盘相关接口.
  * https://developer.work.weixin.qq.com/document/path/93654
  *
- * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
- * created on  2022-04-22
+ * @author <a href="https://github.com/0katekate0">Wang_Wong</a> created on  2022-04-22
  */
 public interface WxCpOaWeDriveService {
 
@@ -24,8 +23,8 @@ public interface WxCpOaWeDriveService {
    * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedrive/space_create?access_token=ACCESS_TOKEN
    *
    * @param request 新建空间对应请求参数
-   * @return spaceid（空间id）
-   * @throws WxErrorException
+   * @return spaceid （空间id）
+   * @throws WxErrorException the wx error exception
    */
   WxCpSpaceCreateData spaceCreate(@NonNull WxCpSpaceCreateRequest request) throws WxErrorException;
 
@@ -37,8 +36,8 @@ public interface WxCpOaWeDriveService {
    * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedrive/space_rename?access_token=ACCESS_TOKEN
    *
    * @param request 重命名空间的请求参数
-   * @return
-   * @throws WxErrorException
+   * @return wx cp base resp
+   * @throws WxErrorException the wx error exception
    */
   WxCpBaseResp spaceRename(@NonNull WxCpSpaceRenameRequest request) throws WxErrorException;
 
@@ -49,10 +48,10 @@ public interface WxCpOaWeDriveService {
    * 请求方式：POST（HTTPS）
    * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedrive/space_dismiss?access_token=ACCESS_TOKEN
    *
-   * @param userId
-   * @param spaceId
-   * @return
-   * @throws WxErrorException
+   * @param userId  the user id
+   * @param spaceId the space id
+   * @return wx cp base resp
+   * @throws WxErrorException the wx error exception
    */
   WxCpBaseResp spaceDismiss(@NonNull String userId, @NonNull String spaceId) throws WxErrorException;
 
@@ -63,10 +62,10 @@ public interface WxCpOaWeDriveService {
    * 请求方式：POST（HTTPS）
    * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedrive/space_info?access_token=ACCESS_TOKEN
    *
-   * @param userId
-   * @param spaceId
-   * @return
-   * @throws WxErrorException
+   * @param userId  the user id
+   * @param spaceId the space id
+   * @return wx cp space info
+   * @throws WxErrorException the wx error exception
    */
   WxCpSpaceInfo spaceInfo(@NonNull String userId, @NonNull String spaceId) throws WxErrorException;
 
@@ -78,8 +77,8 @@ public interface WxCpOaWeDriveService {
    * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedrive/space_acl_add?access_token=ACCESS_TOKEN
    *
    * @param request 添加成员/部门请求参数
-   * @return
-   * @throws WxErrorException
+   * @return wx cp base resp
+   * @throws WxErrorException the wx error exception
    */
   WxCpBaseResp spaceAclAdd(@NonNull WxCpSpaceAclAddRequest request) throws WxErrorException;
 
@@ -91,8 +90,8 @@ public interface WxCpOaWeDriveService {
    * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedrive/space_acl_del?access_token=ACCESS_TOKEN
    *
    * @param request 移除成员/部门请求参数
-   * @return
-   * @throws WxErrorException
+   * @return wx cp base resp
+   * @throws WxErrorException the wx error exception
    */
   WxCpBaseResp spaceAclDel(@NonNull WxCpSpaceAclDelRequest request) throws WxErrorException;
 
@@ -104,8 +103,8 @@ public interface WxCpOaWeDriveService {
    * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedrive/space_setting?access_token=ACCESS_TOKEN
    *
    * @param request 权限管理请求参数
-   * @return
-   * @throws WxErrorException
+   * @return wx cp base resp
+   * @throws WxErrorException the wx error exception
    */
   WxCpBaseResp spaceSetting(@NonNull WxCpSpaceSettingRequest request) throws WxErrorException;
 
@@ -116,10 +115,10 @@ public interface WxCpOaWeDriveService {
    * 请求方式：POST（HTTPS）
    * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedrive/space_share?access_token=ACCESS_TOKEN
    *
-   * @param userId
-   * @param spaceId
-   * @return
-   * @throws WxErrorException
+   * @param userId  the user id
+   * @param spaceId the space id
+   * @return wx cp space share
+   * @throws WxErrorException the wx error exception
    */
   WxCpSpaceShare spaceShare(@NonNull String userId, @NonNull String spaceId) throws WxErrorException;
 
@@ -131,8 +130,8 @@ public interface WxCpOaWeDriveService {
    * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedrive/file_list?access_token=ACCESS_TOKEN
    *
    * @param request 获取文件列表请求参数
-   * @return
-   * @throws WxErrorException
+   * @return wx cp file list
+   * @throws WxErrorException the wx error exception
    */
   WxCpFileList fileList(@NonNull WxCpFileListRequest request) throws WxErrorException;
 
@@ -144,8 +143,8 @@ public interface WxCpOaWeDriveService {
    * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedrive/file_upload?access_token=ACCESS_TOKEN
    *
    * @param request 上传文件请求参数
-   * @return
-   * @throws WxErrorException
+   * @return wx cp file upload
+   * @throws WxErrorException the wx error exception
    */
   WxCpFileUpload fileUpload(@NonNull WxCpFileUploadRequest request) throws WxErrorException;
 
@@ -156,10 +155,10 @@ public interface WxCpOaWeDriveService {
    * 请求方式：POST（HTTPS）
    * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedrive/file_download?access_token=ACCESS_TOKEN
    *
-   * @param userId
-   * @param fileId
-   * @return
-   * @throws WxErrorException
+   * @param userId the user id
+   * @param fileId the file id
+   * @return wx cp file download
+   * @throws WxErrorException the wx error exception
    */
   WxCpFileDownload fileDownload(@NonNull String userId, @NonNull String fileId) throws WxErrorException;
 
@@ -170,11 +169,11 @@ public interface WxCpOaWeDriveService {
    * 请求方式：POST（HTTPS）
    * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedrive/file_rename?access_token=ACCESS_TOKEN
    *
-   * @param userId
-   * @param fileId
-   * @param newName
-   * @return
-   * @throws WxErrorException
+   * @param userId  the user id
+   * @param fileId  the file id
+   * @param newName the new name
+   * @return wx cp file rename
+   * @throws WxErrorException the wx error exception
    */
   WxCpFileRename fileRename(@NonNull String userId, @NonNull String fileId, @NonNull String newName) throws WxErrorException;
 
@@ -190,8 +189,8 @@ public interface WxCpOaWeDriveService {
    * @param fatherId 父目录fileid, 在根目录时为空间spaceid
    * @param fileType 文件类型, 1:文件夹 3:微文档(文档) 4:微文档(表格)
    * @param fileName 文件名字
-   * @return
-   * @throws WxErrorException
+   * @return wx cp file create
+   * @throws WxErrorException the wx error exception
    */
   WxCpFileCreate fileCreate(@NonNull String userId, @NonNull String spaceId,
                             @NonNull String fatherId, @NonNull Integer fileType, @NonNull String fileName) throws WxErrorException;
@@ -204,8 +203,8 @@ public interface WxCpOaWeDriveService {
    * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedrive/file_move?access_token=ACCESS_TOKEN
    *
    * @param request 移动文件的请求参数
-   * @return
-   * @throws WxErrorException
+   * @return wx cp file move
+   * @throws WxErrorException the wx error exception
    */
   WxCpFileMove fileMove(@NonNull WxCpFileMoveRequest request) throws WxErrorException;
 
@@ -218,8 +217,8 @@ public interface WxCpOaWeDriveService {
    *
    * @param userId 操作者userid
    * @param fileId 文件fileid列表
-   * @return
-   * @throws WxErrorException
+   * @return wx cp base resp
+   * @throws WxErrorException the wx error exception
    */
   WxCpBaseResp fileDelete(@NonNull String userId, @NonNull List<String> fileId) throws WxErrorException;
 
@@ -231,8 +230,8 @@ public interface WxCpOaWeDriveService {
    * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedrive/file_acl_add?access_token=ACCESS_TOKEN
    *
    * @param request 新增指定人请求参数
-   * @return
-   * @throws WxErrorException
+   * @return wx cp base resp
+   * @throws WxErrorException the wx error exception
    */
   WxCpBaseResp fileAclAdd(@NonNull WxCpFileAclAddRequest request) throws WxErrorException;
 
@@ -244,8 +243,8 @@ public interface WxCpOaWeDriveService {
    * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedrive/file_acl_del?access_token=ACCESS_TOKEN
    *
    * @param request 请求参数
-   * @return
-   * @throws WxErrorException
+   * @return wx cp base resp
+   * @throws WxErrorException the wx error exception
    */
   WxCpBaseResp fileAclDel(@NonNull WxCpFileAclDelRequest request) throws WxErrorException;
 
@@ -256,12 +255,12 @@ public interface WxCpOaWeDriveService {
    * 请求方式：POST（HTTPS）
    * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedrive/file_setting?access_token=ACCESS_TOKEN
    *
-   * @param userId
-   * @param fileId
-   * @param authScope
-   * @param auth
-   * @return
-   * @throws WxErrorException
+   * @param userId    the user id
+   * @param fileId    the file id
+   * @param authScope the auth scope
+   * @param auth      the auth
+   * @return wx cp base resp
+   * @throws WxErrorException the wx error exception
    */
   WxCpBaseResp fileSetting(@NonNull String userId, @NonNull String fileId, @NonNull Integer authScope, Integer auth) throws WxErrorException;
 
@@ -272,10 +271,10 @@ public interface WxCpOaWeDriveService {
    * 请求方式：POST（HTTPS）
    * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedrive/file_share?access_token=ACCESS_TOKEN
    *
-   * @param userId
-   * @param fileId
-   * @return
-   * @throws WxErrorException
+   * @param userId the user id
+   * @param fileId the file id
+   * @return wx cp file share
+   * @throws WxErrorException the wx error exception
    */
   WxCpFileShare fileShare(@NonNull String userId, @NonNull String fileId) throws WxErrorException;
 
@@ -286,10 +285,10 @@ public interface WxCpOaWeDriveService {
    * 请求方式：POST（HTTPS）
    * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedrive/file_info?access_token=ACCESS_TOKEN
    *
-   * @param userId
-   * @param fileId
-   * @return
-   * @throws WxErrorException
+   * @param userId the user id
+   * @param fileId the file id
+   * @return wx cp file info
+   * @throws WxErrorException the wx error exception
    */
   WxCpFileInfo fileInfo(@NonNull String userId, @NonNull String fileId) throws WxErrorException;
 

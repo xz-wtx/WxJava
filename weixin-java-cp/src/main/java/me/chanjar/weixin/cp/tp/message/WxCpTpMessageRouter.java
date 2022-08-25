@@ -68,6 +68,8 @@ public class WxCpTpMessageRouter {
 
   /**
    * 构造方法.
+   *
+   * @param wxCpTpService the wx cp tp service
    */
   public WxCpTpMessageRouter(WxCpTpService wxCpTpService) {
     this.wxCpTpService = wxCpTpService;
@@ -81,6 +83,9 @@ public class WxCpTpMessageRouter {
 
   /**
    * 使用自定义的 {@link ExecutorService}.
+   *
+   * @param wxCpTpService   the wx cp tp service
+   * @param executorService the executor service
    */
   public WxCpTpMessageRouter(WxCpTpService wxCpTpService, ExecutorService executorService) {
     this.wxCpTpService = wxCpTpService;
@@ -99,6 +104,8 @@ public class WxCpTpMessageRouter {
 
   /**
    * 系统退出前，应该调用该方法，增加了超时时间检测
+   *
+   * @param second the second
    */
   public void shutDownExecutorService(Integer second) {
     this.executorService.shutdown();
@@ -119,6 +126,8 @@ public class WxCpTpMessageRouter {
    * 设置自定义的 {@link ExecutorService}
    * 如果不调用该方法，默认使用 Executors.newFixedThreadPool(100)
    * </pre>
+   *
+   * @param executorService the executor service
    */
   public void setExecutorService(ExecutorService executorService) {
     this.executorService = executorService;
@@ -129,6 +138,8 @@ public class WxCpTpMessageRouter {
    * 设置自定义的 {@link WxMessageDuplicateChecker}
    * 如果不调用该方法，默认使用 {@link WxMessageInMemoryDuplicateChecker}
    * </pre>
+   *
+   * @param messageDuplicateChecker the message duplicate checker
    */
   public void setMessageDuplicateChecker(WxMessageDuplicateChecker messageDuplicateChecker) {
     this.messageDuplicateChecker = messageDuplicateChecker;
@@ -139,6 +150,8 @@ public class WxCpTpMessageRouter {
    * 设置自定义的{@link WxSessionManager}
    * 如果不调用该方法，默认使用 {@link me.chanjar.weixin.common.session.StandardSessionManager}
    * </pre>
+   *
+   * @param sessionManager the session manager
    */
   public void setSessionManager(WxSessionManager sessionManager) {
     this.sessionManager = sessionManager;
@@ -149,17 +162,26 @@ public class WxCpTpMessageRouter {
    * 设置自定义的{@link WxErrorExceptionHandler}
    * 如果不调用该方法，默认使用 {@link LogExceptionHandler}
    * </pre>
+   *
+   * @param exceptionHandler the exception handler
    */
   public void setExceptionHandler(WxErrorExceptionHandler exceptionHandler) {
     this.exceptionHandler = exceptionHandler;
   }
 
+  /**
+   * Gets rules.
+   *
+   * @return the rules
+   */
   List<WxCpTpMessageRouterRule> getRules() {
     return this.rules;
   }
 
   /**
    * 开始一个新的Route规则.
+   *
+   * @return the wx cp tp message router rule
    */
   public WxCpTpMessageRouterRule rule() {
     return new WxCpTpMessageRouterRule(this);
@@ -167,6 +189,10 @@ public class WxCpTpMessageRouter {
 
   /**
    * 处理微信消息.
+   *
+   * @param wxMessage the wx message
+   * @param context   the context
+   * @return the wx cp xml out message
    */
   public WxCpXmlOutMessage route(final WxCpTpXmlMessage wxMessage, final Map<String, Object> context) {
     if (isMsgDuplicated(wxMessage)) {
@@ -196,7 +222,8 @@ public class WxCpTpMessageRouter {
       if (rule.isAsync()) {
         futures.add(
           this.executorService.submit(() -> {
-            rule.service(wxMessage, context, WxCpTpMessageRouter.this.wxCpTpService, WxCpTpMessageRouter.this.sessionManager, WxCpTpMessageRouter.this.exceptionHandler);
+            rule.service(wxMessage, context, WxCpTpMessageRouter.this.wxCpTpService,
+              WxCpTpMessageRouter.this.sessionManager, WxCpTpMessageRouter.this.exceptionHandler);
           })
         );
       } else {
@@ -229,6 +256,9 @@ public class WxCpTpMessageRouter {
 
   /**
    * 处理微信消息.
+   *
+   * @param wxMessage the wx message
+   * @return the wx cp xml out message
    */
   public WxCpXmlOutMessage route(final WxCpTpXmlMessage wxMessage) {
     return this.route(wxMessage, new HashMap<>(2));

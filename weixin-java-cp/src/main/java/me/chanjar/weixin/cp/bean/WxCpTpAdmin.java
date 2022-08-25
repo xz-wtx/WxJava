@@ -23,6 +23,9 @@ public class WxCpTpAdmin extends WxCpBaseResp {
   @SerializedName("admin")
   private List<Admin> admin;
 
+  /**
+   * The type Admin.
+   */
   @Getter
   @Setter
   public static class Admin extends WxCpBaseResp {
@@ -30,7 +33,7 @@ public class WxCpTpAdmin extends WxCpBaseResp {
 
     @SerializedName("userid")
     private String userId;
-    
+
     @SerializedName("open_userid")
     private String openUserId;
 
@@ -42,6 +45,12 @@ public class WxCpTpAdmin extends WxCpBaseResp {
     }
   }
 
+  /**
+   * From json wx cp tp admin.
+   *
+   * @param json the json
+   * @return the wx cp tp admin
+   */
   public static WxCpTpAdmin fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpTpAdmin.class);
   }

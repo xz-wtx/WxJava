@@ -21,6 +21,9 @@ public class WxCpFileInfo extends WxCpBaseResp implements Serializable {
   @SerializedName("file_info")
   private FileInfo fileInfo;
 
+  /**
+   * The type File info.
+   */
   @Getter
   @Setter
   public static class FileInfo implements Serializable {
@@ -68,16 +71,33 @@ public class WxCpFileInfo extends WxCpBaseResp implements Serializable {
     @SerializedName("url")
     private String url;
 
+    /**
+     * From json file info.
+     *
+     * @param json the json
+     * @return the file info
+     */
     public static FileInfo fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, FileInfo.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * From json wx cp file info.
+   *
+   * @param json the json
+   * @return the wx cp file info
+   */
   public static WxCpFileInfo fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpFileInfo.class);
   }

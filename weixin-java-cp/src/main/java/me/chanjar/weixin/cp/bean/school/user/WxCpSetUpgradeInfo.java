@@ -19,6 +19,12 @@ public class WxCpSetUpgradeInfo extends WxCpBaseResp implements Serializable {
   @SerializedName("next_upgrade_time")
   private Long nextUpgradeTime;
 
+  /**
+   * From json wx cp set upgrade info.
+   *
+   * @param json the json
+   * @return the wx cp set upgrade info
+   */
   public static WxCpSetUpgradeInfo fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpSetUpgradeInfo.class);
   }

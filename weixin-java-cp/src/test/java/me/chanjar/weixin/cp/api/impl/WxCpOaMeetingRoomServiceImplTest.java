@@ -16,16 +16,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * 单元测试.
  *
- * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * created on  2020-09-20
+ * @author <a href="https://github.com/binarywang">Binary Wang</a> created on  2020-09-20
  */
-
 @Test
 @Guice(modules = ApiTestModule.class)
 public class WxCpOaMeetingRoomServiceImplTest {
+  /**
+   * The Wx service.
+   */
   @Inject
   protected WxCpService wxService;
 
+  /**
+   * Test add.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testAdd() throws WxErrorException {
     this.wxService.getOaMeetingRoomService().addMeetingRoom(WxCpOaMeetingRoom.builder()
@@ -40,6 +46,11 @@ public class WxCpOaMeetingRoomServiceImplTest {
 
   }
 
+  /**
+   * Test update.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testUpdate() throws WxErrorException {
     this.wxService.getOaMeetingRoomService().editMeetingRoom(WxCpOaMeetingRoom.builder()
@@ -53,9 +64,15 @@ public class WxCpOaMeetingRoomServiceImplTest {
       .build());
   }
 
+  /**
+   * Test get.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testGet() throws WxErrorException {
-    final List<WxCpOaMeetingRoom> meetingRooms = this.wxService.getOaMeetingRoomService().listMeetingRoom(WxCpOaMeetingRoom.builder()
+    final List<WxCpOaMeetingRoom> meetingRooms =
+      this.wxService.getOaMeetingRoomService().listMeetingRoom(WxCpOaMeetingRoom.builder()
       .building("腾讯大厦")
       .city("深圳")
       .equipment(Arrays.asList(1, 2))
@@ -63,6 +80,11 @@ public class WxCpOaMeetingRoomServiceImplTest {
     assertThat(meetingRooms).isNotEmpty();
   }
 
+  /**
+   * Test delete.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testDelete() throws WxErrorException {
     Integer calId = 1;

@@ -22,6 +22,12 @@ public class WxCpGetHealthReportStat extends WxCpBaseResp implements Serializabl
   @SerializedName("uv")
   private Integer uv;
 
+  /**
+   * From json wx cp get health report stat.
+   *
+   * @param json the json
+   * @return the wx cp get health report stat
+   */
   public static WxCpGetHealthReportStat fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpGetHealthReportStat.class);
   }

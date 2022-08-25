@@ -2,9 +2,15 @@ package me.chanjar.weixin.cp.constant;
 
 import lombok.experimental.UtilityClass;
 
+/**
+ * The type Wx cp tp consts.
+ */
 public class WxCpTpConsts {
 
 
+  /**
+   * The type Info type.
+   */
   @UtilityClass
   public static class InfoType {
     /**

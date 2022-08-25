@@ -12,8 +12,8 @@ import java.util.List;
 /**
  * 获取订单中的帐号列表
  * 文档地址：https://developer.work.weixin.qq.com/document/path/95649
- * @author Totoro
- * created on  2022-6-27 14:14:40
+ *
+ * @author Totoro  created on  2022-6-27 14:14:40
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -30,10 +30,15 @@ public class WxCpTpLicenseOrderAccountListResp extends WxCpBaseResp {
   private List<WxCpTpLicenseAccount> accountList;
 
 
+  /**
+   * From json wx cp tp license order account list resp.
+   *
+   * @param json the json
+   * @return the wx cp tp license order account list resp
+   */
   public static WxCpTpLicenseOrderAccountListResp fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpTpLicenseOrderAccountListResp.class);
   }
-
 
 
 }

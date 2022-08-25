@@ -54,6 +54,9 @@ public class WxCpOpenApprovalData implements Serializable {
   @SerializedName("ApproverStep")
   private Integer approverStep;
 
+  /**
+   * The type Approval nodes.
+   */
   @Getter
   @Setter
   public static class ApprovalNodes implements Serializable {
@@ -64,6 +67,9 @@ public class WxCpOpenApprovalData implements Serializable {
 
   }
 
+  /**
+   * The type Approval node.
+   */
   @Getter
   @Setter
   public static class ApprovalNode implements Serializable {
@@ -83,6 +89,9 @@ public class WxCpOpenApprovalData implements Serializable {
 
   }
 
+  /**
+   * The type Notify nodes.
+   */
   @Getter
   @Setter
   public static class NotifyNodes implements Serializable {
@@ -93,6 +102,9 @@ public class WxCpOpenApprovalData implements Serializable {
 
   }
 
+  /**
+   * The type Notify node.
+   */
   @Getter
   @Setter
   public static class NotifyNode implements Serializable {
@@ -112,6 +124,9 @@ public class WxCpOpenApprovalData implements Serializable {
 
   }
 
+  /**
+   * The type Items.
+   */
   @Getter
   @Setter
   public static class Items implements Serializable {
@@ -122,6 +137,9 @@ public class WxCpOpenApprovalData implements Serializable {
 
   }
 
+  /**
+   * The type Item.
+   */
   @Getter
   @Setter
   public static class Item implements Serializable {
@@ -150,10 +168,21 @@ public class WxCpOpenApprovalData implements Serializable {
 
   }
 
+  /**
+   * From json wx cp open approval data.
+   *
+   * @param json the json
+   * @return the wx cp open approval data
+   */
   public static WxCpOpenApprovalData fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpOpenApprovalData.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

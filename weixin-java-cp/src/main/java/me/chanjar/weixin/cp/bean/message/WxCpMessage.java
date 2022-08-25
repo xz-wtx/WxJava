@@ -219,6 +219,8 @@ public class WxCpMessage implements Serializable {
 
   /**
    * 获得文本消息builder.
+   *
+   * @return the text builder
    */
   public static TextBuilder TEXT() {
     return new TextBuilder();
@@ -226,6 +228,8 @@ public class WxCpMessage implements Serializable {
 
   /**
    * 获得文本卡片消息builder.
+   *
+   * @return the text card builder
    */
   public static TextCardBuilder TEXTCARD() {
     return new TextCardBuilder();
@@ -233,6 +237,8 @@ public class WxCpMessage implements Serializable {
 
   /**
    * 获得图片消息builder.
+   *
+   * @return the image builder
    */
   public static ImageBuilder IMAGE() {
     return new ImageBuilder();
@@ -240,6 +246,8 @@ public class WxCpMessage implements Serializable {
 
   /**
    * 获得语音消息builder.
+   *
+   * @return the voice builder
    */
   public static VoiceBuilder VOICE() {
     return new VoiceBuilder();
@@ -247,6 +255,8 @@ public class WxCpMessage implements Serializable {
 
   /**
    * 获得视频消息builder.
+   *
+   * @return the video builder
    */
   public static VideoBuilder VIDEO() {
     return new VideoBuilder();
@@ -254,6 +264,8 @@ public class WxCpMessage implements Serializable {
 
   /**
    * 获得图文消息builder.
+   *
+   * @return the news builder
    */
   public static NewsBuilder NEWS() {
     return new NewsBuilder();
@@ -261,6 +273,8 @@ public class WxCpMessage implements Serializable {
 
   /**
    * 获得mpnews图文消息builder.
+   *
+   * @return the mpnews builder
    */
   public static MpnewsBuilder MPNEWS() {
     return new MpnewsBuilder();
@@ -268,6 +282,8 @@ public class WxCpMessage implements Serializable {
 
   /**
    * 获得markdown消息builder.
+   *
+   * @return the markdown msg builder
    */
   public static MarkdownMsgBuilder MARKDOWN() {
     return new MarkdownMsgBuilder();
@@ -275,6 +291,8 @@ public class WxCpMessage implements Serializable {
 
   /**
    * 获得文件消息builder.
+   *
+   * @return the file builder
    */
   public static FileBuilder FILE() {
     return new FileBuilder();
@@ -282,6 +300,8 @@ public class WxCpMessage implements Serializable {
 
   /**
    * 获得任务卡片消息builder.
+   *
+   * @return the task card builder
    */
   public static TaskCardBuilder TASKCARD() {
     return new TaskCardBuilder();
@@ -289,6 +309,8 @@ public class WxCpMessage implements Serializable {
 
   /**
    * 获得任务卡片消息builder.
+   *
+   * @return the template card builder
    */
   public static TemplateCardBuilder TEMPLATECARD() {
     return new TemplateCardBuilder();
@@ -296,6 +318,8 @@ public class WxCpMessage implements Serializable {
 
   /**
    * 获得小程序通知消息builder.
+   *
+   * @return the mini program notice msg builder
    */
   public static MiniProgramNoticeMsgBuilder newMiniProgramNoticeBuilder() {
     return new MiniProgramNoticeMsgBuilder();
@@ -323,6 +347,11 @@ public class WxCpMessage implements Serializable {
     this.msgType = msgType;
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     JsonObject messageJson = new JsonObject();
     if (this.getAgentId() != null) {

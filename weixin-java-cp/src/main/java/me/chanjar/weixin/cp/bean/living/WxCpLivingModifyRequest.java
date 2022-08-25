@@ -13,8 +13,7 @@ import java.io.Serializable;
 /**
  * 创建预约直播请求.
  *
- * @author Wang_Wong
- * created on  2021-12-23
+ * @author Wang_Wong  created on  2021-12-23
  */
 @Data
 @Builder
@@ -45,10 +44,21 @@ public class WxCpLivingModifyRequest implements Serializable {
   @SerializedName("type")
   private Integer type;
 
+  /**
+   * From json wx cp living modify request.
+   *
+   * @param json the json
+   * @return the wx cp living modify request
+   */
   public static WxCpLivingModifyRequest fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpLivingModifyRequest.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

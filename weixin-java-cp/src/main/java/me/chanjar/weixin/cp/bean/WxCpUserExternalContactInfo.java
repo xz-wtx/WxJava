@@ -27,6 +27,9 @@ public class WxCpUserExternalContactInfo implements Serializable {
   @SerializedName("follow_user")
   private List<FollowedUser> followedUsers;
 
+  /**
+   * The type External contact.
+   */
   @Getter
   @Setter
   public static class ExternalContact implements Serializable {
@@ -63,6 +66,9 @@ public class WxCpUserExternalContactInfo implements Serializable {
     private ExternalProfile externalProfile;
   }
 
+  /**
+   * The type External profile.
+   */
   @Setter
   @Getter
   public static class ExternalProfile implements Serializable {
@@ -72,6 +78,9 @@ public class WxCpUserExternalContactInfo implements Serializable {
     private List<ExternalAttribute> externalAttrs;
   }
 
+  /**
+   * The type External attribute.
+   */
   @Data
   @Builder
   @NoArgsConstructor
@@ -79,6 +88,9 @@ public class WxCpUserExternalContactInfo implements Serializable {
   public static class ExternalAttribute implements Serializable {
     private static final long serialVersionUID = -5696099236344075582L;
 
+    /**
+     * The type Text.
+     */
     @Setter
     @Getter
     public static class Text implements Serializable {
@@ -87,6 +99,9 @@ public class WxCpUserExternalContactInfo implements Serializable {
       private String value;
     }
 
+    /**
+     * The type Web.
+     */
     @Setter
     @Getter
     public static class Web implements Serializable {
@@ -96,6 +111,9 @@ public class WxCpUserExternalContactInfo implements Serializable {
       private String url;
     }
 
+    /**
+     * The type Mini program.
+     */
     @Setter
     @Getter
     public static class MiniProgram implements Serializable {
@@ -119,6 +137,9 @@ public class WxCpUserExternalContactInfo implements Serializable {
     private MiniProgram miniProgram;
   }
 
+  /**
+   * The type Followed user.
+   */
   @Setter
   @Getter
   public static class FollowedUser implements Serializable {
@@ -143,10 +164,19 @@ public class WxCpUserExternalContactInfo implements Serializable {
 
   }
 
+  /**
+   * From json wx cp user external contact info.
+   *
+   * @param json the json
+   * @return the wx cp user external contact info
+   */
   public static WxCpUserExternalContactInfo fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpUserExternalContactInfo.class);
   }
 
+  /**
+   * The type Tag.
+   */
   @Setter
   @Getter
   public static class Tag implements Serializable {

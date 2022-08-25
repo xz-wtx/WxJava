@@ -6,13 +6,7 @@ import me.chanjar.weixin.common.bean.result.WxMediaUploadResult;
 import me.chanjar.weixin.cp.api.ApiTestModule;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.WxCpBaseResp;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountAdd;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountAddResp;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountDel;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountLink;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountLinkResp;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountListResp;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountUpd;
+import me.chanjar.weixin.cp.bean.kf.*;
 import org.testng.annotations.Guice;
 import org.testng.annotations.Test;
 
@@ -22,8 +16,7 @@ import java.io.InputStream;
  * WxCpKfServiceImpl-测试类
  * 需要用到专门的 secret https://kf.weixin.qq.com/api/doc/path/93304#secret
  *
- * @author Fu
- * created on  2022/1/19 20:12
+ * @author Fu  created on  2022/1/19 20:12
  */
 @Guice(modules = ApiTestModule.class)
 public class WxCpKfServiceImplTest {
@@ -33,6 +26,11 @@ public class WxCpKfServiceImplTest {
 
   private static String kfid = "wkPzhXVAAAJD9oR75LrO1DmURSOUFBIg";
 
+  /**
+   * Test account add.
+   *
+   * @throws Exception the exception
+   */
   @Test(priority = 1)
   public void testAccountAdd() throws Exception {
     try (InputStream in = ClassLoader.getSystemResourceAsStream("mm.jpeg")) {
@@ -47,6 +45,11 @@ public class WxCpKfServiceImplTest {
     }
   }
 
+  /**
+   * Test account upd.
+   *
+   * @throws Exception the exception
+   */
   @Test(priority = 2)
   public void testAccountUpd() throws Exception {
     WxCpKfAccountUpd upd = new WxCpKfAccountUpd();
@@ -56,12 +59,22 @@ public class WxCpKfServiceImplTest {
     System.out.println(resp);
   }
 
+  /**
+   * Test account list.
+   *
+   * @throws Exception the exception
+   */
   @Test(priority = 3)
   public void testAccountList() throws Exception {
-    WxCpKfAccountListResp resp = this.wxService.getKfService().listAccount(0,10);
+    WxCpKfAccountListResp resp = this.wxService.getKfService().listAccount(0, 10);
     System.out.println(resp);
   }
 
+  /**
+   * Test account link.
+   *
+   * @throws Exception the exception
+   */
   @Test(priority = 4)
   public void testAccountLink() throws Exception {
     WxCpKfAccountLink link = new WxCpKfAccountLink();
@@ -71,6 +84,11 @@ public class WxCpKfServiceImplTest {
     System.out.println(resp);
   }
 
+  /**
+   * Test account del.
+   *
+   * @throws Exception the exception
+   */
   @Test(priority = 5)
   public void testAccountDel() throws Exception {
     WxCpKfAccountDel del = new WxCpKfAccountDel();

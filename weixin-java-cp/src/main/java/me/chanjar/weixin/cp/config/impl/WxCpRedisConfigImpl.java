@@ -104,7 +104,8 @@ public class WxCpRedisConfigImpl implements WxCpConfigStorage {
    * @param password   the password
    * @param database   the database
    */
-  public WxCpRedisConfigImpl(JedisPoolConfig poolConfig, String host, int port, int timeout, String password, int database) {
+  public WxCpRedisConfigImpl(JedisPoolConfig poolConfig, String host, int port, int timeout, String password,
+                             int database) {
     jedisPool = new JedisPool(poolConfig, host, port, timeout, password, database);
   }
 

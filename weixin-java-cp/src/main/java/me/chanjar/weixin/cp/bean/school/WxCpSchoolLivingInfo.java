@@ -22,6 +22,9 @@ public class WxCpSchoolLivingInfo extends WxCpBaseResp implements Serializable {
   @SerializedName("living_info")
   private LivingInfo livingInfo;
 
+  /**
+   * The type Living info.
+   */
   @Getter
   @Setter
   public static class LivingInfo implements Serializable {
@@ -53,16 +56,30 @@ public class WxCpSchoolLivingInfo extends WxCpBaseResp implements Serializable {
     @SerializedName("push_stream_url")
     private String pushStreamUrl;
 
+    /**
+     * From json living info.
+     *
+     * @param json the json
+     * @return the living info
+     */
     public static LivingInfo fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, LivingInfo.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * The type Living range.
+   */
   @Getter
   @Setter
   public static class LivingRange implements Serializable {
@@ -73,16 +90,33 @@ public class WxCpSchoolLivingInfo extends WxCpBaseResp implements Serializable {
     @SerializedName("group_names")
     private List<String> groupNames;
 
+    /**
+     * From json living range.
+     *
+     * @param json the json
+     * @return the living range
+     */
     public static LivingRange fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, LivingRange.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * From json wx cp school living info.
+   *
+   * @param json the json
+   * @return the wx cp school living info
+   */
   public static WxCpSchoolLivingInfo fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpSchoolLivingInfo.class);
   }

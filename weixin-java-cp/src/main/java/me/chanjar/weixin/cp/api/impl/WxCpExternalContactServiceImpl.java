@@ -32,6 +32,8 @@ import java.util.UUID;
 import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.ExternalContact.*;
 
 /**
+ * The type Wx cp external contact service.
+ *
  * @author 曹祖鹏 & yuanqixun & Mr.Pan & Wang_Wong
  */
 @RequiredArgsConstructor
@@ -153,7 +155,8 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
   }
 
   @Override
-  public WxCpExternalUserIdList unionidToExternalUserid3rd(@NotNull String unionid, @NotNull String openid, String corpid) throws WxErrorException {
+  public WxCpExternalUserIdList unionidToExternalUserid3rd(@NotNull String unionid, @NotNull String openid,
+                                                           String corpid) throws WxErrorException {
     JsonObject json = new JsonObject();
     json.addProperty("unionid", unionid);
     json.addProperty("openid", openid);
@@ -277,7 +280,8 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
   }
 
   @Override
-  public WxCpUserTransferResultResp transferResult(@NotNull String handOverUserid, @NotNull String takeOverUserid, String cursor) throws WxErrorException {
+  public WxCpUserTransferResultResp transferResult(@NotNull String handOverUserid, @NotNull String takeOverUserid,
+                                                   String cursor) throws WxErrorException {
     JsonObject json = new JsonObject();
     json.addProperty("cursor", cursor);
     json.addProperty("handover_userid", handOverUserid);
@@ -296,7 +300,8 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
   }
 
   @Override
-  public WxCpUserTransferResultResp resignedTransferResult(@NotNull String handOverUserid, @NotNull String takeOverUserid, String cursor) throws WxErrorException {
+  public WxCpUserTransferResultResp resignedTransferResult(@NotNull String handOverUserid,
+                                                           @NotNull String takeOverUserid, String cursor) throws WxErrorException {
     JsonObject json = new JsonObject();
     json.addProperty("cursor", cursor);
     json.addProperty("handover_userid", handOverUserid);
@@ -307,7 +312,8 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
   }
 
   @Override
-  public WxCpUserExternalGroupChatList listGroupChat(Integer pageIndex, Integer pageSize, int status, String[] userIds, String[] partyIds) throws WxErrorException {
+  public WxCpUserExternalGroupChatList listGroupChat(Integer pageIndex, Integer pageSize, int status,
+                                                     String[] userIds, String[] partyIds) throws WxErrorException {
     JsonObject json = new JsonObject();
     json.addProperty("offset", pageIndex == null ? 0 : pageIndex);
     json.addProperty("limit", pageSize == null ? 100 : pageSize);
@@ -368,7 +374,8 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
   }
 
   @Override
-  public WxCpUserExternalUserBehaviorStatistic getUserBehaviorStatistic(Date startTime, Date endTime, String[] userIds, String[] partyIds) throws WxErrorException {
+  public WxCpUserExternalUserBehaviorStatistic getUserBehaviorStatistic(Date startTime, Date endTime,
+                                                                        String[] userIds, String[] partyIds) throws WxErrorException {
     JsonObject json = new JsonObject();
     json.addProperty("start_time", startTime.getTime() / 1000);
     json.addProperty("end_time", endTime.getTime() / 1000);
@@ -386,7 +393,9 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
   }
 
   @Override
-  public WxCpUserExternalGroupChatStatistic getGroupChatStatistic(Date startTime, Integer orderBy, Integer orderAsc, Integer pageIndex, Integer pageSize, String[] userIds, String[] partyIds) throws WxErrorException {
+  public WxCpUserExternalGroupChatStatistic getGroupChatStatistic(Date startTime, Integer orderBy, Integer orderAsc,
+                                                                  Integer pageIndex, Integer pageSize,
+                                                                  String[] userIds, String[] partyIds) throws WxErrorException {
     JsonObject json = new JsonObject();
     json.addProperty("day_begin_time", startTime.getTime() / 1000);
     json.addProperty("order_by", orderBy == null ? 1 : orderBy);
@@ -617,7 +626,8 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
    * @throws WxErrorException the wx error exception
    */
   @Override
-  public WxCpGroupMsgListResult getGroupMsgListV2(String chatType, @NonNull Date startTime, @NonNull Date endTime, String creator, Integer filterType, Integer limit, String cursor) throws WxErrorException {
+  public WxCpGroupMsgListResult getGroupMsgListV2(String chatType, @NonNull Date startTime, @NonNull Date endTime,
+                                                  String creator, Integer filterType, Integer limit, String cursor) throws WxErrorException {
     JsonObject json = new JsonObject();
     json.addProperty("chat_type", chatType);
     json.addProperty("start_time", startTime.getTime() / 1000);
@@ -843,13 +853,15 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
   @Override
   public WxCpInterceptRuleResultResp addInterceptRule(WxCpInterceptRuleResp ruleResp) throws WxErrorException {
     return WxCpInterceptRuleResultResp
-      .fromJson(this.mainService.post(this.mainService.getWxCpConfigStorage().getApiUrl(ADD_INTERCEPT_RULE), ruleResp.toJson()));
+      .fromJson(this.mainService.post(this.mainService.getWxCpConfigStorage().getApiUrl(ADD_INTERCEPT_RULE),
+        ruleResp.toJson()));
   }
 
   @Override
   public WxCpInterceptRuleResultResp updateInterceptRule(WxCpInterceptRuleResp ruleResp) throws WxErrorException {
     return WxCpInterceptRuleResultResp
-      .fromJson(this.mainService.post(this.mainService.getWxCpConfigStorage().getApiUrl(UPDATE_INTERCEPT_RULE), ruleResp.toJson()));
+      .fromJson(this.mainService.post(this.mainService.getWxCpConfigStorage().getApiUrl(UPDATE_INTERCEPT_RULE),
+        ruleResp.toJson()));
   }
 
   @Override
@@ -857,7 +869,8 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("rule_id", rule_id);
     return WxCpBaseResp
-      .fromJson(this.mainService.post(this.mainService.getWxCpConfigStorage().getApiUrl(DEL_INTERCEPT_RULE), jsonObject));
+      .fromJson(this.mainService.post(this.mainService.getWxCpConfigStorage().getApiUrl(DEL_INTERCEPT_RULE),
+        jsonObject));
   }
 
   @Override
@@ -908,7 +921,7 @@ public class WxCpExternalContactServiceImpl implements WxCpExternalContactServic
     JsonObject json = new JsonObject();
     json.addProperty("config_id", configId);
     final String url = this.mainService.getWxCpConfigStorage().getApiUrl(GET_JOIN_WAY);
-    String responseContent = this.mainService.post(url,json);
+    String responseContent = this.mainService.post(url, json);
 
     return WxCpGroupJoinWayInfo.fromJson(responseContent);
   }

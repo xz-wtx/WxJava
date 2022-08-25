@@ -4,8 +4,14 @@ import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * The type Wx cp group msg result test.
+ */
 public class WxCpGroupMsgResultTest {
 
+  /**
+   * Test to json.
+   */
   @Test
   public void testToJson() {
     /*

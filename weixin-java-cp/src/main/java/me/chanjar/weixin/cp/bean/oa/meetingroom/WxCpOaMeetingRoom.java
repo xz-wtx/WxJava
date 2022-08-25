@@ -14,9 +14,10 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * The type Wx cp oa meeting room.
+ *
  * @author fcat
- * @version 1.0
- * Create by 2022/8/12 22:46
+ * @version 1.0  Create by 2022/8/12 22:46
  */
 @Data
 @Builder
@@ -76,6 +77,9 @@ public class WxCpOaMeetingRoom implements Serializable, ToJson {
     return WxCpGsonBuilder.create().toJson(this);
   }
 
+  /**
+   * The type Coordinate.
+   */
   @Data
   @AllArgsConstructor
   public static class Coordinate implements Serializable {

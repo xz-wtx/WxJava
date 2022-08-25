@@ -8,8 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
- * @author Totoro
- * created on  2022-6-27 15:35:30
+ * The type Wx cp tp license invalid account.
+ *
+ * @author Totoro  created on  2022-6-27 15:35:30
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

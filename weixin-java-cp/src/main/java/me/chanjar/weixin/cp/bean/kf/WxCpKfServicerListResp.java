@@ -1,16 +1,18 @@
 package me.chanjar.weixin.cp.bean.kf;
 
 import com.google.gson.annotations.SerializedName;
-import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import me.chanjar.weixin.cp.bean.WxCpBaseResp;
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
+import java.util.List;
+
 /**
- * @author leiin
- * created on  2022/1/26 4:29 下午
+ * The type Wx cp kf servicer list resp.
+ *
+ * @author leiin  created on  2022/1/26 4:29 下午
  */
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
@@ -21,6 +23,9 @@ public class WxCpKfServicerListResp extends WxCpBaseResp {
   @SerializedName("servicer_list")
   private List<WxCpKfServicerStatus> servicerList;
 
+  /**
+   * The type Wx cp kf servicer status.
+   */
   @NoArgsConstructor
   @Data
   public static class WxCpKfServicerStatus {
@@ -29,6 +34,12 @@ public class WxCpKfServicerListResp extends WxCpBaseResp {
     private Integer status;
   }
 
+  /**
+   * From json wx cp kf servicer list resp.
+   *
+   * @param json the json
+   * @return the wx cp kf servicer list resp
+   */
   public static WxCpKfServicerListResp fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpKfServicerListResp.class);
   }

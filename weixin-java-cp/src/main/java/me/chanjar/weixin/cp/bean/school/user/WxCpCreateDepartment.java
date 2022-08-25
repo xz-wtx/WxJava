@@ -19,6 +19,12 @@ public class WxCpCreateDepartment extends WxCpBaseResp implements Serializable {
   @SerializedName("id")
   private Integer id;
 
+  /**
+   * From json wx cp create department.
+   *
+   * @param json the json
+   * @return the wx cp create department
+   */
   public static WxCpCreateDepartment fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpCreateDepartment.class);
   }

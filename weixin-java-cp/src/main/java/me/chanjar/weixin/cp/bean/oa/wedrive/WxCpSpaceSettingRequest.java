@@ -42,10 +42,21 @@ public class WxCpSpaceSettingRequest implements Serializable {
   @SerializedName("share_url_no_approve_default_auth")
   private Integer shareUrlNoApproveDefaultAuth;
 
+  /**
+   * From json wx cp space setting request.
+   *
+   * @param json the json
+   * @return the wx cp space setting request
+   */
   public static WxCpSpaceSettingRequest fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpSpaceSettingRequest.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

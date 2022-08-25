@@ -10,8 +10,8 @@ import lombok.experimental.SuperBuilder;
 
 /**
  * 订单账号信息
- * @author Totoro
- * created on  2022/6/27 14:04
+ *
+ * @author Totoro  created on  2022/6/27 14:04
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -26,7 +26,6 @@ public class WxCpTpLicenseAccount extends WxCpTpLicenseBaseAccount {
    */
   @SerializedName("active_code")
   private String activeCode;
-
 
 
 }

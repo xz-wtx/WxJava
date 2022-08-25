@@ -8,9 +8,11 @@ import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 import java.io.Serializable;
 
 /**
+ * The type Wx cp tp contact search.
+ *
  * @author uianz
  * @description
- * @since 2020/12/23 下午 02:43
+ * @since 2020 /12/23 下午 02:43
  */
 @Data
 @Accessors(chain = true)
@@ -59,6 +61,11 @@ public class WxCpTpContactSearch implements Serializable {
   @SerializedName("full_match_field")
   private Integer fullMatchField;
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

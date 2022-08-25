@@ -12,8 +12,7 @@ import java.util.List;
 /**
  * 企业发表内容到客户的朋友圈 获取企业全部的发表列表
  *
- * @author leiin
- * created on  2021-10-29
+ * @author leiin  created on  2021-10-29
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -25,6 +24,12 @@ public class WxCpGetMomentList extends WxCpBaseResp {
   @SerializedName("moment_list")
   private List<MomentInfo> momentList;
 
+  /**
+   * From json wx cp get moment list.
+   *
+   * @param json the json
+   * @return the wx cp get moment list
+   */
   public static WxCpGetMomentList fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpGetMomentList.class);
   }

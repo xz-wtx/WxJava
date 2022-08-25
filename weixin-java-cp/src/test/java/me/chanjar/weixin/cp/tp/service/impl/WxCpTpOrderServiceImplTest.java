@@ -35,6 +35,9 @@ public class WxCpTpOrderServiceImplTest {
 
   private WxCpTpOrderService wxCpTpOrderService;
 
+  /**
+   * Sets up.
+   */
   @BeforeClass
   public void setUp() {
     MockitoAnnotations.initMocks(this);
@@ -46,6 +49,8 @@ public class WxCpTpOrderServiceImplTest {
 
   /**
    * 获取订单详情
+   *
+   * @throws WxErrorException the wx error exception
    */
   @Test
   public void testGetOrder() throws WxErrorException {
@@ -95,6 +100,8 @@ public class WxCpTpOrderServiceImplTest {
 
   /**
    * 获取订单列表
+   *
+   * @throws WxErrorException the wx error exception
    */
   @Test
   public void testGetOrderList() throws WxErrorException {

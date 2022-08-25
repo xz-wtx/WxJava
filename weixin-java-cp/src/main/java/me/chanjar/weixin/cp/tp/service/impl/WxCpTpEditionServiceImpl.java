@@ -12,8 +12,7 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Tp.PROLONG_TRY;
 /**
  * 应用版本付费版本相关接口实现
  *
- * @author leigouqing
- * created on  2022年4月24日
+ * @author leigouqing  created on  2022年4月24日
  */
 @RequiredArgsConstructor
 public class WxCpTpEditionServiceImpl implements WxCpTpEditionService {

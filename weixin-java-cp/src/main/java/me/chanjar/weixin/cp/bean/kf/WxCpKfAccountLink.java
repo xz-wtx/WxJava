@@ -9,8 +9,7 @@ import java.io.Serializable;
 /**
  * 获取客服帐号链接-请求参数
  *
- * @author Fu
- * created on  2022/1/19 19:18
+ * @author Fu  created on  2022/1/19 19:18
  */
 @NoArgsConstructor
 @Data

@@ -27,6 +27,11 @@ public class WxCpDepartmentServiceImplTest {
 
   private WxCpDepart depart;
 
+  /**
+   * Test create.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testCreate() throws Exception {
     WxCpDepart cpDepart = new WxCpDepart();
@@ -37,6 +42,11 @@ public class WxCpDepartmentServiceImplTest {
     System.out.println(departId);
   }
 
+  /**
+   * Depart ids object [ ] [ ].
+   *
+   * @return the object [ ] [ ]
+   */
   @DataProvider
   public Object[][] departIds() {
     return new Object[][]{
@@ -46,6 +56,12 @@ public class WxCpDepartmentServiceImplTest {
     };
   }
 
+  /**
+   * Test list.
+   *
+   * @param id the id
+   * @throws Exception the exception
+   */
   @Test(dataProvider = "departIds")
   public void testList(Long id) throws Exception {
     System.out.println("=================获取部门");
@@ -58,6 +74,11 @@ public class WxCpDepartmentServiceImplTest {
     }
   }
 
+  /**
+   * Test update.
+   *
+   * @throws Exception the exception
+   */
   @Test(dependsOnMethods = {"testList", "testCreate"})
   public void testUpdate() throws Exception {
     System.out.println("=================更新部门");
@@ -65,6 +86,11 @@ public class WxCpDepartmentServiceImplTest {
     this.wxCpService.getDepartmentService().update(this.depart);
   }
 
+  /**
+   * Test delete.
+   *
+   * @throws Exception the exception
+   */
   @Test(dependsOnMethods = "testUpdate")
   public void testDelete() throws Exception {
     System.out.println("=================删除部门");
@@ -76,8 +102,8 @@ public class WxCpDepartmentServiceImplTest {
    * 获取子部门ID列表
    * https://developer.work.weixin.qq.com/document/path/95350
    *
-   * @param id
-   * @throws WxErrorException
+   * @param id the id
+   * @throws WxErrorException the wx error exception
    */
   @Test(dataProvider = "departIds")
   public void testSimpleList(Long id) throws WxErrorException {
@@ -87,6 +113,12 @@ public class WxCpDepartmentServiceImplTest {
     departList.forEach(System.out::println);
   }
 
+  /**
+   * Test get.
+   *
+   * @param id the id
+   * @throws WxErrorException the wx error exception
+   */
   @Test(dataProvider = "departIds")
   public void testGet(Long id) throws WxErrorException {
     if (id == null) {

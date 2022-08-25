@@ -9,8 +9,7 @@ import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 /**
  * 应用版本付费订单详情
  *
- * @author leiguoqing
- * created on  2022年4月24日
+ * @author leiguoqing  created on  2022年4月24日
  */
 @Getter
 @Setter

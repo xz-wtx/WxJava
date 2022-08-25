@@ -69,10 +69,21 @@ public class WxCpLivingInfo implements Serializable {
   @SerializedName("subscribe_count")
   private Integer subscribeCount;
 
+  /**
+   * From json wx cp living info.
+   *
+   * @param json the json
+   * @return the wx cp living info
+   */
   public static WxCpLivingInfo fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpLivingInfo.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

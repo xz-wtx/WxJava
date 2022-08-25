@@ -14,8 +14,7 @@ import java.util.List;
  * 获取外部联系人详情
  * https://developer.work.weixin.qq.com/document/path/91670
  *
- * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
- * created on : 2022/6/27 9:10
+ * @author <a href="https://github.com/0katekate0">Wang_Wong</a> created on : 2022/6/27 9:10
  */
 @Data
 public class WxCpExternalContact extends WxCpBaseResp implements Serializable {
@@ -27,6 +26,9 @@ public class WxCpExternalContact extends WxCpBaseResp implements Serializable {
   @SerializedName("follow_user")
   private List<WxCpFollowUser> followedUsers;
 
+  /**
+   * The type Wx cp follow user.
+   */
   @Getter
   @Setter
   public static class WxCpFollowUser implements Serializable {
@@ -52,16 +54,30 @@ public class WxCpExternalContact extends WxCpBaseResp implements Serializable {
 
     private Tag[] tags;
 
+    /**
+     * From json wx cp follow user.
+     *
+     * @param json the json
+     * @return the wx cp follow user
+     */
     public static WxCpFollowUser fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, WxCpFollowUser.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * The type Tag.
+   */
   @Getter
   @Setter
   public static class Tag implements Serializable {
@@ -84,16 +100,30 @@ public class WxCpExternalContact extends WxCpBaseResp implements Serializable {
      */
     private int type;
 
+    /**
+     * From json tag.
+     *
+     * @param json the json
+     * @return the tag
+     */
     public static Tag fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, Tag.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * The type External contact.
+   */
   @Getter
   @Setter
   public static class ExternalContact implements Serializable {
@@ -135,16 +165,30 @@ public class WxCpExternalContact extends WxCpBaseResp implements Serializable {
     @SerializedName("external_profile")
     private ExternalProfile externalProfile;
 
+    /**
+     * From json external contact.
+     *
+     * @param json the json
+     * @return the external contact
+     */
     public static ExternalContact fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, ExternalContact.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * The type Subscriber info.
+   */
   @Getter
   @Setter
   public static class SubscriberInfo implements Serializable {
@@ -159,16 +203,30 @@ public class WxCpExternalContact extends WxCpBaseResp implements Serializable {
     @SerializedName("remark")
     private String remark;
 
+    /**
+     * From json subscriber info.
+     *
+     * @param json the json
+     * @return the subscriber info
+     */
     public static SubscriberInfo fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, SubscriberInfo.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * The type External profile.
+   */
   @Getter
   @Setter
   public static class ExternalProfile implements Serializable {
@@ -179,6 +237,9 @@ public class WxCpExternalContact extends WxCpBaseResp implements Serializable {
 
   }
 
+  /**
+   * The type External attribute.
+   */
   @Getter
   @Setter
   public static class ExternalAttribute implements Serializable {
@@ -195,16 +256,30 @@ public class WxCpExternalContact extends WxCpBaseResp implements Serializable {
     @SerializedName("miniprogram")
     private MiniProgram miniProgram;
 
+    /**
+     * From json external attribute.
+     *
+     * @param json the json
+     * @return the external attribute
+     */
     public static ExternalAttribute fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, ExternalAttribute.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * The type Text.
+   */
   @Getter
   @Setter
   public static class Text implements Serializable {
@@ -214,6 +289,9 @@ public class WxCpExternalContact extends WxCpBaseResp implements Serializable {
 
   }
 
+  /**
+   * The type Web.
+   */
   @Getter
   @Setter
   public static class Web implements Serializable {
@@ -225,6 +303,9 @@ public class WxCpExternalContact extends WxCpBaseResp implements Serializable {
 
   }
 
+  /**
+   * The type Mini program.
+   */
   @Getter
   @Setter
   public static class MiniProgram implements Serializable {
@@ -239,6 +320,12 @@ public class WxCpExternalContact extends WxCpBaseResp implements Serializable {
 
   }
 
+  /**
+   * From json wx cp external contact.
+   *
+   * @param json the json
+   * @return the wx cp external contact
+   */
   public static WxCpExternalContact fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpExternalContact.class);
   }

@@ -13,8 +13,7 @@ import java.util.List;
 /**
  * 企业发表内容到客户的朋友圈 获取客户朋友圈的互动数据
  *
- * @author leiin
- * created on  2021-10-29
+ * @author leiin  created on  2021-10-29
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -26,6 +25,9 @@ public class WxCpGetMomentComments extends WxCpBaseResp {
   @SerializedName("like_list")
   private List<CommentLikeItem> likeList;
 
+  /**
+   * The type Comment like item.
+   */
   @Getter
   @Setter
   public static class CommentLikeItem {
@@ -37,6 +39,12 @@ public class WxCpGetMomentComments extends WxCpBaseResp {
     private Long createTime;
   }
 
+  /**
+   * From json wx cp get moment comments.
+   *
+   * @param json the json
+   * @return the wx cp get moment comments
+   */
   public static WxCpGetMomentComments fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpGetMomentComments.class);
   }

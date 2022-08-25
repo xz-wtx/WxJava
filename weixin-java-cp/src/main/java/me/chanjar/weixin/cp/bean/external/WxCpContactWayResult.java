@@ -22,6 +22,12 @@ public class WxCpContactWayResult extends WxCpBaseResp {
   @SerializedName("qr_code")
   private String qrCode;
 
+  /**
+   * From json wx cp contact way result.
+   *
+   * @param json the json
+   * @return the wx cp contact way result
+   */
   public static WxCpContactWayResult fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpContactWayResult.class);
   }

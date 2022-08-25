@@ -31,6 +31,9 @@ public class WxCpGetApprovalData extends WxCpBaseResp implements Serializable {
   @SerializedName("data")
   private List<ApprovalData> data;
 
+  /**
+   * The type Approval data.
+   */
   @Getter
   @Setter
   public static class ApprovalData implements Serializable {
@@ -74,6 +77,9 @@ public class WxCpGetApprovalData extends WxCpBaseResp implements Serializable {
 
   }
 
+  /**
+   * The type Expense.
+   */
   @Getter
   @Setter
   public static class Expense implements Serializable {
@@ -90,6 +96,9 @@ public class WxCpGetApprovalData extends WxCpBaseResp implements Serializable {
 
   }
 
+  /**
+   * The type Comm.
+   */
   @Getter
   @Setter
   public static class Comm implements Serializable {
@@ -100,6 +109,9 @@ public class WxCpGetApprovalData extends WxCpBaseResp implements Serializable {
 
   }
 
+  /**
+   * The type Item.
+   */
   @Getter
   @Setter
   public static class Item implements Serializable {
@@ -119,6 +131,12 @@ public class WxCpGetApprovalData extends WxCpBaseResp implements Serializable {
 
   }
 
+  /**
+   * From json wx cp get approval data.
+   *
+   * @param json the json
+   * @return the wx cp get approval data
+   */
   public static WxCpGetApprovalData fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpGetApprovalData.class);
   }

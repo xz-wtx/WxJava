@@ -3,16 +3,12 @@ package me.chanjar.weixin.cp.bean.kf;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import me.chanjar.weixin.cp.bean.kf.msg.WxCpKfLinkMsg;
-import me.chanjar.weixin.cp.bean.kf.msg.WxCpKfLocationMsg;
-import me.chanjar.weixin.cp.bean.kf.msg.WxCpKfMenuMsg;
-import me.chanjar.weixin.cp.bean.kf.msg.WxCpKfMiniProgramMsg;
-import me.chanjar.weixin.cp.bean.kf.msg.WxCpKfResourceMsg;
-import me.chanjar.weixin.cp.bean.kf.msg.WxCpKfTextMsg;
+import me.chanjar.weixin.cp.bean.kf.msg.*;
 
 /**
- * @author leiin
- * created on  2022/1/26 7:00 下午
+ * The type Wx cp kf msg send request.
+ *
+ * @author leiin  created on  2022/1/26 7:00 下午
  */
 @NoArgsConstructor
 @Data

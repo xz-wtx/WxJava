@@ -30,10 +30,21 @@ public class WxCpSpaceRenameRequest implements Serializable {
   @SerializedName("space_name")
   private String spaceName;
 
+  /**
+   * From json wx cp space rename request.
+   *
+   * @param json the json
+   * @return the wx cp space rename request
+   */
   public static WxCpSpaceRenameRequest fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpSpaceRenameRequest.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

@@ -47,10 +47,21 @@ public class WxCpFileMoveRequest implements Serializable {
   @SerializedName("fileid")
   private String[] fileId;
 
+  /**
+   * From json wx cp file move request.
+   *
+   * @param json the json
+   * @return the wx cp file move request
+   */
   public static WxCpFileMoveRequest fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpFileMoveRequest.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

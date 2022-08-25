@@ -11,8 +11,7 @@ import java.util.List;
 /**
  * 获取会话同意情况请求参数.
  *
- * @author Wang_Wong
- * created on  2022-01-21
+ * @author Wang_Wong  created on  2022-01-21
  */
 @Data
 @Builder
@@ -25,14 +24,28 @@ public class WxCpCheckAgreeRequest implements Serializable {
   @SerializedName("info")
   private List<Info> info;
 
+  /**
+   * From json wx cp check agree request.
+   *
+   * @param json the json
+   * @return the wx cp check agree request
+   */
   public static WxCpCheckAgreeRequest fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpCheckAgreeRequest.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }
 
+  /**
+   * The type Info.
+   */
   @Getter
   @Setter
   public static class Info implements Serializable {
@@ -44,10 +57,21 @@ public class WxCpCheckAgreeRequest implements Serializable {
     @SerializedName("exteranalopenid")
     private String exteranalOpenId;
 
+    /**
+     * From json info.
+     *
+     * @param json the json
+     * @return the info
+     */
     public static Info fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, Info.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }

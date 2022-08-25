@@ -21,6 +21,9 @@ public class WxCpFileRename extends WxCpBaseResp implements Serializable {
   @SerializedName("file")
   private File file;
 
+  /**
+   * The type File.
+   */
   @Getter
   @Setter
   public static class File implements Serializable {
@@ -68,16 +71,33 @@ public class WxCpFileRename extends WxCpBaseResp implements Serializable {
     @SerializedName("md5")
     private String md5;
 
+    /**
+     * From json file.
+     *
+     * @param json the json
+     * @return the file
+     */
     public static File fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, File.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * From json wx cp file rename.
+   *
+   * @param json the json
+   * @return the wx cp file rename
+   */
   public static WxCpFileRename fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpFileRename.class);
   }

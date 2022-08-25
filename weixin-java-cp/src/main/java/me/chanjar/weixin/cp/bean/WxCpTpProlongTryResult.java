@@ -7,8 +7,8 @@ import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
 /**
  * 应用市场延长试用期结果
- * @author leiguoqing
- * created on  2022年4月24日
+ *
+ * @author leiguoqing  created on  2022年4月24日
  */
 @Getter
 @Setter

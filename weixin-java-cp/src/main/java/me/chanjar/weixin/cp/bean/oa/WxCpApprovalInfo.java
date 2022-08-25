@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * The type Wx cp approval info.
+ *
  * @author element
  */
 @Data

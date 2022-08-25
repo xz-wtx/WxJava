@@ -11,8 +11,7 @@ import java.io.Serializable;
 /**
  * 入群欢迎语素材.
  *
- * @author <a href="https://github.com/wslongchen">Mr.Pan</a>
- * created on  2021-11-3
+ * @author <a href="https://github.com/wslongchen">Mr.Pan</a> created on  2021-11-3
  */
 @Data
 @Builder
@@ -46,6 +45,12 @@ public class WxCpGroupWelcomeTemplateResult extends WxCpBaseResp implements Seri
    */
   private Integer notify;
 
+  /**
+   * From json wx cp group welcome template result.
+   *
+   * @param json the json
+   * @return the wx cp group welcome template result
+   */
   public static WxCpGroupWelcomeTemplateResult fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpGroupWelcomeTemplateResult.class);
   }

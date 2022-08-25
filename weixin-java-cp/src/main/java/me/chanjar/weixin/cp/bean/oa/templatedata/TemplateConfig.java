@@ -15,7 +15,7 @@ import java.io.Serializable;
  * Table-明细；
  * Attendance-假勤组件（请假、外出、出差、加班）
  *
- * @author gyv12345@163.com
+ * @author gyv12345 @163.com
  */
 @Data
 public class TemplateConfig implements Serializable {

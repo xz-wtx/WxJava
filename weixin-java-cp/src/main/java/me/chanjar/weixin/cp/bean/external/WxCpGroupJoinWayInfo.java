@@ -11,18 +11,23 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- *客户群「加入群聊」对象
+ * 客户群「加入群聊」对象
+ *
  * @author Jc
  */
 @Data
 @NoArgsConstructor
-public class WxCpGroupJoinWayInfo  implements Serializable {
+public class WxCpGroupJoinWayInfo implements Serializable {
   private static final long serialVersionUID = 5621905029624794129L;
   @SerializedName("join_way")
   private JoinWay joinWay;
+
+  /**
+   * The type Join way.
+   */
   @Getter
   @Setter
-  public static  class JoinWay implements Serializable {
+  public static class JoinWay implements Serializable {
     private static final long serialVersionUID = 5621905029624794122L;
 
     /**
@@ -68,24 +73,47 @@ public class WxCpGroupJoinWayInfo  implements Serializable {
     @SerializedName("qr_code")
     private String qrCode;
     /**
-     企业自定义的state参数，用于区分不同的入群渠道。不超过30个UTF-8字符
-     如果有设置此参数，在调用获取客户群详情接口时会返回每个群成员对应的该参数值
+     * 企业自定义的state参数，用于区分不同的入群渠道。不超过30个UTF-8字符
+     * 如果有设置此参数，在调用获取客户群详情接口时会返回每个群成员对应的该参数值
      */
     @SerializedName("state")
     private String state;
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
+
+    /**
+     * From json wx cp group join way info . join way.
+     *
+     * @param json the json
+     * @return the wx cp group join way info . join way
+     */
     public static WxCpGroupJoinWayInfo.JoinWay fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, WxCpGroupJoinWayInfo.JoinWay.class);
     }
   }
 
+  /**
+   * From json wx cp group join way info.
+   *
+   * @param json the json
+   * @return the wx cp group join way info
+   */
   public static WxCpGroupJoinWayInfo fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpGroupJoinWayInfo.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

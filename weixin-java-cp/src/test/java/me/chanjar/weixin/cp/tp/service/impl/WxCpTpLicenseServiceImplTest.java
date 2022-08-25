@@ -24,8 +24,8 @@ import static org.testng.Assert.assertNotNull;
 
 /**
  * 许可证账号服务测试
- * @author Totoro
- * created on  2022/6/27 16:34
+ *
+ * @author Totoro  created on  2022/6/27 16:34
  */
 public class WxCpTpLicenseServiceImplTest {
 
@@ -36,6 +36,9 @@ public class WxCpTpLicenseServiceImplTest {
 
   private WxCpTpLicenseService wxCpTpLicenseService;
 
+  /**
+   * Sets up.
+   */
   @BeforeClass
   public void setUp() {
     MockitoAnnotations.initMocks(this);
@@ -45,6 +48,11 @@ public class WxCpTpLicenseServiceImplTest {
   }
 
 
+  /**
+   * Test crate new order.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testCrateNewOrder() throws WxErrorException {
     String orderId = "OASFNAISFASFA252462";
@@ -53,7 +61,8 @@ public class WxCpTpLicenseServiceImplTest {
       "\t\"errmsg\": \"ok\",\n" +
       "\t\"order_id\": \"OASFNAISFASFA252462\"\n" +
       "}";
-    String url = configStorage.getApiUrl(CREATE_NEW_ORDER) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
+    String url =
+      configStorage.getApiUrl(CREATE_NEW_ORDER) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
     when(wxCpTpService.post(eq(url), any(String.class))).thenReturn(result);
     WxCpTpLicenseNewOrderRequest orderRequest = WxCpTpLicenseNewOrderRequest.builder()
       .accountCount(WxCpTpLicenseAccountCount.builder().baseCount(5).externalContactCount(6).build())
@@ -67,6 +76,11 @@ public class WxCpTpLicenseServiceImplTest {
   }
 
 
+  /**
+   * Test create renew order job.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testCreateRenewOrderJob() throws WxErrorException {
     String jobId = "test123456";
@@ -89,7 +103,8 @@ public class WxCpTpLicenseServiceImplTest {
       "        }\n" +
       "    ]\n" +
       "}";
-    String url = configStorage.getApiUrl(CREATE_RENEW_ORDER_JOB) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
+    String url =
+      configStorage.getApiUrl(CREATE_RENEW_ORDER_JOB) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
     when(wxCpTpService.post(eq(url), any(String.class))).thenReturn(result);
     List<WxCpTpLicenseBaseAccount> accountList = new ArrayList<>();
     accountList.add(WxCpTpLicenseBaseAccount.builder().type(1).userid("userid1").build());
@@ -105,6 +120,11 @@ public class WxCpTpLicenseServiceImplTest {
     assertEquals(renewOrderJob.getInvalidAccountList().size(), accountList.size());
   }
 
+  /**
+   * Test submit renew order job.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testSubmitRenewOrderJob() throws WxErrorException {
     String orderId = "test5915231";
@@ -113,7 +133,8 @@ public class WxCpTpLicenseServiceImplTest {
       "\t\"errmsg\": \"ok\",\n" +
       "\t\"order_id\": \"test5915231\"\n" +
       "}";
-    String url = configStorage.getApiUrl(SUBMIT_ORDER_JOB) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
+    String url =
+      configStorage.getApiUrl(SUBMIT_ORDER_JOB) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
     when(wxCpTpService.post(eq(url), any(String.class))).thenReturn(result);
     WxCpTpLicenseRenewOrderRequest renewOrderRequest = WxCpTpLicenseRenewOrderRequest.builder()
       .jobId("test123456")
@@ -126,6 +147,11 @@ public class WxCpTpLicenseServiceImplTest {
     assertEquals(createOrderResp.getOrderId(), orderId);
   }
 
+  /**
+   * Test get order list.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testGetOrderList() throws WxErrorException {
     String nextCursor = "DSGAKAFA4524";
@@ -153,6 +179,12 @@ public class WxCpTpLicenseServiceImplTest {
     assertEquals(orderList.getOrderList().get(0).getOrderId(), orderId);
 
   }
+
+  /**
+   * Test get order.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testGetOrder() throws WxErrorException {
     String corpId = "ASFASF4254";
@@ -193,6 +225,11 @@ public class WxCpTpLicenseServiceImplTest {
   }
 
 
+  /**
+   * Test get order account.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testGetOrderAccount() throws WxErrorException {
     String orderId = "ASFASF4254";
@@ -216,7 +253,8 @@ public class WxCpTpLicenseServiceImplTest {
       "\t]\n" +
       "}";
 
-    String url = configStorage.getApiUrl(LIST_ORDER_ACCOUNT) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
+    String url =
+      configStorage.getApiUrl(LIST_ORDER_ACCOUNT) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
     when(wxCpTpService.post(eq(url), any(String.class))).thenReturn(result);
     WxCpTpLicenseOrderAccountListResp orderAccountList = wxCpTpLicenseService.getOrderAccountList(orderId, 10, null);
     assertNotNull(orderAccountList);
@@ -229,6 +267,11 @@ public class WxCpTpLicenseServiceImplTest {
   }
 
 
+  /**
+   * Test active account.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testActiveAccount() throws WxErrorException {
     String result = "{\n" +
@@ -236,12 +279,18 @@ public class WxCpTpLicenseServiceImplTest {
       "\t\"errmsg\": \"ok\"\n" +
       "}";
 
-    String url = configStorage.getApiUrl(ACTIVE_ACCOUNT) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
+    String url =
+      configStorage.getApiUrl(ACTIVE_ACCOUNT) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
     when(wxCpTpService.post(eq(url), any(String.class))).thenReturn(result);
     WxCpBaseResp wxCpBaseResp = wxCpTpLicenseService.activeCode("123456", "123456", "123456");
     assertNotNull(wxCpBaseResp);
   }
 
+  /**
+   * Test batch active account.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testBatchActiveAccount() throws WxErrorException {
     String result = "{\n" +
@@ -259,12 +308,14 @@ public class WxCpTpLicenseServiceImplTest {
       "\t\t\"errcode\":0\n" +
       "\t}]\n" +
       "}";
-    String url = configStorage.getApiUrl(BATCH_ACTIVE_ACCOUNT) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
+    String url =
+      configStorage.getApiUrl(BATCH_ACTIVE_ACCOUNT) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
     when(wxCpTpService.post(eq(url), any(String.class))).thenReturn(result);
     List<WxCpTpLicenseActiveAccount> accountList = new ArrayList<>();
     accountList.add(WxCpTpLicenseActiveAccount.builder().userid("SAGASGSD").activeCode("aASFINAJOFASF").build());
     accountList.add(WxCpTpLicenseActiveAccount.builder().userid("dsfafD").activeCode("ASDEGAFAd").build());
-    WxCpTpLicenseBatchActiveResultResp wxCpTpLicenseBatchActiveResultResp = wxCpTpLicenseService.batchActiveCode("123456", accountList);
+    WxCpTpLicenseBatchActiveResultResp wxCpTpLicenseBatchActiveResultResp = wxCpTpLicenseService.batchActiveCode(
+      "123456", accountList);
     assertNotNull(wxCpTpLicenseBatchActiveResultResp);
 
     assertEquals(wxCpTpLicenseBatchActiveResultResp.getActiveResults().size(), accountList.size());
@@ -273,6 +324,11 @@ public class WxCpTpLicenseServiceImplTest {
   }
 
 
+  /**
+   * Test get active info by code.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testGetActiveInfoByCode() throws WxErrorException {
     String activeCode = "asgasfasfa";
@@ -290,7 +346,8 @@ public class WxCpTpLicenseServiceImplTest {
       "\t}\n" +
       "}";
 
-    String url = configStorage.getApiUrl(GET_ACTIVE_INFO_BY_CODE) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
+    String url =
+      configStorage.getApiUrl(GET_ACTIVE_INFO_BY_CODE) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
     when(wxCpTpService.post(eq(url), any(String.class))).thenReturn(result);
     WxCpTpLicenseCodeInfoResp activeInfoByCode = wxCpTpLicenseService.getActiveInfoByCode("123456", "safasg");
     assertNotNull(activeInfoByCode);
@@ -301,6 +358,11 @@ public class WxCpTpLicenseServiceImplTest {
   }
 
 
+  /**
+   * Test get active info by user.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testGetActiveInfoByUser() throws WxErrorException {
     String activeCode = "asfaisfhiuaw";
@@ -328,7 +390,8 @@ public class WxCpTpLicenseServiceImplTest {
       "       ]\n" +
       "}";
 
-    String url = configStorage.getApiUrl(GET_ACTIVE_INFO_BY_USER) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
+    String url =
+      configStorage.getApiUrl(GET_ACTIVE_INFO_BY_USER) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
     when(wxCpTpService.post(eq(url), any(String.class))).thenReturn(result);
     WxCpTpLicenseActiveInfoByUserResp activeInfoByUser = wxCpTpLicenseService.getActiveInfoByUser("123456", userid);
     assertNotNull(activeInfoByUser);
@@ -338,6 +401,11 @@ public class WxCpTpLicenseServiceImplTest {
     assertEquals(activeInfoByUser.getActiveInfoList().get(0).getActiveCode(), activeCode);
   }
 
+  /**
+   * Test batch get active info by user.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testBatchGetActiveInfoByUser() throws WxErrorException {
     String activeCode = "asgasgasgas";
@@ -368,7 +436,8 @@ public class WxCpTpLicenseServiceImplTest {
       "}";
 
 
-    String url = configStorage.getApiUrl(BATCH_GET_ACTIVE_INFO_BY_CODE) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
+    String url =
+      configStorage.getApiUrl(BATCH_GET_ACTIVE_INFO_BY_CODE) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
     when(wxCpTpService.post(eq(url), any(String.class))).thenReturn(result);
     Set<String> codes = new HashSet<>();
     codes.add("asgasgasgas");
@@ -377,7 +446,7 @@ public class WxCpTpLicenseServiceImplTest {
     WxCpTpLicenseBatchCodeInfoResp codeInfoResp = wxCpTpLicenseService.batchGetActiveInfoByCode(codes, "asfasfas");
     assertNotNull(codeInfoResp);
 
-    assertEquals(codeInfoResp.getActiveCodeInfoList().size() , codes.size() - 1);
+    assertEquals(codeInfoResp.getActiveCodeInfoList().size(), codes.size() - 1);
 
     assertNotNull(codeInfoResp.getInvalidActiveCodeList());
 
@@ -385,6 +454,11 @@ public class WxCpTpLicenseServiceImplTest {
   }
 
 
+  /**
+   * Test get corp account list.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testGetCorpAccountList() throws WxErrorException {
     String nextCursor = "asfasdfas";
@@ -410,7 +484,8 @@ public class WxCpTpLicenseServiceImplTest {
       "\t]\n" +
       "}";
 
-    String url = configStorage.getApiUrl(LIST_ACTIVED_ACCOUNT) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
+    String url =
+      configStorage.getApiUrl(LIST_ACTIVED_ACCOUNT) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
     when(wxCpTpService.post(eq(url), any(String.class))).thenReturn(result);
     WxCpTpLicenseCorpAccountListResp accountList = wxCpTpLicenseService.getCorpAccountList("123456", 10, null);
     assertNotNull(accountList);
@@ -423,6 +498,11 @@ public class WxCpTpLicenseServiceImplTest {
   }
 
 
+  /**
+   * Test batch transfer license.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testBatchTransferLicense() throws WxErrorException {
     String handoverUserid = "dazdasfasf";
@@ -438,11 +518,13 @@ public class WxCpTpLicenseServiceImplTest {
       "\t}]\n" +
       "}";
 
-    String url = configStorage.getApiUrl(BATCH_TRANSFER_LICENSE) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
+    String url =
+      configStorage.getApiUrl(BATCH_TRANSFER_LICENSE) + "?provider_access_token=" + wxCpTpService.getWxCpProviderToken();
     when(wxCpTpService.post(eq(url), any(String.class))).thenReturn(result);
     List<WxCpTpLicenseTransfer> transferList = new ArrayList<>();
     transferList.add(WxCpTpLicenseTransfer.builder().handoverUserId(handoverUserid).takeoverUserId(takeoverUserid).build());
-    WxCpTpLicenseBatchTransferResp licenseBatchTransferResp = wxCpTpLicenseService.batchTransferLicense("123456", transferList);
+    WxCpTpLicenseBatchTransferResp licenseBatchTransferResp = wxCpTpLicenseService.batchTransferLicense("123456",
+      transferList);
     assertNotNull(licenseBatchTransferResp);
 
     assertNotNull(licenseBatchTransferResp.getTransferResult());
@@ -450,8 +532,6 @@ public class WxCpTpLicenseServiceImplTest {
     assertEquals(licenseBatchTransferResp.getTransferResult().size(), transferList.size());
 
   }
-
-
 
 
 }

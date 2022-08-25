@@ -34,13 +34,23 @@ import static org.testng.Assert.assertNotNull;
 public class WxCpUserServiceImplTest {
   @Inject
   private WxCpService wxCpService;
-  private String userId = "someone" + System.currentTimeMillis();
+  private final String userId = "someone" + System.currentTimeMillis();
 
+  /**
+   * Test authenticate.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testAuthenticate() throws Exception {
     this.wxCpService.getUserService().authenticate("abc");
   }
 
+  /**
+   * Test create.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testCreate() throws Exception {
     WxCpUser user = new WxCpUser();
@@ -56,6 +66,11 @@ public class WxCpUserServiceImplTest {
     this.wxCpService.getUserService().create(user);
   }
 
+  /**
+   * Test update.
+   *
+   * @throws Exception the exception
+   */
   @Test(dependsOnMethods = "testCreate")
   public void testUpdate() throws Exception {
     WxCpUser user = new WxCpUser();
@@ -65,17 +80,32 @@ public class WxCpUserServiceImplTest {
     this.wxCpService.getUserService().update(user);
   }
 
+  /**
+   * Test delete.
+   *
+   * @throws Exception the exception
+   */
   @Test(dependsOnMethods = {"testCreate", "testUpdate"})
   public void testDelete() throws Exception {
     this.wxCpService.getUserService().delete(userId);
   }
 
+  /**
+   * Test get by id.
+   *
+   * @throws Exception the exception
+   */
   @Test(dependsOnMethods = "testUpdate")
   public void testGetById() throws Exception {
     WxCpUser user = this.wxCpService.getUserService().getById(userId);
     assertNotNull(user);
   }
 
+  /**
+   * Test list by department.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testListByDepartment() throws Exception {
     List<WxCpUser> users = this.wxCpService.getUserService().listByDepartment(2L, true, 0);
@@ -85,6 +115,11 @@ public class WxCpUserServiceImplTest {
     }
   }
 
+  /**
+   * Test list simple by department.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testListSimpleByDepartment() throws Exception {
     List<WxCpUser> users = this.wxCpService.getUserService().listSimpleByDepartment(1L, true, 0);
@@ -94,6 +129,11 @@ public class WxCpUserServiceImplTest {
     }
   }
 
+  /**
+   * Test invite.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testInvite() throws Exception {
     WxCpInviteResult result = this.wxCpService.getUserService().invite(
@@ -101,6 +141,11 @@ public class WxCpUserServiceImplTest {
     System.out.println(result);
   }
 
+  /**
+   * Test user id 2 openid.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testUserId2Openid() throws Exception {
     Map<String, String> result = this.wxCpService.getUserService().userId2Openid(userId, null);
@@ -108,6 +153,11 @@ public class WxCpUserServiceImplTest {
     assertNotNull(result);
   }
 
+  /**
+   * Test openid 2 user id.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testOpenid2UserId() throws Exception {
     String result = this.wxCpService.getUserService().openid2UserId(userId);
@@ -116,6 +166,11 @@ public class WxCpUserServiceImplTest {
   }
 
 
+  /**
+   * Test get user id.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testGetUserId() throws WxErrorException {
     String result = this.wxCpService.getUserService().getUserId("xxx");
@@ -123,10 +178,18 @@ public class WxCpUserServiceImplTest {
     assertNotNull(result);
   }
 
+  /**
+   * Test get external contact.
+   */
   @Test
   public void testGetExternalContact() {
   }
 
+  /**
+   * Test get active stat.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testGetActiveStat() throws WxErrorException {
     Integer activeStat = this.wxCpService.getUserService().getActiveStat(new Date());
@@ -140,7 +203,7 @@ public class WxCpUserServiceImplTest {
    * <p>
    * https://developer.work.weixin.qq.com/document/40856
    *
-   * @throws WxErrorException
+   * @throws WxErrorException the wx error exception
    */
   @Test
   public void testGetUserListId() throws WxErrorException {

@@ -29,6 +29,9 @@ public class WxCpTpEditionServiceImplTest {
 
   private WxCpTpEditionService wxCpTpEditionService;
 
+  /**
+   * Sets up.
+   */
   @BeforeClass
   public void setUp() {
     MockitoAnnotations.initMocks(this);
@@ -40,6 +43,8 @@ public class WxCpTpEditionServiceImplTest {
 
   /**
    * 延长试用期
+   *
+   * @throws WxErrorException the wx error exception
    */
   @Test
   public void testProlongTry() throws WxErrorException {

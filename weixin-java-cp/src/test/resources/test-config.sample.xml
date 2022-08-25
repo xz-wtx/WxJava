@@ -23,6 +23,9 @@
     6JizEuHDTC2YljEbg/j+/AlpA/Ua5HQYnH5yD3DCK7rQyTvqE5gU+CfRbwTbLGre
     fk/WJK4iqizgZobNRyUCQGB7jR5b8K7NsX7SoV7v/PFOsoj4G2W5q7LSz4GaoXGl
     3F+dSlXPYHdTow3dzfgVDldEzgoThs5UWMTQvBUZch0=
-    -----END RSA PRIVATE KEY-----</msgAuditPriKey>
-  <msgAuditLibPath>/www/osfile/libcrypto-1_1-x64.dll,libssl-1_1-x64.dll,libcurl-x64.dll,WeWorkFinanceSdk.dll,libWeWorkFinanceSdk_Java.so</msgAuditLibPath>
+    -----END RSA PRIVATE KEY-----
+  </msgAuditPriKey>
+  <msgAuditLibPath>
+    /www/osfile/libcrypto-1_1-x64.dll,libssl-1_1-x64.dll,libcurl-x64.dll,WeWorkFinanceSdk.dll,libWeWorkFinanceSdk_Java.so
+  </msgAuditLibPath>
 </xml>

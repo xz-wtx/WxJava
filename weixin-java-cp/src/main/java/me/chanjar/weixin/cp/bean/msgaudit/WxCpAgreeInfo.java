@@ -27,6 +27,9 @@ public class WxCpAgreeInfo implements Serializable {
   @SerializedName("agreeinfo")
   private List<AgreeInfo> agreeInfo;
 
+  /**
+   * The type Agree info.
+   */
   @Getter
   @Setter
   public static class AgreeInfo implements Serializable {
@@ -44,20 +47,42 @@ public class WxCpAgreeInfo implements Serializable {
     @SerializedName("agree_status")
     private String agreeStatus;
 
+    /**
+     * From json agree info.
+     *
+     * @param json the json
+     * @return the agree info
+     */
     public static AgreeInfo fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, AgreeInfo.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * From json wx cp agree info.
+   *
+   * @param json the json
+   * @return the wx cp agree info
+   */
   public static WxCpAgreeInfo fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpAgreeInfo.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

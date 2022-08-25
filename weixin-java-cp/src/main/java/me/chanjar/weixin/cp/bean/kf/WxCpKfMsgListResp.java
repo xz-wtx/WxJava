@@ -1,24 +1,19 @@
 package me.chanjar.weixin.cp.bean.kf;
 
 import com.google.gson.annotations.SerializedName;
-import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import me.chanjar.weixin.cp.bean.WxCpBaseResp;
-import me.chanjar.weixin.cp.bean.kf.msg.WxCpKfBusinessCardMsg;
-import me.chanjar.weixin.cp.bean.kf.msg.WxCpKfEventMsg;
-import me.chanjar.weixin.cp.bean.kf.msg.WxCpKfLinkMsg;
-import me.chanjar.weixin.cp.bean.kf.msg.WxCpKfLocationMsg;
-import me.chanjar.weixin.cp.bean.kf.msg.WxCpKfMenuMsg;
-import me.chanjar.weixin.cp.bean.kf.msg.WxCpKfMiniProgramMsg;
-import me.chanjar.weixin.cp.bean.kf.msg.WxCpKfResourceMsg;
-import me.chanjar.weixin.cp.bean.kf.msg.WxCpKfTextMsg;
+import me.chanjar.weixin.cp.bean.kf.msg.*;
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
+import java.util.List;
+
 /**
- * @author leiin
- * created on  2022/1/26 5:24 下午
+ * The type Wx cp kf msg list resp.
+ *
+ * @author leiin  created on  2022/1/26 5:24 下午
  */
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
@@ -35,6 +30,9 @@ public class WxCpKfMsgListResp extends WxCpBaseResp {
   @SerializedName("msg_list")
   private List<WxCpKfMsgItem> msgList;
 
+  /**
+   * The type Wx cp kf msg item.
+   */
   @NoArgsConstructor
   @Data
   public static class WxCpKfMsgItem {
@@ -67,6 +65,12 @@ public class WxCpKfMsgListResp extends WxCpBaseResp {
     private WxCpKfEventMsg event;
   }
 
+  /**
+   * From json wx cp kf msg list resp.
+   *
+   * @param json the json
+   * @return the wx cp kf msg list resp
+   */
   public static WxCpKfMsgListResp fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpKfMsgListResp.class);
   }

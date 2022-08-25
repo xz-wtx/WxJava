@@ -15,6 +15,7 @@ import org.testng.collections.Lists;
 
 import java.text.ParseException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -29,12 +30,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Guice(modules = ApiTestModule.class)
 public class WxCpOaServiceImplTest {
 
+  /**
+   * The Wx service.
+   */
   @Inject
   protected WxCpService wxService;
 
+  /**
+   * The Gson.
+   */
   @Inject
   protected Gson gson;
 
+  /**
+   * Test get checkin data.
+   *
+   * @throws ParseException   the parse exception
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testGetCheckinData() throws ParseException, WxErrorException {
     Date startTime = DateFormatUtils.ISO_8601_EXTENDED_DATE_FORMAT.parse("2019-04-11");
@@ -50,6 +63,12 @@ public class WxCpOaServiceImplTest {
 
   }
 
+  /**
+   * Test get checkin day data.
+   *
+   * @throws ParseException   the parse exception
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testGetCheckinDayData() throws ParseException, WxErrorException {
     Date startTime = DateFormatUtils.ISO_8601_EXTENDED_DATE_FORMAT.parse("2021-06-30");
@@ -66,6 +85,12 @@ public class WxCpOaServiceImplTest {
 
   }
 
+  /**
+   * Test get checkin month data.
+   *
+   * @throws ParseException   the parse exception
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testGetCheckinMonthData() throws ParseException, WxErrorException {
     Date startTime = DateFormatUtils.ISO_8601_EXTENDED_DATE_FORMAT.parse("2021-07-01");
@@ -79,6 +104,12 @@ public class WxCpOaServiceImplTest {
     System.out.println(gson.toJson(results));
   }
 
+  /**
+   * Test get checkin schedule data.
+   *
+   * @throws ParseException   the parse exception
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testGetCheckinScheduleData() throws ParseException, WxErrorException {
     Date startTime = DateFormatUtils.ISO_8601_EXTENDED_DATE_FORMAT.parse("2021-07-01");
@@ -92,6 +123,11 @@ public class WxCpOaServiceImplTest {
     System.out.println(gson.toJson(results));
   }
 
+  /**
+   * Test set checkin schedule list.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testSetCheckinScheduleList() throws WxErrorException {
     WxCpSetCheckinSchedule wxCpSetCheckinSchedule = new WxCpSetCheckinSchedule();
@@ -101,10 +137,15 @@ public class WxCpOaServiceImplTest {
     item.setScheduleId(0);
     item.setDay(20);
     item.setUserid("12003648");
-    wxCpSetCheckinSchedule.setItems(Arrays.asList(item));
+    wxCpSetCheckinSchedule.setItems(Collections.singletonList(item));
     wxService.getOaService().setCheckinScheduleList(wxCpSetCheckinSchedule);
   }
 
+  /**
+   * Test get checkin option.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testGetCheckinOption() throws WxErrorException {
 
@@ -115,6 +156,11 @@ public class WxCpOaServiceImplTest {
     System.out.println(gson.toJson(results));
   }
 
+  /**
+   * Test get crop checkin option.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testGetCropCheckinOption() throws WxErrorException {
 
@@ -125,6 +171,12 @@ public class WxCpOaServiceImplTest {
     System.out.println(gson.toJson(results));
   }
 
+  /**
+   * Test get approval info.
+   *
+   * @throws WxErrorException the wx error exception
+   * @throws ParseException   the parse exception
+   */
   @Test
   public void testGetApprovalInfo() throws WxErrorException, ParseException {
     Date startTime = DateFormatUtils.ISO_8601_EXTENDED_DATE_FORMAT.parse("2019-12-01");
@@ -137,6 +189,11 @@ public class WxCpOaServiceImplTest {
     System.out.println(gson.toJson(result));
   }
 
+  /**
+   * Test get approval detail.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testGetApprovalDetail() throws WxErrorException {
     String spNo = "201912020001";
@@ -148,6 +205,11 @@ public class WxCpOaServiceImplTest {
     System.out.println(gson.toJson(result));
   }
 
+  /**
+   * Test get template detail.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testGetTemplateDetail() throws WxErrorException {
     String templateId = "3TkZjxugodbqpEMk9j7X6h6zKqYkc7MxQrrFmT7H";
@@ -157,6 +219,11 @@ public class WxCpOaServiceImplTest {
     System.out.println(gson.toJson(result));
   }
 
+  /**
+   * Test apply.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void testApply() throws WxErrorException {
     this.wxService.getOaService().apply(new WxCpOaApplyEventRequest().setCreatorUserId("123"));
@@ -166,21 +233,41 @@ public class WxCpOaServiceImplTest {
    * 获取审批数据（旧）
    * https://developer.work.weixin.qq.com/document/path/91530
    *
-   * @throws WxErrorException
+   * @throws WxErrorException the wx error exception
    */
   @Test
   public void testGetApprovalData() throws WxErrorException {
 
     // 提示：推荐使用新接口“批量获取审批单号”及“获取审批申请详情”，此接口后续将不再维护、逐步下线。
-//    WxCpGetApprovalData approvalData = this.wxService.getOaService().getApprovalData(System.currentTimeMillis(), System.currentTimeMillis() + 3600L, null);
+//    WxCpGetApprovalData approvalData = this.wxService.getOaService().getApprovalData(System.currentTimeMillis(),
+//    System.currentTimeMillis() + 3600L, null);
 //    log.info("返回数据：{}", approvalData.toJson());
 
-    String text = "{\"errcode\":0,\"errmsg\":\"ok\",\"count\":3,\"total\":5,\"next_spnum\":201704240001,\"data\":[{\"spname\":\"报销\",\"apply_name\":\"报销测试\",\"apply_org\":\"报销测试企业\",\"approval_name\":[\"审批人测试\"],\"notify_name\":[\"抄送人测试\"],\"sp_status\":1,\"sp_num\":201704200001,\"mediaids\":[\"WWCISP_G8PYgRaOVHjXWUWFqchpBqqqUpGj0OyR9z6WTwhnMZGCPHxyviVstiv_2fTG8YOJq8L8zJT2T2OvTebANV-2MQ\"],\"apply_time\":1499153693,\"apply_user_id\":\"testuser\",\"expense\":{\"expense_type\":1,\"reason\":\"\",\"item\":[{\"expenseitem_type\":6,\"time\":1492617600,\"sums\":9900,\"reason\":\"\"}]},\"comm\":{\"apply_data\":\"{\\\"item-1492610773696\\\":{\\\"title\\\":\\\"abc\\\",\\\"type\\\":\\\"text\\\",\\\"value\\\":\\\"\\\"}}\"}},{\"spname\":\"请假\",\"apply_name\":\"请假测试\",\"apply_org\":\"请假测试企业\",\"approval_name\":[\"审批人测试\"],\"notify_name\":[\"抄送人测试\"],\"sp_status\":1,\"sp_num\":201704200004,\"apply_time\":1499153693,\"apply_user_id\":\"testuser\",\"leave\":{\"timeunit\":0,\"leave_type\":4,\"start_time\":1492099200,\"end_time\":1492790400,\"duration\":144,\"reason\":\"\"},\"comm\":{\"apply_data\":\"{\\\"item-1492610773696\\\":{\\\"title\\\":\\\"abc\\\",\\\"type\\\":\\\"text\\\",\\\"value\\\":\\\"\\\"}}\"}},{\"spname\":\"自定义审批\",\"apply_name\":\"自定义\",\"apply_org\":\"自定义测试企业\",\"approval_name\":[\"自定义审批人\"],\"notify_name\":[\"自定义抄送人\"],\"sp_status\":1,\"sp_num\":201704240001,\"apply_time\":1499153693,\"apply_user_id\":\"testuser\",\"comm\":{\"apply_data\":\"{\\\"item-1492610773696\\\":{\\\"title\\\":\\\"abc\\\",\\\"type\\\":\\\"text\\\",\\\"value\\\":\\\"\\\"}}\"}}]}";
+    String text = "{\"errcode\":0,\"errmsg\":\"ok\",\"count\":3,\"total\":5,\"next_spnum\":201704240001," +
+      "\"data\":[{\"spname\":\"报销\",\"apply_name\":\"报销测试\",\"apply_org\":\"报销测试企业\",\"approval_name\":[\"审批人测试\"]," +
+      "\"notify_name\":[\"抄送人测试\"],\"sp_status\":1,\"sp_num\":201704200001," +
+      "\"mediaids\":[\"WWCISP_G8PYgRaOVHjXWUWFqchpBqqqUpGj0OyR9z6WTwhnMZGCPHxyviVstiv_2fTG8YOJq8L8zJT2T2OvTebANV-2MQ" +
+      "\"],\"apply_time\":1499153693,\"apply_user_id\":\"testuser\",\"expense\":{\"expense_type\":1,\"reason\":\"\"," +
+      "\"item\":[{\"expenseitem_type\":6,\"time\":1492617600,\"sums\":9900,\"reason\":\"\"}]}," +
+      "\"comm\":{\"apply_data\":\"{\\\"item-1492610773696\\\":{\\\"title\\\":\\\"abc\\\",\\\"type\\\":\\\"text\\\"," +
+      "\\\"value\\\":\\\"\\\"}}\"}},{\"spname\":\"请假\",\"apply_name\":\"请假测试\",\"apply_org\":\"请假测试企业\"," +
+      "\"approval_name\":[\"审批人测试\"],\"notify_name\":[\"抄送人测试\"],\"sp_status\":1,\"sp_num\":201704200004," +
+      "\"apply_time\":1499153693,\"apply_user_id\":\"testuser\",\"leave\":{\"timeunit\":0,\"leave_type\":4," +
+      "\"start_time\":1492099200,\"end_time\":1492790400,\"duration\":144,\"reason\":\"\"}," +
+      "\"comm\":{\"apply_data\":\"{\\\"item-1492610773696\\\":{\\\"title\\\":\\\"abc\\\",\\\"type\\\":\\\"text\\\"," +
+      "\\\"value\\\":\\\"\\\"}}\"}},{\"spname\":\"自定义审批\",\"apply_name\":\"自定义\",\"apply_org\":\"自定义测试企业\"," +
+      "\"approval_name\":[\"自定义审批人\"],\"notify_name\":[\"自定义抄送人\"],\"sp_status\":1,\"sp_num\":201704240001," +
+      "\"apply_time\":1499153693,\"apply_user_id\":\"testuser\"," +
+      "\"comm\":{\"apply_data\":\"{\\\"item-1492610773696\\\":{\\\"title\\\":\\\"abc\\\",\\\"type\\\":\\\"text\\\"," +
+      "\\\"value\\\":\\\"\\\"}}\"}}]}";
     WxCpGetApprovalData wxCpGetApprovalData = WxCpGetApprovalData.fromJson(text);
     log.info("返回数据2：{}", wxCpGetApprovalData.toJson());
 
   }
 
+  /**
+   * Test get dial record.
+   */
   @Test
   public void testGetDialRecord() {
   }
@@ -189,7 +276,7 @@ public class WxCpOaServiceImplTest {
    * 获取企业假期管理配置
    * https://developer.work.weixin.qq.com/document/path/93375
    *
-   * @throws WxErrorException
+   * @throws WxErrorException the wx error exception
    */
   @Test
   public void testGetCorpConf() throws WxErrorException {
@@ -201,14 +288,18 @@ public class WxCpOaServiceImplTest {
    * 获取成员假期余额
    * https://developer.work.weixin.qq.com/document/path/93376
    *
-   * @throws WxErrorException
+   * @throws WxErrorException the wx error exception
    */
   @Test
   public void testGetUserVacationQuota() throws WxErrorException {
     WxCpUserVacationQuota vacationQuota = this.wxService.getOaService().getUserVacationQuota("WangKai");
     log.info(vacationQuota.toJson());
 
-    String text = "{\"errcode\":0,\"errmsg\":\"ok\",\"lists\":[{\"id\":1,\"assignduration\":0,\"usedduration\":0,\"leftduration\":604800,\"vacationname\":\"年假\"},{\"id\":2,\"assignduration\":0,\"usedduration\":0,\"leftduration\":1296000,\"vacationname\":\"事假\"},{\"id\":3,\"assignduration\":0,\"usedduration\":0,\"leftduration\":0,\"vacationname\":\"病假\"}]}";
+    String text =
+      "{\"errcode\":0,\"errmsg\":\"ok\",\"lists\":[{\"id\":1,\"assignduration\":0,\"usedduration\":0," +
+        "\"leftduration\":604800,\"vacationname\":\"年假\"},{\"id\":2,\"assignduration\":0,\"usedduration\":0," +
+        "\"leftduration\":1296000,\"vacationname\":\"事假\"},{\"id\":3,\"assignduration\":0,\"usedduration\":0," +
+        "\"leftduration\":0,\"vacationname\":\"病假\"}]}";
     WxCpUserVacationQuota json = WxCpUserVacationQuota.fromJson(text);
     log.info("数据为：{}", json.toJson());
 
@@ -218,7 +309,7 @@ public class WxCpOaServiceImplTest {
    * 修改成员假期余额
    * https://developer.work.weixin.qq.com/document/path/93377
    *
-   * @throws WxErrorException
+   * @throws WxErrorException the wx error exception
    */
   @Test
   public void testSetOneUserQuota() throws WxErrorException {

@@ -39,10 +39,21 @@ public class WxCpFileListRequest implements Serializable {
   @SerializedName("limit")
   private Integer limit;
 
+  /**
+   * From json wx cp file list request.
+   *
+   * @param json the json
+   * @return the wx cp file list request
+   */
   public static WxCpFileListRequest fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpFileListRequest.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

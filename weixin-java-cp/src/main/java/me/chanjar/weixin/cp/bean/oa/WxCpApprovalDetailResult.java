@@ -24,6 +24,9 @@ public class WxCpApprovalDetailResult implements Serializable {
   @SerializedName("info")
   private WxCpApprovalDetail info;
 
+  /**
+   * The type Wx cp approval detail.
+   */
   @Data
   public static class WxCpApprovalDetail implements Serializable {
     private static final long serialVersionUID = 1353393306564207170L;

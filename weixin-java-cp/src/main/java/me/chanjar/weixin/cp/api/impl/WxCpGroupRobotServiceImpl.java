@@ -17,8 +17,7 @@ import static me.chanjar.weixin.cp.constant.WxCpConsts.GroupRobotMsgType;
 /**
  * 企业微信群机器人消息发送api 实现
  *
- * @author yr
- * created on  2020-08-20
+ * @author yr  created on  2020-08-20
  */
 @RequiredArgsConstructor
 public class WxCpGroupRobotServiceImpl implements WxCpGroupRobotService {

@@ -10,8 +10,8 @@ import java.io.Serializable;
 
 /**
  * 许可证账号基础类
- * @author Totoro
- * created on  2022/6/27 14:39
+ *
+ * @author Totoro  created on  2022/6/27 14:39
  */
 @Data
 @SuperBuilder
@@ -32,6 +32,11 @@ public class WxCpTpLicenseBaseAccount implements Serializable {
   private Integer type;
 
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

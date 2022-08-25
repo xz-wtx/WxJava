@@ -22,6 +22,9 @@ public class WxCpUserVacationQuota extends WxCpBaseResp implements Serializable 
   @SerializedName("lists")
   private List<VacationQuota> lists;
 
+  /**
+   * The type Vacation quota.
+   */
   @Getter
   @Setter
   public static class VacationQuota implements Serializable {
@@ -44,6 +47,12 @@ public class WxCpUserVacationQuota extends WxCpBaseResp implements Serializable 
 
   }
 
+  /**
+   * From json wx cp user vacation quota.
+   *
+   * @param json the json
+   * @return the wx cp user vacation quota
+   */
   public static WxCpUserVacationQuota fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpUserVacationQuota.class);
   }

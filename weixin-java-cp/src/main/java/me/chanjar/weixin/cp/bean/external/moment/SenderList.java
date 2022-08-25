@@ -7,6 +7,8 @@ import lombok.Setter;
 import java.util.List;
 
 /**
+ * The type Sender list.
+ *
  * @author Boris
  */
 @Getter

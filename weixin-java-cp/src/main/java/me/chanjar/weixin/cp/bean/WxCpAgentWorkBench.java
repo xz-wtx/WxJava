@@ -14,9 +14,9 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @author songshiyu
- * created on  : create in 16:09 2020/9/27
- * 工作台自定义展示
+ * The type Wx cp agent work bench.
+ *
+ * @author songshiyu  created on  : create in 16:09 2020/9/27 工作台自定义展示
  */
 @Data
 @Builder
@@ -60,6 +60,8 @@ public class WxCpAgentWorkBench implements Serializable {
 
   /**
    * 生成模板Json字符串
+   *
+   * @return the string
    */
   public String toTemplateString() {
     JsonObject templateObject = new JsonObject();
@@ -74,6 +76,8 @@ public class WxCpAgentWorkBench implements Serializable {
 
   /**
    * 生成用户数据Json字符串
+   *
+   * @return the string
    */
   public String toUserDataString() {
     JsonObject userDataObject = new JsonObject();

@@ -177,14 +177,14 @@ public interface WxCpConfigStorage {
   /**
    * 企微会话存档私钥
    *
-   * @return
+   * @return msg audit pri key
    */
   String getMsgAuditPriKey();
 
   /**
    * 获取企微会话存档系统库 绝对路径
    *
-   * @return
+   * @return msg audit lib path
    */
   String getMsgAuditLibPath();
 

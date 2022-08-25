@@ -24,8 +24,7 @@ import static me.chanjar.weixin.common.api.WxConsts.SchoolContactMsgType.*;
  * 发送「学校通知」
  * https://developer.work.weixin.qq.com/document/path/92321
  *
- * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
- * created on  2022-06-29
+ * @author <a href="https://github.com/0katekate0">Wang_Wong</a> created on  2022-06-29
  */
 @Data
 @Builder
@@ -148,7 +147,8 @@ public class WxCpSchoolContactMessage implements Serializable {
 
   /**
    * 图文消息（mpnews）
-   * https://developer.work.weixin.qq.com/document/path/92321#%E5%9B%BE%E6%96%87%E6%B6%88%E6%81%AF%EF%BC%88mpnews%EF%BC%89
+   * https://developer.work.weixin.qq.com/document/path/92321#%E5%9B%BE%E6%96%87%E6%B6%88%E6%81%AF%EF%BC%88mpnews%EF
+   * %BC%89
    * <p>
    * mpnews类型的图文消息，跟普通的图文消息一致，唯一的差异是图文内容存储在企业微信。
    * 多次发送mpnews，会被认为是不同的图文，阅读、点赞的统计会被分开计算。
@@ -173,6 +173,11 @@ public class WxCpSchoolContactMessage implements Serializable {
     this.msgType = msgType;
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     JsonObject messageJson = new JsonObject();
 

@@ -28,6 +28,9 @@ public class WxCpGroupMsgResult extends WxCpBaseResp implements Serializable {
   @SerializedName("next_cursor")
   private String nextCursor;
 
+  /**
+   * The type External contact group msg detail info.
+   */
   @Getter
   @Setter
   public static class ExternalContactGroupMsgDetailInfo implements Serializable {
@@ -53,6 +56,12 @@ public class WxCpGroupMsgResult extends WxCpBaseResp implements Serializable {
     private Long sendTime;
   }
 
+  /**
+   * From json wx cp group msg result.
+   *
+   * @param json the json
+   * @return the wx cp group msg result
+   */
   public static WxCpGroupMsgResult fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpGroupMsgResult.class);
   }

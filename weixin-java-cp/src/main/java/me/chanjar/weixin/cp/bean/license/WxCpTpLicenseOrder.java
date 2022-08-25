@@ -9,8 +9,8 @@ import java.io.Serializable;
 /**
  * 详细的订单信息
  * 文档地址：https://developer.work.weixin.qq.com/document/path/95648
- * @author Totoro
- * created on  2022/6/27 11:38
+ *
+ * @author Totoro  created on  2022/6/27 11:38
  */
 @Data
 public class WxCpTpLicenseOrder implements Serializable {
@@ -45,6 +45,11 @@ public class WxCpTpLicenseOrder implements Serializable {
   private Long payTime;
 
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

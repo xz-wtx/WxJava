@@ -28,10 +28,21 @@ public class WxCpFileItem implements Serializable {
   @SerializedName("filesize")
   private Long fileSize;
 
+  /**
+   * From json wx cp file item.
+   *
+   * @param json the json
+   * @return the wx cp file item
+   */
   public static WxCpFileItem fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpFileItem.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

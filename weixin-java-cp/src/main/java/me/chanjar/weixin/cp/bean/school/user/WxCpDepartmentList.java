@@ -22,9 +22,12 @@ public class WxCpDepartmentList extends WxCpBaseResp implements Serializable {
   @SerializedName("departments")
   private List<Department> departments;
 
+  /**
+   * The type Department.
+   */
   @Setter
   @Getter
-  public static class Department implements Serializable{
+  public static class Department implements Serializable {
     @SerializedName("parentid")
     private Integer parentId;
 
@@ -58,16 +61,30 @@ public class WxCpDepartmentList extends WxCpBaseResp implements Serializable {
     @SerializedName("department_admins")
     private List<DepartmentAdmin> departmentAdmins;
 
+    /**
+     * From json department.
+     *
+     * @param json the json
+     * @return the department
+     */
     public static Department fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, Department.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * The type Department admin.
+   */
   @Setter
   @Getter
   public static class DepartmentAdmin implements Serializable {
@@ -81,16 +98,33 @@ public class WxCpDepartmentList extends WxCpBaseResp implements Serializable {
     @SerializedName("subject")
     private String subject;
 
+    /**
+     * From json department admin.
+     *
+     * @param json the json
+     * @return the department admin
+     */
     public static DepartmentAdmin fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, DepartmentAdmin.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * From json wx cp department list.
+   *
+   * @param json the json
+   * @return the wx cp department list
+   */
   public static WxCpDepartmentList fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpDepartmentList.class);
   }

@@ -19,6 +19,12 @@ public class WxCpFileUpload extends WxCpBaseResp implements Serializable {
   @SerializedName("fileid")
   private String fileId;
 
+  /**
+   * From json wx cp file upload.
+   *
+   * @param json the json
+   * @return the wx cp file upload
+   */
   public static WxCpFileUpload fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpFileUpload.class);
   }

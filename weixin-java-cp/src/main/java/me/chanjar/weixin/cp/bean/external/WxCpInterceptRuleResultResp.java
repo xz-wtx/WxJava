@@ -10,15 +10,22 @@ import java.io.Serializable;
 
 /**
  * 新建敏感词规则负返回结果
+ *
  * @author didi
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class WxCpInterceptRuleResultResp  extends WxCpBaseResp implements Serializable {
+public class WxCpInterceptRuleResultResp extends WxCpBaseResp implements Serializable {
 
   @SerializedName("rule_id")
-  private  String ruleId;
+  private String ruleId;
 
+  /**
+   * From json wx cp intercept rule result resp.
+   *
+   * @param json the json
+   * @return the wx cp intercept rule result resp
+   */
   public static WxCpInterceptRuleResultResp fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpInterceptRuleResultResp.class);
   }

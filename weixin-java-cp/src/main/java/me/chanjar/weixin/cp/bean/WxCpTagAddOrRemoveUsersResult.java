@@ -25,6 +25,12 @@ public class WxCpTagAddOrRemoveUsersResult implements Serializable {
     return WxCpGsonBuilder.create().toJson(this);
   }
 
+  /**
+   * From json wx cp tag add or remove users result.
+   *
+   * @param json the json
+   * @return the wx cp tag add or remove users result
+   */
   public static WxCpTagAddOrRemoveUsersResult fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpTagAddOrRemoveUsersResult.class);
   }
@@ -41,6 +47,11 @@ public class WxCpTagAddOrRemoveUsersResult implements Serializable {
   @SerializedName("invalidparty")
   private String[] invalidParty;
 
+  /**
+   * Gets invalid user list.
+   *
+   * @return the invalid user list
+   */
   public List<String> getInvalidUserList() {
     return this.content2List(this.invalidUsers);
   }

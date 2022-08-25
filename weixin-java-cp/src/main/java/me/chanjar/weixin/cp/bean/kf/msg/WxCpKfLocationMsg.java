@@ -4,8 +4,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author leiin
- * created on  2022/1/26 5:32 下午
+ * The type Wx cp kf location msg.
+ *
+ * @author leiin  created on  2022/1/26 5:32 下午
  */
 @NoArgsConstructor
 @Data

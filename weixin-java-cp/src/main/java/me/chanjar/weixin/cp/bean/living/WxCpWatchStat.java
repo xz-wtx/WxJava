@@ -26,6 +26,9 @@ public class WxCpWatchStat implements Serializable {
   @SerializedName("stat_info")
   private StatInfo statInfo;
 
+  /**
+   * The type Stat info.
+   */
   @Getter
   @Setter
   public static class StatInfo implements Serializable {
@@ -39,6 +42,9 @@ public class WxCpWatchStat implements Serializable {
 
   }
 
+  /**
+   * The type User.
+   */
   @Getter
   @Setter
   public static class User implements Serializable {
@@ -57,6 +63,9 @@ public class WxCpWatchStat implements Serializable {
 
   }
 
+  /**
+   * The type External user.
+   */
   @Getter
   @Setter
   public static class ExternalUser implements Serializable {
@@ -79,10 +88,21 @@ public class WxCpWatchStat implements Serializable {
 
   }
 
+  /**
+   * From json wx cp watch stat.
+   *
+   * @param json the json
+   * @return the wx cp watch stat
+   */
   public static WxCpWatchStat fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpWatchStat.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

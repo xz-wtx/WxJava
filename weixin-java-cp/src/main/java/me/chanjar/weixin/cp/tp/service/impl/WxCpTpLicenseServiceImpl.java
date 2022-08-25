@@ -20,8 +20,9 @@ import java.util.*;
 import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.License.*;
 
 /**
- * @author Totoro
- * created on  2022/6/27 11:03
+ * The type Wx cp tp license service.
+ *
+ * @author Totoro  created on  2022/6/27 11:03
  */
 @RequiredArgsConstructor
 public class WxCpTpLicenseServiceImpl implements WxCpTpLicenseService {
@@ -53,15 +54,16 @@ public class WxCpTpLicenseServiceImpl implements WxCpTpLicenseService {
 
 
   @Override
-  public WxCpTpLicenseOrderListResp getOrderList(String corpId, Date startTime, Date endTime, String cursor, int limit) throws WxErrorException {
+  public WxCpTpLicenseOrderListResp getOrderList(String corpId, Date startTime, Date endTime, String cursor,
+                                                 int limit) throws WxErrorException {
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("corpid", corpId);
     jsonObject.addProperty("cursor", cursor);
     jsonObject.addProperty("limit", limit);
-    if(startTime != null) {
+    if (startTime != null) {
       jsonObject.addProperty("start_time", startTime.getTime() / 1000);
     }
-    if(endTime != null) {
+    if (endTime != null) {
       jsonObject.addProperty("end_time", endTime.getTime() / 1000);
     }
     String resultText = mainService.post(getWxCpTpConfigStorage().getApiUrl(LIST_ORDER) +
@@ -102,7 +104,8 @@ public class WxCpTpLicenseServiceImpl implements WxCpTpLicenseService {
   }
 
   @Override
-  public WxCpTpLicenseBatchActiveResultResp batchActiveCode(String corpId, List<WxCpTpLicenseActiveAccount> activeAccountList) throws WxErrorException {
+  public WxCpTpLicenseBatchActiveResultResp batchActiveCode(String corpId,
+                                                            List<WxCpTpLicenseActiveAccount> activeAccountList) throws WxErrorException {
     Map<String, Object> map = new HashMap<>(2);
     map.put("corpid", corpId);
     map.put("active_list", activeAccountList);
@@ -171,6 +174,7 @@ public class WxCpTpLicenseServiceImpl implements WxCpTpLicenseService {
 
   /**
    * 获取服务商token的拼接参数
+   *
    * @return url
    * @throws WxErrorException /
    */
@@ -181,13 +185,12 @@ public class WxCpTpLicenseServiceImpl implements WxCpTpLicenseService {
 
   /**
    * 获取tp参数配置
+   *
    * @return config
    */
   private WxCpTpConfigStorage getWxCpTpConfigStorage() {
     return mainService.getWxCpTpConfigStorage();
   }
-
-
 
 
 }

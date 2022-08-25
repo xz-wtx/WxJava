@@ -12,8 +12,7 @@ import java.util.List;
 /**
  * 读取学生或家长返回结果.
  *
- * @author Wang_Wong
- * created on  2022-07-13
+ * @author Wang_Wong  created on  2022-07-13
  */
 @Data
 @Builder
@@ -32,6 +31,9 @@ public class WxCpUserResult extends WxCpBaseResp implements Serializable {
   @SerializedName("user_type")
   private Integer userType;
 
+  /**
+   * The type Parent.
+   */
   @Setter
   @Getter
   @Builder
@@ -57,16 +59,30 @@ public class WxCpUserResult extends WxCpBaseResp implements Serializable {
     @SerializedName("children")
     private List<Children> children;
 
+    /**
+     * From json parent.
+     *
+     * @param json the json
+     * @return the parent
+     */
     public static Parent fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, Parent.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * The type Student.
+   */
   @Setter
   @Getter
   @Builder
@@ -86,16 +102,30 @@ public class WxCpUserResult extends WxCpBaseResp implements Serializable {
     @SerializedName("name")
     private String name;
 
+    /**
+     * From json student.
+     *
+     * @param json the json
+     * @return the student
+     */
     public static Student fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, Student.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * The type Children.
+   */
   @Setter
   @Getter
   @Builder
@@ -109,16 +139,33 @@ public class WxCpUserResult extends WxCpBaseResp implements Serializable {
     @SerializedName("relation")
     private String relation;
 
+    /**
+     * From json children.
+     *
+     * @param json the json
+     * @return the children
+     */
     public static Children fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, Children.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * From json wx cp user result.
+   *
+   * @param json the json
+   * @return the wx cp user result
+   */
   public static WxCpUserResult fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpUserResult.class);
   }

@@ -132,7 +132,8 @@ public interface WxCpUserService {
    *
    * @param userId  企业内的成员id
    * @param agentId 非必填，整型，仅用于发红包。其它场景该参数不要填，如微信支付、企业转账、电子发票
-   * @return map对象 ，可能包含以下值： - openid 企业微信成员userid对应的openid，若有传参agentid，则是针对该agentid的openid。否则是针对企业微信corpid的openid - appid 应用的appid，若请求包中不包含agentid则不返回appid。该appid在使用微信红包时会用到
+   * @return map对象 ，可能包含以下值： - openid 企业微信成员userid对应的openid，若有传参agentid，则是针对该agentid的openid。否则是针对企业微信corpid的openid -
+   * appid 应用的appid，若请求包中不包含agentid则不返回appid。该appid在使用微信红包时会用到
    * @throws WxErrorException the wx error exception
    */
   Map<String, String> userId2Openid(String userId, Integer agentId) throws WxErrorException;
@@ -226,9 +227,9 @@ public interface WxCpUserService {
    * 将自建应用或代开发应用获取的userid转换为第三方应用的userid
    * https://developer.work.weixin.qq.com/document/path/95603
    *
-   * @param useridList
+   * @param useridList the userid list
    * @return the WxCpUseridToOpenUseridResult
-   * @throws WxErrorException
+   * @throws WxErrorException the wx error exception
    */
   WxCpUseridToOpenUseridResult useridToOpenUserid(ArrayList<String> useridList) throws WxErrorException;
 
@@ -239,10 +240,10 @@ public interface WxCpUserService {
    * 请求方式：POST（HTTPS）
    * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/user/list_id?access_token=ACCESS_TOKEN
    *
-   * @param cursor
-   * @param limit
-   * @return
-   * @throws WxErrorException
+   * @param cursor the cursor
+   * @param limit  the limit
+   * @return user list id
+   * @throws WxErrorException the wx error exception
    */
   WxCpDeptUserResult getUserListId(String cursor, Integer limit) throws WxErrorException;
 

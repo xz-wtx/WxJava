@@ -22,6 +22,12 @@ public class WxCpFileCreate extends WxCpBaseResp implements Serializable {
   @SerializedName("url")
   private String url;
 
+  /**
+   * From json wx cp file create.
+   *
+   * @param json the json
+   * @return the wx cp file create
+   */
   public static WxCpFileCreate fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpFileCreate.class);
   }

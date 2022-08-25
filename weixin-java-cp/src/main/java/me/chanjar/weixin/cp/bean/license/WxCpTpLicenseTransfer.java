@@ -10,8 +10,8 @@ import java.io.Serializable;
 
 /**
  * 基础的信息
- * @author Totoro
- * created on  2022/6/27 15:50
+ *
+ * @author Totoro  created on  2022/6/27 15:50
  */
 @Data
 @Builder
@@ -39,8 +39,6 @@ public class WxCpTpLicenseTransfer implements Serializable {
    */
   @SerializedName("errcode")
   private Integer errCode;
-
-
 
 
 }

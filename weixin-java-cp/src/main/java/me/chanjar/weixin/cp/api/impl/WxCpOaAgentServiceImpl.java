@@ -17,8 +17,7 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Oa.GET_OPEN_APPROV
 /**
  * 企业微信自建应用接口实现类.
  *
- * @author <a href="https://gitee.com/Wang_Wong/">Wang_Wong</a>
- * created on  2022-04-06
+ * @author <a href="https://gitee.com/Wang_Wong/">Wang_Wong</a> created on  2022-04-06
  */
 @Slf4j
 @RequiredArgsConstructor

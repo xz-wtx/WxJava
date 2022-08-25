@@ -5,8 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author leiin
- * created on  2022/1/26 5:30 下午
+ * The type Wx cp kf text msg.
+ *
+ * @author leiin  created on  2022/1/26 5:30 下午
  */
 @NoArgsConstructor
 @Data

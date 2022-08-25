@@ -70,14 +70,28 @@ public class WxCpAgent implements Serializable {
   @SerializedName("home_url")
   private String homeUrl;
 
+  /**
+   * From json wx cp agent.
+   *
+   * @param json the json
+   * @return the wx cp agent
+   */
   public static WxCpAgent fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpAgent.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }
 
+  /**
+   * The type Users.
+   */
   @Data
   public static class Users implements Serializable {
     private static final long serialVersionUID = 8801100463558788565L;
@@ -86,6 +100,9 @@ public class WxCpAgent implements Serializable {
     private List<User> users;
   }
 
+  /**
+   * The type User.
+   */
   @Data
   public static class User implements Serializable {
     private static final long serialVersionUID = 7287632514385508024L;
@@ -94,12 +111,18 @@ public class WxCpAgent implements Serializable {
     private String userId;
   }
 
+  /**
+   * The type Parties.
+   */
   @Data
   public static class Parties {
     @SerializedName("partyid")
     private List<Long> partyIds = null;
   }
 
+  /**
+   * The type Tags.
+   */
   @Data
   public static class Tags {
     @SerializedName("tagid")

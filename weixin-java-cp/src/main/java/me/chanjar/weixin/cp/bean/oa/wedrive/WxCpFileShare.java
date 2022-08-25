@@ -19,6 +19,12 @@ public class WxCpFileShare extends WxCpBaseResp implements Serializable {
   @SerializedName("share_url")
   private String shareUrl;
 
+  /**
+   * From json wx cp file share.
+   *
+   * @param json the json
+   * @return the wx cp file share
+   */
   public static WxCpFileShare fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpFileShare.class);
   }

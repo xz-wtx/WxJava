@@ -22,7 +22,7 @@ public interface WxCpOAuth2Service {
    * </pre>
    *
    * @param state 状态码
-   * @return url
+   * @return url string
    */
   String buildAuthorizationUrl(String state);
 
@@ -34,7 +34,7 @@ public interface WxCpOAuth2Service {
    *
    * @param redirectUri 跳转链接地址
    * @param state       状态码
-   * @return url
+   * @return url string
    */
   String buildAuthorizationUrl(String redirectUri, String state);
 
@@ -47,7 +47,7 @@ public interface WxCpOAuth2Service {
    * @param redirectUri 跳转链接地址
    * @param state       状态码
    * @param scope       取值参考me.chanjar.weixin.common.api.WxConsts.OAuth2Scope类
-   * @return url
+   * @return url string
    */
   String buildAuthorizationUrl(String redirectUri, String state, String scope);
 
@@ -61,9 +61,9 @@ public interface WxCpOAuth2Service {
    * </pre>
    *
    * @param code 微信oauth授权返回的代码
-   * @return WxCpOauth2UserInfo
+   * @return WxCpOauth2UserInfo user info
    * @throws WxErrorException 异常
-   * @see #getUserInfo(Integer, String)
+   * @see #getUserInfo(Integer, String) #getUserInfo(Integer, String)
    */
   WxCpOauth2UserInfo getUserInfo(String code) throws WxErrorException;
 
@@ -80,9 +80,9 @@ public interface WxCpOAuth2Service {
    *
    * @param agentId 企业号应用的id
    * @param code    通过成员授权获取到的code，最大为512字节。每次成员授权带上的code将不一样，code只能使用一次，5分钟未被使用自动过期。
-   * @return WxCpOauth2UserInfo
+   * @return WxCpOauth2UserInfo user info
    * @throws WxErrorException 异常
-   * @see #getUserInfo(String)
+   * @see #getUserInfo(String) #getUserInfo(String)
    */
   WxCpOauth2UserInfo getUserInfo(Integer agentId, String code) throws WxErrorException;
 
@@ -93,9 +93,9 @@ public interface WxCpOAuth2Service {
    * 请求方式：GET（HTTPS）
    * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/school/getuserinfo?access_token=ACCESS_TOKEN&code=CODE
    *
-   * @param code
-   * @return
-   * @throws WxErrorException
+   * @param code the code
+   * @return school user info
+   * @throws WxErrorException the wx error exception
    */
   WxCpOauth2UserInfo getSchoolUserInfo(String code) throws WxErrorException;
 
@@ -112,7 +112,7 @@ public interface WxCpOAuth2Service {
    * </pre>
    *
    * @param userTicket 成员票据
-   * @return WxCpUserDetail
+   * @return WxCpUserDetail user detail
    * @throws WxErrorException 异常
    */
   WxCpUserDetail getUserDetail(String userTicket) throws WxErrorException;

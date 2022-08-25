@@ -28,6 +28,12 @@ public class WxCpTrade extends WxCpBaseResp implements Serializable {
   @SerializedName("pay_time")
   private Long payTime;
 
+  /**
+   * From json wx cp trade.
+   *
+   * @param json the json
+   * @return the wx cp trade
+   */
   public static WxCpTrade fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpTrade.class);
   }

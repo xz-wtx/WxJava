@@ -13,8 +13,7 @@ import java.util.List;
  * 如需自行实现，亦可调用Finance类库函数，进行实现：
  * com.tencent.wework.Finance
  *
- * @author Wang_Wong
- * created on  2022-01-14
+ * @author Wang_Wong  created on  2022-01-14
  */
 public interface WxCpMsgAuditService {
 
@@ -26,7 +25,8 @@ public interface WxCpMsgAuditService {
    * @param proxy   使用代理的请求，需要传入代理的链接。如：socks5://10.0.0.1:8081 或者 http://10.0.0.1:8081，如果没有传null
    * @param passwd  代理账号密码，需要传入代理的账号密码。如 user_name:passwd_123，如果没有传null
    * @param timeout 超时时间，根据实际需要填写
-   * @return 返回是否调用成功
+   * @return 返回是否调用成功 chat datas
+   * @throws Exception the exception
    */
   WxCpChatDatas getChatDatas(long seq, @NonNull long limit, String proxy, String passwd, @NonNull long timeout) throws Exception;
 
@@ -36,10 +36,11 @@ public interface WxCpMsgAuditService {
    * @param sdk      getChatDatas()获取到的sdk
    * @param chatData getChatDatas()获取到的聊天数据
    * @param pkcs1    使用什么方式进行解密，1代表使用PKCS1进行解密，2代表PKCS8进行解密 ...
-   * @return 解密后的聊天数据
-   * @throws Exception
+   * @return 解密后的聊天数据 decrypt data
+   * @throws Exception the exception
    */
-  WxCpChatModel getDecryptData(@NonNull long sdk, @NonNull WxCpChatDatas.WxCpChatData chatData, @NonNull Integer pkcs1) throws Exception;
+  WxCpChatModel getDecryptData(@NonNull long sdk, @NonNull WxCpChatDatas.WxCpChatData chatData,
+                               @NonNull Integer pkcs1) throws Exception;
 
   /**
    * 获取解密的聊天数据明文
@@ -47,8 +48,8 @@ public interface WxCpMsgAuditService {
    * @param sdk      getChatDatas()获取到的sdk
    * @param chatData getChatDatas()获取到的聊天数据
    * @param pkcs1    使用什么方式进行解密，1代表使用PKCS1进行解密，2代表PKCS8进行解密 ...
-   * @return 解密后的明文
-   * @throws Exception
+   * @return 解密后的明文 chat plain text
+   * @throws Exception the exception
    */
   String getChatPlainText(@NonNull long sdk, @NonNull WxCpChatDatas.WxCpChatData chatData, @NonNull Integer pkcs1) throws Exception;
 
@@ -66,9 +67,10 @@ public interface WxCpMsgAuditService {
    * @param passwd         代理账号密码，需要传入代理的账号密码。如 user_name:passwd_123，如果没有传null
    * @param timeout        超时时间，分片数据需累加到文件存储。单次最大返回512K字节，如果文件比较大，自行设置长一点，比如timeout=10000
    * @param targetFilePath 目标文件绝对路径+实际文件名，比如：/usr/local/file/20220114/474f866b39d10718810d55262af82662.gif
-   * @throws WxErrorException
+   * @throws WxErrorException the wx error exception
    */
-  void getMediaFile(@NonNull long sdk, @NonNull String sdkfileid, String proxy, String passwd, @NonNull long timeout, @NonNull String targetFilePath) throws WxErrorException;
+  void getMediaFile(@NonNull long sdk, @NonNull String sdkfileid, String proxy, String passwd, @NonNull long timeout,
+                    @NonNull String targetFilePath) throws WxErrorException;
 
   /**
    * 获取会话内容存档开启成员列表
@@ -78,8 +80,8 @@ public interface WxCpMsgAuditService {
    * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/msgaudit/get_permit_user_list?access_token=ACCESS_TOKEN
    *
    * @param type 拉取对应版本的开启成员列表。1表示办公版；2表示服务版；3表示企业版。非必填，不填写的时候返回全量成员列表。
-   * @return
-   * @throws WxErrorException
+   * @return permit user list
+   * @throws WxErrorException the wx error exception
    */
   List<String> getPermitUserList(Integer type) throws WxErrorException;
 
@@ -91,8 +93,8 @@ public interface WxCpMsgAuditService {
    * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/msgaudit/groupchat/get?access_token=ACCESS_TOKEN
    *
    * @param roomid 待查询的群id
-   * @return
-   * @throws WxErrorException
+   * @return group chat
+   * @throws WxErrorException the wx error exception
    */
   WxCpGroupChat getGroupChat(@NonNull String roomid) throws WxErrorException;
 
@@ -105,8 +107,8 @@ public interface WxCpMsgAuditService {
    * 请求方式：POST（HTTPS）
    *
    * @param checkAgreeRequest 待查询的会话信息
-   * @return
-   * @throws WxErrorException
+   * @return wx cp agree info
+   * @throws WxErrorException the wx error exception
    */
   WxCpAgreeInfo checkSingleAgree(@NonNull WxCpCheckAgreeRequest checkAgreeRequest) throws WxErrorException;
 

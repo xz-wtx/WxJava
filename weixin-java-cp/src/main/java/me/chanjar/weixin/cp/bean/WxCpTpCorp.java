@@ -32,10 +32,21 @@ public class WxCpTpCorp implements Serializable {
   @SerializedName("auth_info")
   private String authInfo;
 
+  /**
+   * From json wx cp tp corp.
+   *
+   * @param json the json
+   * @return the wx cp tp corp
+   */
   public static WxCpTpCorp fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpTpCorp.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

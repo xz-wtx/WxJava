@@ -16,7 +16,7 @@ import java.util.List;
  * @author Wang_Wong
  */
 @Data
-public class WxCpSchoolWatchStat extends WxCpBaseResp{
+public class WxCpSchoolWatchStat extends WxCpBaseResp {
   private static final long serialVersionUID = -5028321625140879571L;
 
   @SerializedName("ending")
@@ -28,6 +28,9 @@ public class WxCpSchoolWatchStat extends WxCpBaseResp{
   @SerializedName("stat_infoes")
   private StatInfo statInfoes;
 
+  /**
+   * The type Stat info.
+   */
   @Getter
   @Setter
   public static class StatInfo implements Serializable {
@@ -41,6 +44,9 @@ public class WxCpSchoolWatchStat extends WxCpBaseResp{
 
   }
 
+  /**
+   * The type Student.
+   */
   @Getter
   @Setter
   public static class Student implements Serializable {
@@ -69,6 +75,9 @@ public class WxCpSchoolWatchStat extends WxCpBaseResp{
 
   }
 
+  /**
+   * The type Visitor.
+   */
   @Getter
   @Setter
   public static class Visitor implements Serializable {
@@ -91,6 +100,12 @@ public class WxCpSchoolWatchStat extends WxCpBaseResp{
 
   }
 
+  /**
+   * From json wx cp school watch stat.
+   *
+   * @param json the json
+   * @return the wx cp school watch stat
+   */
   public static WxCpSchoolWatchStat fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpSchoolWatchStat.class);
   }

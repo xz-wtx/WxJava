@@ -28,6 +28,9 @@ public class WxCpSchoolUnwatchStat extends WxCpBaseResp {
   @SerializedName("stat_info")
   private StatInfo statInfo;
 
+  /**
+   * The type Stat info.
+   */
   @Getter
   @Setter
   public static class StatInfo implements Serializable {
@@ -38,6 +41,9 @@ public class WxCpSchoolUnwatchStat extends WxCpBaseResp {
 
   }
 
+  /**
+   * The type Student.
+   */
   @Getter
   @Setter
   public static class Student implements Serializable {
@@ -54,6 +60,12 @@ public class WxCpSchoolUnwatchStat extends WxCpBaseResp {
 
   }
 
+  /**
+   * From json wx cp school unwatch stat.
+   *
+   * @param json the json
+   * @return the wx cp school unwatch stat
+   */
   public static WxCpSchoolUnwatchStat fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpSchoolUnwatchStat.class);
   }

@@ -7,9 +7,8 @@ import me.chanjar.weixin.cp.bean.export.WxCpExportResult;
 /**
  * 异步导出接口
  *
- * @author <a href="https://github.com/zhongjun96">zhongjun</a>
- * created on  2022/4/21
- **/
+ * @author <a href="https://github.com/zhongjun96">zhongjun</a> created on  2022/4/21
+ */
 public interface WxCpExportService {
 
   /**
@@ -93,7 +92,7 @@ public interface WxCpExportService {
    * </pre>
    *
    * @param jobId 异步任务id
-   * @return 导出结果
+   * @return 导出结果 result
    * @throws WxErrorException .
    */
   WxCpExportResult getResult(String jobId) throws WxErrorException;

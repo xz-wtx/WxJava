@@ -24,8 +24,7 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.School.*;
  * 企业微信家校沟通相关接口.
  * https://developer.work.weixin.qq.com/document/path/91638
  *
- * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
- * created on : 2022/6/18 9:10
+ * @author <a href="https://github.com/0katekate0">Wang_Wong</a> created on : 2022/6/18 9:10
  */
 @Slf4j
 @RequiredArgsConstructor
@@ -44,7 +43,8 @@ public class WxCpSchoolUserServiceImpl implements WxCpSchoolUserService {
   }
 
   @Override
-  public WxCpBaseResp createStudent(@NonNull String studentUserId, @NonNull String name, @NonNull List<Integer> departments) throws WxErrorException {
+  public WxCpBaseResp createStudent(@NonNull String studentUserId, @NonNull String name,
+                                    @NonNull List<Integer> departments) throws WxErrorException {
     String apiUrl = this.cpService.getWxCpConfigStorage().getApiUrl(CREATE_STUDENT);
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("student_userid", studentUserId);
@@ -87,7 +87,8 @@ public class WxCpSchoolUserServiceImpl implements WxCpSchoolUserService {
   }
 
   @Override
-  public WxCpBaseResp updateStudent(@NonNull String studentUserId, String newStudentUserId, String name, List<Integer> departments) throws WxErrorException {
+  public WxCpBaseResp updateStudent(@NonNull String studentUserId, String newStudentUserId, String name,
+                                    List<Integer> departments) throws WxErrorException {
     String apiUrl = this.cpService.getWxCpConfigStorage().getApiUrl(UPDATE_STUDENT);
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("student_userid", studentUserId);
@@ -151,7 +152,8 @@ public class WxCpSchoolUserServiceImpl implements WxCpSchoolUserService {
 
   @Override
   public WxCpUserListResult getUserList(@NonNull Integer departmentId, Integer fetchChild) throws WxErrorException {
-    String apiUrl = String.format(this.cpService.getWxCpConfigStorage().getApiUrl(GET_USER_LIST), departmentId, fetchChild);
+    String apiUrl = String.format(this.cpService.getWxCpConfigStorage().getApiUrl(GET_USER_LIST), departmentId,
+      fetchChild);
     String responseContent = this.cpService.get(apiUrl, null);
     return WxCpUserListResult.fromJson(responseContent);
   }

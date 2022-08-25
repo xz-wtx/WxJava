@@ -20,8 +20,7 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Living.*;
  * 企业微信直播接口实现类.
  * https://developer.work.weixin.qq.com/document/path/93633
  *
- * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
- * created on  2021-12-21
+ * @author <a href="https://github.com/0katekate0">Wang_Wong</a> created on  2021-12-21
  */
 @Slf4j
 @RequiredArgsConstructor

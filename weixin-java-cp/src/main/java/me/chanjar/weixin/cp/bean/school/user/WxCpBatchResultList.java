@@ -13,8 +13,7 @@ import java.util.List;
 /**
  * 批量返回结果.
  *
- * @author Wang_Wong
- * created on  2022-07-01
+ * @author Wang_Wong  created on  2022-07-01
  */
 @Data
 public class WxCpBatchResultList extends WxCpBaseResp implements Serializable {
@@ -23,9 +22,12 @@ public class WxCpBatchResultList extends WxCpBaseResp implements Serializable {
   @SerializedName("result_list")
   private List<ResultList> resultList;
 
+  /**
+   * The type Result list.
+   */
   @Setter
   @Getter
-  public static class ResultList extends WxCpBaseResp{
+  public static class ResultList extends WxCpBaseResp {
 
     @SerializedName("parent_userid")
     private String parentUserId;
@@ -33,6 +35,12 @@ public class WxCpBatchResultList extends WxCpBaseResp implements Serializable {
     @SerializedName("student_userid")
     private String studentUserId;
 
+    /**
+     * From json result list.
+     *
+     * @param json the json
+     * @return the result list
+     */
     public static ResultList fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, ResultList.class);
     }
@@ -43,6 +51,12 @@ public class WxCpBatchResultList extends WxCpBaseResp implements Serializable {
 
   }
 
+  /**
+   * From json wx cp batch result list.
+   *
+   * @param json the json
+   * @return the wx cp batch result list
+   */
   public static WxCpBatchResultList fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpBatchResultList.class);
   }

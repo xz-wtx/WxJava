@@ -10,8 +10,9 @@ import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 import java.io.Serializable;
 
 /**
- * @author Totoro
- * created on  2022/6/27 11:54
+ * The type Wx cp tp license account count.
+ *
+ * @author Totoro  created on  2022/6/27 11:54
  */
 @Data
 @Builder
@@ -25,6 +26,11 @@ public class WxCpTpLicenseAccountCount implements Serializable {
   @SerializedName("external_contact_count")
   private Integer externalContactCount;
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

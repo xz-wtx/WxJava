@@ -10,22 +10,6 @@ import me.chanjar.weixin.cp.api.WxCpKfService;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.WxCpBaseResp;
 import me.chanjar.weixin.cp.bean.kf.*;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountAdd;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountAddResp;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountDel;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountLink;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountLinkResp;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountListResp;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfAccountUpd;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfCustomerBatchGetResp;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfMsgListResp;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfMsgSendRequest;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfMsgSendResp;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfServiceStateResp;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfServiceStateTransResp;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfServiceUpgradeConfigResp;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfServicerListResp;
-import me.chanjar.weixin.cp.bean.kf.WxCpKfServicerOpResp;
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
 import java.util.List;
@@ -35,8 +19,7 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Kf.*;
 /**
  * 微信客服接口-服务实现
  *
- * @author Fu
- * created on  2022/1/19 19:41
+ * @author Fu  created on  2022/1/19 19:41
  */
 @RequiredArgsConstructor
 public class WxCpKfServiceImpl implements WxCpKfService {
@@ -65,7 +48,7 @@ public class WxCpKfServiceImpl implements WxCpKfService {
   }
 
   @Override
-  public WxCpKfAccountListResp listAccount(Integer offset,Integer limit) throws WxErrorException {
+  public WxCpKfAccountListResp listAccount(Integer offset, Integer limit) throws WxErrorException {
     String url = cpService.getWxCpConfigStorage().getApiUrl(ACCOUNT_LIST);
     JsonObject json = new JsonObject();
     if (offset != null) {
@@ -130,7 +113,7 @@ public class WxCpKfServiceImpl implements WxCpKfService {
 
   @Override
   public WxCpKfServiceStateTransResp transServiceState(String openKfid, String externalUserId,
-    Integer serviceState, String servicerUserId) throws WxErrorException {
+                                                       Integer serviceState, String servicerUserId) throws WxErrorException {
     String url = cpService.getWxCpConfigStorage().getApiUrl(SERVICE_STATE_TRANS);
 
     JsonObject json = new JsonObject();
@@ -149,16 +132,16 @@ public class WxCpKfServiceImpl implements WxCpKfService {
     String url = cpService.getWxCpConfigStorage().getApiUrl(SYNC_MSG);
 
     JsonObject json = new JsonObject();
-    if (cursor!=null) {
+    if (cursor != null) {
       json.addProperty("cursor", cursor);
     }
-    if (token!=null) {
+    if (token != null) {
       json.addProperty("token", token);
     }
-    if (limit!=null) {
+    if (limit != null) {
       json.addProperty("limit", limit);
     }
-    if (voiceFormat!=null) {
+    if (voiceFormat != null) {
       json.addProperty("voice_format", voiceFormat);
     }
 
@@ -208,7 +191,7 @@ public class WxCpKfServiceImpl implements WxCpKfService {
 
   @Override
   public WxCpBaseResp upgradeMemberService(String openKfid, String externalUserId,
-    String userid, String wording) throws WxErrorException {
+                                           String userid, String wording) throws WxErrorException {
     String url = cpService.getWxCpConfigStorage().getApiUrl(CUSTOMER_UPGRADE_SERVICE);
 
     JsonObject json = new JsonObject();
@@ -227,7 +210,7 @@ public class WxCpKfServiceImpl implements WxCpKfService {
 
   @Override
   public WxCpBaseResp upgradeGroupchatService(String openKfid, String externalUserId,
-    String chatId, String wording) throws WxErrorException {
+                                              String chatId, String wording) throws WxErrorException {
     String url = cpService.getWxCpConfigStorage().getApiUrl(CUSTOMER_UPGRADE_SERVICE);
 
     JsonObject json = new JsonObject();
@@ -255,6 +238,7 @@ public class WxCpKfServiceImpl implements WxCpKfService {
     String response = cpService.post(url, json);
     return WxCpBaseResp.fromJson(response);
   }
+
   @Override
   public WxCpKfGetCorpStatisticResp getCorpStatistic(WxCpKfGetCorpStatisticRequest request) throws WxErrorException {
     String url = cpService.getWxCpConfigStorage().getApiUrl(GET_CORP_STATISTIC);

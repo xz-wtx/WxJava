@@ -287,6 +287,7 @@ public class WxCpXmlMessage implements Serializable {
   /**
    * 企业邮箱;代开发自建应用不返回该字段。
    * ISSUE#2584
+   *
    * @see <a href="https://developer.work.weixin.qq.com/document/path/90970">Link</a>
    */
   @XStreamAlias("BizMail")
@@ -485,10 +486,10 @@ public class WxCpXmlMessage implements Serializable {
 
   /**
    * 审批消息
-   *
+   * <p>
    * 审批申请状态变化回调通知
    * https://developer.work.weixin.qq.com/document/path/91815
-   *
+   * <p>
    * 自建应用审批状态变化通知回调
    * https://developer.work.weixin.qq.com/document/path/90269
    */
@@ -496,6 +497,12 @@ public class WxCpXmlMessage implements Serializable {
   private WxCpXmlApprovalInfo approvalInfo = new WxCpXmlApprovalInfo();
 
 
+  /**
+   * From xml wx cp xml message.
+   *
+   * @param xml the xml
+   * @return the wx cp xml message
+   */
   protected static WxCpXmlMessage fromXml(String xml) {
     //修改微信变态的消息内容格式，方便解析
     xml = xml.replace("</PicList><PicList>", "");
@@ -504,6 +511,13 @@ public class WxCpXmlMessage implements Serializable {
     return xmlMessage;
   }
 
+  /**
+   * From xml wx cp xml message.
+   *
+   * @param xml     the xml
+   * @param agentId the agent id
+   * @return the wx cp xml message
+   */
   public static WxCpXmlMessage fromXml(String xml, String agentId) {
     //修改微信变态的消息内容格式，方便解析
     xml = xml.replace("</PicList><PicList>", "");
@@ -512,12 +526,25 @@ public class WxCpXmlMessage implements Serializable {
     return xmlMessage;
   }
 
+  /**
+   * From xml wx cp xml message.
+   *
+   * @param is the is
+   * @return the wx cp xml message
+   */
   protected static WxCpXmlMessage fromXml(InputStream is) {
     return XStreamTransformer.fromXml(WxCpXmlMessage.class, is);
   }
 
   /**
    * 从加密字符串转换.
+   *
+   * @param encryptedXml      the encrypted xml
+   * @param wxCpConfigStorage the wx cp config storage
+   * @param timestamp         the timestamp
+   * @param nonce             the nonce
+   * @param msgSignature      the msg signature
+   * @return the wx cp xml message
    */
   public static WxCpXmlMessage fromEncryptedXml(String encryptedXml, WxCpConfigStorage wxCpConfigStorage,
                                                 String timestamp, String nonce, String msgSignature) {
@@ -533,10 +560,21 @@ public class WxCpXmlMessage implements Serializable {
 
   }
 
+  /**
+   * From encrypted xml wx cp xml message.
+   *
+   * @param is                the is
+   * @param wxCpConfigStorage the wx cp config storage
+   * @param timestamp         the timestamp
+   * @param nonce             the nonce
+   * @param msgSignature      the msg signature
+   * @return the wx cp xml message
+   */
   public static WxCpXmlMessage fromEncryptedXml(InputStream is, WxCpConfigStorage wxCpConfigStorage,
                                                 String timestamp, String nonce, String msgSignature) {
     try {
-      return fromEncryptedXml(IOUtils.toString(is, StandardCharsets.UTF_8), wxCpConfigStorage, timestamp, nonce, msgSignature);
+      return fromEncryptedXml(IOUtils.toString(is, StandardCharsets.UTF_8), wxCpConfigStorage, timestamp, nonce,
+        msgSignature);
     } catch (IOException e) {
       throw new WxRuntimeException(e);
     }
@@ -547,6 +585,9 @@ public class WxCpXmlMessage implements Serializable {
     return WxCpGsonBuilder.create().toJson(this);
   }
 
+  /**
+   * The type Scan code info.
+   */
   @Data
   @XStreamAlias("ScanCodeInfo")
   public static class ScanCodeInfo implements Serializable {
@@ -567,13 +608,22 @@ public class WxCpXmlMessage implements Serializable {
     private String scanResult;
   }
 
+  /**
+   * The type Ext attr.
+   */
   @Data
   public static class ExtAttr implements Serializable {
     private static final long serialVersionUID = -3418685294606228837L;
 
+    /**
+     * The Items.
+     */
     @XStreamImplicit(itemFieldName = "Item")
     protected final List<Item> items = new ArrayList<>();
 
+    /**
+     * The type Item.
+     */
     @XStreamAlias("Item")
     @Data
     public static class Item implements Serializable {
@@ -589,17 +639,26 @@ public class WxCpXmlMessage implements Serializable {
     }
   }
 
+  /**
+   * The type Send pics info.
+   */
   @Data
   @XStreamAlias("SendPicsInfo")
   public static class SendPicsInfo implements Serializable {
     private static final long serialVersionUID = -6549728838848064881L;
 
+    /**
+     * The Pic list.
+     */
     @XStreamAlias("PicList")
     protected final List<Item> picList = new ArrayList<>();
 
     @XStreamAlias("Count")
     private Long count;
 
+    /**
+     * The type Item.
+     */
     @XStreamAlias("item")
     @Data
     public static class Item implements Serializable {
@@ -611,6 +670,9 @@ public class WxCpXmlMessage implements Serializable {
     }
   }
 
+  /**
+   * The type Send location info.
+   */
   @Data
   @XStreamAlias("SendLocationInfo")
   public static class SendLocationInfo implements Serializable {

@@ -24,6 +24,12 @@ public class WxCpProductAlbumResult extends WxCpBaseResp implements Serializable
   @SerializedName("product")
   private WxCpProductAlbumInfo product;
 
+  /**
+   * From json wx cp product album result.
+   *
+   * @param json the json
+   * @return the wx cp product album result
+   */
   public static WxCpProductAlbumResult fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpProductAlbumResult.class);
   }

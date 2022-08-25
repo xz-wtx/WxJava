@@ -15,9 +15,8 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Export.*;
 /**
  * 异步导出接口
  *
- * @author <a href="https://github.com/zhongjun96">zhongjun</a>
- * created on  2022/4/21
- **/
+ * @author <a href="https://github.com/zhongjun96">zhongjun</a> created on  2022/4/21
+ */
 @RequiredArgsConstructor
 public class WxCpExportServiceImpl implements WxCpExportService {
 

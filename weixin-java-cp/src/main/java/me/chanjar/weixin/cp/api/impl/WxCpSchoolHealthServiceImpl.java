@@ -19,8 +19,7 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.School.*;
 /**
  * 企业微信家校应用 健康上报接口实现类.
  *
- * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
- * created on : 2022/5/31 9:16
+ * @author <a href="https://github.com/0katekate0">Wang_Wong</a> created on : 2022/5/31 9:16
  */
 @Slf4j
 @RequiredArgsConstructor
@@ -58,7 +57,8 @@ public class WxCpSchoolHealthServiceImpl implements WxCpSchoolHealthService {
   }
 
   @Override
-  public WxCpGetReportAnswer getReportAnswer(@NonNull String jobId, @NonNull String date, Integer offset, Integer limit) throws WxErrorException {
+  public WxCpGetReportAnswer getReportAnswer(@NonNull String jobId, @NonNull String date, Integer offset,
+                                             Integer limit) throws WxErrorException {
     String apiUrl = this.cpService.getWxCpConfigStorage().getApiUrl(GET_REPORT_ANSWER);
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("jobid", jobId);

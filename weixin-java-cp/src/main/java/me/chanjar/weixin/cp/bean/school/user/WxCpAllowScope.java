@@ -22,6 +22,9 @@ public class WxCpAllowScope extends WxCpBaseResp implements Serializable {
   @SerializedName("allow_scope")
   private AllowScope allowScope;
 
+  /**
+   * The type Allow scope.
+   */
   @Setter
   @Getter
   public static class AllowScope implements Serializable {
@@ -32,16 +35,30 @@ public class WxCpAllowScope extends WxCpBaseResp implements Serializable {
     @SerializedName("departments")
     private Department departments;
 
+    /**
+     * From json allow scope.
+     *
+     * @param json the json
+     * @return the allow scope
+     */
     public static AllowScope fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, AllowScope.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * The type Department.
+   */
   @Setter
   @Getter
   public static class Department implements Serializable {
@@ -49,16 +66,30 @@ public class WxCpAllowScope extends WxCpBaseResp implements Serializable {
     @SerializedName("partyid")
     private List<Integer> partyId;
 
+    /**
+     * From json department.
+     *
+     * @param json the json
+     * @return the department
+     */
     public static Department fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, Department.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * The type Student.
+   */
   @Setter
   @Getter
   public static class Student implements Serializable {
@@ -68,6 +99,12 @@ public class WxCpAllowScope extends WxCpBaseResp implements Serializable {
 
   }
 
+  /**
+   * From json wx cp allow scope.
+   *
+   * @param json the json
+   * @return the wx cp allow scope
+   */
   public static WxCpAllowScope fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpAllowScope.class);
   }

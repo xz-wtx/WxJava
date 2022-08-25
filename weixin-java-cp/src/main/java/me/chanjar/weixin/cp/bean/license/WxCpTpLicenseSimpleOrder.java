@@ -10,8 +10,9 @@ import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 import java.io.Serializable;
 
 /**
- * @author Totoro
- * created on  2022/6/27 11:38
+ * The type Wx cp tp license simple order.
+ *
+ * @author Totoro  created on  2022/6/27 11:38
  */
 @Data
 @Builder
@@ -26,6 +27,11 @@ public class WxCpTpLicenseSimpleOrder implements Serializable {
   @SerializedName("order_type")
   private Integer orderType;
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

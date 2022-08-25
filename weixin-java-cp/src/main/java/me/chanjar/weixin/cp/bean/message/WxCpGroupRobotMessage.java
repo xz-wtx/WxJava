@@ -16,8 +16,7 @@ import static me.chanjar.weixin.cp.constant.WxCpConsts.GroupRobotMsgType.*;
 /**
  * 微信群机器人消息
  *
- * @author yr
- * created on  2020-08-20
+ * @author yr  created on  2020-08-20
  */
 @AllArgsConstructor
 @NoArgsConstructor
@@ -62,6 +61,11 @@ public class WxCpGroupRobotMessage implements Serializable {
    */
   private String mediaId;
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     JsonObject messageJson = new JsonObject();
     messageJson.addProperty("msgtype", this.getMsgType());

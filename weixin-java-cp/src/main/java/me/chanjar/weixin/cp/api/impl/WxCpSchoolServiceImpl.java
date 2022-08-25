@@ -21,8 +21,7 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.School.*;
  * 企业微信家校应用 复学码相关接口实现类.
  * https://developer.work.weixin.qq.com/document/path/93744
  *
- * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
- * created on : 2022/6/1 14:05
+ * @author <a href="https://github.com/0katekate0">Wang_Wong</a> created on : 2022/6/1 14:05
  */
 @Slf4j
 @RequiredArgsConstructor

@@ -19,6 +19,12 @@ public class WxCpSpaceShare extends WxCpBaseResp implements Serializable {
   @SerializedName("space_share_url")
   private String spaceShareUrl;
 
+  /**
+   * From json wx cp space share.
+   *
+   * @param json the json
+   * @return the wx cp space share
+   */
   public static WxCpSpaceShare fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpSpaceShare.class);
   }

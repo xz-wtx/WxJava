@@ -12,8 +12,7 @@ import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 /**
  * 消息推送接口实现类.
  *
- * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * created on  2020-08-30
+ * @author <a href="https://github.com/binarywang">Binary Wang</a> created on  2020-08-30
  */
 @RequiredArgsConstructor
 public class WxCpMessageServiceImpl implements WxCpMessageService {

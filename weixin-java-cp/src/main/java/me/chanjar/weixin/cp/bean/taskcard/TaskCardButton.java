@@ -13,8 +13,7 @@ import java.io.Serializable;
  *  Created by Jeff on 2019-05-16.
  * </pre>
  *
- * @author <a href="https://github.com/domainname">Jeff</a>
- * created on  2019-05-16
+ * @author <a href="https://github.com/domainname">Jeff</a> created on  2019-05-16
  */
 @Data
 @Builder

@@ -27,6 +27,12 @@ public class WxCpMaJsCode2SessionResult implements Serializable {
   @SerializedName("corpid")
   private String corpId;
 
+  /**
+   * From json wx cp ma js code 2 session result.
+   *
+   * @param json the json
+   * @return the wx cp ma js code 2 session result
+   */
   public static WxCpMaJsCode2SessionResult fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpMaJsCode2SessionResult.class);
   }

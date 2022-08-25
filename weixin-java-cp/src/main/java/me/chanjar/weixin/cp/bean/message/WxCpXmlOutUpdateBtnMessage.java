@@ -8,8 +8,9 @@ import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.util.xml.XStreamReplaceNameConverter;
 
 /**
- * @author nickname263
- * created on  2021-09-23
+ * The type Wx cp xml out update btn message.
+ *
+ * @author nickname263  created on  2021-09-23
  */
 @XStreamAlias("xml")
 @Data
@@ -20,6 +21,9 @@ public class WxCpXmlOutUpdateBtnMessage extends WxCpXmlOutMessage {
   @XStreamConverter(value = XStreamReplaceNameConverter.class)
   private String replaceName;
 
+  /**
+   * Instantiates a new Wx cp xml out update btn message.
+   */
   public WxCpXmlOutUpdateBtnMessage() {
     this.msgType = WxConsts.XmlMsgType.UPDATE_BUTTON;
   }

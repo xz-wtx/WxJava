@@ -11,8 +11,7 @@ import me.chanjar.weixin.cp.bean.school.health.WxCpGetReportJobInfo;
  * 企业微信家校应用 健康上报接口.
  * https://developer.work.weixin.qq.com/document/path/93676
  *
- * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
- * created on : 2022/5/31 9:10
+ * @author <a href="https://github.com/0katekate0">Wang_Wong</a> created on : 2022/5/31 9:10
  */
 public interface WxCpSchoolHealthService {
 
@@ -22,8 +21,8 @@ public interface WxCpSchoolHealthService {
    * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/health/get_health_report_stat?access_token=ACCESS_TOKEN
    *
    * @param date 具体某天的使用统计，最长支持获取30天前数据
-   * @return
-   * @throws WxErrorException
+   * @return health report stat
+   * @throws WxErrorException the wx error exception
    */
   WxCpGetHealthReportStat getHealthReportStat(@NonNull String date) throws WxErrorException;
 
@@ -36,8 +35,8 @@ public interface WxCpSchoolHealthService {
    *
    * @param offset 否	分页，偏移量, 默认为0
    * @param limit  否	分页，预期请求的数据量，默认为100，取值范围 1 ~ 100
-   * @return
-   * @throws WxErrorException
+   * @return report job ids
+   * @throws WxErrorException the wx error exception
    */
   WxCpGetReportJobIds getReportJobIds(Integer offset, Integer limit) throws WxErrorException;
 
@@ -50,8 +49,8 @@ public interface WxCpSchoolHealthService {
    *
    * @param jobId 是	任务ID
    * @param date  是	具体某天任务详情，仅支持获取最近14天数据
-   * @return
-   * @throws WxErrorException
+   * @return report job info
+   * @throws WxErrorException the wx error exception
    */
   WxCpGetReportJobInfo getReportJobInfo(@NonNull String jobId, @NonNull String date) throws WxErrorException;
 
@@ -62,12 +61,12 @@ public interface WxCpSchoolHealthService {
    * 请求方式：POST（HTTPS）
    * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/health/get_report_answer?access_token=ACCESS_TOKEN
    *
-   * @param jobId
-   * @param date
-   * @param offset
-   * @param limit
-   * @return
-   * @throws WxErrorException
+   * @param jobId  the job id
+   * @param date   the date
+   * @param offset the offset
+   * @param limit  the limit
+   * @return report answer
+   * @throws WxErrorException the wx error exception
    */
   WxCpGetReportAnswer getReportAnswer(@NonNull String jobId, @NonNull String date, Integer offset, Integer limit) throws WxErrorException;
 

@@ -29,10 +29,21 @@ public class WxCpLivingShareInfo implements Serializable {
   @SerializedName("invitor_external_userid")
   private String invitorExternalUserid;
 
+  /**
+   * From json wx cp living share info.
+   *
+   * @param json the json
+   * @return the wx cp living share info
+   */
   public static WxCpLivingShareInfo fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpLivingShareInfo.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

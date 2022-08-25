@@ -23,6 +23,12 @@ public class WxCpGetReportJobIds extends WxCpBaseResp implements Serializable {
   @SerializedName("jobids")
   private List<String> jobIds;
 
+  /**
+   * From json wx cp get report job ids.
+   *
+   * @param json the json
+   * @return the wx cp get report job ids
+   */
   public static WxCpGetReportJobIds fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpGetReportJobIds.class);
   }

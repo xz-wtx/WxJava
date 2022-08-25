@@ -29,6 +29,11 @@ public class WxCpOaWeDriveServiceTest {
   private static WxCpConfigStorage wxCpConfigStorage;
   private static WxCpService cpService;
 
+  /**
+   * Test.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void test() throws Exception {
 
@@ -39,7 +44,8 @@ public class WxCpOaWeDriveServiceTest {
     cpService = new WxCpServiceImpl();
     cpService.setWxCpConfigStorage(config);
 
-    String createSpace = "{\"userid\":\"USERID\",\"space_name\":\"SPACE_NAME\",\"auth_info\":[{\"type\":1,\"userid\":\"USERID\",\"auth\":2},{\"type\":2,\"departmentid\":2,\"auth\":1}]}";
+    String createSpace = "{\"userid\":\"USERID\",\"space_name\":\"SPACE_NAME\",\"auth_info\":[{\"type\":1," +
+      "\"userid\":\"USERID\",\"auth\":2},{\"type\":2,\"departmentid\":2,\"auth\":1}]}";
     WxCpSpaceCreateRequest wxCpSpaceCreateRequest = WxCpSpaceCreateRequest.fromJson(createSpace);
     log.info(wxCpSpaceCreateRequest.toJson());
 
@@ -150,7 +156,7 @@ public class WxCpOaWeDriveServiceTest {
     File file = new File("D:/info.log.2022-05-07.0.log");
 //    File file = new File("D:/16.png");
     FileInputStream inputFile = new FileInputStream(file);
-    byte[] buffer = new byte[(int)file.length()];
+    byte[] buffer = new byte[(int) file.length()];
     inputFile.read(buffer);
     inputFile.close();
     String encodeBase64Content = Base64.getEncoder().encodeToString(buffer);

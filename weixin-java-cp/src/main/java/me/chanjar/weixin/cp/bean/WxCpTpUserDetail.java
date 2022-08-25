@@ -6,6 +6,8 @@ import lombok.EqualsAndHashCode;
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
 /**
+ * The type Wx cp tp user detail.
+ *
  * @author huangxiaoming
  */
 @Data
@@ -48,6 +50,12 @@ public class WxCpTpUserDetail extends WxCpBaseResp {
   @SerializedName("qr_code")
   private String qrCode;
 
+  /**
+   * From json wx cp tp user detail.
+   *
+   * @param json the json
+   * @return the wx cp tp user detail
+   */
   public static WxCpTpUserDetail fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpTpUserDetail.class);
   }

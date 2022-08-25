@@ -1,15 +1,17 @@
 package me.chanjar.weixin.cp.bean.kf.msg;
 
 import com.google.gson.annotations.SerializedName;
-import java.util.List;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 /**
- * @author leiin
- * created on  2022/1/26 6:33 下午
+ * The type Wx cp kf menu msg.
+ *
+ * @author leiin  created on  2022/1/26 6:33 下午
  */
 @NoArgsConstructor
 @Data
@@ -35,6 +37,9 @@ public class WxCpKfMenuMsg {
   @SerializedName("tail_content")
   private String tailContent;
 
+  /**
+   * The type Wx cp kf menu item.
+   */
   @NoArgsConstructor
   @Data
   public static class WxCpKfMenuItem {
@@ -61,6 +66,9 @@ public class WxCpKfMenuMsg {
     private MiniProgram miniProgram;
   }
 
+  /**
+   * The type Menu click.
+   */
   @Getter
   @Setter
   public static class MenuClick {
@@ -81,6 +89,9 @@ public class WxCpKfMenuMsg {
     private String content;
   }
 
+  /**
+   * The type Menu view.
+   */
   @Getter
   @Setter
   public static class MenuView {
@@ -100,6 +111,9 @@ public class WxCpKfMenuMsg {
     private String content;
   }
 
+  /**
+   * The type Mini program.
+   */
   @Getter
   @Setter
   public static class MiniProgram {

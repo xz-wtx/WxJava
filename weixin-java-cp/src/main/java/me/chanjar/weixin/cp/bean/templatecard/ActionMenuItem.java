@@ -10,8 +10,8 @@ import java.io.Serializable;
 
 /**
  * 卡片右上角更多操作按钮点击后出现的操作列表，列表长度取值范围为 [1, 3]
- * @author xiaohe
- * created on  2022-03-06
+ *
+ * @author xiaohe  created on  2022-03-06
  */
 @Data
 @Builder
@@ -30,6 +30,11 @@ public class ActionMenuItem implements Serializable {
    */
   private String key;
 
+  /**
+   * To json json object.
+   *
+   * @return the json object
+   */
   public JsonObject toJson() {
     JsonObject btnObject = new JsonObject();
     btnObject.addProperty("text", this.getText());

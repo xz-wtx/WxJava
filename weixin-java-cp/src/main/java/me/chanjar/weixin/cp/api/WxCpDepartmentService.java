@@ -23,7 +23,7 @@ public interface WxCpDepartmentService {
    * </pre>
    *
    * @param depart 部门
-   * @return 部门id
+   * @return 部门id long
    * @throws WxErrorException 异常
    */
   Long create(WxCpDepart depart) throws WxErrorException;
@@ -35,7 +35,7 @@ public interface WxCpDepartmentService {
    * </pre>
    *
    * @param id 部门id
-   * @return 部门信息
+   * @return 部门信息 wx cp depart
    * @throws WxErrorException 异常
    */
   WxCpDepart get(Long id) throws WxErrorException;
@@ -47,7 +47,7 @@ public interface WxCpDepartmentService {
    * </pre>
    *
    * @param id 部门id。获取指定部门及其下的子部门。非必需，可为null
-   * @return 获取的部门列表
+   * @return 获取的部门列表 list
    * @throws WxErrorException 异常
    */
   List<WxCpDepart> list(Long id) throws WxErrorException;
@@ -59,7 +59,7 @@ public interface WxCpDepartmentService {
    * </pre>
    *
    * @param id 部门id。获取指定部门及其下的子部门（以及子部门的子部门等等，递归）。 如果不填，默认获取全量组织架构
-   * @return 子部门ID列表
+   * @return 子部门ID列表 list
    * @throws WxErrorException 异常
    */
   List<WxCpDepart> simpleList(Long id) throws WxErrorException;

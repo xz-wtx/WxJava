@@ -22,6 +22,9 @@ public class WxCpGetReportJobInfo extends WxCpBaseResp implements Serializable {
   @SerializedName("job_info")
   private JobInfo jobInfo;
 
+  /**
+   * The type Job info.
+   */
   @Getter
   @Setter
   public static class JobInfo implements Serializable {
@@ -54,16 +57,30 @@ public class WxCpGetReportJobInfo extends WxCpBaseResp implements Serializable {
     @SerializedName("question_templates")
     private List<QuestionTemplate> questionTemplates;
 
+    /**
+     * From json job info.
+     *
+     * @param json the json
+     * @return the job info
+     */
     public static JobInfo fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, JobInfo.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * The type Apply range.
+   */
   @Getter
   @Setter
   public static class ApplyRange implements Serializable {
@@ -75,16 +92,30 @@ public class WxCpGetReportJobInfo extends WxCpBaseResp implements Serializable {
     @SerializedName("partyids")
     private List<Integer> partyIds;
 
+    /**
+     * From json apply range.
+     *
+     * @param json the json
+     * @return the apply range
+     */
     public static ApplyRange fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, ApplyRange.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * The type Report to.
+   */
   @Getter
   @Setter
   public static class ReportTo implements Serializable {
@@ -93,16 +124,30 @@ public class WxCpGetReportJobInfo extends WxCpBaseResp implements Serializable {
     @SerializedName("userids")
     private List<String> userIds;
 
+    /**
+     * From json report to.
+     *
+     * @param json the json
+     * @return the report to
+     */
     public static ReportTo fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, ReportTo.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * The type Question template.
+   */
   @Getter
   @Setter
   public static class QuestionTemplate implements Serializable {
@@ -123,16 +168,30 @@ public class WxCpGetReportJobInfo extends WxCpBaseResp implements Serializable {
     @SerializedName("option_list")
     private List<OptionList> optionList;
 
+    /**
+     * From json question template.
+     *
+     * @param json the json
+     * @return the question template
+     */
     public static QuestionTemplate fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, QuestionTemplate.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * The type Option list.
+   */
   @Getter
   @Setter
   public static class OptionList implements Serializable {
@@ -144,16 +203,33 @@ public class WxCpGetReportJobInfo extends WxCpBaseResp implements Serializable {
     @SerializedName("option_text")
     private String optionText;
 
+    /**
+     * From json option list.
+     *
+     * @param json the json
+     * @return the option list
+     */
     public static OptionList fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, OptionList.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * From json wx cp get report job info.
+   *
+   * @param json the json
+   * @return the wx cp get report job info
+   */
   public static WxCpGetReportJobInfo fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpGetReportJobInfo.class);
   }

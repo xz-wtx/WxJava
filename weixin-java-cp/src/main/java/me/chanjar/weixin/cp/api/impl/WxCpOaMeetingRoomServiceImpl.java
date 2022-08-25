@@ -7,7 +7,6 @@ import me.chanjar.weixin.common.util.json.GsonHelper;
 import me.chanjar.weixin.common.util.json.GsonParser;
 import me.chanjar.weixin.cp.api.WxCpOaMeetingRoomService;
 import me.chanjar.weixin.cp.api.WxCpService;
-
 import me.chanjar.weixin.cp.bean.oa.meetingroom.WxCpOaMeetingRoom;
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
@@ -16,9 +15,10 @@ import java.util.List;
 import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Oa.*;
 
 /**
+ * The type Wx cp oa meeting room service.
+ *
  * @author fcat
- * @version 1.0
- * Create by 2022/8/12 23:49
+ * @version 1.0  Create by 2022/8/12 23:49
  */
 @RequiredArgsConstructor
 public class WxCpOaMeetingRoomServiceImpl implements WxCpOaMeetingRoomService {

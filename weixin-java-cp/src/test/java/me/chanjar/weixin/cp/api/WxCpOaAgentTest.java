@@ -21,10 +21,10 @@ import java.io.InputStream;
 /**
  * 企业微信自建应用接口测试类.
  * https://developer.work.weixin.qq.com/document/path/90269
- * https://developer.work.weixin.qq.com/document/path/90240#%E5%AE%A1%E6%89%B9%E7%8A%B6%E6%80%81%E9%80%9A%E7%9F%A5%E4%BA%8B%E4%BB%B6
+ * https://developer.work.weixin.qq.com/document/path/90240#%E5%AE%A1%E6%89%B9%E7%8A%B6%E6%80%81%E9%80%9A%E7%9F%A5%E4
+ * %BA%8B%E4%BB%B6
  *
- * @author <a href="https://gitee.com/Wang_Wong/">Wang_Wong</a>
- * created on  2022-04-06
+ * @author <a href="https://gitee.com/Wang_Wong/">Wang_Wong</a> created on  2022-04-06
  */
 @Slf4j
 public class WxCpOaAgentTest {
@@ -33,6 +33,11 @@ public class WxCpOaAgentTest {
   private static WxCpConfigStorage wxCpConfigStorage;
   private static WxCpService cpService;
 
+  /**
+   * Test.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void test() throws WxErrorException {
 
@@ -91,7 +96,7 @@ public class WxCpOaAgentTest {
       "    <approverstep>0</approverstep>\n" +
       "  </ApprovalInfo>\n" +
       "</xml>\n";
-    final WxCpXmlMessage mess2  = XStreamTransformer.fromXml(WxCpXmlMessage.class, testXml2);
+    final WxCpXmlMessage mess2 = XStreamTransformer.fromXml(WxCpXmlMessage.class, testXml2);
     mess2.setAllFieldsMap(XmlUtils.xml2Map(testXml2));
     log.info("xmlJson: {}", JSON.toString(mess2));
 
@@ -116,7 +121,7 @@ public class WxCpOaAgentTest {
       "\t<AgentID>1</AgentID>\n" +
       "</xml>\n";
 
-    final WxCpXmlMessage mess  = XStreamTransformer.fromXml(WxCpXmlMessage.class, testXml);
+    final WxCpXmlMessage mess = XStreamTransformer.fromXml(WxCpXmlMessage.class, testXml);
     mess.setAllFieldsMap(XmlUtils.xml2Map(testXml));
     log.info("xmlJson: {}", JSON.toString(mess));
 
@@ -188,7 +193,14 @@ public class WxCpOaAgentTest {
     /**
      * Test
      */
-    String test = "{\"errcode\":0,\"errmsg\":\"ok\",\"data\":{\"ThirdNo\":\"thirdNoxxx\",\"OpenTemplateId\":\"1234567111\",\"OpenSpName\":\"付款\",\"OpenSpstatus\":1,\"ApplyTime\":1527837645,\"ApplyUsername\":\"jackiejjwu\",\"ApplyUserParty\":\"产品部\",\"ApplyUserImage\":\"http://www.qq.com/xxx.png\",\"ApplyUserId\":\"WuJunJie\",\"ApprovalNodes\":{\"ApprovalNode\":[{\"NodeStatus\":1,\"NodeAttr\":1,\"NodeType\":1,\"Items\":{\"Item\":[{\"ItemName\":\"chauvetxiao\",\"ItemParty\":\"产品部\",\"ItemImage\":\"http://www.qq.com/xxx.png\",\"ItemUserId\":\"XiaoWen\",\"ItemStatus\":1,\"ItemSpeech\":\"\",\"ItemOpTime\":0}]}}]},\"NotifyNodes\":{\"NotifyNode\":[{\"ItemName\":\"jinhuiguo\",\"ItemParty\":\"行政部\",\"ItemImage\":\"http://www.qq.com/xxx.png\",\"ItemUserId\":\"GuoJinHui\"}]},\"ApproverStep\":0}}";
+    String test = "{\"errcode\":0,\"errmsg\":\"ok\",\"data\":{\"ThirdNo\":\"thirdNoxxx\"," +
+      "\"OpenTemplateId\":\"1234567111\",\"OpenSpName\":\"付款\",\"OpenSpstatus\":1,\"ApplyTime\":1527837645," +
+      "\"ApplyUsername\":\"jackiejjwu\",\"ApplyUserParty\":\"产品部\",\"ApplyUserImage\":\"http://www.qq.com/xxx.png\"," +
+      "\"ApplyUserId\":\"WuJunJie\",\"ApprovalNodes\":{\"ApprovalNode\":[{\"NodeStatus\":1,\"NodeAttr\":1," +
+      "\"NodeType\":1,\"Items\":{\"Item\":[{\"ItemName\":\"chauvetxiao\",\"ItemParty\":\"产品部\"," +
+      "\"ItemImage\":\"http://www.qq.com/xxx.png\",\"ItemUserId\":\"XiaoWen\",\"ItemStatus\":1,\"ItemSpeech\":\"\"," +
+      "\"ItemOpTime\":0}]}}]},\"NotifyNodes\":{\"NotifyNode\":[{\"ItemName\":\"jinhuiguo\",\"ItemParty\":\"行政部\"," +
+      "\"ItemImage\":\"http://www.qq.com/xxx.png\",\"ItemUserId\":\"GuoJinHui\"}]},\"ApproverStep\":0}}";
 
     final WxCpOpenApprovalData data = WxCpGsonBuilder.create()
       .fromJson(GsonParser.parse(test).get("data"),

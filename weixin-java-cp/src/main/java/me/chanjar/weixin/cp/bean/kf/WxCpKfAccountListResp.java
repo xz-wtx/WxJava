@@ -1,6 +1,5 @@
 package me.chanjar.weixin.cp.bean.kf;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,8 +12,7 @@ import java.util.List;
 /**
  * 获取客服帐号列表-结果
  *
- * @author Fu
- * created on  2022/1/19 19:13
+ * @author Fu  created on  2022/1/19 19:13
  */
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
@@ -29,6 +27,9 @@ public class WxCpKfAccountListResp extends WxCpBaseResp {
   @SerializedName("account_list")
   private List<AccountListDTO> accountList;
 
+  /**
+   * The type Account list dto.
+   */
   @NoArgsConstructor
   @Data
   public static class AccountListDTO {
@@ -51,6 +52,12 @@ public class WxCpKfAccountListResp extends WxCpBaseResp {
     private String avatar;
   }
 
+  /**
+   * From json wx cp kf account list resp.
+   *
+   * @param json the json
+   * @return the wx cp kf account list resp
+   */
   public static WxCpKfAccountListResp fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpKfAccountListResp.class);
   }

@@ -25,6 +25,12 @@ public class WxCpSubscribeQrCode extends WxCpBaseResp implements Serializable {
   @SerializedName("qrcode_thumb")
   private String qrCodeThumb;
 
+  /**
+   * From json wx cp subscribe qr code.
+   *
+   * @param json the json
+   * @return the wx cp subscribe qr code
+   */
   public static WxCpSubscribeQrCode fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpSubscribeQrCode.class);
   }

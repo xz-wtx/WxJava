@@ -19,6 +19,12 @@ public class WxCpSpaceCreateData extends WxCpBaseResp implements Serializable {
   @SerializedName("spaceid")
   private String spaceId;
 
+  /**
+   * From json wx cp space create data.
+   *
+   * @param json the json
+   * @return the wx cp space create data
+   */
   public static WxCpSpaceCreateData fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpSpaceCreateData.class);
   }

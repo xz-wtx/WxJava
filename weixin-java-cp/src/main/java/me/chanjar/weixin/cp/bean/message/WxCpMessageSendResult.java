@@ -25,6 +25,12 @@ public class WxCpMessageSendResult implements Serializable {
     return WxCpGsonBuilder.create().toJson(this);
   }
 
+  /**
+   * From json wx cp message send result.
+   *
+   * @param json the json
+   * @return the wx cp message send result
+   */
   public static WxCpMessageSendResult fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpMessageSendResult.class);
   }
@@ -53,6 +59,11 @@ public class WxCpMessageSendResult implements Serializable {
   @SerializedName("response_code")
   private String responseCode;
 
+  /**
+   * Gets invalid user list.
+   *
+   * @return the invalid user list
+   */
   public List<String> getInvalidUserList() {
     return this.content2List(this.invalidUser);
   }
@@ -65,10 +76,20 @@ public class WxCpMessageSendResult implements Serializable {
     return Splitter.on("|").splitToList(content);
   }
 
+  /**
+   * Gets invalid party list.
+   *
+   * @return the invalid party list
+   */
   public List<String> getInvalidPartyList() {
     return this.content2List(this.invalidParty);
   }
 
+  /**
+   * Gets invalid tag list.
+   *
+   * @return the invalid tag list
+   */
   public List<String> getInvalidTagList() {
     return this.content2List(this.invalidTag);
   }

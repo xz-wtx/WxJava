@@ -19,8 +19,7 @@ import java.util.Date;
  * 企业微信家校应用 健康上报接口.
  * https://developer.work.weixin.qq.com/document/path/93676
  *
- * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
- * created on : 2022/5/31 9:10
+ * @author <a href="https://github.com/0katekate0">Wang_Wong</a> created on : 2022/5/31 9:10
  */
 @Slf4j
 public class WxCpSchoolHealthTest {
@@ -28,6 +27,11 @@ public class WxCpSchoolHealthTest {
   private static WxCpConfigStorage wxCpConfigStorage;
   private static WxCpService cpService;
 
+  /**
+   * Test.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void test() throws WxErrorException {
 

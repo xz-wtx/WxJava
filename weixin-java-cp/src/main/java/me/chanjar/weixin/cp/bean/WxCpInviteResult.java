@@ -21,6 +21,12 @@ public class WxCpInviteResult implements Serializable {
     return WxCpGsonBuilder.create().toJson(this);
   }
 
+  /**
+   * From json wx cp invite result.
+   *
+   * @param json the json
+   * @return the wx cp invite result
+   */
   public static WxCpInviteResult fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpInviteResult.class);
   }

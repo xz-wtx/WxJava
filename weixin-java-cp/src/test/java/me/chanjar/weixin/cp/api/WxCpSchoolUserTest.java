@@ -27,8 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * 企业微信家校沟通相关接口.
  * https://developer.work.weixin.qq.com/document/path/91638
  *
- * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
- * created on : 2022/6/18 9:10
+ * @author <a href="https://github.com/0katekate0">Wang_Wong</a> created on : 2022/6/18 9:10
  */
 @Slf4j
 public class WxCpSchoolUserTest {
@@ -36,6 +35,11 @@ public class WxCpSchoolUserTest {
   private static WxCpConfigStorage wxCpConfigStorage;
   private static WxCpService cpService;
 
+  /**
+   * Test.
+   *
+   * @throws WxErrorException the wx error exception
+   */
   @Test
   public void test() throws WxErrorException {
 
@@ -50,7 +54,7 @@ public class WxCpSchoolUserTest {
     list.add(1);
     list.add(2);
     list.add(3);
-    log.info("list:{}", list.toString());
+    log.info("list:{}", list);
 
     final String userId = "WangKai";
     final String exUserId = "wmOQpTDwAAJFHrryZ8I8ALLEZuLHIUKA";
@@ -240,8 +244,10 @@ public class WxCpSchoolUserTest {
       "        }   \n" +
       "    ]   \n" +
       "}";
-    WxCpBatchUpdateParentRequest batchUpdateParentRequest = WxCpBatchUpdateParentRequest.fromJson(batchUpdateParentRequestParam);
-    WxCpBatchResultList batchUpdateParentResult = cpService.getSchoolUserService().batchUpdateParent(batchUpdateParentRequest);
+    WxCpBatchUpdateParentRequest batchUpdateParentRequest =
+      WxCpBatchUpdateParentRequest.fromJson(batchUpdateParentRequestParam);
+    WxCpBatchResultList batchUpdateParentResult =
+      cpService.getSchoolUserService().batchUpdateParent(batchUpdateParentRequest);
 
 
     /**
@@ -249,7 +255,7 @@ public class WxCpSchoolUserTest {
      *
      * https://developer.work.weixin.qq.com/document/path/92335
      */
-    WxCpBatchResultList batchDeleteParentResult = cpService.getSchoolUserService().batchDeleteParent(new String[]{"abc", userId});
+    WxCpBatchResultList batchDeleteParentResult = cpService.getSchoolUserService().batchDeleteParent("abc", userId);
 
 
     /**
@@ -337,7 +343,8 @@ public class WxCpSchoolUserTest {
       "}";
     assertThat(wxCpBatchCreateParentRequest.toJson()).isEqualTo(GsonParser.parse(batchCreateParentRequestParam).toString());
 
-    WxCpBatchResultList batchCreateParentResult = cpService.getSchoolUserService().batchCreateParent(wxCpBatchCreateParentRequest);
+    WxCpBatchResultList batchCreateParentResult =
+      cpService.getSchoolUserService().batchCreateParent(wxCpBatchCreateParentRequest);
 
     // 返回结果
     String batchResultStr = "{\n" +
@@ -408,7 +415,8 @@ public class WxCpSchoolUserTest {
       "\t\t}\n" +
       "     ]\n" +
       "}";
-    WxCpBatchUpdateStudentRequest batchUpdateStudentRequest = WxCpBatchUpdateStudentRequest.fromJson(batchUpdateStudent);
+    WxCpBatchUpdateStudentRequest batchUpdateStudentRequest =
+      WxCpBatchUpdateStudentRequest.fromJson(batchUpdateStudent);
     WxCpBatchResultList list3 = cpService.getSchoolUserService().batchUpdateStudent(batchUpdateStudentRequest);
     log.info("list3: {}", list3.toJson());
 
@@ -422,7 +430,8 @@ public class WxCpSchoolUserTest {
     String batchDeleteStudent = "{\n" +
       "\t\"useridlist\": [\"zhangsan\", \"lisi\"]\n" +
       "}\n";
-    WxCpBatchDeleteStudentRequest batchDeleteStudentRequest = WxCpBatchDeleteStudentRequest.fromJson(batchDeleteStudent);
+    WxCpBatchDeleteStudentRequest batchDeleteStudentRequest =
+      WxCpBatchDeleteStudentRequest.fromJson(batchDeleteStudent);
     WxCpBatchResultList list2 = cpService.getSchoolUserService().batchDeleteStudent(batchDeleteStudentRequest);
     log.info("list2: {}", list2.toJson());
 
@@ -444,7 +453,8 @@ public class WxCpSchoolUserTest {
       "\t\t}\n" +
       "     ]\n" +
       "}";
-    WxCpBatchCreateStudentRequest batchCreateStudentRequest = WxCpBatchCreateStudentRequest.fromJson(batchCreateStudent);
+    WxCpBatchCreateStudentRequest batchCreateStudentRequest =
+      WxCpBatchCreateStudentRequest.fromJson(batchCreateStudent);
     WxCpBatchResultList list1 = cpService.getSchoolUserService().batchCreateStudent(batchCreateStudentRequest);
     log.info("list1: {}", list1.toJson());
 
@@ -568,7 +578,18 @@ public class WxCpSchoolUserTest {
      * 家校沟通 获取外部联系人详情
      * https://developer.work.weixin.qq.com/document/path/92322
      */
-    String str7 = "{\"errcode\":0,\"errmsg\":\"ok\",\"external_contact\":{\"external_userid\":\"woAAAA\",\"name\":\"李四\",\"position\":\"Mangaer\",\"avatar\":\"http://p.qlogo.cn/bizmail/IcsdgagqefergqerhewSdage/0\",\"corp_name\":\"腾讯\",\"corp_full_name\":\"腾讯科技有限公司\",\"type\":2,\"gender\":1,\"unionid\":\"unAAAAA\",\"is_subscribe\":1,\"subscriber_info\":{\"tag_id\":[\"TAG_ID1\",\"TAG_ID2\"],\"remark_mobiles\":[\"10000000000\",\"10000000001\"],\"remark\":\"李小明-爸爸\"},\"external_profile\":{\"external_attr\":[{\"type\":0,\"name\":\"文本名称\",\"text\":{\"value\":\"文本\"}},{\"type\":1,\"name\":\"网页名称\",\"web\":{\"url\":\"http://www.test.com\",\"title\":\"标题\"}},{\"type\":2,\"name\":\"测试app\",\"miniprogram\":{\"appid\":\"wxAAAAA\",\"pagepath\":\"/index\",\"title\":\"my miniprogram\"}}]}},\"follow_user\":[{\"userid\":\"rocky\",\"remark\":\"李部长\",\"description\":\"对接采购事物\",\"createtime\":1525779812,\"tags\":[{\"group_name\":\"标签分组名称\",\"tag_name\":\"标签名称\",\"type\":1}],\"remark_corp_name\":\"腾讯科技\",\"remark_mobiles\":[10000000003,10000000004]},{\"userid\":\"tommy\",\"remark\":\"李总\",\"description\":\"采购问题咨询\",\"createtime\":1525881637,\"state\":\"外联二维码1\"}]}";
+    String str7 = "{\"errcode\":0,\"errmsg\":\"ok\",\"external_contact\":{\"external_userid\":\"woAAAA\"," +
+      "\"name\":\"李四\",\"position\":\"Mangaer\",\"avatar\":\"http://p.qlogo.cn/bizmail/IcsdgagqefergqerhewSdage/0\"," +
+      "\"corp_name\":\"腾讯\",\"corp_full_name\":\"腾讯科技有限公司\",\"type\":2,\"gender\":1,\"unionid\":\"unAAAAA\"," +
+      "\"is_subscribe\":1,\"subscriber_info\":{\"tag_id\":[\"TAG_ID1\",\"TAG_ID2\"]," +
+      "\"remark_mobiles\":[\"10000000000\",\"10000000001\"],\"remark\":\"李小明-爸爸\"}," +
+      "\"external_profile\":{\"external_attr\":[{\"type\":0,\"name\":\"文本名称\",\"text\":{\"value\":\"文本\"}}," +
+      "{\"type\":1,\"name\":\"网页名称\",\"web\":{\"url\":\"http://www.test.com\",\"title\":\"标题\"}},{\"type\":2," +
+      "\"name\":\"测试app\",\"miniprogram\":{\"appid\":\"wxAAAAA\",\"pagepath\":\"/index\",\"title\":\"my " +
+      "miniprogram\"}}]}},\"follow_user\":[{\"userid\":\"rocky\",\"remark\":\"李部长\",\"description\":\"对接采购事物\"," +
+      "\"createtime\":1525779812,\"tags\":[{\"group_name\":\"标签分组名称\",\"tag_name\":\"标签名称\",\"type\":1}]," +
+      "\"remark_corp_name\":\"腾讯科技\",\"remark_mobiles\":[10000000003,10000000004]},{\"userid\":\"tommy\"," +
+      "\"remark\":\"李总\",\"description\":\"采购问题咨询\",\"createtime\":1525881637,\"state\":\"外联二维码1\"}]}";
     WxCpExternalContact wxCpExternalContact = WxCpExternalContact.fromJson(str7);
     log.info("wxCpExternalContact:{}", wxCpExternalContact.toJson());
 
@@ -621,7 +642,12 @@ public class WxCpSchoolUserTest {
      * 获取部门列表
      * https://developer.work.weixin.qq.com/document/path/92343
      */
-    String str5 = "{\"errcode\":0,\"errmsg\":\"ok\",\"departments\":[{\"name\":\"一年级\",\"parentid\":1,\"id\":2,\"type\":2,\"register_year\":2018,\"standard_grade\":1,\"order\":1,\"department_admins\":[{\"userid\":\"zhangsan\",\"type\":1},{\"userid\":\"lisi\",\"type\":2}],\"is_graduated\":0},{\"name\":\"一年级一班\",\"parentid\":1,\"id\":3,\"type\":1,\"department_admins\":[{\"userid\":\"zhangsan\",\"type\":3,\"subject\":\"语文\"},{\"userid\":\"lisi\",\"type\":4,\"subject\":\"数学\"}],\"open_group_chat\":1,\"group_chat_id\":\"group_chat_id\"}]}";
+    String str5 = "{\"errcode\":0,\"errmsg\":\"ok\",\"departments\":[{\"name\":\"一年级\",\"parentid\":1,\"id\":2," +
+      "\"type\":2,\"register_year\":2018,\"standard_grade\":1,\"order\":1," +
+      "\"department_admins\":[{\"userid\":\"zhangsan\",\"type\":1},{\"userid\":\"lisi\",\"type\":2}]," +
+      "\"is_graduated\":0},{\"name\":\"一年级一班\",\"parentid\":1,\"id\":3,\"type\":1," +
+      "\"department_admins\":[{\"userid\":\"zhangsan\",\"type\":3,\"subject\":\"语文\"},{\"userid\":\"lisi\"," +
+      "\"type\":4,\"subject\":\"数学\"}],\"open_group_chat\":1,\"group_chat_id\":\"group_chat_id\"}]}";
     WxCpDepartmentList wxCpDepartmentList = WxCpDepartmentList.fromJson(str5);
     log.info("wxCpDepartmentList:{}", wxCpDepartmentList.toJson());
 
@@ -639,7 +665,9 @@ public class WxCpSchoolUserTest {
      * 更新部门
      * https://developer.work.weixin.qq.com/document/path/92341
      */
-    String str4 = "{\"name\":\"一年级\",\"parentid\":5,\"id\":2,\"register_year\":2018,\"standard_grade\":1,\"order\":1,\"new_id\":100,\"department_admins\":[{\"op\":0,\"userid\":\"zhangsan\",\"type\":3,\"subject\":\"语文\"},{\"op\":1,\"userid\":\"lisi\",\"type\":4,\"subject\":\"数学\"}]}";
+    String str4 = "{\"name\":\"一年级\",\"parentid\":5,\"id\":2,\"register_year\":2018,\"standard_grade\":1,\"order\":1," +
+      "\"new_id\":100,\"department_admins\":[{\"op\":0,\"userid\":\"zhangsan\",\"type\":3,\"subject\":\"语文\"}," +
+      "{\"op\":1,\"userid\":\"lisi\",\"type\":4,\"subject\":\"数学\"}]}";
     WxCpUpdateDepartmentRequest wxCpUpdateDepartmentRequest = WxCpUpdateDepartmentRequest.fromJson(str4);
     log.info("wxCpUpdateParentRequest:{}", wxCpUpdateDepartmentRequest.toJson());
 
@@ -650,7 +678,9 @@ public class WxCpSchoolUserTest {
      * 创建部门
      * https://developer.work.weixin.qq.com/document/path/92340
      */
-    String str3 = "{\"name\":\"一年级\",\"parentid\":5,\"id\":2,\"type\":1,\"register_year\":2018,\"standard_grade\":1,\"order\":1,\"department_admins\":[{\"userid\":\"zhangsan\",\"type\":4,\"subject\":\"语文\"},{\"userid\":\"lisi\",\"type\":3,\"subject\":\"数学\"}]}";
+    String str3 = "{\"name\":\"一年级\",\"parentid\":5,\"id\":2,\"type\":1,\"register_year\":2018,\"standard_grade\":1," +
+      "\"order\":1,\"department_admins\":[{\"userid\":\"zhangsan\",\"type\":4,\"subject\":\"语文\"}," +
+      "{\"userid\":\"lisi\",\"type\":3,\"subject\":\"数学\"}]}";
     WxCpCreateDepartmentRequest wxCpCreateDepartmentRequest = WxCpCreateDepartmentRequest.fromJson(str3);
     log.info("wxCpCreateDepartmentRequest:{}", wxCpCreateDepartmentRequest.toJson());
 
@@ -678,7 +708,9 @@ public class WxCpSchoolUserTest {
      * 更新家长
      * https://developer.work.weixin.qq.com/document/path/92333
      */
-    String str2 = "{\"parent_userid\":\"zhangsan_parent_userid\",\"new_parent_userid\":\"NEW_ID\",\"mobile\":\"18000000000\",\"children\":[{\"student_userid\":\"zhangsan\",\"relation\":\"爸爸\"},{\"student_userid\":\"lisi\",\"relation\":\"伯父\"}]}";
+    String str2 = "{\"parent_userid\":\"zhangsan_parent_userid\",\"new_parent_userid\":\"NEW_ID\"," +
+      "\"mobile\":\"18000000000\",\"children\":[{\"student_userid\":\"zhangsan\",\"relation\":\"爸爸\"}," +
+      "{\"student_userid\":\"lisi\",\"relation\":\"伯父\"}]}";
     WxCpUpdateParentRequest updateParentRequest1 = WxCpUpdateParentRequest.fromJson(str2);
     log.info("updateParentRequest1：{}", updateParentRequest1.toJson());
 
@@ -709,7 +741,9 @@ public class WxCpSchoolUserTest {
      * 创建家长
      * https://developer.work.weixin.qq.com/document/path/92331
      */
-    String str1 = "{\"parent_userid\":\"zhangsan_parent_userid\",\"mobile\":\"10000000000\",\"to_invite\":false,\"children\":[{\"student_userid\":\"zhangsan\",\"relation\":\"爸爸\"},{\"student_userid\":\"lisi\",\"relation\":\"伯父\"}]}";
+    String str1 = "{\"parent_userid\":\"zhangsan_parent_userid\",\"mobile\":\"10000000000\",\"to_invite\":false," +
+      "\"children\":[{\"student_userid\":\"zhangsan\",\"relation\":\"爸爸\"},{\"student_userid\":\"lisi\"," +
+      "\"relation\":\"伯父\"}]}";
     WxCpCreateParentRequest createParentRequest1 = WxCpCreateParentRequest.fromJson(str1);
     log.info("createParentRequest1：{}", createParentRequest1.toJson());
 

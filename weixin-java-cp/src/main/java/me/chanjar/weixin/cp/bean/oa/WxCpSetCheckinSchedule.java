@@ -32,6 +32,9 @@ public class WxCpSetCheckinSchedule implements Serializable {
   private Integer yearmonth;
 
 
+  /**
+   * The type Item.
+   */
   @Data
   public static class Item implements Serializable {
 

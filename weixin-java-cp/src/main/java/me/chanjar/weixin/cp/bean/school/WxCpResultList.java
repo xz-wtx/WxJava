@@ -22,9 +22,12 @@ public class WxCpResultList extends WxCpBaseResp implements Serializable {
   @SerializedName("result_list")
   private List<QrCodeList> qrCodeList;
 
+  /**
+   * The type Qr code list.
+   */
   @Setter
   @Getter
-  public static class QrCodeList extends WxCpBaseResp{
+  public static class QrCodeList extends WxCpBaseResp {
 
     @SerializedName("userid")
     private String userId;
@@ -32,6 +35,12 @@ public class WxCpResultList extends WxCpBaseResp implements Serializable {
     @SerializedName("qrcode_data")
     private String qrCodeData;
 
+    /**
+     * From json qr code list.
+     *
+     * @param json the json
+     * @return the qr code list
+     */
     public static QrCodeList fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, QrCodeList.class);
     }
@@ -42,6 +51,12 @@ public class WxCpResultList extends WxCpBaseResp implements Serializable {
 
   }
 
+  /**
+   * From json wx cp result list.
+   *
+   * @param json the json
+   * @return the wx cp result list
+   */
   public static WxCpResultList fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpResultList.class);
   }

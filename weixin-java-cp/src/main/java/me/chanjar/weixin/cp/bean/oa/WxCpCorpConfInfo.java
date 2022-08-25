@@ -22,6 +22,9 @@ public class WxCpCorpConfInfo extends WxCpBaseResp implements Serializable {
   @SerializedName("lists")
   private List<CorpConf> lists;
 
+  /**
+   * The type Corp conf.
+   */
   @Getter
   @Setter
   public static class CorpConf implements Serializable {
@@ -47,6 +50,9 @@ public class WxCpCorpConfInfo extends WxCpBaseResp implements Serializable {
 
   }
 
+  /**
+   * The type Quota attr.
+   */
   @Getter
   @Setter
   public static class QuotaAttr implements Serializable {
@@ -63,6 +69,12 @@ public class WxCpCorpConfInfo extends WxCpBaseResp implements Serializable {
 
   }
 
+  /**
+   * From json wx cp corp conf info.
+   *
+   * @param json the json
+   * @return the wx cp corp conf info
+   */
   public static WxCpCorpConfInfo fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpCorpConfInfo.class);
   }

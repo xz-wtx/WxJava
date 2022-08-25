@@ -17,8 +17,7 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Oa.*;
 /**
  * 企业微信微盘接口实现类.
  *
- * @author Wang_Wong
- * created on  2022-04-22
+ * @author Wang_Wong  created on  2022-04-22
  */
 @Slf4j
 @RequiredArgsConstructor
@@ -126,7 +125,8 @@ public class WxCpOaWeDriveServiceImpl implements WxCpOaWeDriveService {
   }
 
   @Override
-  public WxCpFileCreate fileCreate(@NonNull String userId, @NonNull String spaceId, @NonNull String fatherId, @NonNull Integer fileType, @NonNull String fileName) throws WxErrorException {
+  public WxCpFileCreate fileCreate(@NonNull String userId, @NonNull String spaceId, @NonNull String fatherId,
+                                   @NonNull Integer fileType, @NonNull String fileName) throws WxErrorException {
     String apiUrl = this.cpService.getWxCpConfigStorage().getApiUrl(FILE_CREATE);
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("userid", userId);
@@ -168,7 +168,8 @@ public class WxCpOaWeDriveServiceImpl implements WxCpOaWeDriveService {
   }
 
   @Override
-  public WxCpBaseResp fileSetting(@NonNull String userId, @NonNull String fileId, @NonNull Integer authScope, Integer auth) throws WxErrorException {
+  public WxCpBaseResp fileSetting(@NonNull String userId, @NonNull String fileId, @NonNull Integer authScope,
+                                  Integer auth) throws WxErrorException {
     String apiUrl = this.cpService.getWxCpConfigStorage().getApiUrl(FILE_SETTING);
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("userid", userId);

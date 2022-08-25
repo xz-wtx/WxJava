@@ -7,13 +7,15 @@ import me.chanjar.weixin.cp.bean.kf.WxCpKfGetCorpStatisticResp;
 import java.lang.reflect.Type;
 
 /**
- * @author zhongjun
- * created on  2022/4/25
- **/
+ * The type Statistic list adapter.
+ *
+ * @author zhongjun  created on  2022/4/25
+ */
 public class StatisticListAdapter implements JsonDeserializer<WxCpKfGetCorpStatisticResp.StatisticList> {
 
   @Override
-  public WxCpKfGetCorpStatisticResp.StatisticList deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+  public WxCpKfGetCorpStatisticResp.StatisticList deserialize(JsonElement jsonElement, Type type,
+                                                              JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
     WxCpKfGetCorpStatisticResp.StatisticList statisticList = new WxCpKfGetCorpStatisticResp.StatisticList();
     JsonObject asJsonObject = jsonElement.getAsJsonObject();
     statisticList.setStatTime(asJsonObject.get("stat_time").getAsLong());

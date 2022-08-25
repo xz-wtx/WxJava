@@ -1,7 +1,5 @@
 package me.chanjar.weixin.cp.util.crypto;
 
-import com.google.common.base.CharMatcher;
-import com.google.common.io.BaseEncoding;
 import me.chanjar.weixin.common.util.crypto.WxCryptUtil;
 import me.chanjar.weixin.cp.config.WxCpTpConfigStorage;
 import org.apache.commons.lang3.StringUtils;
@@ -9,11 +7,15 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Base64;
 
 /**
+ * The type Wx cp tp crypt util.
+ *
  * @author someone
  */
 public class WxCpTpCryptUtil extends WxCryptUtil {
   /**
    * 构造函数.
+   *
+   * @param wxCpTpConfigStorage the wx cp tp config storage
    */
   public WxCpTpCryptUtil(WxCpTpConfigStorage wxCpTpConfigStorage) {
     /*

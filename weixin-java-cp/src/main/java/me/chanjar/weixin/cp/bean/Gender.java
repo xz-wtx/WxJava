@@ -30,6 +30,12 @@ public enum Gender {
   private final String genderName;
   private final String code;
 
+  /**
+   * From code gender.
+   *
+   * @param code the code
+   * @return the gender
+   */
   public static Gender fromCode(String code) {
     for (Gender a : Gender.values()) {
       if (a.code.equals(code)) {

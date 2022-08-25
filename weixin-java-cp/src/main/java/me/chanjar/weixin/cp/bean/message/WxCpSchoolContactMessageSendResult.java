@@ -9,8 +9,7 @@ import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
  * 发送「学校通知」返回实体
  * https://developer.work.weixin.qq.com/document/path/92321
  *
- * @author <a href="https://github.com/0katekate0">Wang_Wong</a>
- * created on  2022-06-29
+ * @author <a href="https://github.com/0katekate0">Wang_Wong</a> created on  2022-06-29
  */
 @Data
 public class WxCpSchoolContactMessageSendResult extends WxCpBaseResp {
@@ -29,6 +28,12 @@ public class WxCpSchoolContactMessageSendResult extends WxCpBaseResp {
     return WxCpGsonBuilder.create().toJson(this);
   }
 
+  /**
+   * From json wx cp school contact message send result.
+   *
+   * @param json the json
+   * @return the wx cp school contact message send result
+   */
   public static WxCpSchoolContactMessageSendResult fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpSchoolContactMessageSendResult.class);
   }

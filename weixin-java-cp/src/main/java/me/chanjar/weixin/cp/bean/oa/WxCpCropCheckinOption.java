@@ -179,6 +179,9 @@ public class WxCpCropCheckinOption implements Serializable {
   private Integer offWorkIntervalTime;
 
 
+  /**
+   * The type Checkin date.
+   */
   @Data
   public static class CheckinDate implements Serializable {
     private static final long serialVersionUID = -8560643656775167406L;
@@ -219,6 +222,9 @@ public class WxCpCropCheckinOption implements Serializable {
     private Integer flexOffDutyTime;
   }
 
+  /**
+   * The type Checkin time.
+   */
   @Data
   public static class CheckinTime implements Serializable {
 
@@ -248,6 +254,9 @@ public class WxCpCropCheckinOption implements Serializable {
     private Integer remindOffWorkSec;
   }
 
+  /**
+   * The type Spe workday.
+   */
   @Data
   public static class SpeWorkday implements Serializable {
 
@@ -271,6 +280,9 @@ public class WxCpCropCheckinOption implements Serializable {
     private List<CheckinTime> checkinTime;
   }
 
+  /**
+   * The type Spe off day.
+   */
   @Data
   public static class SpeOffDay implements Serializable {
     private static final long serialVersionUID = 9214798931489490993L;
@@ -287,6 +299,9 @@ public class WxCpCropCheckinOption implements Serializable {
     private String notes;
   }
 
+  /**
+   * The type Wifi mac info.
+   */
   @Data
   public static class WifiMacInfo implements Serializable {
 
@@ -305,6 +320,9 @@ public class WxCpCropCheckinOption implements Serializable {
     private String wifimac;
   }
 
+  /**
+   * The type Loc info.
+   */
   @Data
   public static class LocInfo implements Serializable {
 
@@ -340,6 +358,9 @@ public class WxCpCropCheckinOption implements Serializable {
     private Integer distance;
   }
 
+  /**
+   * The type Range.
+   */
   @Data
   public static class Range implements Serializable {
 
@@ -366,6 +387,9 @@ public class WxCpCropCheckinOption implements Serializable {
 
   }
 
+  /**
+   * The type Reporter info.
+   */
   @Data
   public static class ReporterInfo implements Serializable {
     private static final long serialVersionUID = 1132450350458936772L;
@@ -382,6 +406,9 @@ public class WxCpCropCheckinOption implements Serializable {
     private long updateTime;
   }
 
+  /**
+   * The type Reporter.
+   */
   @Data
   public static class Reporter implements Serializable {
 
@@ -391,6 +418,9 @@ public class WxCpCropCheckinOption implements Serializable {
     private String userid;
   }
 
+  /**
+   * The type Ot info.
+   */
   @Data
   public static class OtInfo implements Serializable {
 
@@ -436,6 +466,9 @@ public class WxCpCropCheckinOption implements Serializable {
     private OtApplyInfo otapplyinfo;
   }
 
+  /**
+   * The type Ot check info.
+   */
   @Data
   public static class OtCheckInfo implements Serializable {
 
@@ -490,6 +523,9 @@ public class WxCpCropCheckinOption implements Serializable {
     private OtNonworkingDayRestInfo otNonworkingdayRestinfo;
   }
 
+  /**
+   * The type Ot working day rest info.
+   */
   @Data
   public static class OtWorkingDayRestInfo implements Serializable {
 
@@ -514,6 +550,9 @@ public class WxCpCropCheckinOption implements Serializable {
     private CalOtTimeRule calOttimeRule;
   }
 
+  /**
+   * The type Fix time rule.
+   */
   @Data
   public static class FixTimeRule implements Serializable {
 
@@ -532,6 +571,9 @@ public class WxCpCropCheckinOption implements Serializable {
     private Integer fixTimeEndSec;
   }
 
+  /**
+   * The type Cal ot time rule.
+   */
   @Data
   public static class CalOtTimeRule implements Serializable {
 
@@ -545,6 +587,9 @@ public class WxCpCropCheckinOption implements Serializable {
 
   }
 
+  /**
+   * The type Item.
+   */
   @Data
   public static class Item implements Serializable {
 
@@ -563,6 +608,9 @@ public class WxCpCropCheckinOption implements Serializable {
     private Integer restTime;
   }
 
+  /**
+   * The type Ot nonworking day rest info.
+   */
   @Data
   public static class OtNonworkingDayRestInfo implements Serializable {
 
@@ -587,6 +635,9 @@ public class WxCpCropCheckinOption implements Serializable {
     private CalOtTimeRule calOttimeRule;
   }
 
+  /**
+   * The type Ot apply info.
+   */
   @Data
   public static class OtApplyInfo implements Serializable {
 
@@ -630,6 +681,9 @@ public class WxCpCropCheckinOption implements Serializable {
 
   }
 
+  /**
+   * The type Schedule.
+   */
   @Data
   public static class Schedule implements Serializable {
 
@@ -710,6 +764,9 @@ public class WxCpCropCheckinOption implements Serializable {
   }
 
 
+  /**
+   * The type Time section.
+   */
   @Data
   public static class TimeSection implements Serializable {
     private static final long serialVersionUID = 7497252128339062724L;
@@ -764,6 +821,9 @@ public class WxCpCropCheckinOption implements Serializable {
   }
 
 
+  /**
+   * The type Late rule.
+   */
   @Data
   public static class LateRule implements Serializable {
 
@@ -783,6 +843,9 @@ public class WxCpCropCheckinOption implements Serializable {
     private List<TimeRule> timerules;
   }
 
+  /**
+   * The type Time rule.
+   */
   @Data
   public static class TimeRule implements Serializable {
 

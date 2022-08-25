@@ -46,10 +46,21 @@ public class WxCpProductAlbumInfo implements Serializable {
   @SerializedName("attachments")
   private List<Attachment> attachments;
 
+  /**
+   * From json wx cp product album info.
+   *
+   * @param json the json
+   * @return the wx cp product album info
+   */
   public static WxCpProductAlbumInfo fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpProductAlbumInfo.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

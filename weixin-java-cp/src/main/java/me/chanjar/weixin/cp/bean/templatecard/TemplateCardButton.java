@@ -11,8 +11,7 @@ import java.io.Serializable;
 /**
  * 按钮列表，该字段可为空数组，但有数据的话需确认对应字段是否必填，列表长度不超过6
  *
- * @author yzts
- * created on  2021/9/22
+ * @author yzts  created on  2021/9/22
  */
 @Data
 @Builder
@@ -45,7 +44,11 @@ public class TemplateCardButton implements Serializable {
   private String url;
 
 
-
+  /**
+   * To json json object.
+   *
+   * @return the json object
+   */
   public JsonObject toJson() {
     JsonObject btnObject = new JsonObject();
 

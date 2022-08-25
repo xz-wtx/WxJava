@@ -39,7 +39,8 @@ public class WxCpMediaServiceImpl implements WxCpMediaService {
   }
 
   @Override
-  public WxMediaUploadResult upload(String mediaType, String filename, String url) throws WxErrorException, IOException {
+  public WxMediaUploadResult upload(String mediaType, String filename, String url) throws WxErrorException,
+    IOException {
     HttpURLConnection conn = null;
     InputStream inputStream = null;
     try {
@@ -50,7 +51,9 @@ public class WxCpMediaServiceImpl implements WxCpMediaService {
       //防止屏蔽程序抓取而返回403错误
       conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
       inputStream = conn.getInputStream();
-      return this.mainService.execute(MediaInputStreamUploadRequestExecutor.create(this.mainService.getRequestHttp()), this.mainService.getWxCpConfigStorage().getApiUrl(MEDIA_UPLOAD + mediaType), new InputStreamData(inputStream, filename));
+      return this.mainService.execute(MediaInputStreamUploadRequestExecutor.create(this.mainService.getRequestHttp())
+        , this.mainService.getWxCpConfigStorage().getApiUrl(MEDIA_UPLOAD + mediaType),
+        new InputStreamData(inputStream, filename));
     } finally {
       if (inputStream != null) {
         try {

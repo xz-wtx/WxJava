@@ -21,10 +21,21 @@ public class WxCpDepart implements Serializable {
   private Long parentId;
   private Long order;
 
+  /**
+   * From json wx cp depart.
+   *
+   * @param json the json
+   * @return the wx cp depart
+   */
   public static WxCpDepart fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpDepart.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

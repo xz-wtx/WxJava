@@ -1,4 +1,5 @@
 package me.chanjar.weixin.cp.bean.license.order;
+
 import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,8 +14,8 @@ import java.io.Serializable;
 /**
  * 下单购买帐号
  * 文档地址：https://developer.work.weixin.qq.com/document/path/95644
- * @author Totoro
- * created on  2022/6/27 10:52
+ *
+ * @author Totoro  created on  2022/6/27 10:52
  */
 @Data
 @Builder
@@ -48,13 +49,14 @@ public class WxCpTpLicenseNewOrderRequest implements Serializable {
   private WxCpTpLicenseAccountDuration accountDuration;
 
 
-
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }
-
-
-
 
 
 }

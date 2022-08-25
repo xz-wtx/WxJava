@@ -12,8 +12,7 @@ import java.util.List;
  * 用法: WxCustomMessage m = WxCustomMessage.TEMPLATECARD().title(...)....toUser(...).build();
  * </pre>
  *
- * @author yzts</ a>
- * created on  2019-05-16
+ * @author yzts</ a>  created on  2019-05-16
  */
 public class TemplateCardBuilder extends BaseBuilder<TemplateCardBuilder> {
   /**
@@ -168,150 +167,327 @@ public class TemplateCardBuilder extends BaseBuilder<TemplateCardBuilder> {
   private QuoteArea quoteArea;
 
 
+  /**
+   * Instantiates a new Template card builder.
+   */
   public TemplateCardBuilder() {
     this.msgType = WxConsts.KefuMsgType.TEMPLATE_CARD;
   }
 
+  /**
+   * Card type template card builder.
+   *
+   * @param cardType the card type
+   * @return the template card builder
+   */
   public TemplateCardBuilder cardType(String cardType) {
     this.cardType = cardType;
     return this;
   }
 
+  /**
+   * Card image url template card builder.
+   *
+   * @param cardImageUrl the card image url
+   * @return the template card builder
+   */
   public TemplateCardBuilder cardImageUrl(String cardImageUrl) {
     this.cardImageUrl = cardImageUrl;
     return this;
   }
 
+  /**
+   * Card image aspect ratio template card builder.
+   *
+   * @param cardImageAspectRatio the card image aspect ratio
+   * @return the template card builder
+   */
   public TemplateCardBuilder cardImageAspectRatio(Float cardImageAspectRatio) {
     this.cardImageAspectRatio = cardImageAspectRatio;
     return this;
   }
 
+  /**
+   * Action menu desc template card builder.
+   *
+   * @param actionMenuDesc the action menu desc
+   * @return the template card builder
+   */
   public TemplateCardBuilder actionMenuDesc(String actionMenuDesc) {
     this.actionMenuDesc = actionMenuDesc;
     return this;
   }
 
+  /**
+   * Action menu action list template card builder.
+   *
+   * @param actionMenuItemList the action menu item list
+   * @return the template card builder
+   */
   public TemplateCardBuilder actionMenuActionList(List<ActionMenuItem> actionMenuItemList) {
     this.actionMenuActionList = actionMenuItemList;
     return this;
   }
 
+  /**
+   * Source icon url template card builder.
+   *
+   * @param sourceIconUrl the source icon url
+   * @return the template card builder
+   */
   public TemplateCardBuilder sourceIconUrl(String sourceIconUrl) {
     this.sourceIconUrl = sourceIconUrl;
     return this;
   }
 
+  /**
+   * Source desc template card builder.
+   *
+   * @param sourceDesc the source desc
+   * @return the template card builder
+   */
   public TemplateCardBuilder sourceDesc(String sourceDesc) {
     this.sourceDesc = sourceDesc;
     return this;
   }
 
+  /**
+   * Source desc color template card builder.
+   *
+   * @param sourceDescColor the source desc color
+   * @return the template card builder
+   */
   public TemplateCardBuilder sourceDescColor(Integer sourceDescColor) {
     this.sourceDescColor = sourceDescColor;
     return this;
   }
 
+  /**
+   * Main title title template card builder.
+   *
+   * @param mainTitleTitle the main title title
+   * @return the template card builder
+   */
   public TemplateCardBuilder mainTitleTitle(String mainTitleTitle) {
     this.mainTitleTitle = mainTitleTitle;
     return this;
   }
 
+  /**
+   * Main title desc template card builder.
+   *
+   * @param mainTitleDesc the main title desc
+   * @return the template card builder
+   */
   public TemplateCardBuilder mainTitleDesc(String mainTitleDesc) {
     this.mainTitleDesc = mainTitleDesc;
     return this;
   }
 
+  /**
+   * Emphasis content title template card builder.
+   *
+   * @param emphasisContentTitle the emphasis content title
+   * @return the template card builder
+   */
   public TemplateCardBuilder emphasisContentTitle(String emphasisContentTitle) {
     this.emphasisContentTitle = emphasisContentTitle;
     return this;
   }
 
+  /**
+   * Emphasis content desc template card builder.
+   *
+   * @param emphasisContentDesc the emphasis content desc
+   * @return the template card builder
+   */
   public TemplateCardBuilder emphasisContentDesc(String emphasisContentDesc) {
     this.emphasisContentDesc = emphasisContentDesc;
     return this;
   }
 
+  /**
+   * Sub title text template card builder.
+   *
+   * @param subTitleText the sub title text
+   * @return the template card builder
+   */
   public TemplateCardBuilder subTitleText(String subTitleText) {
     this.subTitleText = subTitleText;
     return this;
   }
 
+  /**
+   * Vertical contents template card builder.
+   *
+   * @param verticalContents the vertical contents
+   * @return the template card builder
+   */
   public TemplateCardBuilder verticalContents(List<VerticalContent> verticalContents) {
     this.verticalContents = verticalContents;
     return this;
   }
 
+  /**
+   * Horizontal contents template card builder.
+   *
+   * @param horizontalContents the horizontal contents
+   * @return the template card builder
+   */
   public TemplateCardBuilder horizontalContents(List<HorizontalContent> horizontalContents) {
     this.horizontalContents = horizontalContents;
     return this;
   }
 
+  /**
+   * Jumps template card builder.
+   *
+   * @param jumps the jumps
+   * @return the template card builder
+   */
   public TemplateCardBuilder jumps(List<TemplateCardJump> jumps) {
     this.jumps = jumps;
     return this;
   }
 
+  /**
+   * Card action type template card builder.
+   *
+   * @param cardActionType the card action type
+   * @return the template card builder
+   */
   public TemplateCardBuilder cardActionType(Integer cardActionType) {
     this.cardActionType = cardActionType;
     return this;
   }
 
+  /**
+   * Card action url template card builder.
+   *
+   * @param cardActionUrl the card action url
+   * @return the template card builder
+   */
   public TemplateCardBuilder cardActionUrl(String cardActionUrl) {
     this.cardActionUrl = cardActionUrl;
     return this;
   }
 
+  /**
+   * Card action appid template card builder.
+   *
+   * @param cardActionAppid the card action appid
+   * @return the template card builder
+   */
   public TemplateCardBuilder cardActionAppid(String cardActionAppid) {
     this.cardActionAppid = cardActionAppid;
     return this;
   }
 
+  /**
+   * Card action pagepath template card builder.
+   *
+   * @param cardActionPagepath the card action pagepath
+   * @return the template card builder
+   */
   public TemplateCardBuilder cardActionPagepath(String cardActionPagepath) {
     this.cardActionPagepath = cardActionPagepath;
     return this;
   }
 
+  /**
+   * Task id template card builder.
+   *
+   * @param taskId the task id
+   * @return the template card builder
+   */
   public TemplateCardBuilder taskId(String taskId) {
     this.taskId = taskId;
     return this;
   }
 
+  /**
+   * Buttons template card builder.
+   *
+   * @param buttons the buttons
+   * @return the template card builder
+   */
   public TemplateCardBuilder buttons(List<TemplateCardButton> buttons) {
     this.buttons = buttons;
     return this;
   }
 
+  /**
+   * Checkbox question key template card builder.
+   *
+   * @param checkboxQuestionKey the checkbox question key
+   * @return the template card builder
+   */
   public TemplateCardBuilder checkboxQuestionKey(String checkboxQuestionKey) {
     this.checkboxQuestionKey = checkboxQuestionKey;
     return this;
   }
 
+  /**
+   * Checkbox mode template card builder.
+   *
+   * @param checkboxMode the checkbox mode
+   * @return the template card builder
+   */
   public TemplateCardBuilder checkboxMode(Integer checkboxMode) {
     this.checkboxMode = checkboxMode;
     return this;
   }
 
+  /**
+   * Options template card builder.
+   *
+   * @param options the options
+   * @return the template card builder
+   */
   public TemplateCardBuilder options(List<CheckboxOption> options) {
     this.options = options;
     return this;
   }
 
+  /**
+   * Submit button text template card builder.
+   *
+   * @param submitButtonText the submit button text
+   * @return the template card builder
+   */
   public TemplateCardBuilder submitButtonText(String submitButtonText) {
     this.submitButtonText = submitButtonText;
     return this;
   }
 
+  /**
+   * Submit button key template card builder.
+   *
+   * @param submitButtonKey the submit button key
+   * @return the template card builder
+   */
   public TemplateCardBuilder submitButtonKey(String submitButtonKey) {
     this.submitButtonKey = submitButtonKey;
     return this;
   }
 
+  /**
+   * Selects template card builder.
+   *
+   * @param selects the selects
+   * @return the template card builder
+   */
   public TemplateCardBuilder selects(List<MultipleSelect> selects) {
     this.selects = selects;
     return this;
   }
 
+  /**
+   * Quote area template card builder.
+   *
+   * @param quoteArea the quote area
+   * @return the template card builder
+   */
   public TemplateCardBuilder quoteArea(QuoteArea quoteArea) {
     this.quoteArea = quoteArea;
     return this;

@@ -6,8 +6,7 @@ import me.chanjar.weixin.cp.bean.message.*;
 /**
  * 消息推送接口.
  *
- * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * created on  2020 -08-30
+ * @author <a href="https://github.com/binarywang">Binary Wang</a> created on  2020 -08-30
  */
 public interface WxCpMessageService {
   /**
@@ -32,7 +31,7 @@ public interface WxCpMessageService {
    * </pre>
    *
    * @param timeType 查询哪天的数据，0：当天；1：昨天。默认为0。
-   * @return 统计结果
+   * @return 统计结果 statistics
    * @throws WxErrorException the wx error exception
    */
   WxCpMessageSendStatistics getStatistics(int timeType) throws WxErrorException;
@@ -61,8 +60,8 @@ public interface WxCpMessageService {
    * 请求地址： https://qyapi.weixin.qq.com/cgi-bin/externalcontact/message/send?access_token=ACCESS_TOKEN
    *
    * @param message 要发送的消息对象
-   * @return
-   * @throws WxErrorException
+   * @return wx cp school contact message send result
+   * @throws WxErrorException the wx error exception
    */
   WxCpSchoolContactMessageSendResult sendSchoolContactMessage(WxCpSchoolContactMessage message) throws WxErrorException;
 

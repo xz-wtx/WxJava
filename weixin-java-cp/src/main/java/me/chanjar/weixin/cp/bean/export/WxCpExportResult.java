@@ -10,9 +10,8 @@ import java.util.List;
 /**
  * 异步导出响应
  *
- * @author zhongjun
- * created on  2022/4/21
- **/
+ * @author zhongjun  created on  2022/4/21
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class WxCpExportResult extends WxCpBaseResp {
@@ -27,6 +26,9 @@ public class WxCpExportResult extends WxCpBaseResp {
   private List<ExportData> dataList;
 
 
+  /**
+   * The type Export data.
+   */
   @Data
   public static class ExportData {
 

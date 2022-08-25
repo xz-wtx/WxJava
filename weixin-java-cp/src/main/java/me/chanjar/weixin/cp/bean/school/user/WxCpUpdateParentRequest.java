@@ -11,8 +11,7 @@ import java.util.List;
 /**
  * 更新家长请求.
  *
- * @author Wang_Wong
- * created on  2022-06-20
+ * @author Wang_Wong  created on  2022-06-20
  */
 @Data
 @Builder
@@ -34,6 +33,9 @@ public class WxCpUpdateParentRequest implements Serializable {
   @SerializedName("children")
   private List<Children> children;
 
+  /**
+   * The type Children.
+   */
   @Setter
   @Getter
   public static class Children implements Serializable {
@@ -44,20 +46,42 @@ public class WxCpUpdateParentRequest implements Serializable {
     @SerializedName("relation")
     private String relation;
 
+    /**
+     * From json children.
+     *
+     * @param json the json
+     * @return the children
+     */
     public static Children fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, Children.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * From json wx cp update parent request.
+   *
+   * @param json the json
+   * @return the wx cp update parent request
+   */
   public static WxCpUpdateParentRequest fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpUpdateParentRequest.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

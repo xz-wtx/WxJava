@@ -53,10 +53,21 @@ public class WxCpMsgTemplate implements Serializable {
    */
   private List<Attachment> attachments;
 
+  /**
+   * From json wx cp msg template.
+   *
+   * @param json the json
+   * @return the wx cp msg template
+   */
   public static WxCpMsgTemplate fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpMsgTemplate.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

@@ -22,6 +22,9 @@ public class WxCpFileMove extends WxCpBaseResp implements Serializable {
   @SerializedName("file_list")
   private FileList fileList;
 
+  /**
+   * The type File list.
+   */
   @Getter
   @Setter
   public static class FileList implements Serializable {
@@ -30,16 +33,30 @@ public class WxCpFileMove extends WxCpBaseResp implements Serializable {
     @SerializedName("item")
     private List<Item> item;
 
+    /**
+     * From json file list.
+     *
+     * @param json the json
+     * @return the file list
+     */
     public static FileList fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, FileList.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * The type Item.
+   */
   @Getter
   @Setter
   public static class Item implements Serializable {
@@ -84,16 +101,33 @@ public class WxCpFileMove extends WxCpBaseResp implements Serializable {
     @SerializedName("md5")
     private String md5;
 
+    /**
+     * From json item.
+     *
+     * @param json the json
+     * @return the item
+     */
     public static Item fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, Item.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * From json wx cp file move.
+   *
+   * @param json the json
+   * @return the wx cp file move
+   */
   public static WxCpFileMove fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpFileMove.class);
   }

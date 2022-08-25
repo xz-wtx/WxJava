@@ -9,8 +9,7 @@ import java.io.Serializable;
 /**
  * 服务商凭证.
  *
- * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * created on  2019-11-02
+ * @author <a href="https://github.com/binarywang">Binary Wang</a> created on  2019-11-02
  */
 @Data
 public class WxCpProviderToken implements Serializable {
@@ -28,6 +27,12 @@ public class WxCpProviderToken implements Serializable {
   @SerializedName("expires_in")
   private Integer expiresIn;
 
+  /**
+   * From json wx cp provider token.
+   *
+   * @param json the json
+   * @return the wx cp provider token
+   */
   public static WxCpProviderToken fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpProviderToken.class);
   }

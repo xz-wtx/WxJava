@@ -28,10 +28,21 @@ public class WxCpFileDeleteRequest implements Serializable {
   @SerializedName("fileid")
   private List<String> fileId;
 
+  /**
+   * From json wx cp file delete request.
+   *
+   * @param json the json
+   * @return the wx cp file delete request
+   */
   public static WxCpFileDeleteRequest fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpFileDeleteRequest.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

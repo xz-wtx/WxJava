@@ -12,9 +12,8 @@ import java.util.List;
 /**
  * 获取「客户数据统计」企业汇总数据
  *
- * @author zhongjun
- * created on  2022/4/25
- **/
+ * @author zhongjun  created on  2022/4/25
+ */
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @Data
@@ -27,6 +26,9 @@ public class WxCpKfGetCorpStatisticResp extends WxCpBaseResp {
   @SerializedName("statistic_list")
   private List<StatisticList> statisticList;
 
+  /**
+   * The type Statistic list.
+   */
   @NoArgsConstructor
   @Data
   public static class StatisticList {
@@ -43,6 +45,9 @@ public class WxCpKfGetCorpStatisticResp extends WxCpBaseResp {
     private Statistic statistic;
   }
 
+  /**
+   * The type Statistic.
+   */
   @NoArgsConstructor
   @Data
   public static class Statistic {
@@ -84,12 +89,19 @@ public class WxCpKfGetCorpStatisticResp extends WxCpBaseResp {
     private Integer aiTransferRate;
 
     /**
-     * 知识命中率。一个自然日内，客户给智能助手发送的消息中，命中知识库的占比。只有在开启了智能回复原生功能并配置了知识库的情况下，才会产生该项统计数据。当api托管了会话分配，智能回复原生功能失效。若不返回，代表没有向配置知识库的智能接待助手发送消息，该项无法计算
+     * 知识命中率。一个自然日内，客户给智能助手发送的消息中，命中知识库的占比。只有在开启了智能回复原生功能并配置了知识库的情况下，才会产生该项统计数据。当api
+     * 托管了会话分配，智能回复原生功能失效。若不返回，代表没有向配置知识库的智能接待助手发送消息，该项无法计算
      */
     @SerializedName("ai_knowledge_hit_rate")
     private Integer aiKnowledgeHitRate;
   }
 
+  /**
+   * From json wx cp kf get corp statistic resp.
+   *
+   * @param json the json
+   * @return the wx cp kf get corp statistic resp
+   */
   public static WxCpKfGetCorpStatisticResp fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpKfGetCorpStatisticResp.class);
   }

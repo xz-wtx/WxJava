@@ -74,26 +74,56 @@ public class WxCpUser implements Serializable {
   private String[] directLeader;
 
 
+  /**
+   * Add external attr.
+   *
+   * @param externalAttr the external attr
+   */
   public void addExternalAttr(ExternalAttribute externalAttr) {
     this.externalAttrs.add(externalAttr);
   }
 
+  /**
+   * Add ext attr.
+   *
+   * @param name  the name
+   * @param value the value
+   */
   public void addExtAttr(String name, String value) {
     this.extAttrs.add(new Attr().setType(0).setName(name).setTextValue(value));
   }
 
+  /**
+   * Add ext attr.
+   *
+   * @param attr the attr
+   */
   public void addExtAttr(Attr attr) {
     this.extAttrs.add(attr);
   }
 
+  /**
+   * From json wx cp user.
+   *
+   * @param json the json
+   * @return the wx cp user
+   */
   public static WxCpUser fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpUser.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }
 
+  /**
+   * The type Attr.
+   */
   @Data
   @Accessors(chain = true)
   @Builder
@@ -112,6 +142,9 @@ public class WxCpUser implements Serializable {
     private String webTitle;
   }
 
+  /**
+   * The type External attribute.
+   */
   @Data
   @Builder
   @NoArgsConstructor
@@ -151,6 +184,9 @@ public class WxCpUser implements Serializable {
   }
 
 
+  /**
+   * The type Wechat channels.
+   */
   @Data
   @Builder
   @NoArgsConstructor

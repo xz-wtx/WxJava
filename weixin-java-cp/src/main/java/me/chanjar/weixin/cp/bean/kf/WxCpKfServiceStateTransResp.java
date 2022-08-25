@@ -8,8 +8,9 @@ import me.chanjar.weixin.cp.bean.WxCpBaseResp;
 import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
 /**
- * @author leiin
- * created on  2022/1/26 5:03 下午
+ * The type Wx cp kf service state trans resp.
+ *
+ * @author leiin  created on  2022/1/26 5:03 下午
  */
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
@@ -21,6 +22,12 @@ public class WxCpKfServiceStateTransResp extends WxCpBaseResp {
   @SerializedName("msg_code")
   private String msgCode;
 
+  /**
+   * From json wx cp kf service state trans resp.
+   *
+   * @param json the json
+   * @return the wx cp kf service state trans resp
+   */
   public static WxCpKfServiceStateTransResp fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpKfServiceStateTransResp.class);
   }

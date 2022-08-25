@@ -97,7 +97,8 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
     }
 
     if (GsonHelper.isNotNull(o.get(EXTERNAL_PROFILE))) {
-      user.setExternalCorpName(GsonHelper.getString(o.getAsJsonObject().get(EXTERNAL_PROFILE).getAsJsonObject(), EXTERNAL_CORP_NAME));
+      user.setExternalCorpName(GsonHelper.getString(o.getAsJsonObject().get(EXTERNAL_PROFILE).getAsJsonObject(),
+        EXTERNAL_CORP_NAME));
       JsonElement jsonElement = o.get(EXTERNAL_PROFILE).getAsJsonObject().get(WECHAT_CHANNELS);
       if (jsonElement != null) {
         JsonObject asJsonObject = jsonElement.getAsJsonObject();
@@ -126,7 +127,8 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
 
       switch (type) {
         case 0: {
-          attr.setTextValue(GsonHelper.getString(attrJsonElement.getAsJsonObject().get("text").getAsJsonObject(), "value"));
+          attr.setTextValue(GsonHelper.getString(attrJsonElement.getAsJsonObject().get("text").getAsJsonObject(),
+            "value"));
           break;
         }
         case 1: {
@@ -294,7 +296,8 @@ public class WxCpUserGsonAdapter implements JsonDeserializer<WxCpUser>, JsonSeri
     this.addProperty(attrsJson, EXTERNAL_CORP_NAME, user.getExternalCorpName());
 
     if (user.getWechatChannels() != null) {
-      attrsJson.add(WECHAT_CHANNELS, GsonHelper.buildJsonObject("nickname", user.getWechatChannels().getNickname(), "status", user.getWechatChannels().getStatus()));
+      attrsJson.add(WECHAT_CHANNELS, GsonHelper.buildJsonObject("nickname", user.getWechatChannels().getNickname(),
+        "status", user.getWechatChannels().getStatus()));
     }
 
     if (!user.getExternalAttrs().isEmpty()) {

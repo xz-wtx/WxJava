@@ -11,7 +11,6 @@ import java.util.List;
  *
  * @author longliveh
  */
-
 @Data
 public class WxCpCheckinMonthData implements Serializable {
   private static final long serialVersionUID = -3062328201807894236L;
@@ -22,6 +21,9 @@ public class WxCpCheckinMonthData implements Serializable {
   @SerializedName("base_info")
   private BaseInfo baseInfo;
 
+  /**
+   * The type Base info.
+   */
   @Data
   public static class BaseInfo implements Serializable {
     private static final long serialVersionUID = -5368331890851903885L;
@@ -62,6 +64,9 @@ public class WxCpCheckinMonthData implements Serializable {
     @SerializedName("rule_info")
     private RuleInfo ruleInfo;
 
+    /**
+     * The type Rule info.
+     */
     @Data
     public static class RuleInfo implements Serializable {
       private static final long serialVersionUID = 9152263355916880710L;
@@ -86,6 +91,9 @@ public class WxCpCheckinMonthData implements Serializable {
   @SerializedName("summary_info")
   private SummaryInfo summaryInfo;
 
+  /**
+   * The type Summary info.
+   */
   @Data
   public static class SummaryInfo implements Serializable {
     private static final long serialVersionUID = -1956770107240513983L;
@@ -127,6 +135,9 @@ public class WxCpCheckinMonthData implements Serializable {
   @SerializedName("exception_infos")
   private List<ExceptionInfo> exceptionInfos;
 
+  /**
+   * The type Exception info.
+   */
   @Data
   public static class ExceptionInfo implements Serializable {
     private static final long serialVersionUID = -4855850255704089359L;
@@ -155,6 +166,9 @@ public class WxCpCheckinMonthData implements Serializable {
   @SerializedName("sp_items")
   private List<SpItem> spItems;
 
+  /**
+   * The type Sp item.
+   */
   @Data
   public static class SpItem implements Serializable {
     private static final long serialVersionUID = 224472626753597080L;
@@ -202,6 +216,9 @@ public class WxCpCheckinMonthData implements Serializable {
   @SerializedName("overwork_info")
   private OverWorkInfo overworkInfo;
 
+  /**
+   * The type Over work info.
+   */
   @Data
   public static class OverWorkInfo implements Serializable {
     private static final long serialVersionUID = -9149524232645899305L;

@@ -23,10 +23,21 @@ public class WxCpTag implements Serializable {
   private String name;
 
 
+  /**
+   * From json wx cp tag.
+   *
+   * @param json the json
+   * @return the wx cp tag
+   */
   public static WxCpTag fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpTag.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

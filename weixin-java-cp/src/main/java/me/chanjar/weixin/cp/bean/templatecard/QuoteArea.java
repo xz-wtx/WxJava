@@ -12,8 +12,7 @@ import java.io.Serializable;
 /**
  * 引用文献样式
  *
- * @author zp
- * created on  2022/1/2
+ * @author zp  created on  2022/1/2
  */
 @Data
 @Builder
@@ -48,6 +47,11 @@ public class QuoteArea implements Serializable {
    */
   private String quoteText;
 
+  /**
+   * To json json object.
+   *
+   * @return the json object
+   */
   public JsonObject toJson() {
     JsonObject quoteAreaJson = new JsonObject();
     if (null != this.getType()) {

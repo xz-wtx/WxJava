@@ -11,8 +11,7 @@ import java.util.List;
 /**
  * 创建部门请求.
  *
- * @author Wang_Wong
- * created on  2022-06-22
+ * @author Wang_Wong  created on  2022-06-22
  */
 @Data
 @Builder
@@ -46,6 +45,9 @@ public class WxCpCreateDepartmentRequest implements Serializable {
   @SerializedName("department_admins")
   private List<DepartmentAdmin> departmentAdmins;
 
+  /**
+   * The type Department admin.
+   */
   @Setter
   @Getter
   public static class DepartmentAdmin implements Serializable {
@@ -59,20 +61,42 @@ public class WxCpCreateDepartmentRequest implements Serializable {
     @SerializedName("subject")
     private String subject;
 
+    /**
+     * From json department admin.
+     *
+     * @param json the json
+     * @return the department admin
+     */
     public static DepartmentAdmin fromJson(String json) {
       return WxCpGsonBuilder.create().fromJson(json, DepartmentAdmin.class);
     }
 
+    /**
+     * To json string.
+     *
+     * @return the string
+     */
     public String toJson() {
       return WxCpGsonBuilder.create().toJson(this);
     }
 
   }
 
+  /**
+   * From json wx cp create department request.
+   *
+   * @param json the json
+   * @return the wx cp create department request
+   */
   public static WxCpCreateDepartmentRequest fromJson(String json) {
     return WxCpGsonBuilder.create().fromJson(json, WxCpCreateDepartmentRequest.class);
   }
 
+  /**
+   * To json string.
+   *
+   * @return the string
+   */
   public String toJson() {
     return WxCpGsonBuilder.create().toJson(this);
   }

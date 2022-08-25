@@ -14,6 +14,8 @@ import me.chanjar.weixin.cp.bean.kf.WxCpKfGetCorpStatisticResp;
 import java.util.Objects;
 
 /**
+ * The type Wx cp gson builder.
+ *
  * @author Daniel Qian
  */
 public class WxCpGsonBuilder {
@@ -32,6 +34,11 @@ public class WxCpGsonBuilder {
     INSTANCE.registerTypeAdapter(WxCpKfGetCorpStatisticResp.StatisticList.class, new StatisticListAdapter());
   }
 
+  /**
+   * Create gson.
+   *
+   * @return the gson
+   */
   public static Gson create() {
     if (Objects.isNull(GSON_INSTANCE)) {
       synchronized (INSTANCE) {
