@@ -503,7 +503,8 @@ public class WxMaApiUrlConstants {
     interface Aftersale {
       String AFTERSALE_ADD = "https://api.weixin.qq.com/shop/ecaftersale/add";
       String AFTERSALE_CANCEL = "https://api.weixin.qq.com/shop/ecaftersale/cancel";
-      String AFTERSALE_UPDATE = "https://api.weixin.qq.com/shop/ecaftersale/update";
+      String AFTERSALE_UPDATE = "https://api.weixin.qq.com/shop/aftersale/update";
+      String EC_AFTERSALE_UPDATE = "https://api.weixin.qq.com/shop/ecaftersale/update";
       String AFTERSALE_UPLOAD_RETURN_INFO = "https://api.weixin.qq.com/shop/ecaftersale/uploadreturninfo";
       String AFTERSALE_ACCEPT_REFUND = "https://api.weixin.qq.com/shop/ecaftersale/acceptrefund";
       String AFTERSALE_ACCEPT_RETURN = "https://api.weixin.qq.com/shop/ecaftersale/acceptreturn";
