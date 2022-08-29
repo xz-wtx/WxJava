@@ -48,6 +48,16 @@ public interface WxMaShopAfterSaleService {
   WxMaShopBaseResponse update(WxMaShopAfterSaleUpdateRequest request) throws WxErrorException;
 
   /**
+   * 更新售后(EC版)
+   *
+   * @param request
+   * @return WxMaShopBaseResponse
+   * @throws WxErrorException
+   */
+  WxMaShopBaseResponse update(WxMaShopEcAfterSaleUpdateRequest request) throws WxErrorException;
+
+
+  /**
    * 用户取消售后申请
    * @param outAfterSaleId 商家自定义订单ID
    * @param afterSaleId 与out_aftersale_id二选一

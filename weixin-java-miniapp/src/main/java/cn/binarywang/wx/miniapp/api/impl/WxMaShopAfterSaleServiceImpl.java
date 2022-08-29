@@ -95,6 +95,16 @@ public class WxMaShopAfterSaleServiceImpl implements WxMaShopAfterSaleService {
     return WxMaGsonBuilder.create().fromJson(responseContent, WxMaShopBaseResponse.class);
   }
 
+  @Override
+  public WxMaShopBaseResponse update(WxMaShopEcAfterSaleUpdateRequest request) throws WxErrorException {
+    String responseContent = this.wxMaService.post(EC_AFTERSALE_UPDATE, request);
+    JsonObject jsonObject = GsonParser.parse(responseContent);
+    if (jsonObject.get(ERRCODE).getAsInt() != 0) {
+      throw new WxErrorException(WxError.fromJson(responseContent, WxType.MiniApp));
+    }
+    return WxMaGsonBuilder.create().fromJson(responseContent, WxMaShopBaseResponse.class);
+  }
+
   /**
    * 用户取消售后申请
    * @param outAfterSaleId 商家自定义订单ID
