@@ -12,8 +12,8 @@ import java.util.concurrent.TimeUnit;
  * @author jiangby
  * @version 1.0
  * <p>
- *   消息去重，记录消息ID首次出现时的时间戳，
- *   15S后定时任务触发时废除该记录消息ID
+ * 消息去重，记录消息ID首次出现时的时间戳，
+ * 15S后定时任务触发时废除该记录消息ID
  * </p>
  * created on  2022/5/26 1:32
  */
@@ -34,7 +34,7 @@ public class WxMessageInMemoryDuplicateCheckerSingleton implements WxMessageDupl
    * 线程池
    */
   private static final ScheduledThreadPoolExecutor SCHEDULED_THREAD_POOL_EXECUTOR = new ScheduledThreadPoolExecutor(1,
-    new ThreadFactoryBuilder().setNameFormat("wxMessage-memory-pool-%d").build(), new ThreadPoolExecutor.AbortPolicy());
+    new ThreadFactoryBuilder().setNameFormat("wxMessage-memory-pool-%d").setDaemon(true).build(), new ThreadPoolExecutor.AbortPolicy());
 
   /**
    * 消息id->消息时间戳的map.
@@ -71,7 +71,7 @@ public class WxMessageInMemoryDuplicateCheckerSingleton implements WxMessageDupl
    * 内部类实现单例
    */
   private static class WxMessageInnerClass {
-     static final WxMessageInMemoryDuplicateCheckerSingleton CHECKER_SINGLETON = new WxMessageInMemoryDuplicateCheckerSingleton();
+    static final WxMessageInMemoryDuplicateCheckerSingleton CHECKER_SINGLETON = new WxMessageInMemoryDuplicateCheckerSingleton();
   }
 
   /**
