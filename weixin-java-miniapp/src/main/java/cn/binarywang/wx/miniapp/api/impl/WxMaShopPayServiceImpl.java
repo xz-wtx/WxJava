@@ -3,6 +3,8 @@ package cn.binarywang.wx.miniapp.api.impl;
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.api.WxMaShopPayService;
 import cn.binarywang.wx.miniapp.bean.shop.request.WxMaShopPayCreateOrderRequest;
+import cn.binarywang.wx.miniapp.bean.shop.request.WxMaShopPayOrderRefundRequest;
+import cn.binarywang.wx.miniapp.bean.shop.response.WxMaShopBaseResponse;
 import cn.binarywang.wx.miniapp.bean.shop.response.WxMaShopPayCreateOrderResponse;
 import cn.binarywang.wx.miniapp.bean.shop.response.WxMaShopPayGetOrderResponse;
 import lombok.RequiredArgsConstructor;
@@ -10,8 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.util.json.WxGsonBuilder;
 
-import static cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants.Shop.Pay.CREATE_ORDER;
-import static cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants.Shop.Pay.GET_ORDER;
+import static cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants.Shop.Pay.*;
 
 /**
  * 小程序支付管理订单相关接口
@@ -33,5 +34,11 @@ public class WxMaShopPayServiceImpl implements WxMaShopPayService {
   public WxMaShopPayGetOrderResponse getOrder(String tradeNo) throws WxErrorException {
     String response = this.wxMaService.post(GET_ORDER, tradeNo);
     return WxGsonBuilder.create().fromJson(response, WxMaShopPayGetOrderResponse.class);
+  }
+
+  @Override
+  public WxMaShopBaseResponse refundOrder(WxMaShopPayOrderRefundRequest request) throws WxErrorException {
+    String response = this.wxMaService.post(REFUND_ORDER, request);
+    return WxGsonBuilder.create().fromJson(response, WxMaShopBaseResponse.class);
   }
 }
