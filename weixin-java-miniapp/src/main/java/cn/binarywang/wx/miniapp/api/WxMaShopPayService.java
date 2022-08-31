@@ -2,6 +2,7 @@ package cn.binarywang.wx.miniapp.api;
 
 import cn.binarywang.wx.miniapp.bean.shop.request.WxMaShopPayCreateOrderRequest;
 import cn.binarywang.wx.miniapp.bean.shop.response.WxMaShopPayCreateOrderResponse;
+import cn.binarywang.wx.miniapp.bean.shop.response.WxMaShopPayGetOrderResponse;
 import me.chanjar.weixin.common.error.WxErrorException;
 
 /**
@@ -19,6 +20,15 @@ public interface WxMaShopPayService {
    * @return 创建订单结果
    * @throws WxErrorException .
    */
-  WxMaShopPayCreateOrderResponse createOrder(WxMaShopPayCreateOrderRequest request)
-    throws WxErrorException;
+  WxMaShopPayCreateOrderResponse createOrder(WxMaShopPayCreateOrderRequest request) throws WxErrorException;
+
+  /**
+   * 查询订单详情
+   * 文档地址：<a href="https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/business-capabilities/ministore/wxafunds/API/order/get_order_detail.html">文档地址</a>
+   *
+   * @param trade_no
+   * @return
+   * @throws WxErrorException
+   */
+  WxMaShopPayGetOrderResponse getOrder(String trade_no) throws WxErrorException;
 }
