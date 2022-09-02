@@ -541,6 +541,8 @@ public class WxMaApiUrlConstants {
 
     interface Pay {
       String CREATE_ORDER = "https://api.weixin.qq.com/shop/pay/createorder";
+      String GET_ORDER = "https://api.weixin.qq.com/shop/pay/getorder";
+      String REFUND_ORDER = "https://api.weixin.qq.com/shop/pay/refundorder";
     }
   }
 
