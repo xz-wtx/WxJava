@@ -298,7 +298,7 @@ public interface WxCpApiPathConsts {
     /**
      * The constant GET_APPROVAL_DATA.
      */
-    String GET_APPROVAL_DATA = "/cgi-bin/oa/getapprovaldata";
+    String GET_APPROVAL_DATA = "/cgi-bin/corp/getapprovaldata";
 
     /**
      * The constant GET_CORP_CONF.
