@@ -2,7 +2,6 @@ package me.chanjar.weixin.open.api;
 
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.open.bean.ma.privacy.*;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * 微信第三方平台 小程序用户隐私保护指引接口 / 申请隐私接口(从2022年4月18日开始，部分小程序前端 api 需申请后，方可使用。该接口用于获取“需申请并审核通过”后才可使用的接口列表。)
@@ -47,7 +46,7 @@ public interface WxOpenMaPrivacyService {
    * @return 查询结果
    * @throws WxErrorException 如果出错,抛出此异常
    */
-  GetPrivacySettingResult getPrivacySetting(@Nullable Integer privacyVer) throws WxErrorException;
+  GetPrivacySettingResult getPrivacySetting(Integer privacyVer) throws WxErrorException;
 
 
   /**
