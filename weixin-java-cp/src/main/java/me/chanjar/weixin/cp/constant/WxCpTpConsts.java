@@ -34,6 +34,21 @@ public class WxCpTpConsts {
     public static final String CANCEL_AUTH = "cancel_auth";
 
     /**
+     * 企业互联共享应用事件回调
+     */
+    public static final String SHARE_AGENT_CHANGE = "share_agent_change";
+
+    /**
+     * 重置永久授权码通知
+     */
+    public static final String RESET_PERMANENT_CODE = "reset_permanent_code";
+
+    /**
+     * 应用管理员变更通知
+     */
+    public static final String CHANGE_APP_ADMIN = "change_app_admin";
+
+    /**
      * 通讯录变更通知
      */
     public static final String CHANGE_CONTACT = "change_contact";
