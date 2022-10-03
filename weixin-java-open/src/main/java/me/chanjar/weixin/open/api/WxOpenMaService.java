@@ -3,6 +3,7 @@ package me.chanjar.weixin.open.api;
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaAuditMediaUploadResult;
 import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.open.bean.ma.WxMaPrefetchDomain;
 import me.chanjar.weixin.open.bean.ma.WxMaScheme;
 import me.chanjar.weixin.open.bean.message.WxOpenMaSubmitAuditMessage;
 import me.chanjar.weixin.open.bean.result.*;
@@ -255,6 +256,16 @@ public interface WxOpenMaService extends WxMaService {
    * 小程序管理-查询小程序版本信息
    */
   String API_GET_VERSION_INFO = "https://api.weixin.qq.com/wxa/getversioninfo";
+
+  /**
+   * 设置DNS预解析域名
+   */
+  String API_WX_SET_PREFETCH_DOMAIN = "https://api.weixin.qq.com/wxa/set_prefetchdnsdomain";
+
+  /**
+   * 获取DNS预解析域名
+   */
+  String API_GET_PREFETCH_DOMAIN = "https://api.weixin.qq.com/wxa/get_prefetchdnsdomain";
 
   /**
    * 获得小程序的域名配置信息
@@ -714,5 +725,22 @@ public interface WxOpenMaService extends WxMaService {
    * @throws WxErrorException the wx error exception
    */
   WxOpenVersioninfoResult getVersionInfo() throws WxErrorException;
+
+  /**
+   * 设置DNS预解析域名
+   *
+   * @param domain 预解析域名列表
+   * @return {@link WxOpenResult}
+   * @throws WxErrorException the wx error exception
+   */
+  WxOpenResult setPrefetchDomain(WxMaPrefetchDomain domain) throws WxErrorException;
+
+  /**
+   * 获取DNS预解析域名
+   *
+   * @return {@link WxOpenMaPrefetchDomainResult}
+   * @throws WxErrorException he wx error exception
+   */
+  WxOpenMaPrefetchDomainResult getPrefetchDomain() throws WxErrorException;
 
 }
