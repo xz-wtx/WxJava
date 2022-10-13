@@ -459,4 +459,12 @@ public class WxOpenMaServiceImpl extends WxMaServiceImpl implements WxOpenMaServ
     String response = get(API_GET_PREFETCH_DOMAIN, null);
     return WxMaGsonBuilder.create().fromJson(response, WxOpenMaPrefetchDomainResult.class);
   }
+
+  @Override
+  public WxOpenMaApplyLiveInfoResult applyLiveInfo() throws WxErrorException {
+    JsonObject params = new JsonObject();
+    params.addProperty("action","apply");
+    String response = post(API_WX_APPLY_LIVE_INFO, GSON.toJson(params));
+    return WxMaGsonBuilder.create().fromJson(response,WxOpenMaApplyLiveInfoResult.class);
+  }
 }

@@ -268,6 +268,11 @@ public interface WxOpenMaService extends WxMaService {
   String API_GET_PREFETCH_DOMAIN = "https://api.weixin.qq.com/wxa/get_prefetchdnsdomain";
 
   /**
+   * 申请开通直播
+   */
+  String API_WX_APPLY_LIVE_INFO = "https://api.weixin.qq.com/wxa/business/applyliveinfo";
+
+  /**
    * 获得小程序的域名配置信息
    *
    * @return the domain
@@ -742,5 +747,13 @@ public interface WxOpenMaService extends WxMaService {
    * @throws WxErrorException he wx error exception
    */
   WxOpenMaPrefetchDomainResult getPrefetchDomain() throws WxErrorException;
+
+  /**
+   * 申请开通直播
+   * 文档地址：<a href="https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/live-player/applyLivelnfo.html">https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/live-player/applyLivelnfo.html</a>
+   * @return {@link WxOpenMaApplyLiveInfoResult}
+   * @throws WxErrorException the wx error exception
+   */
+  WxOpenMaApplyLiveInfoResult applyLiveInfo() throws WxErrorException;
 
 }
