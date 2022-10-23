@@ -13,10 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <pre>
- *     微信开放平台代小程序实现服务能力
- *     https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1489144594_DhNoV&token=&lang=zh_CN
- * </pre>
+ * <a href="https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1489144594_DhNoV&token=&lang=zh_CN">微信开放平台代小程序实现服务能力</a>
  *
  * @author yqx
  * created on  2018 /9/12
@@ -74,7 +71,7 @@ public interface WxOpenMaService extends WxMaService {
   /**
    * 以下接口基础信息设置
    * <p>
-   * https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=21517799059ZSEMr&token=6f965b5daf30a98a6bbd2a386faea5c934e929bf&lang=zh_CN
+   * <a href="https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=21517799059ZSEMr&token=6f965b5daf30a98a6bbd2a386faea5c934e929bf&lang=zh_CN">...</a>
    * </p>
    * 1. 设置小程序隐私设置（是否可被搜索）
    */
@@ -99,7 +96,7 @@ public interface WxOpenMaService extends WxMaService {
   /**
    * 以下接口为三方平台代小程序实现的代码管理功能
    * <p>
-   * https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1489140610_Uavc4&token=fe774228c66725425675810097f9e48d0737a4bf&lang=zh_CN
+   * <a href="https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1489140610_Uavc4&token=fe774228c66725425675810097f9e48d0737a4bf&lang=zh_CN">...</a>
    * </p>
    * 1. 为授权的小程序帐号上传小程序代码
    */
@@ -163,7 +160,7 @@ public interface WxOpenMaService extends WxMaService {
   /**
    * 14.设置小程序“扫普通链接二维码打开小程序”能力
    * <p>
-   * https://mp.weixin.qq.com/debug/wxadoc/introduction/qrcode.html
+   * <a href="https://mp.weixin.qq.com/debug/wxadoc/introduction/qrcode.html">...</a>
    * 14.1 增加或修改二维码规则
    */
   String API_QRCODE_JUMP_ADD = "https://api.weixin.qq.com/cgi-bin/wxopen/qrcodejumpadd";
@@ -684,8 +681,10 @@ public interface WxOpenMaService extends WxMaService {
    * <pre>
    * 获取公众号关联的小程序
    * 请求方式：POST(HTTPS)
-   * 请求地址：<a href="https://api.weixin.qq.com/cgi-bin/wxopen/wxamplinkget?access_token=TOKEN">https://api.weixin.qq.com/cgi-bin/wxopen/wxamplinkget?access_token=TOKEN</a>
-   * 文档地址：<a href="https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/Official__Accounts/Mini_Program_Management_Permission.html">https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/Official__Accounts/Mini_Program_Management_Permission.html</a>
+   * 请求地址：
+   * <a href="https://api.weixin.qq.com/cgi-bin/wxopen/wxamplinkget?access_token=TOKEN">https://api.weixin.qq.com/cgi-bin/wxopen/wxamplinkget?access_token=TOKEN</a>
+   * 文档地址：
+   * <a href="https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/Official__Accounts/Mini_Program_Management_Permission.html">https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/Official__Accounts/Mini_Program_Management_Permission.html</a>
    * <pre>
    * @return 公众号关联的小程序
    */
@@ -701,8 +700,10 @@ public interface WxOpenMaService extends WxMaService {
    * 4、关联成功
    * 等待管理员同意的中间状态可使用“获取公众号关联的小程序”接口进行查询。
    * 请求方式：POST(HTTPS)
-   * 请求地址：<a href="https://api.weixin.qq.com/cgi-bin/wxopen/wxamplink?access_token=TOKEN">https://api.weixin.qq.com/cgi-bin/wxopen/wxamplink?access_token=TOKEN</a>
-   * 文档地址：<a href="https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/Official__Accounts/Mini_Program_Management_Permission.html">https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/Official__Accounts/Mini_Program_Management_Permission.html</a>
+   * 请求地址：
+   * <a href="https://api.weixin.qq.com/cgi-bin/wxopen/wxamplink?access_token=TOKEN">https://api.weixin.qq.com/cgi-bin/wxopen/wxamplink?access_token=TOKEN</a>
+   * 文档地址：
+   * <a href="https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/Official__Accounts/Mini_Program_Management_Permission.html">https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/Official__Accounts/Mini_Program_Management_Permission.html</a>
    * <pre>
    * @param appid 小程序 appid
    * @param notifyUsers 是否发送模板消息通知公众号粉丝
@@ -715,8 +716,10 @@ public interface WxOpenMaService extends WxMaService {
    * <pre>
    * 解除已关联的小程序
    * 请求方式：POST(HTTPS)
-   * 请求地址：<a href="https://api.weixin.qq.com/cgi-bin/wxopen/wxampunlink?access_token=TOKEN">https://api.weixin.qq.com/cgi-bin/wxopen/wxampunlink?access_token=TOKEN</a>
-   * 文档地址：<a href="https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/Official__Accounts/Mini_Program_Management_Permission.html">https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/Official__Accounts/Mini_Program_Management_Permission.html</a>
+   * 请求地址：
+   * <a href="https://api.weixin.qq.com/cgi-bin/wxopen/wxampunlink?access_token=TOKEN">https://api.weixin.qq.com/cgi-bin/wxopen/wxampunlink?access_token=TOKEN</a>
+   * 文档地址：
+   * <a href="https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/Official__Accounts/Mini_Program_Management_Permission.html">https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/Official__Accounts/Mini_Program_Management_Permission.html</a>
    * <pre>
    * @param appid 小程序 appid
    * @return 响应结果
@@ -750,7 +753,9 @@ public interface WxOpenMaService extends WxMaService {
 
   /**
    * 申请开通直播
-   * 文档地址：<a href="https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/live-player/applyLivelnfo.html">https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/live-player/applyLivelnfo.html</a>
+   * 文档地址：
+   * <a href="https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/live-player/applyLivelnfo.html">https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/live-player/applyLivelnfo.html</a>
+   *
    * @return {@link WxOpenMaApplyLiveInfoResult}
    * @throws WxErrorException the wx error exception
    */
